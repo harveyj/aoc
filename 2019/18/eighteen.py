@@ -1,12 +1,12 @@
 import fileinput, itertools, collections
-grid = [line.strip() for line in fileinput.input()]
+grid = [list(line.strip()) for line in fileinput.input()]
 lingrid = list(itertools.chain.from_iterable(grid))
 ALL_KEYS = set([c for c in lingrid if c.islower()])
 linstart = lingrid.index('@')
 w, h = len(grid[0]), len(grid)
 
 sx, sy = linstart % w, linstart // w
-grid[sy] = grid[sy].replace('@', '.')
+grid[sy][sx] = '.'
 keylocs = {'@': (sx, sy)}
 for c in ALL_KEYS:
 	start = lingrid.index(c)
