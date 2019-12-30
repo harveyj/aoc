@@ -73,33 +73,47 @@ class Grid(object):
 		rets = rets.replace("#", " ")
 		return rets
 
+def outer(grid, x, y):
+	if x < 6 or y < 6 or x > grid.width -6 or y > grid.height - 6:
+		return True
+	return False
 
 def bfs(grid, x, y, ex, ey):
-	queue = collections.deque([(x, y)])
-	seen = set((x, y))
+	queue = collections.deque([(x, y, 0)])
+	seen = set((x, y, 0))
 	parents = {}
 	while queue:
-		x, y = queue.popleft()
-		seen.add((x, y))
+		x, y, level = queue.popleft()
+		seen.add((x, y, level))
 		for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
 			nx, ny = x + dx, y + dy
-			if (nx, ny) == (ex, ey):
-				parents[(nx, ny)] = x, y
-				print("END")
-			if ((nx, ny)) in seen:
+			if ((nx, ny, level)) in seen:
 				continue
-			seen.add((nx, ny))
-			parents[(nx, ny)] = x, y
+			seen.add((nx, ny, level))
 
 			c = grid.get(nx, ny)
 
 			if c == '.':
-				queue.append((nx, ny))
+				queue.append((nx, ny, level))
+				parents[(nx, ny, level)] = x, y, level
 			elif c != '#':
+				parents[(nx, ny, level)] = x, y, level
 				px, py = get_portal_loc(grid, (nx, ny))
-				if (px, py) != (-1, -1):
-					parents[(px, py)] = nx, ny
-					queue.append((px, py))
+				if (px, py) == (-1, -1):
+					if (nx, ny) == (ex, ey) and level == 0:
+						parents[(nx, ny, level)] = x, y, level
+						print("END")
+						return parents
+				else:
+					if outer(grid, nx, ny) and level > 0:
+						queue.append((px, py, level - 1))
+						parents[(px, py, level - 1)] = nx, ny, level
+						print("TELEPORT", nx, ny, level, px, py, level-1)
+					elif not outer(grid, nx, ny):
+						queue.append((px, py, level + 1))
+						parents[(px, py, level + 1)] = nx, ny, level
+						print("TELEPORT", nx, ny, level, px, py, level+1)
+
 
 	return parents
 
@@ -113,11 +127,9 @@ def get_portal_loc(grid, my_loc):
 			return loc
 	return (-1, -1)
 
-# Test get_portal_loc
-# for loc, code in g.portal_locs.items():
-# 	print(loc, code, get_portal_loc(g, loc))
 
 grid = Grid()
+print(grid.portal_locs)
 sx, sy = -1, -1
 for (x, y) in grid.portal_locs.keys():
 	if grid.portal_locs[x, y] == grid.portals['AA']:
@@ -125,13 +137,15 @@ for (x, y) in grid.portal_locs.keys():
 	if grid.portal_locs[x, y] == grid.portals['ZZ']:
 		ex, ey = x, y
 parents = bfs(grid, sx, sy, ex, ey)
-parents[sx, sy] = None
+parents[sx, sy, 0] = None
 
-node = parents[ex, ey]
+node = parents[ex, ey, 0]
 pathlen = 0
+# print(parents)
 while node:
-	if grid.get(node[0], node[1]) == '.':
-		grid.set(node[0], node[1], '*')
+	# if grid.get(node[0], node[1]) == '.':
+	# 	grid.set(node[0], node[1], '*')
+	print(node)
 	node = parents[node]
 	pathlen += 1
 print(grid)
