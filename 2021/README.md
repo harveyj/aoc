@@ -18,12 +18,50 @@ Started 12/1/2021, finished 1/2/2022. I took 12/23/21 - 12/29/21 almost entirely
 ## Day 12
 ## Day 13
 ## Day 14
+Dynamic programming! "polymerization" extends a string.
+
+Solution notes: It is possible to calculate the number of bigrams in the next step as a function of the number of bigrams in the previous step. This is because the polymerize step only inserts characters, so you know that AC insert B yields AB, BC. If it was postfix or prefix you would need to have the context of where the bigram sat and things would get *way* messier. 
+
+Location: Airplane to CA
+
+Improvements could be:
+* Part 1 is just Part 2 but I am leaving Part 1 as-is to show the difference between the approaches. 
+* Pull out the answer-finding to a common function.
+
 ## Day 15
+Do you know how to graph search: the puzzle. LOTS of corner cases I missed, especially the fact that cells couldn't be zero, which cost me a good 45 minutes. Being more careful about read the darn problem is a good note for next year, as is carefully building up the solution.  
+
+Location: Airplane to CA
+
+Improvements would be:
+* Combine part one and part two into one thing
+* Separate out a grid library
+
+Difficulty: 5/10
+
 ## Day 16
-https://replit.com/@HarveyJones2/AOC16#main.py
+Encoding and decoding. I missed some corner cases up front but ultimately not too bad.
+
+Solution notes: This was a "just implement the thing" problem, nothing magical. Trees and recursion are hard to get the details right on. 
+
+Improvements would be: Pretty happy with this code. 
+
+Location: CA
+
+Difficulty: 5/10
 
 ## Day 17
-https://replit.com/@HarveyJones2/AOC17#main.py
+This was the "shoot an item and see if it ends up crossing a zone above/below you" problem. My solution is really kludge-y looking back on it, this would be a good candidate for a rewrite eventually. 
+
+Summary: Brute force the you know what out of things. 
+
+Solution notes: If you add 1 to y, the highest point the item reaches is y. A number in the sum of y needs to fall between apex_y - base_y_1, apex_y - base_y_2.
+
+Location: CA
+
+Improvements would be: A lot of things. 
+
+Difficulty: 6/10
 
 ## Day 18
 This was a tree descent + mutation / operator application question. The burned extra time quotient was pretty high for me here - I need to work more on trees. 
@@ -32,7 +70,7 @@ Summary: You have a "snailfish number" which is a giant nested list of lists - a
 
 Solution notes: Model it as a tree, use a standard tree library (this took me too long to get around to). Construct a list of all of the leaf nodes in order (this also took me too long, I tried to do everything via up-and-down traversal). 
 
-Libraries: Anytree
+Libraries: anytree
 
 Location: CA
 
