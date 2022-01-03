@@ -5,8 +5,20 @@ Started off the year doing the puzzles in Observable notebooks, continuing my 20
 Started 12/1/2021, finished 1/2/2022. I took 12/23/21 - 12/29/21 almost entirely off so I could spend time with family. 
 
 ## Day 1
+Warmup day. JS version was fine, Python rewrite is where I am starting to flex list comprehensions and feel good.
+
+Location, CT, CT (Python)
+
+Difficulty: 1/10
+
 ## Day 2
 ## Day 3
+Still pretty straightforward. Bit counting in part 1.
+
+Solution notes: Got part 1 down to three lines which feels pretty good. Probably too compact and could unpack gamma a bit more but I'll take it. 
+
+Difficulty: 2/10
+
 ## Day 4
 ## Day 5
 ## Day 6
