@@ -20,8 +20,28 @@ Started 12/1/2021, finished 1/2/2022. I took 12/23/21 - 12/29/21 almost entirely
 ## Day 14
 ## Day 15
 ## Day 16
+https://replit.com/@HarveyJones2/AOC16#main.py
+
 ## Day 17
+https://replit.com/@HarveyJones2/AOC17#main.py
+
 ## Day 18
+This was a tree descent + mutation / operator application question. The burned extra time quotient was pretty high for me here - I need to work more on trees. 
+
+Summary: You have a "snailfish number" which is a giant nested list of lists - aka a tree. It is maximum depth 4 and you add trees by concatenating them. To return to depth 4 you have to spill numbers over to neighboring nodes.
+
+Solution notes: Model it as a tree, use a standard tree library (this took me too long to get around to). Construct a list of all of the leaf nodes in order (this also took me too long, I tried to do everything via up-and-down traversal). 
+
+Libraries: Anytree
+
+Location: CA
+
+Improvements would be:
+* Pretty happy about the final solution
+* A lot of cleanup
+
+Difficulty: 8/10
+
 ## Day 19
 THIS ONE WAS A BEAST. Second hardest of the year for me, though I got it with no specific hints and just a "yeah, grind it out" affirmation from reddit. 
 
@@ -91,6 +111,8 @@ Summary: Do a towers of hanoi-style shuffle of amphipods into and out of rooms i
 Location: A bit of CT, driving from CT --> VT.
 
 Solution notes: Lowest-cost path through a graph. Part 1 was hand-coded to assume there was only depth 2, which was kludgey and less general. I'm glad part 2 forced me to rewrite it to be more general. 
+
+Libraries: networkx
 
 Improvement would be:
 * Better graph algorithm - it takes too long to run for my taste.
