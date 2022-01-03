@@ -23,10 +23,81 @@ Started 12/1/2021, finished 1/2/2022. I took 12/23/21 - 12/29/21 almost entirely
 ## Day 17
 ## Day 18
 ## Day 19
+THIS ONE WAS A BEAST. Second hardest of the year for me, though I got it with no specific hints and just a "yeah, grind it out" affirmation from reddit. 
+
+Summary: You have a bunch of partially-overlapping but floating in 3d space and uncertain-ly oriented. You know that they overlap with n=12 points, so use this to reconstruct the connections.
+
+Solution notes: I just did it. It was hard. I started trying to read linear algebra summaries and then gave up and wrote vectors on an Amazon box and rotated it. Then I checked all my work and found a few I got wrong. Then, a third time. The coding was easy compared to the mental rotations.
+
+Location: CA
+
+Difficulty: 9/10
+
+Improvements would be:
+* I feel pretty happy about the code. 
+
 ## Day 20
+I coded the first part quickly and then realized the a-ha and kludged it a *little* bit for part 2. 
+
+Summary: It's Conway's game of life!
+
+Solution notes: Code game of life. The major twist is that the playing board is infinite, and for the real input value, entirely blank space generates life (but not in the sample value! tricky!). From there you need to reason through the idea that you have an essentially infinite border which is blinking on and off every round. I logic-ed this (or kludged it, ymmv) by putting a giant border around, and just running the standard game of life. 
+
+Location: CA
+
+Difficulty: 6/10 
+
+Improvement would be:
+* More prinicpled approach to an infinite board. 
+
 ## Day 21
+Great example of an AOC puzzle where the solution "feels" right and runs quickly. 
+
+Summary: It's a dice game with moderately complicated rules. The twist in part 2 is that you need to play out all possible games with all possible dice rolls, with is an exponential explosion. 
+
+Solution notes: Do the first part brute force. "Dirac dice" can be modeled naively (you will never finish) or by fibonacci / dynamic programming-style calculation, starting from the base state where one player has just one more point to score. 
+
+f(state) --> # times a wins, # times b wins
+f(state) --> [outcomes] dot product f(state+outcome)
+
+Location: CA
+
+Improvement would be:
+* Cosmetic fixes - I feel good about this one. 
+
+Difficulty: 8/10
+
 ## Day 22
+Probably the hardest puzzle of the whole year for me. I had one version that I knew would work but had so many corner cases I was burning out (cube intersection carefully by hand). I figured out a much fun-er and simpler but expensive version... which was going to take 12 hours to run. For the one and only time this year I dipped into the subreddit relatively deeply. 
+
+Giant shoutout to this person, who did what I was doing and made me realize I could pre-filter the ranges. My answer is very inspired by theirs. https://www.reddit.com/r/adventofcode/comments/rmivfy/everyone_is_overcomplicating_day_22/
+
+Summary: You have a giant 3-d space and a list of instructions which turn arbitrary cubes in that space "on" or "off" - figure out how much volume is "on" at the end.
+
+Solution notes: Enumerate every possible x, y, z, divide the universe into grids, check each grid's lower left corner to see if the last cube to "impact" it was an on or an off. 
+
+Improvement would be:
+* Fixing up the cube intersection version which is admittedly the "right" way to do the puzzle.
+
+Location: CA, CA->CT transit. 
+
+Difficulty: 9.5/10
+
 ## Day 23
+The puzzle-craft in this year's AOC really shone through. This was a great medium-level coding challenge, with enough corner cases to make things interesting but not a giant slog. 
+
+Summary: Do a towers of hanoi-style shuffle of amphipods into and out of rooms in a narrow corridor. I accomplished this by treating it as a graph problem, where each node was the complete game state and each edge was the cost to transition between game states.  
+
+Location: A bit of CT, driving from CT --> VT.
+
+Solution notes: Lowest-cost path through a graph. Part 1 was hand-coded to assume there was only depth 2, which was kludgey and less general. I'm glad part 2 forced me to rewrite it to be more general. 
+
+Improvement would be:
+* Better graph algorithm - it takes too long to run for my taste.
+* Treating all of the As, Bs, etc as interchangeable in all the places I can, which would speed things up a bit. 
+
+Difficulty: 7/10
+
 ## Day 24
 High-quality puzzle and a fitting end to the hard section of Advent of Code. 
 
@@ -54,7 +125,7 @@ Improvement would be:
 * Doing it e2e in code
 * Doing it for generic values of the constants / defensively coding it
 
-Difficulty: 8/10
+Difficulty: 8.5/10
 
 ## Day 25
 The traditional final state of the Tour De France. I had one or two silly bugs and I had to write a grid printer to debug them. 
