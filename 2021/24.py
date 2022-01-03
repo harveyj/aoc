@@ -1,9 +1,6 @@
-import itertools
-import networkx
-import copy
-import collections
 import puzzle
 
+# FULL ALU IMPLEMENTATION - only used to check things in the end.
 # https://appdividend.com/2021/03/23/how-to-check-if-string-is-integer-in-python/
 def checkInt(str):
     if str[0] in ('-', '+'):
@@ -40,20 +37,8 @@ class ALU(object):
     elif op == "eql":
       self.regs[a] = 1 if self.regs[a] == b else 0
 
-def simple_run(INPUT, user_input):
-  alu = ALU(user_input)
-  alu.run(INPUT)
-  return alu
-
-def simple_run_last_segment(INPUT):
-  for digit in range(1, 10):
-    for z in range(0, 200):
-      alu = ALU([digit])
-      alu.regs['z'] = z
-      alu.run(INPUT)
-      if alu.regs['z'] == 0:
-        print(digit, z, alu.regs['z'])
-
+# Decompilation
+# Line by line translation
 def iter_z(in_val, z, add_x, add_y, div_z):
   w = in_val
   x = z % 26
@@ -69,16 +54,20 @@ def iter_z(in_val, z, add_x, add_y, div_z):
   z += y
   return z
 
+# One-liner
 def iter_z_2(w, z, add_x, add_y, div_z):
   # print('if', 0 if z % 26 + add_x == w else 1)
   return z // div_z * (25 * (0 if z % 26 + add_x == w else 1) + 1) + (w + add_y) * (0 if z % 26 + add_x == w else 1)
 
+# Back out the one-liner for readability
 def iter_z_3(w, z, add_x, add_y, div_z):
   if (z % 26 + add_x) == w:
     return z // div_z 
   else:
     return z // div_z * 26 + (w+add_y)
 
+# Full copy of the ASM program. 
+# slice: just run the first $SLICE cycles,
 def python_version(inputs, z_start=0, slice=14):
   x_s = [12, 11, 13, 11, 14, -10, 11, -9, -3, 13, -5, -10, -4, -5][:slice]
   y_s = [4, 11, 5, 11, 14, 7, 11, 4, 6, 5, 9, 12, 14, 14][:slice]
@@ -88,11 +77,20 @@ def python_version(inputs, z_start=0, slice=14):
     z = iter_z_3(w_in, z, x_in, y_in, z_in)
   return z
 
-def print_lasts():
-  lasts = ([(in_val, z, iter_z(in_val, z)) for in_val in range(1, 10) for z in range(0, 27)])
-  for last in lasts:
-    if last[1] == 0:
-      print(last)
+# Utility functions
+def simple_run(INPUT, user_input):
+  alu = ALU(user_input)
+  alu.run(INPUT)
+  return alu
+
+def simple_run_last_segment(INPUT):
+  for digit in range(1, 10):
+    for z in range(0, 200):
+      alu = ALU([digit])
+      alu.regs['z'] = z
+      alu.run(INPUT)
+      if alu.regs['z'] == 0:
+        print(digit, z, alu.regs['z'])
 
 def assert_eq(user_input):
   alu = puzzle.Puzzle("24").run(simple_run, 0, user_input)
@@ -101,31 +99,10 @@ def assert_eq(user_input):
   if alu.regs["z"] == 0:
     print("ZERO", user_input)
 
-
 def base_26(val):
   return [val // (26 ** n) % 26 for n in range(7, -1, -1)]
 
-# 0 is main
-# 4 is the last cycle of main
-# 5 is just the last cycle
-# p = puzzle.Puzzle("24")
-# p.run(simple_run_last_segment, 4)
-
-# val = [9, 9, 9, 9, 9, 5, 7,   9, 9, 9, 9, 9, 9, 9]
-# # assert_eq(val)
-# print(val, base_26(python_version(val, slice=10)))
-
-# for a in range(1, 10):
-#  for b in range(1, 2):
-#    for c in range(1, 2): 
-#      for d in range(1, 2): 
-#        for e in range(1, 2): 
-#          for f in range(1, 2): 
-#            val = [9, 7, 9, 9, 9, 9, 9, 9, 9, 9, 9, a, 4, 5]
-#            assert_eq(val)
-#            print(val, base_26(python_version(val)))
-
-
+# MAIN CODE: Discover and print out the constraints. 
 
 x_s = [0, 12, 11, 13, 11, 14, -10, 11, -9, -3, 13, -5, -10, -4, -5]
 y_s = [0, 4,  11,  5, 11, 14,   7, 11,  4,  6,  5,  9,  12, 14, 14]
@@ -141,13 +118,13 @@ for w, x_in, y_in, z_in in zip(range(0, 15), x_s, y_s, z_s):
     if z_in == 26:
       z_stack.pop()
     constraints.append((z_prev, x_in, 'w'+str(w)))
-  print(w, z_stack)
+  # print(w, z_stack)
 for (z_prev, x_in, w_in) in constraints:
   print (z_prev, "%26", x_in, " = ", w_in)
 
-for i in range(1, 15):
-  print(base_26(python_version([9, 2, 9, 1, 5, 9, 7, 9, 9, 9, 9, 4, 9, 8], slice=i)))
+# Check a potential answer's stack at each iteration. 
+# for i in range(1, 15):
+  # print(base_26(python_version([9, 2, 9, 1, 5, 9, 7, 9, 9, 9, 9, 4, 9, 8], slice=i)))
 
 
-  21611513911181
-assert_eq([int(c) for c in list("21611513911181")])
+#  assert_eq([int(c) for c in list("21611513911181")])
