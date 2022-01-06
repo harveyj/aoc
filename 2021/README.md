@@ -12,14 +12,26 @@ Location, CT, CT (Python)
 Difficulty: 1/10
 
 ## Day 2
+Still mechanical. JS and Python versions both straightforward. 
+
+Location: CT
+
+Difficulty: 1.5/10
+
 ## Day 3
 Still pretty straightforward. Bit counting in part 1.
 
 Solution notes: Got part 1 down to three lines which feels pretty good. Probably too compact and could unpack gamma a bit more but I'll take it. 
 
+Location: CT
+
 Difficulty: 2/10
 
 ## Day 4
+A little bit of state tracking and logic, but still straightforward. Did the python rewrite in 20-30 minutes. 
+Location: CT
+
+Difficulty: 3.5/10
 ## Day 5
 ## Day 6
 ## Day 7
