@@ -32,15 +32,44 @@ A little bit of state tracking and logic, but still straightforward. Did the pyt
 Location: CT
 
 Difficulty: 3.5/10
+
 ## Day 5
+Python rewrite in about 20 minutes. Writing one set of logic that handles both puzzle cases is always nice, going back and figuring that out for a few more has been fun.
+
+Difficulty: 3/10
+
 ## Day 6
+Here we go!! Advent of code starts in earnest. 
+
+Solution notes: I struggled with the initial implementation of part 2 for a while. The breakthrough was realizing that this is \~= fibonacci numbers, and thus that a dynamic programming approach could work. Quite happy with the final solution. I have an iterative js solution that I didn't bother to port.
+
+Difficulty: 6.5/10
+
 ## Day 7
+A "do you know stats" question - the intuition that you should use mean and median is the key breakthrough here.
+
+Solution notes: I already forget why I took a micro-brute-force method to part two and I kinda regret it. 
+
+Difficulty: 4/10
+
 ## Day 8
+Figure out what number the segment wires are encoding. I got derailed (js edition) for a *long* time trying to solve the general version of the puzzle, which would have worked. The input very clearly lets you do a simple logic puzzle version with a long chain of if statements - I eventually bailed out and took that road. Feels a little like cheating.
+
+Location: CT/CT
+
+Improvements could be: 
+* Writing the version that works for arbitrary inputs. 
+
+Difficulty: 5/10
+
 ## Day 9
 ## Day 10
 ## Day 11
 ## Day 12
 ## Day 13
+"Fold stuff" grid puzzle. Surprisingly straightforward for the middle of AOC.
+
+Difficulty: 5/10
 ## Day 14
 Dynamic programming! "polymerization" extends a string.
 
@@ -51,6 +80,8 @@ Location: Airplane to CA
 Improvements could be:
 * Part 1 is just Part 2 but I am leaving Part 1 as-is to show the difference between the approaches. 
 * Pull out the answer-finding to a common function.
+
+Difficulty: 6.5/10
 
 ## Day 15
 Do you know how to graph search: the puzzle. LOTS of corner cases I missed, especially the fact that cells couldn't be zero, which cost me a good 45 minutes. Being more careful about read the darn problem is a good note for next year, as is carefully building up the solution.  
