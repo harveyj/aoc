@@ -101,17 +101,11 @@ def two(INPUT):
     return beam_state.banked
 
   start_state = BeamState(where_p='AA', where_e = 'AA', banked=0, opens=())
-
   states = deque([start_state])
-  # seen = set()
 
   for i in range(DURATION):
     new_states = []
     for state in states:
-      # if state in seen: continue
-      # seen.add(state)
-      
-      # where, new_open
       new_person_states = []
       new_elephant_states = []
       for e in G[state.where_p]:
@@ -136,9 +130,8 @@ def two(INPUT):
           new_states.append(BeamState(where_p=where_p, where_e=where_e, banked=banked, opens=opens))
       new_states = sorted(new_states, key=score)
       new_states = new_states[-WIDTH:]
-      print(len(new_states))
       states = new_states
-  print(states[:-1])
+  return states[-1].banked
 
 p = puzzle.Puzzle("16")
 # p.run(one, 0)
