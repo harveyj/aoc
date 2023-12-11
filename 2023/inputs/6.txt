@@ -1,0 +1,14 @@
+Time:        48     87     69     81
+Distance:   255   1288   1117   1623
+
+
+Time:      7  15   30
+Distance:  9  40  200
+
+
+Time:      71530
+Distance:  940200
+
+
+Time:        48876981
+Distance:   255128811171623
