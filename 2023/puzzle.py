@@ -14,7 +14,6 @@ class Puzzle(object):
     print("ANSWER", answer)
     return answer
 
-
 class Grid:
 
   def __init__(self, x=0, y=0, grid=None):
@@ -60,8 +59,6 @@ class Grid:
   def neighbors_diag_locs(self, pt):
     x, y = pt
     return [(x + DX, y + DY) for DX, DY in self.NEIGHBORS_DIAG]
-
-
 
   def __str__(self):
     rows = []
