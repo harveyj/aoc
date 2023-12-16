@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import puzzle
+import puzzle, re
 
 def parse_input(INPUT):
   return INPUT
@@ -14,6 +14,6 @@ def two(INPUT):
   out = 0
   return out
 
-p = puzzle.Puzzle("3")
+p = puzzle.Puzzle("")
 p.run(one, 0)
 p.run(two, 0)
