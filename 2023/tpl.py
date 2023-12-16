@@ -5,10 +5,12 @@ def parse_input(INPUT):
   return INPUT
 
 def one(INPUT):
+  invals = parse_input(INPUT)
   out = 0
   return out
 
 def two(INPUT):
+  invals = parse_input(INPUT)
   out = 0
   return out
 
