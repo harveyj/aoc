@@ -14,6 +14,9 @@ class Puzzle(object):
     print("ANSWER", answer)
     return answer
 
+def pt_add(pt1, pt2):
+  return (pt1[0] + pt2[0], pt1[1] + pt2[1])
+  
 class Grid:
 
   def __init__(self, x=0, y=0, grid=None):
@@ -21,7 +24,7 @@ class Grid:
       self.grid = grid
     else:
       self.grid = [["." for i in range(self.x)] for j in range(self.y + 1)]
-    self.overlays = []
+    self.overlays = {}
 
   NEIGHBORS = [(-1, 0), (1, 0), (0, -1), (0, 1)]
   NEIGHBORS_DIAG = NEIGHBORS + [(-1, -1), (1, -1), (1, 1), (-1, 1)]
