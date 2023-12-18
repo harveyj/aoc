@@ -1,4 +1,6 @@
+#! /usr/bin/python3
 import copy
+import functools
 
 class Puzzle(object):
 
@@ -19,8 +21,10 @@ def pt_add(pt1, pt2):
   
 class Grid:
 
-  def __init__(self, x=0, y=0, grid=None):
-    if grid:
+  def __init__(self, x=0, y=0, grid=None, raw=None):
+    if raw:
+      self.grid=[list(l) for l in raw.split()]
+    elif grid:
       self.grid = grid
     else:
       self.grid = [["." for i in range(self.x)] for j in range(self.y + 1)]
@@ -28,6 +32,12 @@ class Grid:
 
   NEIGHBORS = [(-1, 0), (1, 0), (0, -1), (0, 1)]
   NEIGHBORS_DIAG = NEIGHBORS + [(-1, -1), (1, -1), (1, 1), (-1, 1)]
+
+  def __hash__(self):
+    return hash(tuple(map(tuple, self.grid)))
+
+  def __eq__(self, other):
+    return self.__hash__() == other.__hash__()
 
   def max_x(self):
     return len(self.grid[0])

@@ -2,7 +2,7 @@
 import puzzle, re, networkx, math
 
 def parse_input(INPUT):
-  G = puzzle.Grid(grid=[list(l) for l in INPUT.split()])
+  G = puzzle.Grid(raw=INPUT)
   pts = []
   for y in range(G.max_y()):
     for x in range(G.max_x()):
