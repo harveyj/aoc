@@ -29,8 +29,6 @@ def two(INPUT):
         if label == lens[0]:
           del boxes[box][i]
     else:
-      if iv[-2] != '=':
-        print(iv)
       label, power = iv.split('=')
       box = hash(label)
       if power != str(int(power)):
@@ -43,16 +41,11 @@ def two(INPUT):
           replace = True
       if not replace:
         boxes[box].append([label, power])
-    print(iv, [(i, boxes[i]) for i in range(255) if len(boxes[i]) > 0])
-  # print(iv, [(i, boxes[i]) for i in range(255) if len(boxes[i]) > 0])
+    # print(iv, [(i, boxes[i]) for i in range(255) if len(boxes[i]) > 0])
   fps = [(i+1) * sum_box(boxes[i]) for i in range(256) if len(boxes[i]) > 0]
-  # print(boxes)
-  # print(fps)
-  print(hash('dk'))
   return sum(fps)
 
-#dk=2 doesn't appear to do anything
 
 p = puzzle.Puzzle("15")
-# p.run(one, 0)
+p.run(one, 0)
 p.run(two, 0)
