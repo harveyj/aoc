@@ -18,7 +18,10 @@ class Puzzle(object):
 
 def pt_add(pt1, pt2):
   return (pt1[0] + pt2[0], pt1[1] + pt2[1])
-  
+
+def mul_vect(vect, mag):
+  return [i * mag for i in vect]
+
 class Grid:
 
   def __init__(self, x=0, y=0, grid=None, raw=None):
@@ -27,7 +30,7 @@ class Grid:
     elif grid:
       self.grid = grid
     else:
-      self.grid = [["." for i in range(self.x)] for j in range(self.y + 1)]
+      self.grid = [["." for i in range(x)] for j in range(y)]
     self.overlays = {}
 
   NEIGHBORS = [(-1, 0), (1, 0), (0, -1), (0, 1)]
@@ -86,5 +89,10 @@ class Grid:
     return '\n'.join(rows)
 
   def window(self, min_x, min_y, max_x, max_y):
+    grid = [row[min_x:max_x] for row in self.grid[min_y:max_y]]
+    for (x, y) in self.overlays:
+      if x < max_x and y < max_y and x >= min_x and y >= min_y:
+        grid[y-min_y][x-min_x] = self.overlays[(x, y)]
+
     return '\n'.join(
-        [''.join(row[min_x:max_x]) for row in self.grid[min_y:max_y]])
+        [''.join(row) for row in grid])
