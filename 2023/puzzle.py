@@ -16,6 +16,11 @@ class Puzzle(object):
     print("ANSWER", answer)
     return answer
 
+DIRS_CARDINAL = [(0, 1), (1, 0), (-1, 0), (0, -1)]
+
+def neighbors(pt):
+  return tuple(pt_add(pt, d) for d in DIRS_CARDINAL)
+
 def pt_add(pt1, pt2):
   return (pt1[0] + pt2[0], pt1[1] + pt2[1])
 
@@ -57,6 +62,14 @@ class Grid:
     if x < 0 or y < 0 or x >= self.max_x() or y >= self.max_y():
       return default
     return self.grid[y][x]
+
+  def get_repeating(self, pt):
+    return self.get(((pt[0] % self.max_x()), (pt[1] % self.max_y())))
+
+  def detect(self, val):
+    return [(x, y) 
+            for x in range(self.max_x()) for y in range(self.max_y())
+            if self.get((x, y)) == val]
 
   def neighbors(self, pt):
     x, y = pt
