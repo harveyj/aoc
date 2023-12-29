@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import puzzle
 import re
 
@@ -28,7 +30,6 @@ def two(INPUT):
     min_match = re.search('(\d)', l)
     min_idx = min_match.start() if min_match else 1000000
     min_val = min_match and min_match.group(0)
-    print(l, "mi, mv", min_idx, min_val)
     for i, pat in enumerate(re_patterns):
       mat = re.search(pat, l)
       if mat and mat.start() < min_idx:
@@ -53,7 +54,6 @@ def two(INPUT):
   for l in INPUT.split("\n"):
     s = find_first(l)
     e = find_last(l)
-    print('f l', s, e)
     out += int(s + e)
   return out
 
