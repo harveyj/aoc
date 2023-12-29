@@ -4,12 +4,83 @@ Another pure Python year. This year with Capen!
 
 Started 12/1/2021, finished 12/28/2023. I took 12/23- 12/26 almost entirely off. 
 
+## Day 1
+Warmup
+
+Difficulty: 2/10
+
+## Day 2
+Warmup
+
+Difficulty: 2/10
+
+## Day 3
+Gears - mostly a warmup.
+
+Difficulty: 3/10
+
+## Day 4
+Giant tree expansion.
+
+Difficulty: 5/10
+## Day 5
+A big tree walk.
+
+Part 2 I did monte carlo style, sampling to find the rough lowest item and then sequentially checking each number below to ensure there was no hidden lower range.
+
+Difficulty: 6/10
+
+## Day 6
+Boat start simulation.
+
+I wish the twist was "you can depress the button whenever you want" - that would force some real 6.046 action.
+
+Difficulty: 5/10
+
+## Day 7
+Card game / poker with alternate rules. 
+
+## Day 8
+LCM and find the cycle makes its appearance!
+
+Difficulty: 5/10
+
+Location: CT
+
+## Day 9
+Tree of difference sums. Super fun, a bit easy (but par for day 9) - a nice romp. 
+
+Difficulty: 5/10
+
+Location: CT
+
+## Day 10
+Pipe maze, what is in the pipe loop. A great mix of coding and thinking through. 
+
+Difficulty: 6.5/10
+
+Location: CT
+
+## Day 11
+"cosmic expansion" - list comprehensions and math made this one quick. Quite enjoyable.
+
+Difficulty: 6/10
+
+Location: CT
+
 ## Day 12
+Fill in the regex-ish thing in all possible ways. Again, the perfect level of challenge. I freaking love memoization and functools is fantastic at it. 
+
+Difficulty: 6.5/10
+
+Location: CT
 
 ## Day 13
 Really hitting my stride. Find the mirrored patterns. Part 1 and part 2 were very list comprehension-able.
 
 Difficulty: 5/10
+
+Location: CT
 
 ## Day 14
 Rocks sliding around like a tabletop game. 
@@ -19,12 +90,16 @@ Part 2 a canonical "find the cycle" AOC puzzle.
 
 Difficulty: 6.5/10
 
+Location: CT
+
 ## Day 15
 Part 1 a nice amuse
 
 Part 2 took 3 hours longer, pulled a reddit solution, all to find i had a 255 rather than a 256 somewhere...
 
 Difficulty 6/10 but 8/10 because I am dumb.
+
+Location: CT
 
 ## Day 16
 Energy beams!
@@ -33,12 +108,16 @@ A fun one.
 
 Difficulty: 6/10
 
+Location: CT
+
 ## Day 17
 Traverse the crucibles losing minimal heat. 
 
 Expressable in a multi-layer graph and then djikstra-able. I love it. Probably my favorite puzzle of AOC this year.
 
 Difficulty: 6/10
+
+Location: CT
 
 ## Day 18
 Giant-ass lagoon.
@@ -118,4 +197,3 @@ Topics
 * Graph theory, especially cut theory
 
 Difficulty: 5/10
-
