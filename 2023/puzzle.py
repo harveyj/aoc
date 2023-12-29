@@ -85,6 +85,11 @@ class Grid:
         [self.get((x + DX, y + DY)) for DX, DY in self.NEIGHBORS_DIAG],
     )
 
+  def neighbors_locs(self, pt):
+    x, y = pt
+    return [(x + DX, y + DY) for DX, DY in self.NEIGHBORS]
+
+
   def neighbors_diag_locs(self, pt):
     x, y = pt
     return [(x + DX, y + DY) for DX, DY in self.NEIGHBORS_DIAG]
