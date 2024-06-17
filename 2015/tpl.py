@@ -4,7 +4,10 @@ import re
 import networkx as nx
 
 def parse(INPUT):
-  return 0
+  pat = re.compile('(\w+) to (\w+) = (\d+)')
+  for l in INPUT.split('\n'):
+    yield re.match(pat, l).groups()
+
 
 def one(INPUT):
   return 0
