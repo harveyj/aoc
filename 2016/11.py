@@ -215,7 +215,7 @@ def run2(state, labels=None):
   #     # print(len(node))
   #     print([(labels[i], node[i]) for i in range(len(node))])
 
-  return len(dp) - 3
+  return len(dp) - 3 # START, END, and fencepost off by one
 
 
 def oneagain(INPUT):
