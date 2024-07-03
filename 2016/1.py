@@ -5,7 +5,7 @@ import networkx as nx
 
 def parse(INPUT):
   pat = re.compile('(\w+)+')
-  return re.findall(pat, INPUT)
+  return re.findall(pat, INPUT[0])
 
 DIRS = ((0, 1), (1, 0), (0, -1), (-1, 0))
 
