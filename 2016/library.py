@@ -60,6 +60,13 @@ class Grid:
         [self.get((x + DX, y + DY)) for DX, DY in self.NEIGHBORS],
     )
 
+  def neighbors_kv(self, pt):
+    x, y = pt
+    return filter(
+        lambda a: a != None,
+        [(((x + DX), (y+DY)), self.get((x + DX, y + DY))) for DX, DY in self.NEIGHBORS],
+    )
+
   def neighbors_diag(self, pt):
     x, y = pt
     return filter(
