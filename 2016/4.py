@@ -2,12 +2,10 @@
 import puzzle
 import re
 from collections import defaultdict
-import networkx as nx
 
 def parse(INPUT):
   pat = re.compile('((\w+-)+)(\d+)\[(\w+)\]')
-  for l in INPUT.split('\n'):
-    print(l)
+  for l in INPUT:
     yield re.match(pat, l).groups()
 
 
@@ -36,13 +34,12 @@ def one(INPUT):
   return cksum
 
 def two(INPUT):
-  cksum = 0
   for code in list(parse(INPUT)):
     id = int(code[-2])
-    print(''.join([chr(((ord(c) - ord('a')) + id) % 26 + ord('a'))  for c in code[0]]), id)
-    # print(code, code[-2])
-  return cksum
+    decoded = ''.join([chr(((ord(c) - ord('a')) + id) % 26 + ord('a'))  for c in code[0]])
+    if 'north' in decoded:
+      return id
 
-p = puzzle.Puzzle("4")
-# p.run(one, 0)
+p = puzzle.Puzzle("2016", "4")
+p.run(one, 0)
 p.run(two, 0)

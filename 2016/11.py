@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import puzzle
-import re
 import networkx as nx
 import itertools
 
@@ -15,6 +14,7 @@ CHIP_TO_GEN = {'Pr-C': 'Pr-G',
                'Di-C': 'Di-G', 
                }
 
+# Test input
 # CHIPS = set(['H-C', 'Li-C',])
 # GENS = set(['H-G', 'Li-G'])
 # CHIP_TO_GEN = {'H-C': 'H-G', 
@@ -80,9 +80,6 @@ def run(state, total=10):
           if not new_state_immutable in seen:
             pending.append(new_state_immutable)
 
-  # print(f'seen, {seen}')
-  print(graph)
-  # dijkstra
   dp = nx.dijkstra_path(graph, "START", "END")
   for item in dp[1:-1]:
     # print(item)
@@ -276,9 +273,7 @@ def testtwo(INPUT):
   # print(legal2(state))
   print('two pair on bottom', run2(tuple(state), labels))
 
-
-
-
+# TODO don't remember how I did this one, I think i extrapolated how many extra steps each new pair would generate.
 def two(INPUT):
   # Evens are G
   state = list(0 for i in range(15))
@@ -288,9 +283,9 @@ def two(INPUT):
   # print(legal2(state))
   return run2(tuple(state))
 
-p = puzzle.Puzzle("13")
+p = puzzle.Puzzle("2016", "11")
 # p.run(one, 0)
 # p.run(oneagain, 0)
-# p.run(two, 0)
+p.run(two, 0)
 
-p.run(testtwo, 0)
+# p.run(testtwo, 0)

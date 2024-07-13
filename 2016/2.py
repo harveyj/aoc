@@ -7,7 +7,8 @@ DIRS = {'U': (0, -1), 'D': (0, 1), 'L': (-1, 0), 'R': (1, 0)}
 
 def one(INPUT):
   x, y = 1, 1
-  for l in INPUT.split('\n'):
+  ret = ''
+  for l in INPUT:
     for c in l:
       dx, dy = DIRS[c]
       x += dx; y += dy
@@ -15,13 +16,14 @@ def one(INPUT):
       if x > 2: x = 2
       if y < 0: y = 0
       if y > 2: y = 2
-    print(PAD[y][x], end='')
-  return 
+    ret += str(PAD[y][x])
+  return ret
 
 PAD_TWO = [[0, 0, 1, 0, 0], [0, 2, 3, 4, 0], [5, 6, 7, 8, 9], [0, 'A', 'B', 'C', 0], [0, 0, 'D', 0, 0]]
 def two(INPUT):
   x, y = 0, 2
-  for l in INPUT.split('\n'):
+  ret = ''
+  for l in INPUT:
     for c in l:
       dx, dy = DIRS[c]
       x += dx; y += dy
@@ -29,10 +31,10 @@ def two(INPUT):
         x -= dx; y -= dy
       # print(x, y)
 
-    print(PAD_TWO[y][x], end='')
-  return 
+    ret += str(PAD_TWO[y][x])
+  return ret
 
 
-p = puzzle.Puzzle("2")
-# p.run(one, 0)
+p = puzzle.Puzzle("2016", "2")
+p.run(one, 0)
 p.run(two, 0)

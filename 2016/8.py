@@ -13,7 +13,7 @@ def parse(INPUT):
     else:
       yield re.match(pat_rotate, l).groups()
 
-def one(INPUT):
+def onetwo(INPUT):
   G = library.Grid(x=50, y=6)
   # G = library.Grid(x=7, y=3)
   for inst in parse(INPUT):
@@ -30,7 +30,7 @@ def one(INPUT):
         for y in range(G.max_y()):
           y_prev = y - mag
           if y_prev < 0: y_prev += G.max_y()
-          print((x, y), (x, y_prev), G_old.get((x, y_prev)))
+          # print((x, y), (x, y_prev), G_old.get((x, y_prev)))
           G.set((x, y), G_old.get((x, y_prev)))
       else:
         y = id
@@ -38,15 +38,8 @@ def one(INPUT):
           x_prev = x - mag
           if x_prev < 0: x_prev += G.max_x()
           G.set((x, y), G_old.get((x_prev, y)))
-    # print(G)
-    # print('')
-  print(len(G.detect('#')))
-  print(G)
-  return 0
+  # pretty-print str(G) and read the letters off of it to get the answer for 2.
+  return len(G.detect('#')), str(G)
 
-def two(INPUT):
-  return 0
-
-p = puzzle.Puzzle("8")
-p.run(one, 0)
-# p.run(two, 0)
+p = puzzle.Puzzle("2016", "8")
+p.run(onetwo, 0)

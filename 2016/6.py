@@ -2,8 +2,7 @@
 import puzzle
 from collections import defaultdict
 
-def one(INPUT, two=True):
-  lines = INPUT.split('\n')
+def puzz(lines, two=False):
   width = len(lines[0])
   hist = [defaultdict(int) for i in range(width)]
   for l in lines:
@@ -17,5 +16,12 @@ def one(INPUT, two=True):
     out.append(max_item[0])
   return ''.join(out)
 
-p = puzzle.Puzzle("6")
+def one(INPUT):
+  return puzz(INPUT)
+
+def two(INPUT):
+  return puzz(INPUT, two=True)
+
+p = puzzle.Puzzle("2016", "6")
 p.run(one, 0)
+p.run(two, 0)

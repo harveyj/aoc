@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import puzzle
-import re
 import networkx as nx
 
 def expand(l):
@@ -24,8 +23,8 @@ def expand(l):
 
 def one(INPUT):
   for l in INPUT:
-    print(len(expand(l)))
-  return 0
+    return len(expand(l))
+  # return 0
 
 
 def expand2(l, DEBUG=False):
@@ -64,9 +63,6 @@ def expand2(l, DEBUG=False):
       start_to_end[key] = i+1
       i += 1
   # thanks, chatgpt...
-  # for node in nx.dfs_postorder_nodes(tree, (0,0)):
-    # print(node)
-    # print(tree.nodes[node]['value'])
   for node in nx.dfs_postorder_nodes(tree, (0,0)):
     if tree.out_degree(node) > 0:
       # print(tree.nodes[node]['reps'])
@@ -78,9 +74,8 @@ def expand2(l, DEBUG=False):
 
 def two(INPUT):
   for l in INPUT:
-    print('answer',l, expand2(l))
-  return 0
+    return expand2(l)
 
-p = puzzle.Puzzle("9")
+p = puzzle.Puzzle("2016", "9")
 p.run(one, 0)
 p.run(two, 0)

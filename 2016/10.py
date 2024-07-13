@@ -62,5 +62,5 @@ def one(INPUT, DEBUG=False):
     print(node_id, node['vals'])
   return 0
 
-p = puzzle.Puzzle("10")
+p = puzzle.Puzzle("2016", "10")
 p.run(one, 0) # Ctrl-F output for answers to one and two.

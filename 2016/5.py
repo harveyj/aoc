@@ -14,7 +14,6 @@ def one(INPUT):
   chars = next_char('wtnhxymk')
   return ''.join(list(itertools.islice(chars, 8)))
 
-
 def two(INPUT):
   chars = next_char('wtnhxymk', two=True)
   char_list = list(itertools.islice(chars, 30))
@@ -28,6 +27,6 @@ def two(INPUT):
   print(passw)
   return ''.join(passw)
 
-p = puzzle.Puzzle("4")
-# p.run(one, 0)
+p = puzzle.Puzzle("2016", "5")
+p.run(one, 0)
 p.run(two, 0)

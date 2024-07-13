@@ -9,7 +9,7 @@ def parse(INPUT):
 
 DIRS = ((0, 1), (1, 0), (0, -1), (-1, 0))
 
-def one(INPUT, two=True):
+def puzz(INPUT, two=False):
   dir_idx = 0
   x, y = 0, 0
   seen = set()
@@ -21,13 +21,17 @@ def one(INPUT, two=True):
     for i in range(mag):
       x += dx; y += dy
       if (x, y) in seen and two:
-        return (x, y)
+        return abs(x)+abs(y)
       seen.add((x, y))
 
   return abs(x) + abs(y)
 
-def two(INPUT):
-  return 0
+def one(INPUT):
+  return puzz(INPUT)
 
-p = puzzle.Puzzle("1")
+def two(INPUT):
+  return puzz(INPUT, two=True)
+
+p = puzzle.Puzzle("2016", "1")
 p.run(one, 0)
+p.run(two, 0)

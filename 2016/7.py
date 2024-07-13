@@ -11,17 +11,12 @@ def one(INPUT):
     for match in re.finditer(pattern, l):
       if match.group()[0] == match.group()[1]: continue
       found = True
-      print('ms', match.span())
       illegal_zones = re.finditer(pattern_brackets, l)
       for iz in illegal_zones:
-        print('iz', iz.span())
         if iz.span()[0] < match.span()[0] < iz.span()[1]:
-          print('illegal')
           illegal = True
     if found and not illegal:
       legal.add(l)
-  print(legal)
-
   return len(legal)
 
 def palindrome(str):
@@ -36,45 +31,29 @@ def two(INPUT):
   illegal = set()
   matches = set()
   for l in INPUT:
-    # pals = list(palindrome(l))
-    # char_pairs = [pal['chars'] for pal in pals]
-    # for cp in char_pairs:
-    #   if (cp[1], cp[0]) in char_pairs and cp[0] != cp[1]:
-    #     print('MATCH', cp)
-    #     matches.add(l)
-    # continue
-    # print(char_pairs)
     for match in palindrome(l):
       a, b = match['chars']
       s, e = match['pos']
       if a == b: 
-        print('bail dup', a, b)
         continue
       inner_zones = re.finditer(pattern_brackets, l)
-      print(f'om {a}, {b}')
       inner = False
       for iz in inner_zones:
-        print('iz', iz.group(), iz.span())
         if iz.span()[0] < s < iz.span()[1]:
-          print('bail within iz')
           inner = True
           break
       if inner == False:
         inner_zones = re.finditer(pattern_brackets, l)
         for iz in inner_zones:
           for inner_match in palindrome(iz.group()):
-            # print('im', inner_match)
             c, d = inner_match['chars']
-            # print(f'c: {c}, d: {d}')
             if a == d and b == c: 
-              print('FOUND', a, b)
               legal.add(l)
       if l not in legal:
         illegal.add(l)
-  # print('illegal', illegal)
   for m in matches: print(m)
   return len(legal)
 
-p = puzzle.Puzzle("7")
-# p.run(one, 0)
+p = puzzle.Puzzle("2016", "7")
+p.run(one, 0)
 p.run(two, 0)

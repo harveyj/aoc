@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 import puzzle
 import re
-import networkx as nx
 import collections
-
 
 def parse(INPUT):
   pat = re.compile('(\w+) (\w+) ?([-]?\w+)?')
@@ -12,9 +10,10 @@ def parse(INPUT):
       print('PARSE ERROR:', l)
     yield re.match(pat, l).groups()
 
-
-def one(INPUT, two=True):
+def puzz(INPUT, two=False):
   pc = 0; regs = collections.defaultdict(int)
+  if two:
+    regs['c'] = 1
   instrs = list(parse(INPUT))
   while pc < len(instrs):
     # print(instrs[pc])
@@ -40,10 +39,14 @@ def one(INPUT, two=True):
         pc += eval(inst[2])
       else: pc += 1
   print(regs)
-  return 0
+  return regs['a']
+
+def one(INPUT):
+  return puzz(INPUT)
 
 def two(INPUT):
-  return 0
+  return puzz(INPUT, two=True)
 
-p = puzzle.Puzzle("12")
-p.run(one, 1)
+p = puzzle.Puzzle("2016", "12")
+p.run(one, 0)
+p.run(two, 0)
