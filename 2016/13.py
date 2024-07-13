@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import puzzle, library
-import re
 import networkx as nx
 
 def bits(num):
@@ -12,7 +11,6 @@ def bits(num):
 
 def is_wall(x, y, favorite):
   prod = x*x + 3*x + 2*x*y + y + y*y + favorite
-  print(bits(prod))
   return bits(prod) %2 == 1
 
 def make_graph(INPUT):
@@ -42,6 +40,6 @@ def two(INPUT):
   nodes = [(1,1)] + [v for u, v in edges]
   return len(nodes)
 
-p = puzzle.Puzzle("13")
+p = puzzle.Puzzle("2016", "13")
 p.run(one, 0)
 p.run(two, 0)

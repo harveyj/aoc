@@ -11,9 +11,9 @@ def parse(INPUT):
 LEFT, CENTER, RIGHT = (-1, -1), (0, -1), (1, -1)
 TRAPS = ('^^.', '.^^', '^..', '..^')
 
-def one(INPUT):
+def one(INPUT, two=False):
   seed = INPUT[0]
-  G = library.Grid(x=len(seed), y=400000)
+  G = library.Grid(x=len(seed), y=400000 if two else 40)
   for x, c in enumerate(seed):
     G.set((x, 0), c)
   for y in range(1, G.max_y()):
@@ -29,8 +29,8 @@ def one(INPUT):
   return len(G.detect('.'))
 
 def two(INPUT):
-  return 0
+  return one(INPUT, two=True)
 
-p = puzzle.Puzzle("18")
+p = puzzle.Puzzle("2016", "18")
 p.run(one, 0)
 p.run(two, 0)

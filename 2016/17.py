@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import puzzle, library
-import re, hashlib, networkx as nx, collections
+import hashlib, collections
 
 def md5hash(inval):
   md5_hash = hashlib.md5()
@@ -8,7 +8,7 @@ def md5hash(inval):
   return md5_hash.hexdigest()
 
 LEGAL = 'bcdef'
-def one(INPUT):
+def one(INPUT, two=False):
   salt = INPUT[0]
   queue = collections.deque()
   queue.append(('', (0,0)))
@@ -18,14 +18,13 @@ def one(INPUT):
   while queue:
     path, loc = queue.popleft()
     num += 1
-    # if num > 10: return
     if loc == (3,3):
+      if not two:
+        return path  
       good_paths.append(path)
       continue
     inval = salt+path
     u_c, d_c, l_c, r_c = md5hash(inval)[:4]
-    # print(u_c, d_c, l_c, r_c, LEGAL)
-    # print(d_c in LEGAL)
     if u_c in LEGAL:
       dx, dy = 0, -1
       new_loc = (loc[0] + dx, loc[1] + dy)
@@ -46,13 +45,12 @@ def one(INPUT):
       new_loc = (loc[0] + dx, loc[1] + dy)
       if G.get(new_loc):
         queue.append((path+'R', new_loc))
-    # print(queue)
   max_len = max([len(p) for p in good_paths])
   return max_len
 
 def two(INPUT):
-  return 0
+  return one(INPUT, two=True)
 
-p = puzzle.Puzzle("17")
+p = puzzle.Puzzle("2016", "17")
 p.run(one, 0)
-# p.run(two, 0)
+p.run(two, 0)

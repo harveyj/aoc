@@ -1,10 +1,4 @@
 #!/usr/bin/env python3
-import puzzle, library
-import re
-import networkx as nx
-import hashlib
-
-#!/usr/bin/env python3
 import puzzle
 import re
 import networkx as nx
@@ -67,7 +61,7 @@ def one(INPUT, two=True):
         pc += value
       else: pc += 1
     elif op == 'tgl':
-      print('.', pc, inst, regs)
+      # print('.', pc, inst, regs)
       if inst[1].isdecimal(): # handle literal value
         tgt = pc + eval(inst[1])
       elif regs[inst[1]] != 0:
@@ -87,12 +81,12 @@ def one(INPUT, two=True):
         else:
           tgt_op[0] = 'jnz'
       pc += 1
-  print(regs)
-  print(instrs)
-  return 0
+  # print(instrs)
+  return regs['a']
 
 def two(INPUT):
+  # Reverse engineer this one by looking at the register values at various breakpoints.
   return 0
 
-p = puzzle.Puzzle("23")
+p = puzzle.Puzzle("2016", "23")
 p.run(one, 0)

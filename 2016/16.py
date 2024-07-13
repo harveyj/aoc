@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import puzzle
 import re
-import networkx as nx
 
 def parse(INPUT):
   pat = re.compile('(\w+)+')
@@ -21,21 +20,22 @@ def checksum(data):
     sum.append('1' if a == b else '0')
   return ''.join(sum)
 
-def one(INPUT, max_len=35651584):
+def puzz(INPUT, max_len):
   data = INPUT[0]
   while len(data) < max_len:
     data = expand(data)
-    # print(data)
   data = data[:max_len]
   cksum = checksum(data)
   while len(cksum) % 2 == 0:
     cksum = checksum(cksum)
-  print(data, cksum)
-  return 0
+  return cksum
+
+def one(INPUT):
+  return puzz(INPUT, max_len=272)
 
 def two(INPUT):
-  return 0
+  return puzz(INPUT, max_len=35651584)
 
-p = puzzle.Puzzle("16")
+p = puzzle.Puzzle("2016", "16")
 p.run(one, 0)
-# p.run(two, 0)
+p.run(two, 0)

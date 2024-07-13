@@ -1,15 +1,11 @@
 #!/usr/bin/env python3
-import puzzle, library
+import puzzle
 import re
-import networkx as nx
-import heapq
-
 
 def parse(INPUT):
   pat = re.compile('(\d+)-(\d+)')
   for l in INPUT:
     yield list(map(int, re.match(pat, l).groups()))
-
 
 def one(INPUT, max=4294967295):
   ranges = list(parse(INPUT))
@@ -21,11 +17,9 @@ def one(INPUT, max=4294967295):
   events.append((max+2, 'END', None))
   events = sorted(events)
   depth = 0
-  last_loc = 0
   zero_ranges = []
   last_zero_start = 0
   for e, next in zip(events, events[1:]):
-    print(e, next)
     loc, code, other = e
     if code == 's':
       if depth == 0:
@@ -37,8 +31,7 @@ def one(INPUT, max=4294967295):
         last_zero_start = loc+1
   # zero_ranges.append((last_zero_start, max))
   zero_ranges = [(s, e) for (s, e) in zero_ranges if s != e]
-  print('zr',zero_ranges)
-  zero_mags = [e - s for s, e in zero_ranges]
+  # print('zr',zero_ranges)
   return zero_ranges[0][0]
 
 def two(INPUT, end_range=4294967295):
@@ -55,7 +48,7 @@ def two(INPUT, end_range=4294967295):
   for e in events:
     loc, code, other = e
     if code == 's':
-      print(loc, max_last)
+      # print(loc, max_last)
       if loc > max_last:
         zero_ranges.append((max_last+1, loc))
       max_last = max(max_last, other)
@@ -63,11 +56,10 @@ def two(INPUT, end_range=4294967295):
 
   # zero_ranges.append((last_zero_start, max))
   zero_ranges = [(s, e) for (s, e) in zero_ranges if s != e]
-  print('zr',zero_ranges)
+  # print('zr',zero_ranges)
   zero_mags = [e - s for s, e in zero_ranges]
   return sum(zero_mags)
 
-
-p = puzzle.Puzzle("20")
-# p.run(one, 0)
+p = puzzle.Puzzle("2016", "20")
+p.run(one, 0)
 p.run(two, 0)
