@@ -3,7 +3,7 @@ import puzzle, library
 import re
 import networkx as nx
 import hashlib
-
+from collections import defaultdict
 
 def parse(INPUT):
   pat = re.compile('(\w+)+')
