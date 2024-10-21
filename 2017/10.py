@@ -2,6 +2,8 @@
 import puzzle, library
 import itertools, operator
 
+# Hat tip https://www.reddit.com/r/adventofcode/comments/7irzg5/comment/dr10ayw/
+
 def parse(INPUT):
   return list(map(int, INPUT[0].split(',')))
 
@@ -25,23 +27,31 @@ def hexchr(i):
   return '0123456789abcdef'[i]
 
 def print_hex(vals):
+  ret = ''
   for val in vals:
-    print(hexchr(val // 16), hexchr(val % 16))
-
+    ret += hexchr(val // 16) + hexchr(val % 16)
+  return ret
 
 def two(INPUT):
   INPUT=INPUT[0]
+  # INPUT=''
   key = list(map(ord, INPUT)) + [17, 31, 73, 47, 23]
   vals = list(range(256))
   offset = 0; skip_size = 0
   for i in range(64):
-    _, vals, offset, skip_size = knothash(vals, key, offset, skip_size)
-  print(vals[:16])
-  val = (list(itertools.accumulate(vals[:16], operator.xor))[-1])
-  print_hex([val])
+    # print(len(vals))
+    _, vals, offset, skip_size = knothash(vals, key, skip_size, offset)
+    print(offset, skip_size)
+  print(vals)
+  dense = []
+  for i in range(len(vals) // 16):
+    val = 0
+    dense.append(list(itertools.accumulate(vals[i*16:(i+1)*16], operator.xor))[-1])
+  print(list(dense))
+  out = print_hex(dense)
   # print_hex([64, 7, 255])
-  return 0
+  return out
 
 p = puzzle.Puzzle("2017", "10")
 p.run(one, 0)
-p.run(two, 2)
+p.run(two, 0)
