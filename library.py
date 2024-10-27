@@ -13,7 +13,7 @@ class Grid:
 
   def __init__(self, x=0, y=0, grid=None, raw=None):
     if raw:
-      self.grid=[list(l) for l in raw.split()]
+      self.grid=[list(l) for l in raw.split('\n')]
     elif grid:
       self.grid = grid
     else:
