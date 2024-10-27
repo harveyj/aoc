@@ -28,7 +28,6 @@ class VM(object):
     self.sent = False
     inst = self.instrs[self.pc]
     op, xy = inst.split()[0], inst.split()[1:]
-    # print(inst)
     if op in ['snd', 'jgz']:
       rewrite_x(xy, self.regs)
     if op in ['add', 'mul', 'mod', 'jgz', 'set']:
@@ -37,7 +36,6 @@ class VM(object):
       x, y = xy
     else:
       x = xy[0]
-    # print(op, xy, self.regs)
     if op == 'snd':
       self.outbox.append(x)
       self.sent = True
