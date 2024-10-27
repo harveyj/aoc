@@ -1,85 +1,97 @@
 #!/usr/bin/env python3
-import puzzle, library
-import re
-import networkx as nx
-import hashlib
+import puzzle
 from collections import defaultdict
 
-def parse(INPUT):
-  pat = re.compile('(\w+)+')
-  for l in INPUT:
-    yield re.match(pat, l).groups()
+def rewrite_x(xy, regs):
+  if xy[0] in regs:
+    xy[0] = regs[xy[0]]
+  else: xy[0] = int(xy[0])
 
-# snd X plays a sound with a frequency equal to the value of X.
-# set X Y sets register X to the value of Y.
-# add X Y increases register X by the value of Y.
-# mul X Y sets register X to the result of multiplying the value contained in register X by the value of Y.
-# mod X Y sets register X to the remainder of dividing the value contained in register X by the value of Y (that is, it sets X to the result of X modulo Y).
-# rcv X recovers the frequency of the last sound played, but only when the value of X is not zero. (If it is zero, the command does nothing.)
-# jgz X Y jumps with an offset of the value of Y, but only if the value of X is greater than zero. (An offset of 2 skips the next instruction, an offset of -1 jumps to the previous instruction, and so on.)
+def rewrite_y(xy, regs):
+  if xy[1] in regs:
+    xy[1] = regs[xy[1]]
+  else: 
+    xy[1] = int(xy[1])
 
-def rewrite_1(xy, regs):
-  new_xy = xy[:1]
-  for val in xy[1:]:
-    if val in regs:
-      new_xy.append(regs[val])
-    else: new_xy.append(int(val))
-  return new_xy
+class VM(object):
+  def __init__(self, instrs, inbox, outbox):
+    self.pc = 0
+    self.regs = defaultdict(int)
+    self.inbox = inbox
+    self.outbox = outbox
+    self.instrs = instrs
+    self.rcv_called = False # hack for part 1
+    self.blocking = False # hack for part 1
 
-def rewrite_2(xy, regs):
-  new_xy = []
-  for val in xy:
-    if val in regs:
-      new_xy.append(regs[val])
-    else: 
-      new_xy.append(int(val))
-  return new_xy
-
-def rewrite_3(xy, regs):
-  return [regs[xy[0]], None]
-
-def one(INPUT):
-  instrs = INPUT
-  regs = defaultdict(int)
-  snd = None
-  rcv = None
-  pc = 0
-  while True:
-    inst = instrs[pc]
+  def step(self):
+    self.blocking = False
+    self.sent = False
+    inst = self.instrs[self.pc]
     op, xy = inst.split()[0], inst.split()[1:]
-    if op in ['snd', 'rcv']:
-      x, y = rewrite_3(xy, regs)
-    elif op in ['jgz']:
-      x, y = rewrite_2(xy, regs)
+    # print(inst)
+    if op in ['snd', 'jgz']:
+      rewrite_x(xy, self.regs)
+    if op in ['add', 'mul', 'mod', 'jgz', 'set']:
+      rewrite_y(xy, self.regs)
+    if op in ['add', 'mul', 'mod', 'jgz', 'set', 'jgz']:
+      x, y = xy
     else:
-      x, y = rewrite_1(xy, regs)
-
+      x = xy[0]
+    # print(op, xy, self.regs)
     if op == 'snd':
-      snd = x
+      self.outbox.append(x)
+      self.sent = True
     elif op == 'set':
-      regs[x] = y
+      self.regs[x] = y
     elif op == 'add':
-      new = regs[x] + y
-      regs[x] = new
+      new = self.regs[x] + y
+      self.regs[x] = new
     elif op == 'mul':
-      new = regs[x] * y
-      regs[x] = new
+      new = self.regs[x] * y
+      self.regs[x] = new
     elif op == 'mod':
-      new = regs[x] % y
-      regs[x] = new
+      new = self.regs[x] % y
+      self.regs[x] = new
     elif op == 'rcv':
-      if x != 0:
-        rcv = snd
-        return rcv
+      if x != 0 and len(self.inbox) > 0:
+        self.regs[x] = self.inbox.pop(0)
+        self.rcv_called = True
+      else: # block until item in queue
+        self.pc -= 1
+        self.blocking = True
     elif op == 'jgz':
       if x > 0:
         # cancel out the += 1 at the end of the loop
-        pc += y -1
-    pc += 1
+        self.pc += y -1
+    self.pc += 1
+
+def one(INPUT):
+  single_queue = []
+  vm = VM(instrs=INPUT, inbox=single_queue, outbox=single_queue)
+  while True:
+    vm.step()
+    if vm.rcv_called:
+      return single_queue[-1]
 
 def two(INPUT):
-  return 0
+  a_out = []
+  b_out = []
+  vm_a = VM(instrs=INPUT, inbox=b_out, outbox=a_out)
+  vm_b = VM(instrs=INPUT, inbox=a_out, outbox=b_out)
+  vm_a.regs['p'] = 0
+  vm_b.regs['p'] = 1
+  total = 0
+  while True:
+    vm_a.step()
+    vm_b.step()
+    # if vm_a.sent: 
+    #   print('send a', a_out[-1])
+    if vm_b.sent: 
+      # print('send b', b_out[-1])
+      total += 1
+    if vm_a.blocking and vm_b.blocking:
+      return total
 
 p = puzzle.Puzzle("2017", "18")
-p.run(one, 1)
+p.run(one, 0)
 p.run(two, 0)
