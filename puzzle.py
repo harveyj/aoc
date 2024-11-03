@@ -4,7 +4,10 @@ class Puzzle(object):
   def __init__(self, year, id):
     self.id = id
     self.inputs = []
-    raw_inputs = open(year + '/inputs/' + id + '.txt').read().split('\n\n\n')
+    if year == "":
+      raw_inputs = open('inputs/' + id + '.txt').read().split('\n\n\n')
+    else: 
+      raw_inputs = open(year + '/inputs/' + id + '.txt').read().split('\n\n\n')
     for inval in raw_inputs:
       self.inputs.append([l for l in inval.split('\n') if not l[:2] == '//'])
 
