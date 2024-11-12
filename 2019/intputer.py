@@ -83,6 +83,8 @@ class Intputer(object):
     if opcode == self.ADD:
       self.out("ADD modes a b out", modes, a, b, a+b, "to", c_addr)
       self.ram[c_addr] = a + b
+      # if a not in [0,1] and b not in [0,1]:
+      #   print(f'ADD {a} {b}')
       self.pc += self.WIDTHS[opcode]
     elif opcode == self.MUL:
       self.out("MUL modes a b out", modes, a, b, a*b, "to", c_addr)
@@ -97,12 +99,20 @@ class Intputer(object):
         self.last_read = in_val
         self.pc += self.WIDTHS[opcode]
       else:
-        self.out('HALT')
-        self.halted = True
-        return self.INPUT, None
+        in_val = list(map(ord, input()))
+        print(in_val)
+        self.ram[a_addr] = in_val[0]
+        # self.last_read = in_val
+        self.inputs = in_val[1:] + [10]
+        self.pc += self.WIDTHS[opcode]
+
+        # self.out('HALT')
+        # self.halted = True
+        # return self.INPUT, None
     elif opcode == self.OUTPUT:
       self.out("OUTPUT", modes, a)
       self.outputs.append(a)
+      print(chr(a), end='')
       self.pc += self.WIDTHS[opcode]
     elif opcode == self.JTR:
       self.out("JTR", modes, a, "to", b)
@@ -118,7 +128,7 @@ class Intputer(object):
         self.ram[c_addr] = 0
       self.pc += self.WIDTHS[opcode]
     elif opcode == self.EQ:
-      self.out("EQ", modes, a, b)
+      # self.out("EQ", modes, a, b)
       if a == b: 
         self.ram[c_addr] = 1
       else:
