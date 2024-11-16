@@ -14,28 +14,28 @@ def is_nice(inval):
 
 def one(INPUT):
   total = 0
-  for l in INPUT.split('\n'):
+  for l in INPUT:
     if is_nice(l):
-      print('nice', l)
+      # print('nice', l)
       total += 1
-    else: print('no', l)
+    # else: print('no', l)
   return total
 
 def is_nice2(inval):
   repeat = re.search(r'(..).*\1', inval)
   sandwich = re.search(r'(.).\1', inval)
-  print(repeat, sandwich, inval)
+  # print(repeat, sandwich, inval)
   return repeat != None and sandwich != None
 
 def two(INPUT):
   total = 0
-  for l in INPUT.split('\n'):
+  for l in INPUT:
     if is_nice2(l):
-      print('nice', l)
+      # print('nice', l)
       total += 1
-    else: print('no', l)
+    # else: print('no', l)
   return total
 
-p = puzzle.Puzzle("5")
+p = puzzle.Puzzle("2015", "5")
 p.run(one, 0)
 p.run(two, 0)
