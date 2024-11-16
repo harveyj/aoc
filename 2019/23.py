@@ -16,7 +16,7 @@ def onetwo(INPUT, two=False):
       if len(p.outputs) == 3:
         dest, x, y = p.outputs
         if dest == 255:
-          if not two:d
+          if not two:
             return y
           nat_x, nat_y = x, y
           p.outputs = []

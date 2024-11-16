@@ -6,7 +6,6 @@ class SpringDroid(object):
 
   def __init__(self, code, instructions):
     inputs = list(map(ord, code))
-    print(inputs)
     self.puter = intputer.Intputer(instructions, inputs, id='a')
     self.outputs = []
 
@@ -14,7 +13,7 @@ class SpringDroid(object):
     for i in range(10000):
       code, out = self.puter.run()
       if code == intputer.Intputer.OUTPUT:
-        # print("OUTPUT", out)
+        print("OUTPUT", out)
         self.outputs.append(out)
       elif code == intputer.Intputer.INPUT: 
         next_ip = raw_input()

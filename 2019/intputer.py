@@ -100,7 +100,6 @@ class Intputer(object):
         self.pc += self.WIDTHS[opcode]
       else:
         in_val = list(map(ord, input()))
-        print(in_val)
         self.ram[a_addr] = in_val[0]
         # self.last_read = in_val
         self.inputs = in_val[1:] + [10]
@@ -112,7 +111,7 @@ class Intputer(object):
     elif opcode == self.OUTPUT:
       self.out("OUTPUT", modes, a)
       self.outputs.append(a)
-      print(chr(a), end='')
+      # print(chr(a), end='')
       self.pc += self.WIDTHS[opcode]
     elif opcode == self.JTR:
       self.out("JTR", modes, a, "to", b)
