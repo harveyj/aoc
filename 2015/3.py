@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 import puzzle
-import re
-import networkx as nx
 
 def one(INPUT):
   seen = set()
