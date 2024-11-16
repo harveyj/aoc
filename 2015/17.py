@@ -3,25 +3,23 @@ import puzzle
 import itertools
 
 def parse(INPUT):
-  return map(int, INPUT.split('\n'))
+  return map(int, INPUT)
 
 
-def one(INPUT):
+def onetwo(INPUT, two=False):
   buckets = list(parse(INPUT))
   combos = 0
   for i in range(len(buckets)):
-    if combos > 0:
+    if two and combos > 0:
       break
     for combo in itertools.combinations(buckets, i):
-      # print(combo)
       if sum(combo) == 150:
         combos += 1
-        # print(combo)
   return combos
 
-def two(INPUT):
-  return 0
+def one(INPUT): return onetwo(INPUT, two=False)
+def two(INPUT): return onetwo(INPUT, two=True)
 
 p = puzzle.Puzzle("2015", "17")
 p.run(one, 0)
-# p.run(two, 0)
+p.run(two, 0)

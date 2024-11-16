@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import puzzle
 import re
-import networkx as nx
 import collections
 
 def parse(INPUT):

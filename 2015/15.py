@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 import puzzle
 import re
-import networkx as nx
 
 def parse(INPUT):
   pat = re.compile('(\w+): capacity (-?\d+), durability (-?\d+), flavor (-?\d+), texture (-?\d+), calories (-?\d+)')
-  for l in INPUT.split('\n'):
+  for l in INPUT:
     yield re.match(pat, l).groups()
 
 
@@ -14,12 +13,10 @@ def one(INPUT):
   ing_map = dict()
   for i in ingredients:
     ing_map[i[0]] = tuple(map(int, i[1:5]))
-  print(ing_map)
   cap = [ing_map[key][0] for key in ing_map]
   dur = [ing_map[key][1] for key in ing_map]
   fla = [ing_map[key][2] for key in ing_map]
   tex = [ing_map[key][3] for key in ing_map]
-  score_indices = None
   score_max = 0
   for a in range(0, 100):
     for b in range(0, 100-a):
@@ -35,8 +32,6 @@ def one(INPUT):
         score = c_s * d_s * f_s * t_s
         if score > score_max:
           score_max = score
-          print(c_s, d_s, f_s, t_s)
-          # score_indices = [a,b,c,d]
   return score_max
 
 def two(INPUT):
@@ -44,13 +39,11 @@ def two(INPUT):
   ing_map = dict()
   for i in ingredients:
     ing_map[i[0]] = tuple(map(int, i[1:6]))
-  print(ing_map)
   cap = [ing_map[key][0] for key in ing_map]
   dur = [ing_map[key][1] for key in ing_map]
   fla = [ing_map[key][2] for key in ing_map]
   tex = [ing_map[key][3] for key in ing_map]
   cal = [ing_map[key][4] for key in ing_map]
-  score_indices = None
   score_max = 0
   for a in range(0, 100):
     for b in range(0, 100-a):
@@ -67,8 +60,6 @@ def two(INPUT):
         score = c_s * d_s * f_s * t_s
         if score > score_max and cal_s == 500:
           score_max = score
-          print(c_s, d_s, f_s, t_s)
-          # score_indices = [a,b,c,d]
   return score_max
 p = puzzle.Puzzle("2015", "15")
 p.run(one, 0)
