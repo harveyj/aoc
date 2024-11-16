@@ -1,10 +1,12 @@
+#!/usr/bin/env python3
+import puzzle, re
 import fileinput, itertools, collections, copy
 import heapq
 
 class Grid(object):
 
-	def __init__(self):
-		self.floor = [list(line[:-1]) for line in fileinput.input()]
+	def __init__(self, INPUT):
+		self.floor = [list(line[:-1]) for line in INPUT]
 		self.width = len(self.floor[0])
 		self.height = len(self.floor)
 		self.portals = {}
@@ -117,22 +119,37 @@ def get_portal_loc(grid, my_loc):
 # for loc, code in g.portal_locs.items():
 # 	print(loc, code, get_portal_loc(g, loc))
 
-grid = Grid()
-sx, sy = -1, -1
-for (x, y) in grid.portal_locs.keys():
-	if grid.portal_locs[x, y] == grid.portals['AA']:
-		sx, sy = x, y
-	if grid.portal_locs[x, y] == grid.portals['ZZ']:
-		ex, ey = x, y
-parents = bfs(grid, sx, sy, ex, ey)
-parents[sx, sy] = None
 
-node = parents[ex, ey]
-pathlen = 0
-while node:
-	if grid.get(node[0], node[1]) == '.':
-		grid.set(node[0], node[1], '*')
-	node = parents[node]
-	pathlen += 1
-print(grid)
-print(pathlen)
+def one(INPUT):
+  grid = Grid(INPUT)
+  sx, sy = -1, -1
+  for (x, y) in grid.portal_locs.keys():
+    if grid.portal_locs[x, y] == grid.portals['AA']:
+      sx, sy = x, y
+    if grid.portal_locs[x, y] == grid.portals['ZZ']:
+      ex, ey = x, y
+  parents = bfs(grid, sx, sy, ex, ey)
+  parents[sx, sy] = None
+
+  node = parents[ex, ey]
+  pathlen = 0
+  while node:
+    if grid.get(node[0], node[1]) == '.':
+      grid.set(node[0], node[1], '*')
+    node = parents[node]
+    pathlen += 1
+  print(grid)
+  print(pathlen)
+
+  invals = parse_input(INPUT)
+  out = 0
+  return out
+
+def two(INPUT):
+  invals = parse_input(INPUT)
+  out = 0
+  return out
+
+p = puzzle.Puzzle("2019", "20")
+p.run(one, 0)
+p.run(two, 0)
