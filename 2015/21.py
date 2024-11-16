@@ -32,23 +32,24 @@ def one(INPUT):
   weps = parse(WEPS)
   arm = parse(ARM)
   ring = parse(RING)
-  # sim(8, 1)
-  # return 0
+  match_costs = []
   for w, wstats in weps:
     for a, astats in arm:
       for r, rstats in ring:
         for r2, r2stats in ring:
-          # print(wstats, astats, rstats)
           h_a = wstats[1] + rstats[1] + r2stats[1]
           h_d = astats[2] + rstats[2] + r2stats[2]
           cost = wstats[0]+astats[0]+rstats[0]+r2stats[0]
           if cost < 91 and sim(h_a, h_d):
-            print(w, a, r, r2, cost, h_a, h_d)
+            # print(w, a, r, r2, cost, h_a, h_d)
+            match_costs.append(cost)
+  return min(match_costs)
 
 def two(INPUT):
   weps = parse(WEPS)
   arm = parse(ARM)
   ring = parse(RING)
+  match_costs = []
   for w, wstats in weps:
     for a, astats in arm:
       for r, rstats in ring:
@@ -58,7 +59,9 @@ def two(INPUT):
           h_d = astats[2] + rstats[2] + r2stats[2]
           cost = wstats[0]+astats[0]+rstats[0]+r2stats[0]
           if cost > 135 and not sim(h_a, h_d):
-            print(w, a, r, r2, cost, h_a, h_d)
+            # print(w, a, r, r2, cost, h_a, h_d)
+            match_costs.append(cost)
+  return min(match_costs)
 
 
 def sim(h_a, h_d):
@@ -75,5 +78,5 @@ def sim(h_a, h_d):
 
 
 p = puzzle.Puzzle("2015", "21")
-# p.run(one, 0)
+p.run(one, 0)
 p.run(two, 0)

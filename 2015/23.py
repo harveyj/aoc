@@ -7,7 +7,7 @@ import collections
 
 def parse(INPUT):
   pat = re.compile('(\w+) ([+-]?\w+)?(, [+-]\d+)?')
-  for l in INPUT.split('\n'):
+  for l in INPUT:
     yield re.match(pat, l).groups()
 
 
@@ -34,11 +34,11 @@ def onetwo(INPUT, two=True):
       pc += 1 if regs[inst[1]] % 2 == 1 else eval(inst[2][1:])
     elif op == 'jio':
       pc += 1 if regs[inst[1]] != 1 else eval(inst[2][1:])
-  print(regs)
-  return 0
+  return regs['b']
 
-def two(INPUT):
-  return 0
+def one(INPUT): return onetwo(INPUT, two=False)
+def two(INPUT): return onetwo(INPUT, two=True)
 
 p = puzzle.Puzzle("2015", "23")
-p.run(onetwo, 0)
+p.run(one, 0)
+p.run(two, 0)

@@ -4,7 +4,7 @@ import re
 import networkx as nx
 
 def parse(INPUT):
-  return library.Grid(raw=INPUT)
+  return library.Grid(raw='\n'.join(INPUT))
 
 def one(INPUT, two=False):
   def iter(G):
@@ -39,5 +39,5 @@ def two(INPUT):
   return one(INPUT, two=True)
 
 p = puzzle.Puzzle("2015", "18")
-# p.run(one, 0)
+p.run(one, 0)
 p.run(two, 0)

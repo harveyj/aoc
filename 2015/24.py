@@ -6,7 +6,7 @@ import itertools
 import operator, functools
 
 def parse(INPUT):
-  return list(map(int, INPUT.split('\n')))
+  return list(map(int, INPUT))
 
 def qe(vals):
   return functools.reduce(operator.mul, vals)
@@ -20,11 +20,11 @@ def onetwo(INPUT, two=True):
     for c in itertools.combinations(vals, i):
       if sum(c) == tgt:
         if qe(c) < ideal: ideal = qe(c)
-        print(c, qe(c))
   return ideal
 
-def two(INPUT):
-  return 0
+def one(INPUT): return onetwo(INPUT, two=False)
+def two(INPUT): return onetwo(INPUT, two=True)
 
 p = puzzle.Puzzle("2015", "24")
-p.run(onetwo, 0)
+p.run(one, 0)
+p.run(two, 0)

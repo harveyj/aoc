@@ -86,53 +86,21 @@ def turn(params, t, debug = False, hard=False):
   return (h_hp, h_m, h_sh, h_rc, b_hp, b_a, b_p, consumed)
 
 def one(INPUT):
-  # (h_hp, h_m, h_sh, h_rc, b_hp, b_a, b_p, consumed)
-  # params = 50, 500, 0, 0, 55, 8, 0, 0
-  # params =  10, 250, 0, 0, 13, 8, 0, 0
-  # params = turn(params, 'p')
-  # params = turn(params, 'mm')
-  # print(params)
-  # params =  10, 250, 0, 0, 14, 8, 0, 0
-  # params = turn(params, 're')
-  # params = turn(params, 'sh')
-  # params = turn(params, 'dr')
-  # params = turn(params, 'p')
-  # params = turn(params, 'mm')
-  # print(params)
-
-  # 953
-  params =  50, 500, 0, 0, 55, 8, 0, 0
-  turns = ['re', 'sh', 'p', 'mm', 'mm', 'mm', 'p', 'mm', 'mm']
-  
-  # 900
-  # turns = ('p', 'mm', 're', 'mm', 'p', 'sh', 'mm', 'mm')
-  # for t in turns:
-  #   params = turn(params, t, debug=True)
-
-  # return 0
   legal_turns = ['p', 're', 'sh', 'mm', 'dr']
   sequences = itertools.product(legal_turns, repeat=9)
   total = 0
   consumed = [10000000]
   for sequence in sequences:
     total += 1
-    params =  50, 500, 0, 0, 55, 8, 0, 0
-    # print(sequence)
+    params = 50, 500, 0, 0, 55, 8, 0, 0
     for t in sequence:
       params = turn(params, t)
       if params == None:
-        # print('break')
         break
-      # print(f'you:{params[0]}, boss: {params[4]}, consumed:{params[7]}')
     if params:
       if params[4] <= 0:
-        # print(f'you:{params[0]}, boss: {params[4]}, consumed:{params[7]}')
         consumed.append(params[7])
-        print(sequence, params[7])
-  print(min(consumed))
-  print(total)
-
-  return 0
+  return min(consumed)
 
 def two(INPUT):
   legal_turns = ['p', 're', 'sh', 'mm', 'dr']
@@ -142,21 +110,15 @@ def two(INPUT):
   for sequence in sequences:
     total += 1
     params =  50, 500, 0, 0, 55, 8, 0, 0
-    # print(sequence)
     for t in sequence:
       params = turn(params, t, hard=True)
       if params == None:
-        # print('break')
         break
-      # print(f'you:{params[0]}, boss: {params[4]}, consumed:{params[7]}')
     if params:
       if params[4] <= 0:
-        # print(f'you:{params[0]}, boss: {params[4]}, consumed:{params[7]}')
         consumed.append(params[7])
-        print(sequence, params[7])
-  print(min(consumed))
-  print(total)
+  return min(consumed)
 
 p = puzzle.Puzzle("2015", "22")
-# p.run(one, 0)
+p.run(one, 0)
 p.run(two, 0)

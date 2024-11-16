@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 import puzzle
-import re
-import networkx as nx
 
 
 CODES = '''20151125  18749137  17289845  30943339  10071777  33511524
@@ -30,20 +28,15 @@ def code(idx):
   return code
 
 def one(INPUT):
+  x, y = map(int, INPUT[0].split(","))
   a = parse(CODES)
-  # print(a)
   grid = [[0] * 7, [0] * 7,[0] * 7,[0] * 7,[0] * 7,[0] * 7,[0] * 7,[0] * 7] 
-  # print(grid)
   for i in range(1, 7):
     for j in range(1, 7):
       grid[i-1][j-1] = code(loc(i,j)-1)
-  print('\n'.join([str(row) for row in grid]))
-  print(code(loc(2978, 3083)-1))
-  return a
-
-def two(INPUT):
-  return 0
+  # print('\n'.join([str(row) for row in grid]))
+  return code(loc(x, y) - 1)
 
 p = puzzle.Puzzle("2015", "25")
 p.run(one, 0)
-# p.run(two, 0)
+# Part two is a freebie!

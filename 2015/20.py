@@ -3,7 +3,7 @@ import puzzle
 import math
 
 def parse(INPUT):
-  return int(INPUT)
+  return int(INPUT[0])
 
 def factorization(n):
   factors = []
@@ -25,7 +25,6 @@ def one(INPUT):
     prev = sum(factorization(2**(i-1)))
     cur = sum(factorization(2**i))
     if prev < max < cur:
-      print(i)
       break
   indices = [0] * 21
   indices[20] = 1
@@ -44,37 +43,24 @@ def one(INPUT):
 
   for j in range(i):
     prev = sum(factorization(bin2num(indices)))
-    print(bin2num(indices))
     indices[8] = 1
-    print(bin2num(indices))
     cur = sum(factorization(bin2num(indices)))
     if prev < max < cur:
-      print("yes", indices)
       break
-  print(bin2num(indices))
   for i in range(665280, 600000, -10): # 693000
     if sum(factorization(i)) > max:
-      print("found", i)
-  # # print(factorization(6))
-  # last_seen = 0; i = 3
-  # while last_seen < max:
-  #   last_seen = sum(factorization(i))
-  #   if max / last_seen > 2:
-  #     i *= max / last_seen
-  #   else: i += 1
-  #   print(i, sum(factorization(i)))
-  # return 0
+      return i
 
 def two(INPUT):
-  # 715000
-  for i in range(700000, 705600+1, 1):
+  # i manually range-found for this one
+  for i in range(705000, 705600+1, 1):
     factors = factorization(i)
     filtered = [f for f in factors if i / f <= 50]
     tot = sum([f * 11 for f in filtered])
     if tot >= 29000000:
-      print(i, tot)
+      return i
   return 0
 
 p = puzzle.Puzzle("2015", "20")
-# p.run(one, 0)
+p.run(one, 0)
 p.run(two, 0)
