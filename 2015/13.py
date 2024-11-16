@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 import puzzle
-import json, networkx
+import networkx
 import re
 import itertools
 
 def parse(INPUT):
   pat = re.compile('(\w+) would .* (\d+) happiness units by sitting next to (\w+).')
-  for l in INPUT.split('\n'):
-    print(l)
+  for l in INPUT:
+    # print(l)
     a, delta, b = re.match(pat, l).groups()
     delta = int(delta)
     if "lose" in l: delta *= -1
@@ -35,4 +35,5 @@ def onetwo(INPUT):
   return max_happiness_order, max_happiness_val
 
 p = puzzle.Puzzle("2015", "13")
+p.run(onetwo, 1)
 p.run(onetwo, 0)
