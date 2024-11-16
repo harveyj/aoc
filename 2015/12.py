@@ -20,5 +20,5 @@ def onetwo(INPUT):
 
   return sum_num(json.loads(INPUT))
 
-p = puzzle.Puzzle("12")
+p = puzzle.Puzzle("2015", "12")
 p.run(onetwo, 0)

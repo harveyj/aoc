@@ -2,7 +2,7 @@
 import puzzle
 
 def parse(INPUT):
-  return INPUT.split('\n')
+  return INPUT
 
 def one(INPUT):
   code = 0
@@ -25,6 +25,6 @@ def two(INPUT):
   return total
 
 
-p = puzzle.Puzzle("8")
+p = puzzle.Puzzle("2015", "8")
 p.run(one, 0)
 p.run(two, 0)

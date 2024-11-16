@@ -157,6 +157,6 @@ def two(INPUT):
   print(min(consumed))
   print(total)
 
-p = puzzle.Puzzle("13")
+p = puzzle.Puzzle("2015", "22")
 # p.run(one, 0)
 p.run(two, 0)

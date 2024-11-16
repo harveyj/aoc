@@ -48,6 +48,7 @@ def two(INPUT):
       if r_dists[r[0]][t] == max_score: scores[r] += 1
   print(scores)
   return 0
-p = puzzle.Puzzle("14")
+
+p = puzzle.Puzzle("2015", "14")
 # p.run(one, 0)
 p.run(two, 0)

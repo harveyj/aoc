@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 import puzzle
 import re
-import networkx as nx
-from library import Grid
+import collections
 
 def parse(INPUT):
   instrs = []
-  for l in INPUT.split('\n'):
+  for l in INPUT:
     match = re.match('(.*) -> (\w+)', l)
     lval, dest = match.group(1, 2)
     match = re.search('(\w+) (.*) (\w+)', lval)
@@ -60,20 +59,17 @@ def one(INPUT):
       v1, op, v2, dest = inst
       val1 = v1 if type(v1) == int else registers.get(v1, None)
       val2 = v2 if type(v2) == int else registers.get(v2, None)
-      if v2 == 'l':
-        print(v1, op, v2, dest)
-        print(registers)
-        print(val1, op, val2, dest)
+      # if v2 == 'l':
+      #   print(v1, op, v2, dest)
+      #   print(registers)
+      #   print(val1, op, val2, dest)
 
       if val1 != None and val2 != None:
         registers[dest] = apply(val1, op, val2)
   print(registers)
-  print(registers['a'])
-  return 0
-
-def two(INPUT):
-  return 0
-
-p = puzzle.Puzzle("7")
+  return registers['a']
+  
+p = puzzle.Puzzle("2015", "7")
 p.run(one, 0)
-# p.run(two, 0)
+# two is one with a different input
+p.run(one, 1)

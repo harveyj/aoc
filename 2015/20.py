@@ -75,6 +75,6 @@ def two(INPUT):
       print(i, tot)
   return 0
 
-p = puzzle.Puzzle("20")
+p = puzzle.Puzzle("2015", "20")
 # p.run(one, 0)
 p.run(two, 0)

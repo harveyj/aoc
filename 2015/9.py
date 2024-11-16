@@ -6,7 +6,7 @@ from itertools import permutations
 
 def parse(INPUT):
   pat = re.compile('(\w+) to (\w+) = (\d+)')
-  for l in INPUT.split('\n'):
+  for l in INPUT:
     yield re.match(pat, l).groups()
 
 def one(INPUT):
@@ -35,6 +35,6 @@ def two(INPUT):
       longest_path = path
   return longest_cost, longest_path
 
-p = puzzle.Puzzle("9")
+p = puzzle.Puzzle("2015", "9")
 p.run(one, 0)
 p.run(two, 0)

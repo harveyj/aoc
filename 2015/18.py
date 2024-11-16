@@ -38,6 +38,6 @@ def one(INPUT, two=False):
 def two(INPUT):
   return one(INPUT, two=True)
 
-p = puzzle.Puzzle("18")
+p = puzzle.Puzzle("2015", "18")
 # p.run(one, 0)
 p.run(two, 0)

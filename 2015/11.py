@@ -2,7 +2,7 @@
 import puzzle
 
 def parse(INPUT):
-  return [ord(c) - ord('a') for c in INPUT]
+  return [ord(c) - ord('a') for c in INPUT[0]]
 
 FORBIDDEN = [ord('i') - ord('a'), ord('o') - ord('a'), ord('l') - ord('a')]
 
@@ -56,7 +56,7 @@ def one(INPUT):
 def two(INPUT):
   return one(INPUT)
 
-p = puzzle.Puzzle("11")
+p = puzzle.Puzzle("2015", "11")
 p.run(one, 0)
 # Two is just one with different input
-p.run(two, 0)
+p.run(two, 1)

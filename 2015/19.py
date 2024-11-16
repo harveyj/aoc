@@ -42,6 +42,6 @@ def two(INPUT):
         break
   return 0
 
-p = puzzle.Puzzle("19")
+p = puzzle.Puzzle("2015", "19")
 # p.run(one, 0)
 p.run(two, 0)

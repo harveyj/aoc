@@ -40,5 +40,5 @@ def onetwo(INPUT, two=True):
 def two(INPUT):
   return 0
 
-p = puzzle.Puzzle("23")
+p = puzzle.Puzzle("2015", "23")
 p.run(onetwo, 0)

@@ -70,6 +70,6 @@ def two(INPUT):
           print(c_s, d_s, f_s, t_s)
           # score_indices = [a,b,c,d]
   return score_max
-p = puzzle.Puzzle("15")
+p = puzzle.Puzzle("2015", "15")
 p.run(one, 0)
 p.run(two, 0)

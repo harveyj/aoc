@@ -34,5 +34,5 @@ def onetwo(INPUT):
       max_happiness_val = total
   return max_happiness_order, max_happiness_val
 
-p = puzzle.Puzzle("13")
+p = puzzle.Puzzle("2015", "13")
 p.run(onetwo, 0)
