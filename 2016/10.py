@@ -15,7 +15,7 @@ def parse(INPUT):
       yield ('bot', bot.groups())
 
 
-def one(INPUT, DEBUG=False):
+def one(INPUT, DEBUG=False, two=False):
   flow = nx.DiGraph()
   seeds = set()
   for parsed in parse(INPUT):
@@ -40,7 +40,7 @@ def one(INPUT, DEBUG=False):
     out = flow.edges(nbunch=s)
     val = int(flow.nodes[s]['val'])
     for oe in out:
-      print(oe[1])
+      # print(oe[1])
       flow.nodes[oe[1]]['vals'].append(val)
   prop_count = -1
   propagated = set()
@@ -58,9 +58,16 @@ def one(INPUT, DEBUG=False):
           flow.nodes[node['low']]['vals'].append(low)
           propagated.add(node_id)
           prop_count += 1
-  for (node_id, node) in flow.nodes.items():
-    print(node_id, node['vals'])
-  return 0
+  if not two:
+    for (node_id, node) in flow.nodes.items():
+      # print(node_id, node['vals'])
+      if node['vals'] == [61, 17]:
+        return node_id
+  else:
+    return flow.nodes['o0']['vals'][0] * flow.nodes['o1']['vals'][0] * flow.nodes['o2']['vals'][0]
+
+def two(INPUT): return one(INPUT, two=True)
 
 p = puzzle.Puzzle("2016", "10")
-p.run(one, 0) # Ctrl-F output for answers to one and two.
+p.run(one, 0)
+p.run(two, 0)

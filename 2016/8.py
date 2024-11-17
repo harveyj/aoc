@@ -38,8 +38,12 @@ def onetwo(INPUT):
           x_prev = x - mag
           if x_prev < 0: x_prev += G.max_x()
           G.set((x, y), G_old.get((x_prev, y)))
-  # pretty-print str(G) and read the letters off of it to get the answer for 2.
-  return len(G.detect('#')), str(G)
+  #  read the letters off of this to get the answer for 2.
+  for y in range(G.max_y()):
+    for x in range(G.max_x()):
+      print(G.get((x, y)), end='')
+    print('')
+  return len(G.detect('#'))
 
 p = puzzle.Puzzle("2016", "8")
 p.run(onetwo, 0)

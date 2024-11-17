@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import puzzle, library
 import re
-import networkx as nx
 
 def parse(INPUT):
   pat = re.compile('(\w+)+')

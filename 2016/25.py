@@ -97,12 +97,6 @@ def one(INPUT):
     input()
 # did this by hand in a spreadsheet due to extensive disassembly
 
-def two(INPUT):
-  return 0
-
 p = puzzle.Puzzle("25")
 
 p.run(one, 0)
-
-
-

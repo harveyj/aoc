@@ -24,11 +24,8 @@ def expand(l):
 def one(INPUT):
   for l in INPUT:
     return len(expand(l))
-  # return 0
-
 
 def expand2(l, DEBUG=False):
-  # out = []
   stack = [(0, 0)] # start, depth
   start_to_end = dict()
   start_to_end[(0, 0)] = len(l) 
@@ -37,7 +34,6 @@ def expand2(l, DEBUG=False):
   i = 0
   while i < len(l):
     c = l[i]
-    # print(nx.to_dict_of_dicts(tree))
     DEBUG and print(f'c{c}')
     while i == start_to_end[stack[-1]]:
       stack.pop()

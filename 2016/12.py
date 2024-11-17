@@ -16,7 +16,6 @@ def puzz(INPUT, two=False):
     regs['c'] = 1
   instrs = list(parse(INPUT))
   while pc < len(instrs):
-    # print(instrs[pc])
     inst = instrs[pc]
     op = inst[0]
     if op == 'cpy':

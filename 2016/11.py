@@ -285,7 +285,7 @@ def two(INPUT):
 
 p = puzzle.Puzzle("2016", "11")
 # p.run(one, 0)
-# p.run(oneagain, 0)
-p.run(two, 0)
+p.run(oneagain, 0)
+# p.run(two, 0)
 
 # p.run(testtwo, 0)
