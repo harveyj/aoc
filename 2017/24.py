@@ -29,7 +29,7 @@ def onetwo(INPUT):
       # print(f'npres: {num_present}, nperm:{num_permitted}')
       if num_present >= num_permitted['data']: continue
       paths.appendleft(path + [e])
-  print(all_paths)
+  # print(all_paths)
   path_len_weights = [(len(path), sum([a+b for a, b in zip(path, path[1:])])) for path in all_paths]
   max_weight = max([b for _, b in path_len_weights])
   max_len = max([a for a, _ in path_len_weights])

@@ -1,19 +1,36 @@
 #!/usr/bin/env python3
-import puzzle, re
+import puzzle
 
-def parse_input(INPUT):
-  return INPUT
+def onetwo(INPUT, two=False):
+  num=0
+  a, b = map(int, INPUT[0].split('-'))
+  for i in range(a, b):
+    adjacent = []
+    more_than_two = []
 
-def one(INPUT):
-  invals = parse_input(INPUT)
-  out = 0
-  return out
+    is_adjacent = False
+    is_inc = True
+    prev = ''
+    for c in str(i):
+      if c == prev: 
+        if c in adjacent:
+          more_than_two.append(c)
+        adjacent.append(c)
 
-def two(INPUT):
-  invals = parse_input(INPUT)
-  out = 0
-  return out
+      if c < prev: is_inc = False
+      prev = c
 
-p = puzzle.Puzzle("")
-p.run(one, 0)
+    if two:
+      for char in adjacent:
+        if char not in more_than_two: is_adjacent = True
+    else:
+      is_adjacent = len(adjacent) > 0
+  
+    if is_adjacent and is_inc: num += 1
+  return num
+
+def two(INPUT): return onetwo(INPUT, two=True)
+
+p = puzzle.Puzzle("2019", "4")
+p.run(onetwo, 0)
 p.run(two, 0)

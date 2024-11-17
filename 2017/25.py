@@ -34,9 +34,5 @@ def one(INPUT):
     # print(out, slot, state)
   return list(tape.values()).count(1)
 
-def two(INPUT):
-  return 0
-
 p = puzzle.Puzzle("2017", "25")
 p.run(one, 0)
-p.run(two, 0)
