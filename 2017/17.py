@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-import puzzle, library
-import re
-import networkx as nx
-import hashlib
-from collections import defaultdict
+import puzzle
 
 def one(INPUT):
   val = int(INPUT[0])
