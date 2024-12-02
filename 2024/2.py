@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import puzzle, re, library
+import puzzle, library
 
 def parse_input(INPUT):
   return [library.ints(l) for l in INPUT]
@@ -35,23 +35,15 @@ def two(INPUT):
   invals = parse_input(INPUT)
   good = set()
   for row in invals:
-    # print(row)
     if check(row):
-      print(f'true! {row}')
       good.add(tuple(row))
     else:
       for i in range(len(row)):
         new_row = row[:i] + row[i+1:]
-        print(new_row)
         if check(new_row):
-          print(f'true! {row}')
           good.add(tuple(row))
-  # print(good)
-  falses = [row for row in invals if tuple(row) not in good]
-  for f in falses: print(f)
   return len(good)
 
-# not 282, too low
 p = puzzle.Puzzle("2024", "2")
 p.run(one, 0)
 p.run(two, 0)
