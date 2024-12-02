@@ -4,22 +4,6 @@ import puzzle, library
 def parse_input(INPUT):
   return [library.ints(l) for l in INPUT]
 
-def one(INPUT):
-  invals = parse_input(INPUT)
-  total = 0
-  for row in invals:
-    asc = True; desc = True; adj = True
-    for a1, a2 in zip(row, row[1:]):
-      if a1 > a2: asc = False
-    for a1, a2 in zip(row, row[1:]):
-      if a1 < a2: desc = False
-    for a1, a2 in zip(row, row[1:]):
-      if not 1 <= abs(a1 - a2) <= 3:
-        adj = False
-    if (asc or desc) and adj:
-      total += 1
-  return total
-
 def check(row):
   asc = True; desc = True; adj = True
   for a1, a2 in zip(row, row[1:]):
@@ -30,6 +14,11 @@ def check(row):
     if not 1 <= abs(a1 - a2) <= 3:
       adj = False
   return (asc or desc) and adj
+
+def one(INPUT):
+  invals = parse_input(INPUT)
+  good_rows = [row for row in invals if check(row)]
+  return len(good_rows)
 
 def two(INPUT):
   invals = parse_input(INPUT)
