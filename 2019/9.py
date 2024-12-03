@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import puzzle, re
+import intputer
 
 def parse_input(INPUT):
   return INPUT
