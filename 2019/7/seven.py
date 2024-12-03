@@ -119,7 +119,7 @@ for a in range(5,9):
 					if a==b or a==c or a==d or a==e or b==c or b==d or b==e or c==d or c==e or d==e:
 						continue
 					a_in = 0
-						out = chained_amplify(seq, a_in=0)
+					out = chained_amplify(seq, a_in=0)
 					if out > the_max:
 						max_input = seq
 						the_max = out
