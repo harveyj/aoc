@@ -28,14 +28,16 @@ Add to the intputer
 Difficulty: 4/10
 
 ## Day 6
-Warmup
+Uneventful graph search - copypasta from original implementation.
 
 Difficulty: 2/10
 
 ## Day 7
-Warmup
+Chained amplifiers. Series of intcode programs that feed into each other. This one was very messy and the old implementation relied on halting behavior which was not that well defined.
 
-Difficulty: 2/10
+Re-coded in hospital with Thomas <3
+
+Difficulty: 4/10
 
 ## Day 8
 Warmup
