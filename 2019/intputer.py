@@ -6,12 +6,15 @@ class Intputer(object):
   WIDTHS = {ADD: 4, MUL: 4, INPUT: 2, OUTPUT: 2, JTR: 3,
            JFAL: 3, LT: 4, EQ: 4, REL: 2, TERM: 1}
 
-  def __init__(self, instructions, inputs=[], id="", user_input=True, halt_on_output=False):
+  def __init__(self, instructions, inputs=[], id="", input_mode='user', output_mode='continue'):
     self.program = list(map(int, instructions))
     self.pc = 0
     self.ram = copy.copy(self.program)
     self.ram += [0] * 100000
-    self.user_input = user_input
+    # legal values: 'user', 'halt'
+    self.input_mode = input_mode
+    # legal values: 'continue', 'halt'
+    self.output_mode = output_mode
     self.inputs = inputs
     self.outputs = []
     self.id = id
@@ -21,8 +24,6 @@ class Intputer(object):
 
     # Hack for day 23.
     self.last_read = None
-    # Hack for day 7
-    self.halt_on_output = halt_on_output
 
   def get_a(self, modes, ram, pc):
     if modes[0] == 0:
@@ -109,13 +110,13 @@ class Intputer(object):
         self.ram[a_addr] = in_val
         self.last_read = in_val
         self.pc += self.WIDTHS[opcode]
-      elif self.user_input:
+      elif self.input_mode == 'user':
         in_val = list(map(ord, input()))
         self.ram[a_addr] = in_val[0]
         # self.last_read = in_val
         self.inputs = in_val[1:] + [10]
         self.pc += self.WIDTHS[opcode]
-      else:
+      elif self.input_mode == 'halt':
         self.out('HALT')
         self.halted = True
         return self.INPUT, None
@@ -124,7 +125,7 @@ class Intputer(object):
       self.out("OUTPUT", modes, a)
       self.outputs.append(a)
       self.pc += self.WIDTHS[opcode]
-      if self.halt_on_output == True:
+      if self.output_mode == 'halt':
         self.halted = True
     elif opcode == self.JTR:
       self.out("JTR", modes, a, "to", b)
