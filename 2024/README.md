@@ -28,3 +28,6 @@ Difficulty: 4/10
 Create ruleset. Topological sort. Done from Thomas's nursery.
 
 Difficulty: 5/10
+
+## Day 6
+
