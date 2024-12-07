@@ -6,7 +6,7 @@ def parse_input(INPUT):
   def parse_line(l):
     a, b = l.split('~')
     return tuple(map(int, a.split(','))), tuple(map(int, b.split(',')))
-  lines = [parse_line(l) for l in INPUT.split('\n')]
+  lines = [parse_line(l) for l in INPUT]
   return [(*line, i) for i, line in enumerate(lines)]
 
 def bottom(cube):
@@ -61,5 +61,8 @@ def two(INPUT):
   out = 0
   return out
 
-p = puzzle.Puzzle("22")
-p.run(one, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2023", "22")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

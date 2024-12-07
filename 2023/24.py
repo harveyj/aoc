@@ -5,7 +5,7 @@ def parse_input(INPUT):
   def parse_line(l):
     left, right = l.split('@')
     return list(map(int, left.split(','))), list(map(int, right.split(',')))
-  return [parse_line(l) for l in INPUT.split('\n')]
+  return [parse_line(l) for l in INPUT]
 
 def mb(line):
   x, y, z = line[0]; dx, dy, dz = line[1]
@@ -100,6 +100,8 @@ def two(INPUT):
   for i in range(len(invals) - 2):
     print(iter(invals[i], invals[i+1], invals[i+2]))
 
-p = puzzle.Puzzle("24")
-# p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2023", "24")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

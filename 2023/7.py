@@ -5,7 +5,7 @@ from collections import namedtuple
 from operator import itemgetter, attrgetter
 
 def parse_input(INPUT):
-  return [(list(l.split()[0]), int(l.split()[1])) for l in INPUT.split('\n')]
+  return [(list(l.split()[0]), int(l.split()[1])) for l in INPUT]
 
 
 def one(INPUT):
@@ -73,6 +73,8 @@ def two(INPUT):
   for sh in sorted_hands: print(sh)
   return out
 
-p = puzzle.Puzzle("7")
-# p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2023", "7")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

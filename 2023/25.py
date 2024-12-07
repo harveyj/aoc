@@ -3,7 +3,7 @@ import puzzle, re, networkx as nx
 
 def parse_input(INPUT):
   G=nx.Graph()
-  for l in INPUT.split('\n'):
+  for l in INPUT:
     lval, rval = l.split(':')
     rval = rval.strip().split()
     G.add_node(lval)
@@ -29,6 +29,8 @@ def two(INPUT):
   out = 0
   return out
 
-p = puzzle.Puzzle("25")
-p.run(one, 0)
-# p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2023", "25")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

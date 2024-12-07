@@ -59,7 +59,9 @@ def two(INPUT):
     print(score(G))
   return score(G)
 
-p = puzzle.Puzzle("14")
-# p.run(one, 1)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2023", "14")
+
+  p.run(one, 1) 
+  p.run(two, 0) 
 # cProfile.run('p.run(two, 0)')

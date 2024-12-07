@@ -43,6 +43,8 @@ def two(INPUT):
     outs[start] = score(start, instrs, network_map)
   return math.lcm(*[outs[k] for k in outs])
 
-p = puzzle.Puzzle("8")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2021", "8")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

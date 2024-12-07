@@ -5,7 +5,7 @@ import re
 
 def one(INPUT):
   out = 0
-  for l in INPUT.split("\n"):
+  for l in INPUT:
     s = re.search('(\d)', l)
     e = re.search('(\d)', l[::-1])
     out += int(s.group(0) + e.group(0))
@@ -51,13 +51,15 @@ def two(INPUT):
     return max_val
 
   out = 0
-  for l in INPUT.split("\n"):
+  for l in INPUT:
     s = find_first(l)
     e = find_last(l)
     out += int(s + e)
   return out
 
 
-p = puzzle.Puzzle("1")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2021", "1")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

@@ -3,7 +3,7 @@ import puzzle
 
 def one(INPUT):
   out = 0
-  G = puzzle.Grid(grid=INPUT.split('\n'))
+  G = puzzle.Grid(grid=INPUT)
   print(G)
   legal_neighbors = ['.', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',]
 
@@ -34,7 +34,7 @@ def one(INPUT):
   return out
 
 def two(INPUT):
-  G = puzzle.Grid(grid=INPUT.split('\n'))
+  G = puzzle.Grid(grid=INPUT)
   gear_nums = dict()
   for y in range(G.max_y()):
     num = 0
@@ -63,6 +63,8 @@ def two(INPUT):
       out += g[0] * g[1]
   return out
 
-p = puzzle.Puzzle("3")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2021", "3")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

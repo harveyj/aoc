@@ -2,7 +2,7 @@
 import puzzle
 
 def parse_input(INPUT):
-  lines = INPUT.split('\n')
+  lines = INPUT
   parsed = [(l.split(":")[1].split('|')[0], l.split('|')[1]) for l in lines]
   processed = [(list(map(int, p[0].split())), list(map(int, p[1].split()))) for p in parsed]
   return processed
@@ -45,8 +45,10 @@ def two(INPUT):
     out += i
   return out
 
-p = puzzle.Puzzle("4")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2021", "4")
 
-for a in range(4, 4): print(a)
+  p.run(one, 0) 
+  p.run(two, 0) 
+
+# for a in range(4, 4): print(a)

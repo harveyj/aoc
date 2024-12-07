@@ -2,7 +2,7 @@
 import puzzle
 
 def parse_input(INPUT):
-  return [list(map(int, l.split())) for l in INPUT.split('\n')]
+  return [list(map(int, l.split())) for l in INPUT]
 
 def onetwo(INPUT):
   invals = parse_input(INPUT)
@@ -32,5 +32,13 @@ def onetwo(INPUT):
 
   return out_1, out_2
 
-p = puzzle.Puzzle("9")
-p.run(onetwo, 0)
+def one(INPUT):
+  return onetwo(INPUT)[0]
+def two(INPUT):
+  return onetwo(INPUT)[1]
+
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2023", "9")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

@@ -45,6 +45,14 @@ def onetwo(INPUT):
 
   return out_1, out_2
 
+def one(INPUT):
+  return onetwo(INPUT)[0]
 
-p = puzzle.Puzzle("11")
-p.run(onetwo, 0)
+def two(INPUT):
+  return onetwo(INPUT)[1]
+
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2023", "11")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

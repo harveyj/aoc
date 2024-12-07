@@ -22,7 +22,7 @@ def one(INPUT):
         return False
     return True
 
-  for i, l in enumerate(INPUT.split('\n')):
+  for i, l in enumerate(INPUT):
     if check_valid(l):
       out += i + 1
   return out
@@ -48,13 +48,15 @@ def two(INPUT):
       max_b = max(max_b, b)
     return (max_r, max_g, max_b)
 
-  for i, l in enumerate(INPUT.split('\n')):
+  for i, l in enumerate(INPUT):
     mins = min_items(l)
     out += mins[0] * mins[1] * mins[2]
 
   return out
 
 
-p = puzzle.Puzzle("2")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2021", "2")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

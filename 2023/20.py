@@ -14,7 +14,7 @@ def parse_input(INPUT):
       code = src[0]
       src = src[1:]
     return src, code, outs
-  return [parse_line(l) for l in INPUT.split('\n')]
+  return [parse_line(l) for l in INPUT]
 
 def out_edges(G, src):
   return [dst for _, dst in G.edges(src)]
@@ -118,6 +118,8 @@ def two(INPUT):
   return 0
 
 # all of its inputs need to be high
-p = puzzle.Puzzle("20")
-# p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2023", "20")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

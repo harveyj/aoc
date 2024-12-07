@@ -2,7 +2,7 @@
 import puzzle, functools
 
 def parse_input(INPUT):
-  lines = INPUT.split('\n')
+  lines = INPUT
   return [(l.split()[0], tuple(map(int, l.split()[1].split(',')))) 
           for l in lines]
 
@@ -55,6 +55,8 @@ def two(INPUT):
 
   return out
 
-p = puzzle.Puzzle("12")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2021", "12")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

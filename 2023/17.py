@@ -56,6 +56,8 @@ def two(INPUT):
   return find_longest_path(INPUT, 4, 10)
 
 
-p = puzzle.Puzzle("17")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2021", "17")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

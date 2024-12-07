@@ -3,7 +3,7 @@ import puzzle, re
 # from ten import seen
 
 def parse_input(INPUT):
-  return [l.split() for l in INPUT.split('\n')]
+  return [l.split() for l in INPUT]
 
 dir_map = {'U': (0, -1), 
            'D': (0, 1), 
@@ -189,6 +189,8 @@ def two(INPUT):
 # #7 = 15 (3x3 carveout) (12 out 3 in)
 # #8 = custom (67)
 # #9 = custom (reverse chirality, emulate example)
-p = puzzle.Puzzle("18")
-# p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2023", "18")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

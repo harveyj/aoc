@@ -2,8 +2,8 @@
 import puzzle
 import itertools, operator
 def parse_input(INPUT):
-  times = list(map(int, INPUT.split('\n')[0].split()[1:]))
-  distances = list(map(int, INPUT.split('\n')[1].split()[1:]))
+  times = list(map(int, INPUT[0].split()[1:]))
+  distances = list(map(int, INPUT[1].split()[1:]))
   return times, distances
 
 def one(INPUT):
@@ -20,7 +20,8 @@ def one(INPUT):
   return list(itertools.accumulate(candidates, operator.mul))[-1]
 
 
-p = puzzle.Puzzle("6")
-p.run(one, 0)
 # input 3 is the hand-edited input for part 2
-p.run(one, 3)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2023", "6")
+  p.run(one, 0)
+  p.run(one, 3)

@@ -8,7 +8,7 @@ def parse_input(INPUT):
 
 dirs = ((0, 1), (0, -1), (1, 0), (-1, 0))
 
-def one_b(INPUT):
+def one(INPUT):
   grid = parse_input(INPUT)
   G = nx.Graph()
   for x in range(grid.max_x()):
@@ -96,6 +96,11 @@ def reachable_plots(scaled_grid, S, s_idx, n_steps, period, max_x, max_y):
   grid_indices = [top_grid, bottom_grid, left_grid, right_grid, ne1_grid, ne2_grid, se1_grid, se2_grid, filled]
   return grid_indices, [subgrids[(g, n_steps)] for g in grid_indices]
 
+def two(INPUT):
+  return 0
 
-p = puzzle.Puzzle("21")
-p.run(one_b, 1)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2023", "21")
+
+  p.run(one, 0) 
+  p.run(two, 0) 
