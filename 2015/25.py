@@ -10,7 +10,7 @@ CODES = '''20151125  18749137  17289845  30943339  10071777  33511524
   33071741   6796745  25397450  24659492   1534922  27995004'''
 
 def parse(INPUT):
-  return [[int(c) for c in l.split()] for l in INPUT.split('\n')]
+  return [[int(c) for c in l.split()] for l in INPUT]
 
 def loc(row, col):
   idx = 1
@@ -37,6 +37,10 @@ def one(INPUT):
       grid[i-1][j-1] = code(loc(i,j)-1)
   # print('\n'.join([str(row) for row in grid]))
   return code(loc(x, y) - 1)
+
+def two(INPUT):
+  print('Merry Christmas!')
+  return 20151225
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2015", "25")
