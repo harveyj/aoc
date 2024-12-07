@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import puzzle
 import re
-import collections
 
 def parse(INPUT):
   instrs = []
@@ -59,17 +58,11 @@ def one(INPUT):
       v1, op, v2, dest = inst
       val1 = v1 if type(v1) == int else registers.get(v1, None)
       val2 = v2 if type(v2) == int else registers.get(v2, None)
-      # if v2 == 'l':
-      #   print(v1, op, v2, dest)
-      #   print(registers)
-      #   print(val1, op, val2, dest)
-
       if val1 != None and val2 != None:
         registers[dest] = apply(val1, op, val2)
-  print(registers)
   return registers['a']
-  
-p = puzzle.Puzzle("2015", "7")
-p.run(one, 0)
-# two is one with a different input
-p.run(one, 1)
+
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2015", "7")
+  p.run(one, 0)
+  p.run(one, 1) # two is one with a different input

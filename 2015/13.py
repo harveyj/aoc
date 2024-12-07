@@ -40,6 +40,7 @@ def one(INPUT):
 def two(INPUT):
   return onetwo(INPUT)
 
-p = puzzle.Puzzle("2015", "13")
-p.run(one, 1)
-p.run(two, 0) # Two is just a different input
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2015", "13")
+  p.run(one, 1)
+  p.run(two, 0) # Two is just a different input
