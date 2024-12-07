@@ -35,6 +35,8 @@ def two(INPUT):
   return ret
 
 
-p = puzzle.Puzzle("2016", "2")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2016", "2")
+
+  p.run(one, 0)
+  p.run(two, 0)

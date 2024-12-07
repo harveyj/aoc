@@ -54,6 +54,8 @@ def two(INPUT):
   for m in matches: print(m)
   return len(legal)
 
-p = puzzle.Puzzle("2016", "7")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2016", "7")
+
+  p.run(one, 0)
+  p.run(two, 0)

@@ -36,6 +36,8 @@ def one(INPUT):
 def two(INPUT):
   return puzz(INPUT, max_len=35651584)
 
-p = puzzle.Puzzle("2016", "16")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2016", "16")
+
+  p.run(one, 0)
+  p.run(two, 0)

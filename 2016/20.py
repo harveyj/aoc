@@ -60,6 +60,8 @@ def two(INPUT, end_range=4294967295):
   zero_mags = [e - s for s, e in zero_ranges]
   return sum(zero_mags)
 
-p = puzzle.Puzzle("2016", "20")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2016", "20")
+
+  p.run(one, 0)
+  p.run(two, 0)

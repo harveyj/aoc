@@ -93,13 +93,13 @@ def run(state, total=10):
 
   return len(dp) - 3
 
-def one(INPUT):
-  # state = (set(['H-C', 'Li-C']), set(['H-G']), set(['Li-G']), set()), 0
-  state = freeze((set(['Pr-G', 'Pr-C']), 
-          set(['Co-G', 'Cu-G', 'Ru-G', 'Pu-G']),
-          set(['Co-C', 'Cu-C', 'Ru-C', 'Pu-C']),
-          set())), 0
-  return run(state)
+# def one(INPUT):
+#   # state = (set(['H-C', 'Li-C']), set(['H-G']), set(['Li-G']), set()), 0
+#   state = freeze((set(['Pr-G', 'Pr-C']), 
+#           set(['Co-G', 'Cu-G', 'Ru-G', 'Pu-G']),
+#           set(['Co-C', 'Cu-C', 'Ru-C', 'Pu-C']),
+#           set())), 0
+#   return run(state)
 
 
 def legal2(state):
@@ -283,9 +283,10 @@ def two(INPUT):
   # print(legal2(state))
   return run2(tuple(state))
 
-p = puzzle.Puzzle("2016", "11")
-# p.run(one, 0)
-p.run(oneagain, 0)
-# p.run(two, 0)
+def one(INPUT):
+  return oneagain(INPUT)
 
-# p.run(testtwo, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2016", "11")
+  p.run(one, 0)
+  p.run(two, 0)

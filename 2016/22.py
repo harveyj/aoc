@@ -55,6 +55,8 @@ def two(INPUT):
   # Move it to the target square
   # Use it to shift the target square left until you reach 0,0
 
-p = puzzle.Puzzle("2016", "22")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2016", "22")
+
+  p.run(one, 0)
+  p.run(two, 0)

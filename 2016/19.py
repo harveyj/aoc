@@ -29,6 +29,8 @@ def two(INPUT):
     idx %= len (items)
   return items[0]
 
-p = puzzle.Puzzle("2016","19")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2016", "19")
+
+  p.run(one, 0)
+  p.run(two, 0)

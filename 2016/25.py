@@ -97,6 +97,10 @@ def one(INPUT):
     input()
 # did this by hand in a spreadsheet due to extensive disassembly
 
-p = puzzle.Puzzle("25")
+def two(INPUT):
+  print('Merry Christmas!')
+  return 20161225
 
-p.run(one, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2016", "25")
+  p.run(one, 0)

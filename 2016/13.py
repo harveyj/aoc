@@ -40,6 +40,8 @@ def two(INPUT):
   nodes = [(1,1)] + [v for u, v in edges]
   return len(nodes)
 
-p = puzzle.Puzzle("2016", "13")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2016", "13")
+
+  p.run(one, 0)
+  p.run(two, 0)

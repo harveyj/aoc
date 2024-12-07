@@ -42,6 +42,8 @@ def one(INPUT, two=False):
 def two(INPUT):
   return one(INPUT, two=True)
 
-p = puzzle.Puzzle("2016", "15")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2016", "15")
+
+  p.run(one, 0)
+  p.run(two, 0)

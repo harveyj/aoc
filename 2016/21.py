@@ -77,6 +77,8 @@ def two(INPUT):
     if encode(INPUT, combo) == list('fbgdceah'):
       return ''.join(combo)
 
-p = puzzle.Puzzle("2016", "21")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2016", "21")
+
+  p.run(one, 0)
+  p.run(two, 0)

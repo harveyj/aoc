@@ -45,5 +45,12 @@ def onetwo(INPUT):
     print('')
   return len(G.detect('#'))
 
-p = puzzle.Puzzle("2016", "8")
-p.run(onetwo, 0)
+def one(INPUT):
+  return onetwo(INPUT)
+
+def two(INPUT):
+  return onetwo(INPUT)
+
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2016", "8")
+  p.run(onetwo, 0)
