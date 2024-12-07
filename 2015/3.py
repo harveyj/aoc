@@ -30,6 +30,8 @@ def two(INPUT):
 
   return len(seen)
 
-p = puzzle.Puzzle("2015", "3")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2015", "3")
+
+  p.run(one, 0)
+  p.run(two, 0)

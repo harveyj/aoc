@@ -49,7 +49,8 @@ def one(INPUT):
 def two(INPUT):
   return one(INPUT)
 
-p = puzzle.Puzzle("2015", "11")
-p.run(one, 0)
-# Two is just one with different input
-p.run(two, 1)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2015", "11")
+
+  p.run(one, 0) 
+  p.run(two, 1)  # Two is just one with different input

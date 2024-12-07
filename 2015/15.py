@@ -61,6 +61,8 @@ def two(INPUT):
         if score > score_max and cal_s == 500:
           score_max = score
   return score_max
-p = puzzle.Puzzle("2015", "15")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2015", "15")
+
+  p.run(one, 0)
+  p.run(two, 0)

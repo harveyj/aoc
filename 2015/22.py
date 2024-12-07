@@ -119,6 +119,8 @@ def two(INPUT):
         consumed.append(params[7])
   return min(consumed)
 
-p = puzzle.Puzzle("2015", "22")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2015", "22")
+
+  p.run(one, 0)
+  p.run(two, 0)

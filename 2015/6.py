@@ -50,6 +50,8 @@ def two(INPUT):
       tot += G.get((x, y))
   return tot
 
-p = puzzle.Puzzle("2015", "6")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2015", "6")
+
+  p.run(one, 0)
+  p.run(two, 0)

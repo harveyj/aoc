@@ -77,6 +77,8 @@ def sim(h_a, h_d):
   return b_hp < h_hp
 
 
-p = puzzle.Puzzle("2015", "21")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2015", "21")
+
+  p.run(one, 0)
+  p.run(two, 0)

@@ -27,6 +27,7 @@ def code(idx):
     code %= 33554393
   return code
 
+# TODO cleanup
 def one(INPUT):
   x, y = map(int, INPUT[0].split(","))
   a = parse(CODES)
@@ -37,6 +38,7 @@ def one(INPUT):
   # print('\n'.join([str(row) for row in grid]))
   return code(loc(x, y) - 1)
 
-p = puzzle.Puzzle("2015", "25")
-p.run(one, 0)
-# Part two is a freebie!
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2015", "25")
+  p.run(one, 0)
+  # Part two is a freebie!
