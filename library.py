@@ -1,4 +1,4 @@
-import re
+import re, copy
 
 DIRS_CARDINAL = [(0, 1), (1, 0), (-1, 0), (0, -1)]
 
@@ -20,7 +20,7 @@ class Grid:
     if raw:
       self.grid=[list(l) for l in raw.split('\n')]
     elif grid:
-      self.grid = grid
+      self.grid = copy.deepcopy(grid)
     else:
       self.grid = [["." for i in range(x)] for j in range(y)]
     self.overlays = {}
