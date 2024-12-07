@@ -5,7 +5,7 @@ import networkx as nx
 
 def parse(INPUT):
   pat = re.compile('(\w+) to (\w+) = (\d+)')
-  for l in INPUT.split('\n'):
+  for l in INPUT:
     yield re.match(pat, l).groups()
 
 
