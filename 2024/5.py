@@ -44,6 +44,8 @@ def two(INPUT):
     out.append(int(sorted_packet[len(sorted_packet)//2]))
   return sum(out)
 
-p = puzzle.Puzzle("2024", "5")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2024", "5")
+
+  p.run(one, 0)
+  p.run(two, 0)

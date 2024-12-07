@@ -81,6 +81,8 @@ def two(INPUT):
   return len(obstructions)
 
 # not 2212, 2038
-p = puzzle.Puzzle("2024", "6")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2024", "6")
+
+  p.run(one, 0)
+  p.run(two, 0)

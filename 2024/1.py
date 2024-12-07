@@ -21,6 +21,8 @@ def two(INPUT):
   totals = [i * b.count(i) for i in a]
   return sum(totals)
 
-p = puzzle.Puzzle("2024", "1")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2024", "1")
+
+  p.run(one, 0)
+  p.run(two, 0)

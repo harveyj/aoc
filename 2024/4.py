@@ -50,6 +50,8 @@ def two(INPUT):
   pts = [(x, y) for x in range(G.max_x()) for y in range(G.max_y()) if Gnesw.get((x, y)) == 'A' and Gnwse.get((x, y)) == 'A']
   return len(pts)
 
-p = puzzle.Puzzle("2024", "4")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2024", "4")
+
+  p.run(one, 0)
+  p.run(two, 0)
