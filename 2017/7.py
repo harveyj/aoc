@@ -55,6 +55,8 @@ def two(INPUT):
       children = [oe[1] for oe in G.out_edges(parent) if oe[1] != n[0]]
       return vals[n[0]] + aggregate_vals[children[0]] - aggregate_vals[n[0]]   
 
-p = puzzle.Puzzle("2017", "7")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2017", "7")
+
+  p.run(one, 0)
+  p.run(two, 0)

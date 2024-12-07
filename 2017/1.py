@@ -18,6 +18,8 @@ def two(INPUT):
     if pair[0] == pair[1]: total += int(pair[0])
   return total
 
-p = puzzle.Puzzle("2017", "1")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2017", "1")
+
+  p.run(one, 0)
+  p.run(two, 0)

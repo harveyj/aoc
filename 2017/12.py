@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-import puzzle, library
+import puzzle
 import re
 import networkx as nx
-from collections import defaultdict
 
 def parse(INPUT):
   pat = re.compile('(\d+) <-> (.*)')
@@ -23,8 +22,12 @@ def onetwo(INPUT):
     if 0 in c:
       return len(c), len(list(nx.connected_components(G)))
 
+def one(INPUT):
+  return onetwo(INPUT)[0]
 def two(INPUT):
-  return 0
+  return onetwo(INPUT)[1]
 
-p = puzzle.Puzzle("2017", "12")
-p.run(onetwo, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2017", "12")
+  p.run(one, 0)
+  p.run(two, 0)

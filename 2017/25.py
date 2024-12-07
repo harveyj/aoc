@@ -34,5 +34,12 @@ def one(INPUT):
     # print(out, slot, state)
   return list(tape.values()).count(1)
 
-p = puzzle.Puzzle("2017", "25")
-p.run(one, 0)
+def two(INPUT):
+  print('Merry Christmas!')
+  return 20171225
+
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2017", "25")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

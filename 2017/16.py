@@ -44,6 +44,8 @@ def two(INPUT):
     cache[tuple(data)].append(i)
     data = dance(instrs, data)
 
-p = puzzle.Puzzle("2017", "16")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2017", "16")
+
+  p.run(one, 0)
+  p.run(two, 0)

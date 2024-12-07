@@ -37,6 +37,13 @@ def onetwo(INPUT):
     # print((x, y))
   return 0
 
-p = puzzle.Puzzle("2017", "19")
+# TODO onetwo won't work
+def one(INPUT):
+  return onetwo(INPUT)[0]
+def two(INPUT):
+  return onetwo(INPUT)[1]
 
-p.run(onetwo, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2017", "19")
+  p.run(one, 0)
+  p.run(two, 0)

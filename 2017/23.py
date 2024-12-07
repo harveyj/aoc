@@ -179,9 +179,11 @@ def optimized_python():
 def two(INPUT):
   return optimized_python()
 
-p = puzzle.Puzzle("2017", "23")
-# p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2017", "23")
+
+  p.run(one, 0) 
+  p.run(two, 0) 
 
 
 

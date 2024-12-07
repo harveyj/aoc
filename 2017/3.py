@@ -50,6 +50,8 @@ def two(INPUT):
       max_y += 1
       idx = (idx + 1) % 4
 
-p = puzzle.Puzzle("2017", "3")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2017", "3")
+
+  p.run(one, 0)
+  p.run(two, 0)

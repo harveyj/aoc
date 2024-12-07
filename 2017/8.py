@@ -27,5 +27,12 @@ def onetwo(INPUT):
       max_val = regs[reg]
   return max(regs.values()), max_val
 
-p = puzzle.Puzzle("2017", "8")
-p.run(onetwo, 0)
+def one(INPUT):
+  return onetwo(INPUT)[0]
+def two(INPUT):
+  return onetwo(INPUT)[1]
+
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2017", "8")
+  p.run(one, 0)
+  p.run(two, 0)

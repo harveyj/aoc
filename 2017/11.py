@@ -85,6 +85,12 @@ def onetwo(INPUT):
   q, s, r = cells[-1]
   return max(q, s, r), max_val
 
+def one(INPUT):
+  return onetwo(INPUT)[0]
+def two(INPUT):
+  return onetwo(INPUT)[1]
 
-p = puzzle.Puzzle("2017", "11")
-p.run(onetwo, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2017", "11")
+  p.run(one, 0)
+  p.run(two, 0)

@@ -52,6 +52,8 @@ def two(INPUT):
   # print_hex([64, 7, 255])
   return out
 
-p = puzzle.Puzzle("2017", "10")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2017", "10")
+
+  p.run(one, 0)
+  p.run(two, 0)

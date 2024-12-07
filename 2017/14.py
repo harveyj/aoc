@@ -68,6 +68,8 @@ def two(INPUT):
           graph.add_edge((x, y), (x-1, y))
   return len(list(nx.connected_components(graph)))
 
-p = puzzle.Puzzle("2017", "14")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2017", "14")
+
+  p.run(one, 0)
+  p.run(two, 0)

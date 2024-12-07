@@ -27,6 +27,8 @@ def two(INPUT):
     processed_l = re.sub('<.*?>', '<>', canceled_l)
     return len(canceled_l) - len(processed_l)
 
-p = puzzle.Puzzle("2017", "9")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2017", "9")
+
+  p.run(one, 0)
+  p.run(two, 0)

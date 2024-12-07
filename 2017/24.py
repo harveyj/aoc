@@ -36,5 +36,12 @@ def onetwo(INPUT):
   two = max([b for a, b in path_len_weights if a == max_len])
   return max_weight, two
 
-p = puzzle.Puzzle("2017", "24")
-p.run(onetwo, 0)
+def one(INPUT):
+  return onetwo(INPUT)[0]
+def two(INPUT):
+  return onetwo(INPUT)[1]
+
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2017", "24")
+  p.run(one, 0)
+  p.run(two, 0)

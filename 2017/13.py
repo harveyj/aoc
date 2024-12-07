@@ -30,6 +30,8 @@ def two(INPUT):
     if len(run(layers, offset=i)) == 0:
       return i
 
-p = puzzle.Puzzle("2017", "13")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2017", "13")
+
+  p.run(one, 0)
+  p.run(two, 0)
