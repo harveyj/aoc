@@ -73,7 +73,7 @@ def mag(tree):
 
 
 def one(INPUT):
-  lines = INPUT.split('\n')
+  lines = INPUT
   t = tree(eval(lines[0]), None)
   for l in lines[1:]:
     t_n = tree(eval(l), None)
@@ -82,13 +82,15 @@ def one(INPUT):
   print("PART ONE ANSWER:", mag(t))
 
 def two(INPUT):
-  lines = INPUT.split('\n')
+  lines = INPUT
   mags = []
   for l1 in lines:
     for l2 in lines:
       mags.append(mag(add(tree(eval(l1), None), (tree(eval(l2), None)))))
   print("PART TWO ANSWER:", max(mags))
 
-p = puzzle.Puzzle("18")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2021", "18")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

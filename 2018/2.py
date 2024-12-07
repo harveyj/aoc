@@ -23,6 +23,8 @@ def two(INPUT):
         return ''.join([c1 for c1, c2 in zip(l, s) if c1 == c2])
     seen.append(l)
 
-p = puzzle.Puzzle("2018", "2")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2018", "2")
+
+  p.run(one, 0)
+  p.run(two, 0)

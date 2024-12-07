@@ -23,7 +23,7 @@ def parse_cube(l):
 
 cubes = []
 all_x, all_y, all_z = [], [], []
-for l in INPUT.split('\n'):
+for l in INPUT:
   cube_is_on, cube = parse_cube(l)
   cubes.append((cube_is_on, cube))  
   all_x.extend((cube[0][X], cube[1][X]))

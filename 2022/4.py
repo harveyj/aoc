@@ -8,7 +8,7 @@ def parse_line(l):
   return [a, b, c, d]
 
 def one(INPUT):
-  processed_input = [parse_line(l) for l in INPUT.split('\n')]
+  processed_input = [parse_line(l) for l in INPUT]
   out = []
   for a, b, c, d in processed_input:
     if a <= c and b >= d or a >= c and b <= d:
@@ -18,7 +18,7 @@ def one(INPUT):
   return len(out)
 
 def two(INPUT):
-  processed_input = [parse_line(l) for l in INPUT.split('\n')]
+  processed_input = [parse_line(l) for l in INPUT]
   out = []
   for a, b, c, d in processed_input:
     if a <= c <= b or a <= d <= b or a <= c and b >= d or a >= c and b <= d:
@@ -27,6 +27,8 @@ def two(INPUT):
   print(out)
   return len(out)
 
-p = puzzle.Puzzle("4")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "4")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

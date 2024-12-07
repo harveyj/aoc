@@ -6,7 +6,7 @@ Line = collections.namedtuple('Line', ['start', 'end'])
 
 def process_input(INPUT):
   ret = []
-  for line in INPUT.split('\n'):
+  for line in INPUT:
     vals = line.split(" -> ");
     start = [int(a) for a in vals[0].split(",")]
     end = [int(a) for a in vals[1].split(",")]

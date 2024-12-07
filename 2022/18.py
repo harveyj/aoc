@@ -3,7 +3,7 @@ import puzzle
 from collections import deque
 
 def parse(INPUT):
-  return [tuple(map(int, l.split(','))) for l in INPUT.split('\n')]
+  return [tuple(map(int, l.split(','))) for l in INPUT]
 
 def one(INPUT):
   cubes = parse(INPUT)
@@ -54,6 +54,8 @@ def two(INPUT):
 
   return cube_bfs(cubes, x_max, y_max, z_max)
 
-p = puzzle.Puzzle("18")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "18")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

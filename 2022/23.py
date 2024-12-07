@@ -40,7 +40,7 @@ class Grid:
 
 def parse(INPUT):
   locs = dict()
-  for y, row in enumerate(INPUT.split('\n')):
+  for y, row in enumerate(INPUT):
     for x, cell in enumerate(row):
       if cell == '#':
         locs[(x, y)] = '#'
@@ -142,6 +142,8 @@ def two(INPUT):
   return 0
 
 
-p = puzzle.Puzzle("23")
-# p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "23")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

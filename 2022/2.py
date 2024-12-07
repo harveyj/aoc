@@ -48,7 +48,7 @@ def loses_rps(a):
 
 
 def one(INPUT):
-  processed_input = [val.split(" ") for val in INPUT.split("\n")]
+  processed_input = [val.split(" ") for val in INPUT]
 
   total = 0
   for a, b in processed_input:
@@ -59,7 +59,7 @@ def one(INPUT):
 def two(INPUT):
   final_input=[]
 
-  processed_input = [val.split(" ") for val in INPUT.split("\n")]
+  processed_input = [val.split(" ") for val in INPUT]
   # X means p1 need to win, Y means you need to end the round in a draw, and Z means p1 needs to lose. Good luck!"
   for a, b in processed_input:
     if b == 'X':
@@ -77,6 +77,8 @@ def two(INPUT):
   return ANSWER_2
 
 
-p = puzzle.Puzzle("2")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "2")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

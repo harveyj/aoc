@@ -9,7 +9,7 @@ State = namedtuple("State", "where when opens")
 
 def parse(INPUT):
   ret = []
-  for l in INPUT.split('\n'):
+  for l in INPUT:
     match = re.match("Valve (\w+) has flow rate=(\d+); tunnels? leads? to valves? ((\w+,? ?)+)", l)
     name = match.group(1)
     rate = int(match.group(2))
@@ -133,6 +133,8 @@ def two(INPUT):
       states = new_states
   return states[-1].banked
 
-p = puzzle.Puzzle("16")
-# p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "16")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

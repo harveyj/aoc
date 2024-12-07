@@ -3,7 +3,7 @@ import puzzle
 import functools
 
 def parse(INPUT):
-  lines = INPUT.split('\n')
+  lines = INPUT
   return [(eval(lines[i]), eval(lines[i+1])) for i in range(0, len(lines), 3)]
 
 def greater(l, r):
@@ -44,7 +44,7 @@ def one(INPUT):
 
 
 def parse2(INPUT):
-  lines = INPUT.split('\n')
+  lines = INPUT
   lines.append('[[2]]')
   lines.append('[[6]]')
   lines.sort()
@@ -65,6 +65,8 @@ def two(INPUT):
       ans *= (i+1)
   return ans
 
-p = puzzle.Puzzle("13")
-# p.run(one, 1)
-p.run(two, 1)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "13")
+
+  p.run(one, 1) 
+  p.run(two, 1) 

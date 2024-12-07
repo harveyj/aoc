@@ -5,7 +5,7 @@ import networkx as nx
 
 def parse(INPUT):
   G = nx.Graph()
-  for l in INPUT.split('\n'):
+  for l in INPUT:
     op_mat = re.match('(\w+): (\w+) (.) (\w+)', l)
     if op_mat:
       G.add_node(op_mat.group(1), op = op_mat.group(3), l=op_mat.group(2), r=op_mat.group(4))
@@ -77,6 +77,8 @@ def two(INPUT):
   c, d = postorder2(G, r)
   return (d-b) / a
 
-p = puzzle.Puzzle("21")
-# p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "21")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

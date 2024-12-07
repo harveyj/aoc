@@ -73,6 +73,8 @@ def two(INPUT):
     if num_destroyed == 200:
       return closest[0] * 100 + closest[1]
 
-p = puzzle.Puzzle("2019", "10")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2019", "10")
+
+  p.run(one, 0)
+  p.run(two, 0)

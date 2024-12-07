@@ -4,7 +4,7 @@ import re
 
 def parse(INPUT):
   pat = re.compile('(\w+)+')
-  for l in INPUT.split('\n'):
+  for l in INPUT:
     yield re.match(pat, l).groups()
 
 discs_one=[

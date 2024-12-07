@@ -88,6 +88,8 @@ def two(INPUT):
 	all_b  = b * (1 - pow(a, 101741582076661, DECK_LENGTH)) * pow(1 - a, -1, DECK_LENGTH)    
 	return (2020 * all_a + all_b) % DECK_LENGTH
 
-p = puzzle.Puzzle("2019", "22")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2019", "22")
+
+  p.run(one, 0)
+  p.run(two, 0)

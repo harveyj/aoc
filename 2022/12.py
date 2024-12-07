@@ -12,7 +12,7 @@ def parse(INPUT):
     return grid[y][x]
 
   G = nx.DiGraph()
-  raw_grid = [list(l) for l in INPUT.split('\n')]
+  raw_grid = [list(l) for l in INPUT]
   start = None; end = None; all_a = []
   for y, row in enumerate(raw_grid):
     for x, c in enumerate(row):
@@ -55,6 +55,8 @@ def two(INPUT):
       min_len_sp = len(sp)
   return len(sp) - 1
 
-p = puzzle.Puzzle("12")
-p.run(one, 1)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "12")
+
+  p.run(one, 1) 
+  p.run(two, 0) 

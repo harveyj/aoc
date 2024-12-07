@@ -12,6 +12,8 @@ def one(INPUT):
 def two(INPUT):
   return 0
 
-p = puzzle.Puzzle("13")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "13")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

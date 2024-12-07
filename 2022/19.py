@@ -5,7 +5,7 @@ from collections import deque, namedtuple
 
 def parse(INPUT):
   ret = []
-  for l in INPUT.split('\n'):
+  for l in INPUT:
     print(l)
     mat = re.match('Blueprint (\d+): Each ore robot costs (\d+) ore. Each clay robot costs (\d+) ore. Each obsidian robot costs (\d+) ore and (\d+) clay. Each geode robot costs (\d+) ore and (\d+) obsidian.', l)
     ret.append(Spec(*map(int, mat.group(1, 2, 3, 4, 5, 6, 7))))
@@ -105,6 +105,8 @@ def two(INPUT):
     answer *= max_score
   return answer
 
-p = puzzle.Puzzle("19")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "19")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

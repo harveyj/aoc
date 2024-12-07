@@ -54,6 +54,8 @@ def two(INPUT):
     print('')
   return 'FGJUZ'
 
-p = puzzle.Puzzle("2019", "8")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2019", "8")
+
+  p.run(one, 0)
+  p.run(two, 0)

@@ -6,7 +6,7 @@ Row = collections.namedtuple('Row', ['tests', 'values'])
 
 def process_input(INPUT):
   rows = []
-  for line in INPUT.split('\n'):
+  for line in INPUT:
     l, r = line.split("|");
     tests = l.strip().split(" ");
     values = r.strip().split(" ");
@@ -73,6 +73,8 @@ def two(INPUT):
     values.append(int(num));
   return sum(values)
 
-p = puzzle.Puzzle("8")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2021", "8")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

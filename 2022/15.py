@@ -5,7 +5,7 @@ import networkx as nx
 
 def parse(INPUT):
   beacon_sensors = []
-  for l in INPUT.split('\n'):
+  for l in INPUT:
      m = re.match("Sensor at x=([-\d]+), y=([-\d]+): closest beacon is at x=([-\d]+), y=([-\d]+)", l)
      if m:
        s_x, s_y, b_x, b_y = list(map(int, m.group(1, 2, 3, 4)))
@@ -54,7 +54,8 @@ def two(INPUT):
         if not check_point(beacon_sensors, (x, y)):
           print((x, y), x * 4000000 + y)
 
-p = puzzle.Puzzle("15")
-# p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "15")
 
+  p.run(one, 0) 
+  p.run(two, 0) 

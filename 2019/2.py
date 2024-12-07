@@ -32,6 +32,8 @@ def two(INPUT):
         return a*100+b
   return None
 
-p = puzzle.Puzzle("2019", "2")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2019", "2")
+
+  p.run(one, 0)
+  p.run(two, 0)

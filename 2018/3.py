@@ -29,6 +29,8 @@ def two(INPUT):
         G.set((x, y), id)
   return [id for id in range(1, len(INPUT)) if id not in bad_ids][0]
 
-p = puzzle.Puzzle("2018", "3")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2018", "3")
+
+  p.run(one, 0)
+  p.run(two, 0)

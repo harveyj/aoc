@@ -3,7 +3,7 @@ import puzzle
 import re
 
 def parse(INPUT):
-  trees= [list(map(int, list(l))) for l in INPUT.split('\n')]
+  trees= [list(map(int, list(l))) for l in INPUT]
   return trees
 
 def one(INPUT):
@@ -62,6 +62,8 @@ def two(INPUT):
         max = score
   return max
 
-p = puzzle.Puzzle("8")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "8")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

@@ -3,7 +3,7 @@ import puzzle
 
 def parse(INPUT):
   ret = []
-  for l in INPUT.split('\n'):
+  for l in INPUT:
     tokens = l.split()
     if len(tokens) == 1:
       ret.append(['noop', 0])
@@ -46,6 +46,8 @@ def two(INPUT):
     else:
       pc += 1
 
-p = puzzle.Puzzle("10")
-# p.run(one, 1)
-p.run(two, 1)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "10")
+
+  p.run(one, 1) 
+  p.run(two, 1) 

@@ -81,6 +81,8 @@ def one(INPUT):
 def two(INPUT):
   return run(INPUT[0].split(','))[-1]
 
-p = puzzle.Puzzle("2019", "5")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2019", "5")
+
+  p.run(one, 0)
+  p.run(two, 0)

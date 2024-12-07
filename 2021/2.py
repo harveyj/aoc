@@ -1,7 +1,7 @@
 import puzzle
 
 def process_input(INPUT):
-  return [(l.split()[0], int(l.split()[1])) for l in INPUT.split("\n")]
+  return [(l.split()[0], int(l.split()[1])) for l in INPUT]
 
 def one(INPUT):
   instructions = process_input(INPUT)
@@ -31,6 +31,8 @@ def two(INPUT):
        depth += aim * mag;
   return depth * forward
 
-p = puzzle.Puzzle("2")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2021", "2")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

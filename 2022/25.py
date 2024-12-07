@@ -5,7 +5,7 @@ import networkx as nx
 import math
 
 def parse(INPUT):
-  return INPUT.split('\n')
+  return INPUT
 
 def translate(c):
   if c == '=': return -2
@@ -54,8 +54,11 @@ def one(INPUT):
   return 0
 
 def two(INPUT):
-  return 0
+  print("Merry Christmas!")
+  return 20221225
 
-p = puzzle.Puzzle("25")
-p.run(one, 0)
-# p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "25")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

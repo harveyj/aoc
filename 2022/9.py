@@ -3,7 +3,7 @@ import puzzle
 import re
 
 def parse(INPUT):
-  instrs = [(l.split()[0], int(l.split()[1])) for l in INPUT.split('\n')]
+  instrs = [(l.split()[0], int(l.split()[1])) for l in INPUT]
   return instrs
 
 def update_t(hx, hy, tx, ty):
@@ -55,6 +55,8 @@ def two(INPUT):
   return len(tail_locs)
 
 
-p = puzzle.Puzzle("9")
-# p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "9")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

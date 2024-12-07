@@ -49,7 +49,7 @@ def parse(INPUT):
   raw_grid = [[row[x] if x < len(row) else ' ' for x in range(max_len)] for row in raw_grid]
   return raw_grid, instrs
 
-def one_v1(INPUT):
+def one(INPUT):
   bearings = [(1, 0), (0, 1), (-1, 0), (0, -1)]
   bearings_signature = ['>', 'v', '<', '^']
   dir_idx = 0
@@ -329,7 +329,9 @@ def test(INPUT):
   return 0
 
 
-p = puzzle.Puzzle("22")
-# p.run(one_v1, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "22")
+
+  p.run(one, 0) 
+  p.run(two, 0) 
 # p.run(test, 0)

@@ -39,6 +39,8 @@ def two(intext):
     dots = fold(dots, *f)
   print("PART TWO ANSWER:\n", render(dots))
 
-p = puzzle.Puzzle("13")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2021", "13")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

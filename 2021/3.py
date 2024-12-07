@@ -1,7 +1,7 @@
 import puzzle
 
 def process_input(INPUT):
-  return [l for l in INPUT.split("\n")]
+  return [l for l in INPUT]
 
 
 def one(INPUT):
@@ -29,6 +29,8 @@ def two(INPUT):
   return int(most[0], base=2) * int(least[0], base=2)
 
 
-p = puzzle.Puzzle("3")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2021", "3")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

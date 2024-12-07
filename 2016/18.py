@@ -4,7 +4,7 @@ import re
 
 def parse(INPUT):
   pat = re.compile('(\w+)+')
-  for l in INPUT.split('\n'):
+  for l in INPUT:
     yield re.match(pat, l).groups()
 
 LEFT, CENTER, RIGHT = (-1, -1), (0, -1), (1, -1)

@@ -5,7 +5,7 @@ import collections
 import puzzle
 
 def run(INPUT):
-  lines = INPUT.split('\n')
+  lines = INPUT
 
   state = {}
   for y, l in enumerate(lines):

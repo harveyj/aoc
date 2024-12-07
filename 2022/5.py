@@ -34,6 +34,8 @@ def two(INPUT):
   # print(stacks)
   return ''.join([s[-1] for s in stacks])
 
-p = puzzle.Puzzle("5")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "5")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

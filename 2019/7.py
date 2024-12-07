@@ -39,6 +39,8 @@ def two(INPUT):
   outs = [looped_amplify(seq, n=5, a_in=0)  for seq in itertools.permutations(range(5, 10))]
   return max(outs)
 
-p = puzzle.Puzzle("2019", "7")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2019", "7")
+
+  p.run(one, 0)
+  p.run(two, 0)

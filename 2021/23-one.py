@@ -10,10 +10,10 @@ import collections
 #TEST4 = TEST with possible moves from 2 and 3
 #TEST5 = TEST with clear end move
 INPUT=input23.INPUT_FULL
-lines = INPUT.split('\n')
+lines = INPUT
 
 state = {}
-for y, l in enumerate(INPUT.split('\n')):
+for y, l in enumerate(INPUT):
   for x, c in enumerate(l):
     if c not in '. #':
       state[c] = (x, y)

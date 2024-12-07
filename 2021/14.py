@@ -91,6 +91,8 @@ def two(intext):
   #   if one_bi_counts[k] != v:
   #     print("DIFF", k, v)
 
-p = puzzle.Puzzle("14")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2021", "14")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

@@ -156,6 +156,8 @@ def two(INPUT):
     last_tops[(pc_offset, shape)]= top
     last_total_shapes[(pc_offset, shape)]= total_shapes
 
-p = puzzle.Puzzle("17")
-# p.run(one, 1)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "17")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

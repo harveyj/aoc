@@ -11,7 +11,7 @@ def parse(INPUT, bottom=False):
   max_x = 0
   max_y = 0 
   pts = []
-  for l in INPUT.split('\n'):
+  for l in INPUT:
     sx, sy = None, None
     for pt in re.finditer("(\d+),(\d+)", l):
       x, y = map(int, pt.groups(1))
@@ -99,6 +99,8 @@ def two(INPUT):
   print(grid.window(490, 0, 510, 20))
   return grains
 
-p = puzzle.Puzzle("14")
-# p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "14")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

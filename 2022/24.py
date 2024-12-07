@@ -33,7 +33,7 @@ class Grid:
     return '\n'.join(rows)
 
 def parse(INPUT):
-  raw_grid = INPUT.split('\n')
+  raw_grid = INPUT
   x = len(raw_grid[0]); y = len(raw_grid)
   g = Grid(x=x, y=y)
   print(x, y)
@@ -108,8 +108,8 @@ def dist(a, b):
 def two(INPUT):
   return 0
 
-p = puzzle.Puzzle("24")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "24")
 
-# 843 too low
+  p.run(one, 0) 
+  p.run(two, 0) 

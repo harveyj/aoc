@@ -4,7 +4,7 @@ import re
 import networkx as nx
 
 def parse(INPUT):
-  return [int(i) for i in INPUT.split('\n')]
+  return [int(i) for i in INPUT]
 
 def mix(arr, iters=1):
   annotated = [(i, 0) for i in arr]
@@ -59,6 +59,8 @@ def two(INPUT):
   print(arr[(arr.index(0) + 1000) % len(arr)], arr[(arr.index(0) + 2000) % len(arr)], arr[(arr.index(0) + 3000) % len(arr)])
   return arr[(arr.index(0) + 1000) % len(arr)] + arr[(arr.index(0) + 2000) % len(arr)] + arr[(arr.index(0) + 3000) % len(arr)]
 
-p = puzzle.Puzzle("20")
-# p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "20")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

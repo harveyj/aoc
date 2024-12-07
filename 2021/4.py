@@ -63,6 +63,8 @@ def two(INPUT):
       if len(winners) == len(boards):
         return calcScore(boards[b_i]) * c;
 
-p = puzzle.Puzzle("4")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2021", "4")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

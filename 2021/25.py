@@ -23,7 +23,7 @@ def run(INPUT):
     for row in grid:
       print(''.join(row))
     print('')
-  grid = [list(l) for l in INPUT.split('\n')]
+  grid = [list(l) for l in INPUT]
   rights = [(x, y) for x in range(len(grid[0])) for y in range(len(grid)) if grid[y][x] == '>']
   downs = [(x, y) for x in range(len(grid[0])) for y in range(len(grid)) if grid[y][x] == 'v']
   for i in range(1000):

@@ -81,6 +81,8 @@ def two(INPUT):
   return smallest_path
 
 
-p = puzzle.Puzzle("7")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "7")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

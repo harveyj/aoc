@@ -16,7 +16,7 @@ def code(char):
 
 def one(INPUT):
   total = 0
-  for l in INPUT.split('\n'):
+  for l in INPUT:
     l_1 = set(l[:len(l)//2])
     l_2 = set(l[len(l)//2:])
     # print(l_1, l_2)
@@ -27,7 +27,7 @@ def one(INPUT):
 
 def two(INPUT):
   total = 0
-  lines = INPUT.split('\n')
+  lines = INPUT
   for i in range(len(lines)//3):
     base_i = i*3
     badge = set(lines[base_i]).intersection(lines[base_i+1]).intersection(lines[base_i+2])
@@ -35,6 +35,8 @@ def two(INPUT):
 
   return total
 
-p = puzzle.Puzzle("3")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2022", "3")
+
+  p.run(one, 0) 
+  p.run(two, 0) 
