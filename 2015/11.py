@@ -20,10 +20,6 @@ def increment(val):
     else:
       break
 
-# Passwords must include one increasing straight of at least three letters, like abc, bcd, cde, and so on, up to xyz. They cannot skip letters; abd doesn't count.
-# Passwords may not contain the letters i, o, or l, as these letters can be mistaken for other characters and are therefore confusing.
-# Passwords must contain at least two different, non-overlapping pairs of letters, like aa, bb, or zz.
-
 def check(val):
   def straight(val):
     for i in range(len(val) - 2):
@@ -37,7 +33,6 @@ def check(val):
   def pairs(val):
     pairs = set([pair for pair in zip(val, val[1:]) if pair[0] == pair[1]])
     return len(pairs) > 1
-  # print(val, straight(val), forbidden(val), pairs(val))
   return straight(val) and forbidden(val) and pairs(val)
 
 def decode(val):
@@ -48,8 +43,6 @@ def one(INPUT):
   limit = 0
   while True:
     limit += 1
-    # if limit > 1: break
-    # print(decode(inval))
     if check(inval): return decode(inval)
     increment(inval)
 

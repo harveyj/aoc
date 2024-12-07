@@ -37,7 +37,7 @@ def puzz(INPUT, two=False):
       elif regs[inst[1]] != 0:
         pc += eval(inst[2])
       else: pc += 1
-  print(regs)
+  # print(regs)
   return regs['a']
 
 def one(INPUT):

@@ -18,15 +18,11 @@ def one(INPUT, two=False):
     return G2
   G = parse(INPUT)
   if two:
-    print('override')
     G.set((0,0), '#'); G.set((0,G.max_y()-1), '#'); G.set((G.max_x()-1,0), '#'); G.set((G.max_x()-1,G.max_y()-1), '#'); 
 
   for i in range(100):
     G = iter(G)
-    print(G)
-    print("")
     if two:
-      print('override')
       G.set((0,0), '#'); G.set((0,G.max_y()-1), '#'); G.set((G.max_x()-1,0), '#'); G.set((G.max_x()-1,G.max_y()-1), '#'); 
 
   tot = 0
