@@ -15,6 +15,13 @@ def puzz(INPUT, iters=256, life=7):
     total += thisFish;
   return total
 
-p = puzzle.Puzzle("6")
-p.run(puzz, 0, iters=80)
-p.run(puzz, 0, iters=256)
+def one(INPUT):
+  return puzz(INPUT, iters=80)
+def two(INPUT):
+  return puzz(INPUT, iters=256)
+
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2021", "6")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

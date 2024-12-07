@@ -26,6 +26,13 @@ def puzz(INPUT, two=False):
   totalTwo = min(totals.items(), key=lambda a: a[1])
   return totalTwo if two else totalOne
 
-p = puzzle.Puzzle("7")
-p.run(puzz, 0)
-p.run(puzz, 0, two=True)
+def one(INPUT):
+  return puzz(INPUT)
+def two(INPUT):
+  return puzz(INPUT, two=True)
+
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2021", "7")
+
+  p.run(one, 0) 
+  p.run(two, 0) 

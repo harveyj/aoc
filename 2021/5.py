@@ -38,6 +38,13 @@ def puzz(INPUT, diag=False):
   overlapCount = len([overlap for overlap in overlaps.values() if overlap > 1])
   return overlapCount;
 
-p = puzzle.Puzzle("5")
-p.run(puzz, 0, diag=False)
-p.run(puzz, 0, diag=True)
+def one(INPUT):
+  return puzz(INPUT, diag=False)
+def two(INPUT):
+  return puzz(INPUT, diag=True)
+
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2021", "5")
+
+  p.run(one, 0) 
+  p.run(two, 0) 
