@@ -53,6 +53,9 @@ class Grid:
   def get_repeating(self, pt):
     return self.get(((pt[0] % self.max_x()), (pt[1] % self.max_y())))
 
+  def legal(self, pt):
+    return 0 <= pt[0] < self.max_x() and 0 <= pt[1] < self.max_y()
+
   def detect(self, val):
     return [(x, y) 
             for x in range(self.max_x()) for y in range(self.max_y())
