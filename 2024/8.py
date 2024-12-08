@@ -94,11 +94,11 @@ def two(INPUT):
             anti.add((x, y))
             continue
           if x - p0[0] == 0:
-            slope1 = 'v'
+            continue
           else: 
             slope1 = (y - p0[1]) / (x - p0[0])
           if x - p1[0] == 0:
-            slope1 == 'v'
+            continue
           else:
             slope2 = (y - p1[1]) / (x - p1[0])
           if slope1 == slope2:
@@ -110,6 +110,4 @@ def two(INPUT):
 
 p = puzzle.Puzzle("2024", "8")
 # p.run(one, 0)
-p.run(two, 3)
-
-#1189 too low
+p.run(two_old, 0)
