@@ -37,4 +37,15 @@ Difficulty: 5.5/10
 ## Day 7
 Figure out the operators to solve math equations. Pretty easy to brute force, I just didn't understand Python libraries. Done while Katie was feeding Thomas.
 
+Lesson learned: Be careful about the itertools product/combination/permitation semantics.
+
 Difficulty: 4/10
+
+## Day 8
+Draw lines on a grid. 99% there very quickly.
+
+Done on Thomas's first NFL Sunday at home. 
+
+Lesson: Be very careful about floats and equality, and look for areas in libraries where you might have those issues lurking. 
+
+Difficulty: 5.5/10

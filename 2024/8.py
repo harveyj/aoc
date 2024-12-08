@@ -34,7 +34,8 @@ def one(INPUT):
 def is_int(num, tolerance = 1e-3):
   return abs(round(num) - num) < tolerance
 
-def two_old(INPUT):
+# The initial and IMO cleanest
+def two(INPUT):
   locs = defaultdict(list)
   G = library.Grid(raw='\n'.join(INPUT))
   for x in range(G.max_x()):
@@ -53,19 +54,20 @@ def two_old(INPUT):
         sx = 1.0; sy = 0
       else: 
         sx = dx/dy; sy = 1.0
-      if sx > 1 and sx < -1:
-        sx = 1.0; sy = 1/sx
-      # print(dx, dy, sx, sy)
       pt = p0
       while G.legal(pt):
         nodes[pt].append(c)
         seen.add(pt)
         pt = library.pt_add(pt, (sx, sy))
+        if is_int(pt[0]) and is_int(pt[1]):
+          pt = round(pt[0]), round(pt[1])
       pt = p0
       while G.legal(pt):
         nodes[pt].append(c)
         seen.add(pt)
         pt = library.pt_add(pt, (-sx, -sy))
+        if is_int(pt[0]) and is_int(pt[1]):
+          pt = round(pt[0]), round(pt[1])
  
   seen = set([(round(pt[0]), round(pt[1])) for pt in seen if is_int(pt[0]) and is_int(pt[1])])
   print(seen)
@@ -74,8 +76,8 @@ def two_old(INPUT):
   print(G)
   return len(seen)
 
-
-def two(INPUT):
+# This was the first one and even bruter-force.
+def two_alt(INPUT):
   locs = defaultdict(list)
   G = library.Grid(raw='\n'.join(INPUT))
   
