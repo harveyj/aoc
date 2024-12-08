@@ -32,15 +32,14 @@ def onetwo(INPUT):
     if total > max_happiness_val:
       max_happiness_order = order
       max_happiness_val = total
-  return max_happiness_order, max_happiness_val
+  return max_happiness_val
 
 def one(INPUT):
-  return onetwo(INPUT)
-
+  return puzzle.Puzzle("2015", "13").run(onetwo, 1)
 def two(INPUT):
-  return onetwo(INPUT)
+  return puzzle.Puzzle("2015", "13").run(onetwo, 0)
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2015", "13")
-  p.run(one, 1)
-  p.run(two, 0) # Two is just a different input
+  p.run(one, -1)
+  p.run(two, -1)

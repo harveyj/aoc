@@ -20,7 +20,7 @@ def one(INPUT):
     if shortest_cost is None or path_cost < shortest_cost:
       shortest_cost = path_cost
       shortest_path = path
-  return shortest_cost, shortest_path
+  return shortest_cost
 
 def two(INPUT):
   G = networkx.Graph()
@@ -33,7 +33,7 @@ def two(INPUT):
     if longest_cost is None or path_cost > longest_cost:
       longest_cost = path_cost
       longest_path = path
-  return longest_cost, longest_path
+  return longest_cost
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2015", "9")

@@ -62,6 +62,9 @@ def one(INPUT):
         registers[dest] = apply(val1, op, val2)
   return registers['a']
 
+def two(INPUT):
+  return puzzle.Puzzle("2015", "7").run(one, 1)
+
 if __name__ == '__main__':
   p = puzzle.Puzzle("2015", "7")
   p.run(one, 0)

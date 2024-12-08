@@ -47,7 +47,7 @@ def one(INPUT):
     increment(inval)
 
 def two(INPUT):
-  return one(INPUT)
+  return puzzle.Puzzle("2015", "11").run(one, 1)
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2015", "11")
