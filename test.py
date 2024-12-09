@@ -10,13 +10,15 @@ parser = argparse.ArgumentParser(description="Run advent of code days in an auto
 
 parser.add_argument('-y', '--year', type=str, help="Year")
 parser.add_argument('-d', '--days', type=str, help="Year")
+parser.add_argument('-e', '--exclude_days', type=str, help="Year", default=[])
 args = parser.parse_args()
 
 years = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
 days = range(1, 26)
+exclude_days = []
 if args.year: years = [args.year]
 if args.days: days = args.days.split(',')
-
+if args.exclude_days: exclude_days = args.exclude_days.split(',')
 
 
 for year in years:
@@ -25,6 +27,7 @@ for year in years:
   answers = {a[0]: [eval(a[1]), eval(a[2])] for a in answers}
   timings = dict()
   for i in days:
+    if str(i) in exclude_days: continue
     print(f'Day {i}')
     file_path = f'{year}/{i}.py'
     module_name = f'day'
