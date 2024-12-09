@@ -1,7 +1,7 @@
 # Advent of Code
 All puzzles, all years!
 
-- 2015: Complete Python3 implementation, standardized
+- 2015: Complete Python3 implementation, standardized, validated (except 21)
 - 2016: Complete Python3 implementation, standardized
 - 2017: Complete Python3 implementation, standardized
 - 2018: Completed, but original code was lost to the sands of time. Partial Python3 reimplementation.
