@@ -49,7 +49,8 @@ def one(INPUT):
   return onetwo(INPUT)
 
 def two(INPUT):
-  return onetwo(INPUT)
+  # real answer is read out of letters returned from onetwo but i want it secret
+  return 'DUMMY' 
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2016", "8")
