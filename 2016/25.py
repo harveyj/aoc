@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import puzzle
 import re
-import networkx as nx
 import collections
 
 
@@ -94,7 +93,7 @@ def one(INPUT):
   for a_val in range(0, 3000):
     print(a_val)
     evaluate(INPUT, a_val, max_instr=100000)
-    input()
+    # input()
 # did this by hand in a spreadsheet due to extensive disassembly
 
 def two(INPUT):
