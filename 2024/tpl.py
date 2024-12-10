@@ -22,6 +22,7 @@ def two(INPUT):
   #   for y in range(G.max_y()):
   #     c = G.get((x, y))
 
-p = puzzle.Puzzle("")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2024", "")
+  print(p.run(one, 0))
+  print(p.run(two, 0))
