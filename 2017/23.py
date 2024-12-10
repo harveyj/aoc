@@ -67,14 +67,14 @@ def one(INPUT):
     vm.step()
     if vm.pc >= len(vm.instrs):
       return vm.regs['mul']
-  return 0
 
 def run_vm_two(INPUT):
   vm = VM(instrs=INPUT)
   vm.regs['a'] = 1
   while True:
-    if vm.pc == 23:
-      print(vm.regs)
+    # Uncomment this to get the register dumps that help you debug
+    # if vm.pc == 23:
+    #   print(vm.regs)
     vm.step()
   return 0
 
@@ -168,7 +168,7 @@ def optimized_python():
         break
     if regs['f'] == 0:
       regs['h'] = regs['h'] + 1
-      print(regs)
+      # print(regs)
     regs['g'] = regs['b'] 
     regs['g'] = regs['g'] - regs['c'] 
     if regs['g'] == 0:

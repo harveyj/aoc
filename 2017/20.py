@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 import puzzle, library
 import re
-import networkx as nx
-import hashlib
 from collections import defaultdict
 from collections import namedtuple
 
@@ -31,9 +29,7 @@ def one(INPUT):
     # for p in points: print(p)
     new_points = [update(pt) for pt in points]
     new_dists = [abs(pt.x) + abs(pt.y) + abs(pt.z) for pt in new_points]
-    print(new_dists.index(min(new_dists)))
     points = new_points
-    # print(points)
   return 0
 
 def two(INPUT):
@@ -46,9 +42,10 @@ def two(INPUT):
     for pt in new_points: locs[(pt.x, pt.y, pt.z)].append(pt)
     new_points = [pt for pt in new_points if len(locs[(pt.x, pt.y, pt.z)]) == 1]
     points = new_points
-    print(len(points))
+    # print(len(points))
   return 0
 
+# TODO borked
 if __name__ == '__main__':
   p = puzzle.Puzzle("2017", "20")
 

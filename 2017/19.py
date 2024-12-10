@@ -37,11 +37,11 @@ def onetwo(INPUT):
     # print((x, y))
   return 0
 
-# TODO onetwo won't work
 def one(INPUT):
-  return onetwo(INPUT)[0]
+  return onetwo(INPUT)
+# TODO forgot why this is onetwo
 def two(INPUT):
-  return onetwo(INPUT)[1]
+  return 0
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2017", "19")

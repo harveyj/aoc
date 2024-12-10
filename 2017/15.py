@@ -14,7 +14,6 @@ def one(INPUT):
   for i in range(rounds):
     a = (a * a_mul) % mod_fact
     b = (b * b_mul) % mod_fact
-    # print(a, b)
     if bin(a)[-16:] == bin(b)[-16:]:
       count += 1
   return count
@@ -47,7 +46,7 @@ def two(INPUT):
     # print(a, b)
     if bin(a)[-16:] == bin(b)[-16:]:
       count += 1
-      print(5000000-rounds)
+      # print(5000000-rounds)
     if rounds == 0:
       return count
 

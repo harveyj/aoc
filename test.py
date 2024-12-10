@@ -23,16 +23,19 @@ if args.year: years = [args.year]
 if args.days: days = args.days.split(',')
 if args.exclude_days: exclude_days = args.exclude_days.split(',')
 
+def out(msg, f):
+  f.write(msg + '\n')
+  print(msg)
 
 for year in years:
   lf = open(log_file, "w")
-  lf.write(f'Year {year}\n'); print(year)
+  out(f'Year {year}', lf)
   answers = list(csv.reader(open(f'{year}/inputs/answers.txt')))
   answers = {a[0]: [eval(a[1]), eval(a[2])] for a in answers}
   timings = dict()
   for i in days:
     if str(i) in exclude_days: continue
-    lf.write(f'Day {i}\n'); print(i)
+    out(f'\nDay {i}', lf)
     file_path = f'{year}/{i}.py'
     module_name = f'day'
     spec = importlib.util.spec_from_file_location(module_name, file_path)
@@ -48,12 +51,14 @@ for year in years:
     end_time = time.time()
     timings[f'{year}-{i}-2'] = round((end_time - start_time)*1000000)/1000
     if answers[str(i)][0] != str(one):
-      lf.write(f'INCORRECT: output - {one} vs correct - {answers[str(i)][0]}')
+      out(f'INCORRECT: output - {one} vs correct - {answers[str(i)][0]}', lf)
       continue
+    else: out('CORRECT pt 1', lf)
     if answers[str(i)][1] != str(two):
-      lf.write(f'INCORRECT: output - {two} vs correct - {answers[str(i)][1]}')
+      out(f'INCORRECT: output - {two} vs correct - {answers[str(i)][1]}', lf)
       continue
-    lf.write(f'{timings[f'{year}-{i}-1']} ms\n')
-    lf.write(f'{timings[f'{year}-{i}-2']} ms\n')
+    else: out('CORRECT pt 2', lf)
+    out(f'pt 1: {timings[f'{year}-{i}-1']} ms', lf)
+    out(f'pt 2: {timings[f'{year}-{i}-2']} ms', lf)
   for t in timings:
-    lf.write(f'{t} {timings[t]} ms\n')
+    out(f'{t} {timings[t]} ms', lf)

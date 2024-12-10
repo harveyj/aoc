@@ -41,15 +41,10 @@ def two(INPUT):
   for i in range(64):
     # print(len(vals))
     _, vals, offset, skip_size = knothash(vals, key, skip_size, offset)
-    print(offset, skip_size)
-  print(vals)
   dense = []
   for i in range(len(vals) // 16):
-    val = 0
     dense.append(list(itertools.accumulate(vals[i*16:(i+1)*16], operator.xor))[-1])
-  print(list(dense))
   out = print_hex(dense)
-  # print_hex([64, 7, 255])
   return out
 
 if __name__ == '__main__':

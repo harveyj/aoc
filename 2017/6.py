@@ -12,7 +12,6 @@ def parse(INPUT):
 
 def one(INPUT):
   blocks = list(parse(INPUT))[0]
-  print(blocks)
   seen = set()
   steps = 0
   while True:

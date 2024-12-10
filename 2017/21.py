@@ -64,9 +64,10 @@ def one(INPUT):
   for i in range(steps):
     stride = 2 if G.max_x() % 2 == 0 else 3
     G = iter(stride, patterns, G)
-    print(len(G.detect('#')))
+    # print(len(G.detect('#')))
   return 0
 
+# TODO borked
 def two(INPUT):
   return 0
 
