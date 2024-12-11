@@ -32,7 +32,7 @@ def snafu(num):
         tgt -= val * 5 ** pow
         break
   ret = []
-  print(vals)
+  # print(vals)
   for val in vals:
     ret.append(rev(val))
   return ''.join(ret)
@@ -47,10 +47,10 @@ def one(INPUT):
       pow *= 5
     # print(num)
     sum += num
-  print(sum)
-  print(snafu(sum))
+  # print(sum)
+  # print(snafu(sum))
   # 625 -250 -25 + 5 - 2
-  # print(snafu(353))
+  print(snafu(353))
   return 0
 
 def two(INPUT):

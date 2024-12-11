@@ -83,12 +83,12 @@ def one(INPUT):
     all_y = [loc[1] for loc in locs]
     grid = Grid(x=max(all_x)+OFFSET, y=max(all_y)+OFFSET)
     grid.overlays = {(loc[0]+OFFSET//2, loc[1]+OFFSET//2): '#' for loc in locs}
-    print('after round', i)
-    print(grid)
-    print('')
-    print(max(all_x), min(all_x))
-    print(max(all_y), min(all_y))
-    print((max(all_x) - min(all_x)+1) * (max(all_y) - min(all_y) + 1) - len(locs))
+    # print('after round', i)
+    # print(grid)
+    # print('')
+    # print(max(all_x), min(all_x))
+    # print(max(all_y), min(all_y))
+    # print((max(all_x) - min(all_x)+1) * (max(all_y) - min(all_y) + 1) - len(locs))
     proposed_new_locs = defaultdict(list)
     for loc in locs:
       new_loc = propose_move(locs, loc, dir_offset)
@@ -112,7 +112,7 @@ def two(INPUT):
   prev_locs = None
   for i in range(1000):
     if locs == prev_locs:
-      print('STASIS DETECTED', i)
+      # print('STASIS DETECTED', i)
       return i
     prev_locs = locs
     OFFSET = 30
@@ -120,7 +120,7 @@ def two(INPUT):
     all_y = [loc[1] for loc in locs]
     grid = Grid(x=max(all_x)+OFFSET, y=max(all_y)+OFFSET)
     grid.overlays = {(loc[0]+OFFSET//2, loc[1]+OFFSET//2): '#' for loc in locs}
-    print('after round', i)
+    # print('after round', i)
     # print(grid)
     # print('')
     # print(max(all_x), min(all_x))

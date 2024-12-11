@@ -5,12 +5,12 @@ import re
 import networkx as nx
 from collections import namedtuple
 
-State = namedtuple("State", "where when opens")
+State = namedtuple("State", ["where", "when", "opens"])
 
 def parse(INPUT):
   ret = []
   for l in INPUT:
-    match = re.match("Valve (\w+) has flow rate=(\d+); tunnels? leads? to valves? ((\w+,? ?)+)", l)
+    match = re.match(r"Valve (\w+) has flow rate=(\d+); tunnels? leads? to valves? ((\w+,? ?)+)", l)
     name = match.group(1)
     rate = int(match.group(2))
     outs = list(re.findall('\w+', match.group(3)))
@@ -37,7 +37,7 @@ def one(INPUT):
   flows = {name:rate for name, rate, _ in nodes}
   flows_nz = {name:rate for name, rate, _ in nodes if rate > 0}
   flows_nz_nodes = list(flows_nz.keys())
-  print(flows)
+  # print(flows)
   G = nx.Graph()
   for name, _, outs in nodes:
     G.add_node(name)
@@ -46,6 +46,7 @@ def one(INPUT):
   dists = dict(nx.all_pairs_dijkstra(G))
 
   SG = nx.DiGraph()
+  # print(State._fields)
   start_state = State(where='AA', when=30, opens=())
   states = deque([start_state])
   seen = set()
@@ -82,8 +83,8 @@ def one(INPUT):
   #   generate all possible next states
   #   rank them by heuristic
 
-BeamState = State = namedtuple("State", "where_p where_e banked opens")
-ScoredBeamState = State = namedtuple("State", "beam score")
+BeamState = namedtuple("BeamState", "where_p where_e banked opens")
+ScoredBeamState = namedtuple("ScoredBeamState", "beam score")
 
 def two(INPUT):
   DURATION = 26

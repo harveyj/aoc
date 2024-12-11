@@ -51,12 +51,12 @@ def one(INPUT):
 def two(INPUT):
   arr = parse(INPUT)
   arr = [a * 811589153 for a in arr]
-  print(arr)
+  # print(arr)
   for i in range(1, 11):
     new_arr = mix2(arr, iters=i)
-    print(new_arr)
+    # print(new_arr)
   arr = new_arr
-  print(arr[(arr.index(0) + 1000) % len(arr)], arr[(arr.index(0) + 2000) % len(arr)], arr[(arr.index(0) + 3000) % len(arr)])
+  # print(arr[(arr.index(0) + 1000) % len(arr)], arr[(arr.index(0) + 2000) % len(arr)], arr[(arr.index(0) + 3000) % len(arr)])
   return arr[(arr.index(0) + 1000) % len(arr)] + arr[(arr.index(0) + 2000) % len(arr)] + arr[(arr.index(0) + 3000) % len(arr)]
 
 if __name__ == '__main__':

@@ -59,9 +59,9 @@ def two(INPUT):
 
   ans = 1
   for i, p in enumerate(pairs):
-    print(p)
+    # print(p)
     if str(p) in [t, s]:
-      print(i+1)
+      # print(i+1)
       ans *= (i+1)
   return ans
 

@@ -14,9 +14,9 @@ All puzzles, all years!
 - 2024: Current Python3 implementation, standardized
 
 ## Validation
-- 2015: Validated (except 21)
-- 2016: 
-- 2017: Validated (except 6, 19, 20, 21, 2-25 unknown)
+- 2015: Validated (1-25) - 21 no
+- 2016: Validated (1-22) -  23, 24 unknown - 25 no
+- 2017: Validated (except 6, 19, 20, 21, 22-25 unknown)
 - 2018: 
 - 2019: 
 - 2020: 
@@ -26,9 +26,9 @@ All puzzles, all years!
 - 2024: 
 
 ## Performance hotspots
-- 2015: 
-- 2016: 5-1 - 5s, 5-2 - 14s, 9 - 42s, 11 (very long), 12-2 (30s) 14-2 (30s), 18-2 (40s)
-- 2017: 15-1 - 10s,  20-1 - 50s, 20-2 - 30s, 23-2 - 20s, 
+- 2015: 6-1 (2s), 6-2 (4s), 22-1&2 (3s)
+- 2016: 5-1 (5s), 5-2 (14s), 9 (42s), 11 (very long), 12-2 (30s) 14-2 (30s), 18-2 (40s), 19-2 (690s), 24 (very long)
+- 2017: 15-1 (10s),  20-1 (50s), 20-2 (30s), 23-2 (20s) 
 - 2018: 
 - 2019: 
 - 2020: 

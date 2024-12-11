@@ -90,6 +90,7 @@ def evaluate(INPUT, a_val, max_instr=None):
   return 0
 
 def one(INPUT):
+  return 0
   for a_val in range(0, 3000):
     print(a_val)
     evaluate(INPUT, a_val, max_instr=100000)

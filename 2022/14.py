@@ -65,7 +65,7 @@ def drop_one(grid, start, bottom_y):
     return False
   while True:
     if y == bottom_y+3:
-      print('bail')
+      # print('bail')
       return False
     if grid.get((x, y+1)) == '.':
       x, y = (x, y+1)
@@ -86,7 +86,7 @@ def one(INPUT):
   while drop_one(grid, o_start, max_y):
     grains += 1
 
-  print(grid)
+  # print(grid)
   return grains
 
 def two(INPUT):
@@ -96,7 +96,7 @@ def two(INPUT):
   grains = 0
   while drop_one(grid, o_start, max_y):
     grains += 1
-  print(grid.window(490, 0, 510, 20))
+  # print(grid.window(490, 0, 510, 20))
   return grains
 
 if __name__ == '__main__':

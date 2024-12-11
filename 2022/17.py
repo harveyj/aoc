@@ -129,14 +129,14 @@ def simulate(instrs):
 
 
 def one(INPUT):
-  instrs = parse(INPUT)
+  instrs = parse(INPUT[0])
   for i in simulate(instrs):
     total, pc_offset, top = i
     if total == 2022:  
       return top
 
 def two(INPUT):
-  instrs = parse(INPUT)
+  instrs = parse(INPUT[0])
   last_tops = defaultdict(int)
   last_total_shapes = defaultdict(int)
 
@@ -148,7 +148,7 @@ def two(INPUT):
     delta = top - last_tops[(pc_offset, shape)]
     delta_shapes = total_shapes - last_total_shapes[(pc_offset, shape)]
     if (pc_offset, delta, total_shapes % 5, delta_shapes) in seen:
-      print('at %i instruction and %i shape, piece %i moved upwards by as much (%i) as the previous cycle, moving up %i shapes' %(pc_offset, shape, total_shapes, delta, delta_shapes))
+      # print('at %i instruction and %i shape, piece %i moved upwards by as much (%i) as the previous cycle, moving up %i shapes' %(pc_offset, shape, total_shapes, delta, delta_shapes))
       if (1000000000000 - total_shapes) % delta_shapes == 0:
         rotations = (1000000000000 - total_shapes) // delta_shapes
         return delta * rotations + top

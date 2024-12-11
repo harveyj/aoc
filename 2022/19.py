@@ -6,7 +6,7 @@ from collections import deque, namedtuple
 def parse(INPUT):
   ret = []
   for l in INPUT:
-    print(l)
+    # print(l)
     mat = re.match('Blueprint (\d+): Each ore robot costs (\d+) ore. Each clay robot costs (\d+) ore. Each obsidian robot costs (\d+) ore and (\d+) clay. Each geode robot costs (\d+) ore and (\d+) obsidian.', l)
     ret.append(Spec(*map(int, mat.group(1, 2, 3, 4, 5, 6, 7))))
   return ret
@@ -76,7 +76,7 @@ def run_all_sequences(spec, END):
     path, elapsed, state = stack.pop()
     if elapsed == END: 
       if state.geodes > max_score:
-        print('new max', state.geodes)
+        # print('new max', state.geodes)
         max_score = state.geodes
         max_moves = path
       continue

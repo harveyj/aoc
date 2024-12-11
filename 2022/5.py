@@ -3,12 +3,12 @@ import puzzle
 import re
 
 def parse_line(l):
-  pat = re.compile("move (\d+) from (\d+) to (\d+)")
+  pat = re.compile(r"move (\d+) from (\d+) to (\d+)")
   a, b, c = [int(i) for i in re.match(string=l, pattern=pat).groups()]
   return [a, b, c]
 
 def parse(INPUT):
-  stacks_raw, instrs_raw = INPUT.split("\n\n")
+  stacks_raw, instrs_raw = '\n'.join(INPUT).split("\n\n")
   N_STACKS = (len(stacks_raw.split("\n")[-1])+1)//4
   stacks = [[] for i in range(N_STACKS)]
   for line in stacks_raw.split("\n")[-2::-1]:
@@ -30,7 +30,7 @@ def two(INPUT):
   for n, fr, to in instrs:
     stacks[to-1] += list(stacks[fr-1][-n:])
     del(stacks[fr-1][-n:])
-    print(stacks)
+    # print(stacks)
   # print(stacks)
   return ''.join([s[-1] for s in stacks])
 

@@ -3,7 +3,7 @@ import puzzle
 import re
 
 def parse_line(l):
-  pat = re.compile("(\d+)-(\d+),(\d+)-(\d+)")
+  pat = re.compile(r"(\d+)-(\d+),(\d+)-(\d+)")
   a, b, c, d = [int(i) for i in re.match(string=l, pattern=pat).groups()]
   return [a, b, c, d]
 

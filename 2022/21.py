@@ -6,11 +6,12 @@ import networkx as nx
 def parse(INPUT):
   G = nx.Graph()
   for l in INPUT:
-    op_mat = re.match('(\w+): (\w+) (.) (\w+)', l)
+    op_mat = re.match(r'(\w+): (\w+) (.) (\w+)', l)
     if op_mat:
       G.add_node(op_mat.group(1), op = op_mat.group(3), l=op_mat.group(2), r=op_mat.group(4))
     else: 
-      lit_mat = re.match('(\w+): (\d+)', l)
+      lit_mat = re.match(r'(\w+): (\d+)', l)
+      print(l)
       G.add_node(lit_mat.group(1), val=int(lit_mat.group(2)))
   return G
 
@@ -48,8 +49,8 @@ def postorder(G, root, apply):
   if not l:
     return G.nodes[root].get('val')
   else:
-    l_val = postorder(G, l)
-    r_val = postorder(G, r)
+    l_val = postorder(G, l, apply)
+    r_val = postorder(G, r, apply)
     return apply(l_val, r_val, G.nodes[root].get('op'))
 
 def postorder2(G, root):
@@ -67,7 +68,7 @@ def postorder2(G, root):
 
 def one(INPUT):
   G = parse(INPUT)
-  return postorder(G, 'root')
+  return postorder(G, 'root', apply)
 
 def two(INPUT):
   G = parse(INPUT)

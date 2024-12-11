@@ -53,7 +53,7 @@ def one(INPUT):
   bearings = [(1, 0), (0, 1), (-1, 0), (0, -1)]
   bearings_signature = ['>', 'v', '<', '^']
   dir_idx = 0
-  raw_grid, instrs = parse(INPUT)
+  raw_grid, instrs = parse('\n'.join(INPUT))
   loc = (raw_grid[0].index('.'), 0)
   grid = Grid(raw_grid)
   for instr in instrs:
@@ -74,7 +74,7 @@ def one(INPUT):
 
 def get_next_loc_and_bearing(loc, bearing, lb_map):
   if (loc, bearing) in lb_map:
-    print('teleport', lb_map[(loc, bearing)])
+    # print('teleport', lb_map[(loc, bearing)])
     return lb_map[(loc, bearing)]
   x, y = loc; dx, dy = bearing
   x, y = (x + dx), (y + dy)
@@ -132,7 +132,7 @@ def pair_edge(lb_map, a_1, a_2, b_1, b_2, bearing_1, bearing_2):
   if abs(x_2 - x_1) not in [0,49] or abs(y_2 - y_1) not in [0,49] :
     print('ERROR', a_1, a_2)
   for i in range(max(abs(x_2 - x_1), abs(y_2 - y_1)) + 1):
-    print('pairing', (ax, ay), (bx, by))
+    # print('pairing', (ax, ay), (bx, by))
     lb_map[(ax, ay), bearing_1] = ((bx, by), bearing_2)
     ax += dax; ay += day; bx += dbx; by += dby
 
@@ -295,7 +295,7 @@ def simulate(grid, instrs, start_loc, lb_map, collide=True, trace=False):
   return loc, dir_idx
 
 def two(INPUT):
-  raw_grid, instrs = parse(INPUT)
+  raw_grid, instrs = parse('\n'.join(INPUT))
   loc = (raw_grid[0].index('.'), 0)
   grid = Grid(raw_grid)
   lb_map = edges_two(grid)
@@ -303,7 +303,7 @@ def two(INPUT):
   return 1000 * (loc[1]+1) + 4 * (loc[0] +1) + dir_idx
 
 def test(INPUT):
-  raw_grid, _ = parse(INPUT)
+  raw_grid, _ = parse('\n'.join(INPUT))
   instrs_r = [1, "R", 1, "R", 1, "R", 1]
   instrs_l = [1, "L", 1, "L", 1, "L", 1]
   grid = Grid(raw_grid)
@@ -315,17 +315,17 @@ def test(INPUT):
         start_loc = (x, y)
         loc, _ = simulate(grid, instrs_r, start_loc, lb_map, collide=False, trace=False)
         if loc != start_loc:
-          print('MISMATCH FOUND', start_loc, loc)
+          # print('MISMATCH FOUND', start_loc, loc)
           grid.overlays[start_loc] = 'N'
         # else:
         #   print('SUCCESS', start_loc)
         loc, _ = simulate(grid, instrs_l, start_loc, lb_map, collide=False, trace=False)
         if loc != start_loc:
-          print('MISMATCH FOUND', start_loc, loc)
+          # print('MISMATCH FOUND', start_loc, loc)
           grid.overlays[start_loc] = 'N'
         # else:
         #   print('SUCCESS', start_loc)
-  print(grid)
+  # print(grid)
   return 0
 
 

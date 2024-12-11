@@ -2,26 +2,6 @@
 import puzzle
 import re
 
-"""
-Monkey 0:
-  Starting items: 79, 98
-  Operation: new = old * 19
-  Test: divisible by 23
-    If true: throw to monkey 2
-    If false: throw to monkey 3
-
-Starting items lists your worry level for each item the monkey is currently holding in the order they will be inspected.
-
-Operation shows how your worry level changes as that monkey inspects an item. (An operation like new = old * 5 means that your worry level after the monkey inspected the item is five times whatever your worry level was before inspection.)
-Test shows how the monkey uses your worry level to decide where to throw an item next.
-If true shows what happens with an item if the Test was true.
-If false shows what happens with an item if the Test was false.
-After each monkey inspects an item but before it tests your worry level, your relief that the monkey's inspection didn't damage the item causes your worry level to be divided by three and rounded down to the nearest integer.
-
-The monkeys take turns inspecting and throwing items. On a single monkey's turn, it inspects and throws all of the items it is holding one at a time and in the order listed. Monkey 0 goes first, then monkey 1, and so on until each monkey has had one turn. The process of each monkey taking a single turn is called a round.
-
-When a monkey throws an item to another monkey, the item goes on the end of the recipient monkey's list. A monkey that starts a round with no items could end up inspecting and throwing many items by the time its turn comes around. If a monkey is holding no items at the start of its turn, its turn ends.
-"""
 class Monkey:
   PAT = """Monkey (\d+):
   Starting items: (.*)
@@ -41,7 +21,7 @@ class Monkey:
     self.cond = int(match.group(4))
     self.true_monkey = int(match.group(5))
     self.false_monkey = int(match.group(6))
-    print(self.id, self.items, self.operation, self.cond, self.true_monkey, self.false_monkey)
+    # print(self.id, self.items, self.operation, self.cond, self.true_monkey, self.false_monkey)
     self.inspect = 0
 
   
@@ -73,7 +53,7 @@ def round(monkeys, divide=3, modulo = 1):
 
 def one(INPUT):
   monkeys = {}
-  for l in INPUT.split('\n\n'):
+  for l in '\n'.join(INPUT).split('\n\n'):
     m = Monkey()
     m.parse(l)
     monkeys[m.id] = m
@@ -89,7 +69,7 @@ def hash(monkeys):
 def two(INPUT):
   monkeys = {}
   hashes = set()
-  for l in INPUT.split('\n\n'):
+  for l in '\n'.join(INPUT).split('\n\n'):
     m = Monkey()
     m.parse(l)
     monkeys[m.id] = m
@@ -104,8 +84,8 @@ def two(INPUT):
     # else:
     #   print('.', end='')
     #   hashes.add(hash(monkeys))
-    if i % 1000 == 0:
-      print(i, [monkeys[m].inspect for m in monkeys])
+    # if i % 1000 == 0:
+    #   print(i, [monkeys[m].inspect for m in monkeys])
   inspects = [monkeys[m].inspect for m in monkeys]
   inspects.sort()
   return inspects[-2] * inspects[-1]

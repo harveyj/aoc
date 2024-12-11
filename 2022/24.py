@@ -36,8 +36,8 @@ def parse(INPUT):
   raw_grid = INPUT
   x = len(raw_grid[0]); y = len(raw_grid)
   g = Grid(x=x, y=y)
-  print(x, y)
-  print(raw_grid)
+  # print(x, y)
+  # print(raw_grid)
   blizzards = defaultdict(list)
   for y, row in enumerate(raw_grid):
     for x, cell in enumerate(row):
@@ -97,9 +97,9 @@ def one(INPUT):
   leg_2 = nx.astar_path_length(graph, (END, leg_1), (START, 'sink'), heuristic=dist)
   leg_3 = nx.astar_path_length(graph, (START, leg_1+leg_2), (END, 'sink'), heuristic=dist)
 
-  print(leg_1, leg_2, leg_3)
+  # print(leg_1, leg_2, leg_3)
   
-  return 0
+  return leg_1+leg_2+leg_3
 
 def dist(a, b):
   a = a[0]; b = b[0]

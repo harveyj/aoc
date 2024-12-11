@@ -16,9 +16,9 @@ def one(INPUT):
   seen = set()
   for x, y, z in cubes:
     for dx, dy, dz in delts:
-      print((x+dx, y+dy, z+dz))
+      # print((x+dx, y+dy, z+dz))
       seen.add((x+dx, y+dy, z+dz))
-  print(6*len(cubes) - 2*(6*len(cubes) - len(seen)))
+  # print(6*len(cubes) - 2*(6*len(cubes) - len(seen)))
   return 2*len(seen) - 6*len(cubes)
 
 def two(INPUT):

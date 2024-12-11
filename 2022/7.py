@@ -3,7 +3,7 @@ import puzzle
 import re
 
 def parse(INPUT):
-  commands = [(command_chunk.split('\n')[0], command_chunk.strip().split('\n')[1:]) for command_chunk in INPUT.split("$ ")][1:]
+  commands = [(command_chunk.split('\n')[0], command_chunk.strip().split('\n')[1:]) for command_chunk in '\n'.join(INPUT).split("$ ")][1:]
   return commands
 
 def get_all_sizes(INPUT):

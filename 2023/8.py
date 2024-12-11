@@ -8,7 +8,7 @@ def parse_input(INPUT):
   network_map = dict()
   for l in network.split('\n'):
     print(l)
-    mat = re.match("(\w+) = \((\w+), (\w+)\)", l)
+    mat = re.match(r"(\w+) = \((\w+), (\w+)\)", l)
     key, left, right = mat.group(1,2,3)
     network_map[key] = {'L': left, 'R': right}
   return instrs, network_map
