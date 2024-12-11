@@ -12,13 +12,13 @@ parser = argparse.ArgumentParser(description="Run advent of code days in an auto
 parser.add_argument('-y', '--year', type=str, help="Year")
 parser.add_argument('-d', '--days', type=str, help="Year")
 parser.add_argument('-e', '--exclude_days', type=str, help="Year", default=[])
-parser.add_argument('-l', '--log_file', type=str, help="Log File", default=[])
+# parser.add_argument('-l', '--log_file', type=str, help="Log File", default=[])
 args = parser.parse_args()
 
 years = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
 days = range(1, 26)
 exclude_days = []
-log_file = f'logs/{datetime.now().strftime("%Y-%m-%d-%H-%M-%S")}'
+log_file = f'logs/main.txt'
 if args.year: years = [args.year]
 if args.days: days = args.days.split(',')
 if args.exclude_days: exclude_days = args.exclude_days.split(',')
@@ -28,14 +28,15 @@ def out(msg, f):
   print(msg)
 
 for year in years:
-  lf = open(log_file, "w")
+  lf = open(log_file, "w+")
+  out(datetime.now().strftime("%Y-%m-%d %H:%M:%S"), lf)
   out(f'Year {year}', lf)
   answers = list(csv.reader(open(f'{year}/inputs/answers.txt')))
   answers = {a[0]: [eval(a[1]), eval(a[2])] for a in answers}
   timings = dict()
   for i in days:
     if str(i) in exclude_days: continue
-    out(f'\nDay {i}', lf)
+    out(f'\nYear {year} Day {i}', lf)
     file_path = f'{year}/{i}.py'
     module_name = f'day'
     spec = importlib.util.spec_from_file_location(module_name, file_path)
@@ -60,5 +61,6 @@ for year in years:
     else: out('CORRECT pt 2', lf)
     out(f'pt 1: {timings[f'{year}-{i}-1']} ms', lf)
     out(f'pt 2: {timings[f'{year}-{i}-2']} ms', lf)
+    lf.flush()
   for t in timings:
     out(f'{t} {timings[t]} ms', lf)
