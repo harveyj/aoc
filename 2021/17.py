@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from collections import defaultdict
 
 # Part 1
@@ -36,19 +38,20 @@ def find_legal_y(base_y_1, base_y_2, base_x_1, base_x_2):
           return v_x_0, max_v_y
   return -1
 
-v_x, v_y = find_legal_y(-5, -10, 20, 30)
-v_x, v_y = find_legal_y(-186, -215, 34, 67)
-print("vx vy", v_x, v_y, apex_y(0, v_y))
-x=0
-y=0
-for i in range(250):
-  x += v_x
-  y += v_y
-  v_x -= 1
-  v_y -= 1
-  if v_x < 0:
-    v_x = 0
-  # print(i, x, y)
+def one(INPUT):
+  v_x, v_y = find_legal_y(-5, -10, 20, 30)
+  v_x, v_y = find_legal_y(-186, -215, 34, 67)
+  print("vx vy", v_x, v_y, apex_y(0, v_y))
+  x=0
+  y=0
+  for i in range(250):
+    x += v_x
+    y += v_y
+    v_x -= 1
+    v_y -= 1
+    if v_x < 0:
+      v_x = 0
+    # print(i, x, y)
 
 ### Part 2
 
@@ -89,9 +92,11 @@ def find_all_legal_y(base_x_1, base_x_2, base_y_1, base_y_2):
 # for i in find_all_legal_y(-186, -215, 34, 67):
 #   print(i)
 
-# print(find_all_legal_y(-5, -10, 20, 30))
-# print(is_legal(6, 9,20, 30, -10, -5))
-print((1 for _ in find_all_legal_y(20, 30, -10, -5)))
-all_test = find_all_legal_y(20, 30, -10, -5)
-print(len(list(all_test)))
-print(sum(1 for _ in find_all_legal_y(34, 67, -215, -186)))
+def two(INPUT):
+  # print(find_all_legal_y(-5, -10, 20, 30))
+  # print(is_legal(6, 9,20, 30, -10, -5))
+  print((1 for _ in find_all_legal_y(20, 30, -10, -5)))
+  all_test = find_all_legal_y(20, 30, -10, -5)
+  print(len(list(all_test)))
+  print(sum(1 for _ in find_all_legal_y(34, 67, -215, -186)))
+

@@ -1,7 +1,7 @@
 import puzzle
 
 def process_input(INPUT):
-  lines = INPUT.split("\n\n")
+  lines = '\n'.join(INPUT).split("\n\n")
   calls = map(int, lines[0].split(','))
   boards = [[list(map(int, row.split())) for row in b.split("\n")] for b in lines[1:]]
   return calls, boards

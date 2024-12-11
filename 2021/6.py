@@ -10,7 +10,7 @@ def numFishCheap(fish, life, iters):
 
 def puzz(INPUT, iters=256, life=7):
   total = 0
-  for i in map(int, INPUT.split(',')):
+  for i in map(int, '\n'.join(INPUT).split(',')):
     thisFish = numFishCheap([0], life, iters - i);
     total += thisFish;
   return total

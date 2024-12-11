@@ -4,7 +4,7 @@ from collections import defaultdict
 # Part 1
 
 def process_input(intext):
-  start_text, inserts_text = intext.split("\n\n")
+  start_text, inserts_text = '\n'.join(intext).split("\n\n")
   inserts = {tuple(a.split(" -> ")[0]): a.split(" -> ")[1]
    for a in inserts_text.split("\n")}
   return list(start_text), inserts
@@ -43,7 +43,7 @@ def one(intext):
 
 ### Part 2
 def process_input2(intext):
-  start_text, inserts_text = intext.split("\n\n")
+  start_text, inserts_text = '\n'.join(intext).split("\n\n")
   inserts = {}
   for l in inserts_text.split('\n'):
     ab, c = l.split(' -> ')

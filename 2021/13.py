@@ -1,7 +1,7 @@
 import puzzle
 
 def process_input(intext):
-  dot_text, fold_text = intext.split("\n\n")
+  dot_text, fold_text = '\n'.join(intext).split("\n\n")
   dots = {(int(a.split(",")[0]), int(a.split(",")[1])): True for a in dot_text.split("\n")}
   folds = []
   for line in fold_text.split("\n"):

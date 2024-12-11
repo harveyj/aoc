@@ -3,9 +3,9 @@ from collections import defaultdict
 import networkx as nx
 
 ### Part 1
-def process_input(intext):
+def process_input(INPUT):
   G = nx.DiGraph()
-  grid = [list(line) for line in intext.split('\n')]
+  grid = [list(line) for line in '\n'.join(INPUT).split('\n')]
   for y, row in enumerate(grid):
     for x, c in enumerate(row):
       c = int(c)
@@ -20,9 +20,9 @@ def one(intext):
   print(nx.dijkstra_path_length(G, (0,0), (max_x, max_y)))
 
 ### Part 2
-def process_input2(intext):
+def process_input2(INPUT):
   G = nx.DiGraph()
-  grid = [list(line) for line in intext.split('\n')]
+  grid = [list(line) for line in '\n'.join(INPUT).split('\n')]
   max_x = len(grid[0])
   max_y = len(grid)
   for y, row in enumerate(grid):
@@ -37,8 +37,8 @@ def process_input2(intext):
           G.add_edge((x+1+x_i*max_x, y+y_i*max_y), (x+x_i*max_x, y+y_i*max_y), weight=w)
   return G, len(grid[0])*5-1, len(grid)*5-1
 
-def get_grid(intext):
-  grid = [list(line) for line in intext.split('\n')]
+def get_grid(INPUT):
+  grid = [list(line) for line in '\n'.join(INPUT).split('\n')]
   max_x = len(grid[0])
   max_y = len(grid)
   ret = {}

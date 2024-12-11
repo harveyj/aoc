@@ -98,8 +98,13 @@ def apply(tree):
   tot = functools.reduce(op(tree[1]), nodes)
   return tot
 
-p, bits = decode_packet(hextobin(intext))
-# p=(6, 6, [(5, 'LITERAL', 15), (2, 'LITERAL', 15)])
-tot = apply(p)
-print(p)
-print(tot)
+def one(INPUT):
+  p, bits = decode_packet(hextobin(intext))
+  # p=(6, 6, [(5, 'LITERAL', 15), (2, 'LITERAL', 15)])
+  tot = apply(p)
+  print(p)
+  print(tot)
+  return tot
+
+def two(INPUT):
+  return one(INPUT)

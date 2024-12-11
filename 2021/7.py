@@ -1,7 +1,7 @@
 import puzzle
 
 def puzz(INPUT, two=False):
-  crabs = list(map(int, INPUT.split(',')))
+  crabs = list(map(int, '\n'.join(INPUT).split(',')))
   crabs.sort()
   median = crabs[len(crabs) // 2];
   deltas = [];

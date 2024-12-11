@@ -23,7 +23,7 @@ All puzzles, all years!
 - 2021: 
 - 2022: Validated - 6, 7, 11, 21, 23, 24, 24 incorrect
 - 2023: Validated - 6, 20, 21, 23 incorrect
-- 2024: 
+- 2024: Validated (through day 11)
 
 ## Performance hotspots
 - 2015: 6-1 (2s), 6-2 (4s), 22-1&2 (3s)
@@ -33,7 +33,7 @@ All puzzles, all years!
 - 2019: 
 - 2020: 
 - 2021: 
-- 2022: 
+- 2022: 16-1 (12s), 20-2 (20s) 23-2 (5s), 24-1 (20s)
 - 2023: 17-1 (5s), 18-1 (30s), 23-1 (long), 24-1 (long)
 - 2024: 9-2 (26s)
 

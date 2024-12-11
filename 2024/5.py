@@ -23,7 +23,7 @@ def one(INPUT):
       good.append(int(vals[len(vals)//2]))
     else: 
       illegal_packets.append(packet)
-  return sum(good), illegal_packets
+  return sum(good)
 
 def two(INPUT):
   raw = '\n'.join(INPUT)
