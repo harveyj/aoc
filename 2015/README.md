@@ -98,9 +98,11 @@ Warmup
 Difficulty: 2/10
 
 ## Day 20
-Warmup
+Rangefinding with numeric factors. Initially done by hand, replaced 12/2024 with a range-finding binary search-ish thing that mostly works. BUFFER is a brute force hack and not entirely guaranteed to work except at large numbers.
 
-Difficulty: 2/10
+New version: 12/11/2024 in between feeding Thomas.
+
+Difficulty: 7/10
 
 ## Day 21
 Warmup

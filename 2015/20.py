@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 import puzzle
-import math
 import sympy
-
-def parse(INPUT):
-  return int(INPUT[0])
 
 BUFFER = 20000
 
@@ -25,11 +21,7 @@ def one(INPUT, one=True):
     low_vals = [prez_fn(base+2**(exp)-BUFFER//2 + j) for j in range(BUFFER)]
     if max(low_vals) < target:
       base += 2**(exp)
-    #   print(f'update {base} {exp} {min(low_vals)} vs {target}')
-    # else:
-    #   print(f'miss {base} {exp} {min(low_vals)} vs {target}')
     exp -= 1
-  # print('here we go ', base, exp )
   for i in range(base, base+50000):
     if prez_fn(i) > target:
       return i
