@@ -30,8 +30,6 @@ def two(INPUT):
   for n, fr, to in instrs:
     stacks[to-1] += list(stacks[fr-1][-n:])
     del(stacks[fr-1][-n:])
-    # print(stacks)
-  # print(stacks)
   return ''.join([s[-1] for s in stacks])
 
 if __name__ == '__main__':

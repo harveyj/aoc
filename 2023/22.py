@@ -12,7 +12,7 @@ def parse_input(INPUT):
 def bottom(cube):
   return cube[0][2]  # z2
 
-def one(INPUT):
+def puzz(INPUT):
   def add_brick(supports, brick):
     x1, y1, z1 = brick[0]; x2, y2, z2 = brick[1]; id = brick[2]
     potential_supports = [supports[(x, y)] for x in range(x1, x2+1) for y in range(y1, y2+1)]
@@ -41,7 +41,7 @@ def one(INPUT):
     if len(supports_for_brick) == 1 and -1 not in supports_for_brick:
       sole_supports.update(supports_for_brick)
   out2 = 0
-  print(supports_map)
+  # print(supports_map)
   for id in supports_map:
     removed = set([id])
     dirty = True
@@ -56,10 +56,8 @@ def one(INPUT):
   
   return (len(bricks) - len(sole_supports), out2)
 
-def two(INPUT):
-  invals = parse_input(INPUT)
-  out = 0
-  return out
+one = lambda INPUT: puzz(INPUT)[0]
+two = lambda INPUT: puzz(INPUT)[1]
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2023", "22")

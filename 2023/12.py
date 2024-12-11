@@ -40,17 +40,17 @@ def one(INPUT):
   out = 0
   for raw, instrs in lines:
     np = num_possible(raw, instrs)
-    print(raw, instrs, np)
+    # print(raw, instrs, np)
     out += np
   return out
 
 def two(INPUT):
   lines = parse_input2(INPUT)
-  print(lines)
+  # print(lines)
   out = 0
   for raw, instrs in lines:
     np = num_possible(raw, instrs)
-    print(raw, instrs, np)
+    # print(raw, instrs, np)
     out += np
 
   return out

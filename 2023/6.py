@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
 import puzzle
 import itertools, operator
+
 def parse_input(INPUT):
   times = list(map(int, INPUT[0].split()[1:]))
   distances = list(map(int, INPUT[1].split()[1:]))
   return times, distances
 
-def one(INPUT):
+def one(INPUT, two=True):
   times, distances = parse_input(INPUT)
+  if two:
+    times = [int(''.join(map(str, times)))]
+    distances = [int(''.join(map(str, distances)))]
   entries = zip(times, distances)
   candidates = []
   for time, distance in entries:
@@ -19,9 +23,10 @@ def one(INPUT):
     candidates.append(candidate)
   return list(itertools.accumulate(candidates, operator.mul))[-1]
 
+def two(INPUT):
+  return one(INPUT, two=True)
 
-# input 3 is the hand-edited input for part 2
 if __name__ == '__main__':
   p = puzzle.Puzzle("2023", "6")
   p.run(one, 0)
-  p.run(one, 3)
+  p.run(two, 0)

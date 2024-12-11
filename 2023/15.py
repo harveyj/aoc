@@ -2,7 +2,7 @@
 import puzzle, re
 
 def parse_input(INPUT):
-  return INPUT.split(',')
+  return '\n'.join(INPUT).split(',')
 
 def hash(instr):
   cv = 0

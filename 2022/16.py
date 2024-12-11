@@ -62,7 +62,7 @@ def one(INPUT):
         states.appendleft(ns)
 
   lp = nx.dag_longest_path(SG, weight="weight")
-  for node in lp: print(node)
+  # for node in lp: print(node)
   lpw = nx.dag_longest_path_length(SG, weight="weight")
   return lpw
 

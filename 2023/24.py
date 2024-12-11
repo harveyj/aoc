@@ -35,16 +35,16 @@ def one(INPUT):
     for line2 in invals[i+1:]:
       m_2, b_2 = mb(line2)
       if m_1 == m_2: 
-        print('***')
-        print('parallel', line1, line2)
+        # print('***')
+        # print('parallel', line1, line2)
       else:
-        print('***')
+        # print('***')
         x_int, y_int = intersect(m_1, b_1, m_2, b_2)
         time_1 = intersect_time(line1[1][0], line1[0][0], x_int)
         if time_1 < 0: print('past for A')
         time_2 = intersect_time(line2[1][0], line2[0][0], x_int)
         if time_2 < 0: print('past for B')
-        print('A, B', line1, line2, x_int, y_int)
+        # print('A, B', line1, line2, x_int, y_int)
         if x_min < x_int < x_max and y_min < y_int < y_max and time_1 > 0 and time_2 > 0:
           out += 1
   return out
@@ -88,9 +88,9 @@ def iter(line1, line2, line3):
     vect = scipy.optimize.fsolve(func2, np.random.rand(6), xtol=0.000000000001, maxfev=1000)
     xa, dxa, ya, dya, za, dza = vect
     if sum(map(abs, func2(vect))) < 0.00000001:
-      print(func2(vect))
-      print('start', xa, ya, za)
-      print('velo', dxa, dya, dza)
+      # print(func2(vect))
+      # print('start', xa, ya, za)
+      # print('velo', dxa, dya, dza)
       answer = round(xa) + round(ya) + round(za)
       return answer
   return None

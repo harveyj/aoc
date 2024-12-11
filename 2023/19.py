@@ -10,7 +10,7 @@ def parse_input(INPUT):
     name = match.group(1)
     rules = match.group(2).split(',')
     return (name, rules)
-  wf_raw, vals_raw = INPUT.split('\n\n')
+  wf_raw, vals_raw = '\n'.join(INPUT).split('\n\n')
   wf = dict(map(parse_wf, wf_raw.split('\n')))
   vars = [raw[1:-1].split(',') for raw in vals_raw.split('\n')]
   return wf, vars

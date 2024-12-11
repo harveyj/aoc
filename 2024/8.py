@@ -28,7 +28,7 @@ def one(INPUT):
         seen.add(n2)
   nodes = {key: '#' for key in nodes.keys()}
   G.overlays = nodes
-  print(G)
+  # print(G)
   return len(seen)
 
 def is_int(num, tolerance = 1e-3):
@@ -70,10 +70,10 @@ def two(INPUT):
           pt = round(pt[0]), round(pt[1])
  
   seen = set([(round(pt[0]), round(pt[1])) for pt in seen if is_int(pt[0]) and is_int(pt[1])])
-  print(seen)
+  # print(seen)
   overlays = {item: '#' for item in seen}
   G.overlays = overlays
-  print(G)
+  # print(G)
   return len(seen)
 
 # This was the first one and even bruter-force.
@@ -107,9 +107,10 @@ def two_alt(INPUT):
             anti.add((x, y))
   overlays = {item: '#' for item in anti}
   G.overlays = overlays
-  print(G)
+  # print(G)
   return len(anti)
 
-p = puzzle.Puzzle("2024", "8")
-# p.run(one, 0)
-p.run(two_old, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2024", "8")
+  p.run(one, 0)
+  p.run(two, 0)

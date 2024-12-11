@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-import puzzle, networkx
-from itertools import product
+import puzzle, networkx, library
 
 def parse_input(INPUT):
-  return puzzle.Grid(raw=INPUT)
+  return library.Grid(raw='\n'.join(INPUT))
 
 deltas = {'N': (0, -1), 
           'S': (0, 1), 
@@ -27,7 +26,7 @@ def find_longest_path(INPUT, min, max):
     for new_dir in legal_turns[prev_dir]:
       for steps in range(min, max+1):
         dx, dy = deltas[new_dir]
-        tgt = puzzle.pt_add((x, y), mul_vect((dx, dy), steps))
+        tgt = library.pt_add((x, y), mul_vect((dx, dy), steps))
         weight = sum([int(grid.get((x + dx * i, y + dy * i), default=10000)) for i in range(1,steps+1)])
         if grid.get(tgt, default=None):
 

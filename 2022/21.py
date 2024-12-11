@@ -11,7 +11,7 @@ def parse(INPUT):
       G.add_node(op_mat.group(1), op = op_mat.group(3), l=op_mat.group(2), r=op_mat.group(4))
     else: 
       lit_mat = re.match(r'(\w+): (\d+)', l)
-      print(l)
+      # print(l)
       G.add_node(lit_mat.group(1), val=int(lit_mat.group(2)))
   return G
 

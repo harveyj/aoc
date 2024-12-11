@@ -18,14 +18,14 @@ def one(INPUT):
   ret = 0
   for instr, rval in parse(INPUT):
     if (pc - 20) % 40 == 0:
-      print(X, pc, X*pc)
+      # print(X, pc, X*pc)
       ret += X*pc
     if instr == 'addx':
       pc += 1
       X += rval
     else:
       pc += 1
-    print('pc', pc,  'X', X)
+    # print('pc', pc,  'X', X)
   return ret
 
 def two(INPUT):

@@ -33,7 +33,7 @@ def two(INPUT):
     dx, dy = DIRS[dir_idx]; nx, ny = x+dx, y+dy
     if 0 <= nx < G.max_x() and 0 <= ny < G.max_y():
       if (nx, ny) in [s[0] for s in seen]:
-        print('WOULD BLOCK PRIOR PATH')
+        # print('WOULD BLOCK PRIOR PATH')
         return [], None
       else:
         new_G.set((nx, ny), '#')

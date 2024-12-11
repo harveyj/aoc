@@ -33,7 +33,7 @@ def one(INPUT):
   out = 0
   for i, h in enumerate(sorted_hands):
     out += (i + 1) * scores[h]
-  for sh in sorted_hands: print(sh)
+  # for sh in sorted_hands: print(sh)
   return out
 
 def two(INPUT):
@@ -70,7 +70,7 @@ def two(INPUT):
   out = 0
   for i, h in enumerate(sorted_hands):
     out += (i + 1) * scores[h]
-  for sh in sorted_hands: print(sh)
+  # for sh in sorted_hands: print(sh)
   return out
 
 if __name__ == '__main__':

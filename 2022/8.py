@@ -9,7 +9,7 @@ def parse(INPUT):
 def one(INPUT):
   trees = parse(INPUT)
   seen = set()
-  print(trees)
+  # print(trees)
   for dx, x_start in [(1, 0), (-1, len(trees[0])-1)]:
     for y in range(len(trees)):
       max = -1

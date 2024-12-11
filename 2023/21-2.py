@@ -2,7 +2,7 @@
 import puzzle, re, collections, functools
 
 def parse_input(INPUT):
-  return puzzle.Grid(raw=INPUT)
+  return library.Grid(raw=INPUT)
 
 def all_reachable(G, n, S):
   queue = collections.deque([S])

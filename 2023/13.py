@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-import puzzle, re
+import puzzle, re, library
 
 def parse_input(INPUT):
-  return [puzzle.Grid(raw=chunk) for chunk in INPUT.split('\n\n')]
+  return [library.Grid(raw=chunk) for chunk in '\n'.join(INPUT).split('\n\n')]
 
 
 def one(INPUT):
@@ -30,8 +30,8 @@ def one(INPUT):
 
     if mirror_row : G.overlays={(0, mirror_row): 'v', (0, mirror_row + 1):'^'}
     if mirror_col : G.overlays={(mirror_col, 0):'>', (mirror_col + 1, 0): '<'}
-    print(G)
-    print('')
+    # print(G)
+    # print('')
     out+=(mirror_row*100+ mirror_col)
   return out
 
@@ -64,8 +64,8 @@ def two(INPUT):
 
     if mirror_row : G.overlays={(0, mirror_row): 'v', (0, mirror_row + 1):'^'}
     if mirror_col : G.overlays={(mirror_col, 0):'>', (mirror_col + 1, 0): '<'}
-    print(G)
-    print('')
+    # print(G)
+    # print('')
     out+=(mirror_row*100+ mirror_col)
   return out
 

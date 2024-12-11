@@ -4,7 +4,7 @@ from collections import defaultdict
 import numpy
 
 def parse_input(INPUT):
-  return puzzle.Grid(raw=INPUT)
+  return library.Grid(raw=INPUT)
 
 dirs = ((0, 1), (0, -1), (1, 0), (-1, 0))
 
@@ -134,7 +134,7 @@ def two(INPUT):
         grid.set(pt, '.')
 
   scale_factor = 30
-  scaled = puzzle.Grid(x=grid.max_x()*scale_factor, y=grid.max_y()*scale_factor)
+  scaled = library.Grid(x=grid.max_x()*scale_factor, y=grid.max_y()*scale_factor)
   for x in range(scaled.max_x()):
     for y in range(scaled.max_y()):
       scaled.set((x, y), grid.get((x % grid.max_x(), y % grid.max_y())))

@@ -13,8 +13,6 @@ def one(INPUT):
   for a, b, c, d in processed_input:
     if a <= c and b >= d or a >= c and b <= d:
       out.append([a, b, c, d])
-  print(processed_input)
-  print(out)
   return len(out)
 
 def two(INPUT):
@@ -23,8 +21,6 @@ def two(INPUT):
   for a, b, c, d in processed_input:
     if a <= c <= b or a <= d <= b or a <= c and b >= d or a >= c and b <= d:
       out.append([a, b, c, d])
-  print(processed_input)
-  print(out)
   return len(out)
 
 if __name__ == '__main__':

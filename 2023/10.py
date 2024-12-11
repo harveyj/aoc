@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-import puzzle, re, math
+import puzzle, re, math, library
 from library import pt_add
 
 def parse_input(INPUT):
-  G = puzzle.Grid(grid=[list(l.strip()) for l in INPUT.strip().split('\n')])
+  G = library.Grid(grid=[list(l.strip()) for l in INPUT])
   return G
 
 def find_start(G):
@@ -83,7 +83,7 @@ def two(INPUT):
       elif in_loop:
         enclosed.add((x, y))
   for pt in enclosed: G.overlays[pt] = 'T'
-  print(G)
+  # print(G)
   return len(enclosed)
 
 # scan left

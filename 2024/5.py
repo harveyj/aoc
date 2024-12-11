@@ -37,7 +37,7 @@ def two(INPUT):
     vals = packet.split(',')
     G = nx.DiGraph()
     filtered_rules = [r for r in rules if r[0] in vals and r[1] in vals]
-    print(filtered_rules)
+    # print(filtered_rules)
     for r in filtered_rules:
       G.add_edge(*r)
     sorted_packet = list(map(int, nx.topological_sort(G)))

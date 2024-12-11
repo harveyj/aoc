@@ -4,10 +4,10 @@ import re
 import math
 
 def parse_input(INPUT):
-  instrs, network = INPUT.split('\n\n')
+  instrs, network = '\n'.join(INPUT).split('\n\n')
   network_map = dict()
   for l in network.split('\n'):
-    print(l)
+    # print(l)
     mat = re.match(r"(\w+) = \((\w+), (\w+)\)", l)
     key, left, right = mat.group(1,2,3)
     network_map[key] = {'L': left, 'R': right}
@@ -32,7 +32,7 @@ def two(INPUT):
       for i in instrs:
         steps += 1
         node = network_map[node][i]
-        print(len([k for k in nodes if k[-1] == 'Z']), end='')
+        # print(len([k for k in nodes if k[-1] == 'Z']), end='')
         if node[-1] == 'Z':
           return steps
 

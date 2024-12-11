@@ -23,11 +23,7 @@ def one(INPUT):
     answer *= len(sg)
   return answer
 
-
-def two(INPUT):
-  invals = parse_input(INPUT)
-  out = 0
-  return out
+two = lambda a: '20231225'
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2023", "25")

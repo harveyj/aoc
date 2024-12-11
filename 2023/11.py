@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-import puzzle, re, networkx, math
+import puzzle, re, networkx, math, library
 
 def parse_input(INPUT):
-  G = puzzle.Grid(raw=INPUT)
+  G = library.Grid(raw='\n'.join(INPUT))
   pts = []
   for y in range(G.max_y()):
     for x in range(G.max_x()):
@@ -23,7 +23,7 @@ def mod_distance(pt1, pt2, blank_rows, blank_cols, mul=1):
   skip_row = [y for y in blank_rows if min_y < y < max_y]
   skip_col = [x for x in blank_cols if min_x < x < max_x]
   # print('sc', skip_col)
-  print(pt1, pt2, dx, dy, len(skip_row), len(skip_col), dx+dy+len(skip_row)*mul + len(skip_col)*mul)
+  # print(pt1, pt2, dx, dy, len(skip_row), len(skip_col), dx+dy+len(skip_row)*mul + len(skip_col)*mul)
   return dx+dy+len(skip_row)*mul + len(skip_col)*mul
 
 def onetwo(INPUT):

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-import puzzle, re
-# from ten import seen
+import puzzle, library
+from library import pt_add
 
 def parse_input(INPUT):
   return [l.split() for l in INPUT]
@@ -19,10 +19,59 @@ corner_map = {('L', 'U'): 'L',
               ('D', 'R'): 'L',
               ('D', 'L'): 'J',
               }
+
+
+def find_start(G):
+  for x in range(G.max_x()):
+    for y in range(G.max_y()):
+      if G.get((x, y)) == 'S':
+        return (x, y)
+
+# Identical to seen from 10
+def seen(G):
+  S = find_start(G)
+  loc = S
+  seen = set()
+  start_code = ''
+  dirs = {'-': ((-1, 0), (1, 0)), '|': ((0, 1), (0, -1)), 'F': ((1, 0), (0, 1)), 'J': ((-1, 0), (0, -1)),'7': ((-1, 0), (0, 1)),'L': ((1, 0), (0, -1)),}
+  while len(seen) == 0 or loc != S:
+    code = G.get(loc)
+    # print(loc, code, len(seen))
+    if code == 'S':
+      seen.add(loc)
+      legal_left, legal_up, legal_right, legal_down = False, False, False, False
+      if G.get(pt_add(loc, (-1, 0))) in ['F', 'L', '-']: 
+        legal_left = True
+      if G.get(pt_add(loc, (1, 0))) in ['7', 'J', '-']:
+        legal_right = True
+      if G.get(pt_add(loc, (0, -1))) in ['F', '7', '|']: 
+        legal_up = True
+      if G.get(pt_add(loc, (0, 1))) in ['J', 'L', '|']:
+        legal_down = True
+      if legal_left and legal_up: start_code = 'J'
+      if legal_left and legal_right: start_code = '-'
+      if legal_left and legal_down: start_code = '7'
+      if legal_up and legal_down: start_code = '|'
+      if legal_right and legal_up: start_code = 'L'
+      if legal_right and legal_down: start_code = 'F'
+      code = start_code
+    dir = dirs[code]
+    for d in dir:
+      if pt_add(loc, d) == S and len(seen) > 3: # ugh
+         return seen, start_code
+    x, y = pt_add(loc, dir[0])
+    if (x, y) in seen:
+      x, y = pt_add(loc, dir[1])
+    if (x, y) in seen:
+      print('ERROR', x, y, )
+    loc = (x, y)
+    seen.add(loc)
+
+
 def one(INPUT):
   instrs = parse_input(INPUT)
   
-  G = puzzle.Grid(x=500, y=400)
+  G = library.Grid(x=500, y=400)
   sx, sy = 125, 250
   prev_dir = 'U'
   for dir, mag, color in instrs:
@@ -39,10 +88,10 @@ def one(INPUT):
     sx, sy = sx+dx, sy+dy
     prev_dir = dir
   G.set((sx, sy), 'S')
-  for dy in range(2):
-    for dx in range(2):
-      print(G.window(dx*250, dy*250, (dx+1)*250, (dy+1)*250))
-      print('')
+  # for dy in range(2):
+  #   for dx in range(2):
+  #     print(G.window(dx*250, dy*250, (dx+1)*250, (dy+1)*250))
+  #     print('')
 
 
   L, start_code = seen(G)
@@ -70,7 +119,7 @@ def one(INPUT):
       elif in_loop:
         enclosed.add((x, y))
   for pt in enclosed: G.overlays[pt] = 'T'
-  print(G)
+  # print(G)
   lengths = [int(instr[1]) for instr in instrs]
   return len(enclosed) + sum(lengths)
 
@@ -122,12 +171,12 @@ def two(INPUT):
               'L': [],
               'R': [],
   }
-  G=puzzle.Grid(x=40,y=20)
+  G=library.Grid(x=40,y=20)
   pt = 10,10
   instrs = [('LDRU'[int(color[-2])], int(color[2:-2], 16)) for (dir, mag, color) in instrs]
   for dir, mag in instrs:
-    delta = puzzle.mul_vect(dir_map[dir], mag)
-    new_pt = puzzle.pt_add(pt, delta)
+    delta = library.mul_vect(dir_map[dir], mag)
+    new_pt = library.pt_add(pt, delta)
     if dir in ['U', 'L']:
       segments[dir].append((new_pt, pt))
     else:
@@ -144,7 +193,7 @@ def two(INPUT):
     tmp = segments['U']
     segments['U'] = segments['D']
     segments['D'] = tmp
-  print(segments)
+  # print(segments)
   out = 0
   for y, y2 in zip(all_y, all_y[1:]):
     up_xes = [seg[0][0] for seg in segments['U'] if bounded(seg, y, dim='y')]

@@ -2,9 +2,10 @@
 import puzzle, re, functools, networkx as nx
 from collections import defaultdict
 import numpy
+import library
 
 def parse_input(INPUT):
-  return puzzle.Grid(raw=INPUT)
+  return library.Grid(raw='\n'.join(INPUT))
 
 dirs = ((0, 1), (0, -1), (1, 0), (-1, 0))
 
@@ -20,7 +21,7 @@ def one(INPUT):
       if grid.get(pt, default='#') != '#':
         G.add_node(pt)
         for d in dirs:
-          new_pt = puzzle.pt_add(pt, d)
+          new_pt = library.pt_add(pt, d)
           if grid.get(new_pt, default='#') != '#':
             G.add_edge(pt, new_pt)
 

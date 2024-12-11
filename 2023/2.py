@@ -18,7 +18,7 @@ def one(INPUT):
       g = int(g.group(1)) if g else 0
       b = int(b.group(1)) if b else 0
       if r > max_r or g > max_g or b > max_b:
-        print('BAD GAME', l)
+        # print('BAD GAME', l)
         return False
     return True
 

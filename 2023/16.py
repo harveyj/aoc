@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-import puzzle, re
+import puzzle, re, library
 from collections import deque
 
 def parse_input(INPUT):
-  return puzzle.Grid(raw=INPUT)
+  return library.Grid(raw='\n'.join(INPUT))
 
 def fslash(dir):
   return -dir[1], -dir[0]
@@ -22,7 +22,7 @@ def solve(start, dir, G):
     if (loc, dir) in seen: continue
     seen.add((loc, dir))
     # G.overlays[loc] = 'X'
-    new_loc = puzzle.pt_add(loc, dir)
+    new_loc = library.pt_add(loc, dir)
     cell = G.get(new_loc)
     if cell == '.':
       queue.append((new_loc, dir))
@@ -60,8 +60,8 @@ def two(INPUT):
   for y in range(G.max_y()):
     tiles[(0, y)] = solve((-1, y), (1, 0), G)
     tiles[(G.max_x(), y)] = solve((y, G.max_x() + 1), (-1, 0), G)
-  for k in tiles:
-    print(k, tiles[k])
+  # for k in tiles:
+  #   print(k, tiles[k])
   return max(tiles.values())
 
 if __name__ == '__main__':

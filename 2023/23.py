@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-import puzzle, re, networkx, collections
+import puzzle, re, networkx, collections, library
 
 def parse_input(INPUT):
   G = networkx.DiGraph()
-  grid = puzzle.Grid(raw=INPUT)
+  grid = library.Grid(raw='\n'.join(INPUT))
   for x in range(grid.max_x()):
    for y in range(grid.max_y()):
       pt = (x,y)
@@ -37,7 +37,7 @@ def parse_input(INPUT):
 
 def parse_input_2(INPUT):
   G = networkx.Graph()
-  grid = puzzle.Grid(raw=INPUT)
+  grid = library.Grid(raw=INPUT)
   for x in range(grid.max_x()):
    for y in range(grid.max_y()):
       pt = (x,y)
@@ -57,14 +57,14 @@ def one(INPUT):
   S, E, G, grid = parse_input(INPUT)
   all_paths = list(networkx.all_simple_paths(G, S, E))
   out_path = max(all_paths, key=lambda x: len(x))
-  print(len(all_paths))
+  # print(len(all_paths))
   for path in all_paths:
     # print(path)
     for pt in path:
       # print(pt)
       if grid.get(pt) == '.': 
         grid.overlays[pt] = 'O'
-  print(grid)
+  # print(grid)
   return len(out_path) - 1
 
 def bfs_corners(grid, G, S, corners):

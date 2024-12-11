@@ -93,7 +93,7 @@ def one(INPUT):
     descend_stack = descend2(stack_edited)
     if descend_stack == stack_edited: out += 1
 
-  # grid = puzzle.Grid(x=30, y=20)
+  # grid = library.Grid(x=30, y=20)
   # for y in range(30):
   #   for z in range(20):
   #     cell = ((0, y, z), (100, y, z))

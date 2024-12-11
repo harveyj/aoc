@@ -15,7 +15,7 @@ def one(INPUT):
         for _ in range(4):
           out += G.get((nx, ny), default="")
           nx += dx; ny += dy
-        print(out)
+        # print(out)
         if out == 'XMAS':
           seen.append(((x, y), dir))
           nx, ny = x, y
@@ -41,7 +41,7 @@ def two(INPUT):
           for _ in range(3):
             out += G.get((nx, ny), default="")
             nx += dx; ny += dy
-          print(out)
+          # print(out)
           if out == 'MAS':
             nx, ny = x, y
             for _ in range(3):

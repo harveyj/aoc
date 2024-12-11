@@ -69,8 +69,8 @@ def simulate(G, state, n):
     q = deque(handle(G, state, 'low', 'broadcaster'))
     while q:
       pulse, tgt = q.popleft()
-      if tgt in ['jt', 'sx', 'kb', 'ks'] and pulse == 'low':
-        print(tgt, i)
+      # if tgt in ['jt', 'sx', 'kb', 'ks'] and pulse == 'low':
+      #   print(tgt, i)
       # all_pulses[(tgt, pulse)].append(i)
       q.extend(handle(G, state, pulse, tgt))
       if pulse == 'high': out_h += 1

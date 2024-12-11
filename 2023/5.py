@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 import puzzle
 import random
+
 def parse_input(INPUT):
-  chunks = INPUT.split('\n\n')
+  chunks = '\n'.join(INPUT).split('\n\n')
   seeds = list(map(int, chunks[0].split()[1:]))
   def parse_map(raw):
     lines = raw.split('\n')
@@ -63,7 +64,7 @@ def two(INPUT):
   return min(hits)
 
 if __name__ == '__main__':
-  p = puzzle.Puzzle("2021", "5")
+  p = puzzle.Puzzle("2023", "5")
 
   p.run(one, 0) 
   p.run(two, 0) 

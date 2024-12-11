@@ -23,9 +23,9 @@ def get_all_sizes(INPUT):
       if type(root[k]) == dict:
         total += sum_recurse(root[k], path + [k], all)
       else:
-        print(path, k, root[k])
+        # print(path, k, root[k])
         total += root[k]
-    print(path, total)
+    # print(path, total)
     all[path_str(path)] = total
     return total
 
@@ -68,14 +68,14 @@ def two(INPUT):
   CAPACITY = 70000000
   all_sizes = get_all_sizes(INPUT)
   NEEDED = 30000000 - (CAPACITY - all_sizes.get(''))
-  print('CAPACITY', 70000000)
-  print('USED', all_sizes.get(''))
-  print('NEEDED', NEEDED)
+  # print('CAPACITY', 70000000)
+  # print('USED', all_sizes.get(''))
+  # print('NEEDED', NEEDED)
   smallest_path = None
   smallest_total = 1000000000000000
   for path, val in all_sizes.items():
     if val >= NEEDED and val < smallest_total:
-      print('replacing', smallest_path, path)
+      # print('replacing', smallest_path, path)
       smallest_path = path
       smallest_total = val
   return smallest_path

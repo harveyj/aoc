@@ -17,7 +17,7 @@ def two(INPUT):
   return out
 
 
-  # G = puzzle.Grid(raw='\n'.join(INPUT))
+  # G = library.Grid(raw='\n'.join(INPUT))
   # for x in range(G.max_x()):
   #   for y in range(G.max_y()):
   #     c = G.get((x, y))

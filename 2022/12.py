@@ -40,7 +40,7 @@ def parse(INPUT):
 def one(INPUT):
   G, start, end, _ = parse(INPUT)
   sp = nx.shortest_path(G, start, end)
-  print(sp)
+  # print(sp)
   return len(sp) - 1
 
 def two(INPUT):

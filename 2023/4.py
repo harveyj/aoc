@@ -27,10 +27,10 @@ def two(INPUT):
       values[i] = 1
     links[i] = range(i+1, i+len(overlap)+1)
   while len(values) < len(lines):
-    print(links)
+    # print(links)
     for i, links_i in links.items():
       total = 1
-      print(links_i)
+      # print(links_i)
       for link_idx in links_i:
         if link_idx in values:
           total += values[link_idx]
@@ -38,8 +38,8 @@ def two(INPUT):
           break
       if total > 1:
         values[i] = total
-  print(values)
-  print(links)
+  # print(values)
+  # print(links)
   out = 0
   for i in values.values():
     out += i

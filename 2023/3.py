@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-import puzzle
+import puzzle, library
 
 def one(INPUT):
   out = 0
-  G = puzzle.Grid(grid=INPUT)
-  print(G)
+  G = library.Grid(grid=INPUT)
+  # print(G)
   legal_neighbors = ['.', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',]
 
   for y in range(G.max_y()):
@@ -17,24 +17,24 @@ def one(INPUT):
         neighbors = [ n for n in G.neighbors_diag((x, y))
                       if n not in legal_neighbors ]
         if len(neighbors) > 0:
-          print(neighbors)
+          # print(neighbors)
           sym = True
       else:
         if sym:
           out += num
-        elif num > 0:
-          print('filtering', num)
+        # elif num > 0:
+        #   print('filtering', num)
         num = 0
         sym = False
     if sym:
       out += num
-    elif num > 0:
-      print('filtering', num)
+    # elif num > 0:
+    #   print('filtering', num)
 
   return out
 
 def two(INPUT):
-  G = puzzle.Grid(grid=INPUT)
+  G = library.Grid(grid=INPUT)
   gear_nums = dict()
   for y in range(G.max_y()):
     num = 0
@@ -58,7 +58,7 @@ def two(INPUT):
 
   out = 0
   for g in gear_nums.values():
-    print(g)
+    # print(g)
     if len(g) == 2:
       out += g[0] * g[1]
   return out

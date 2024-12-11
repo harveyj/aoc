@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-import puzzle, re, functools
-import cProfile
+import puzzle, library
 
 def parse_input(INPUT):
-  return puzzle.Grid(raw=INPUT)
+  return library.Grid(raw='\n'.join(INPUT))
 
 def shift(dir, G):
   dir_vars = {'up': (0, -1, 0, G.max_x(), 1, 0, G.max_y(), 1),
@@ -15,10 +14,10 @@ def shift(dir, G):
   for x in range(start, end, step):
     for y in range(start2, end2, step2):
       if G.get((x, y), '#') == 'O':
-        pt_dest = puzzle.pt_add((x, y), (dx, dy))
+        pt_dest = library.pt_add((x, y), (dx, dy))
         while G.get(pt_dest, '#') == '.':
-          pt_dest = puzzle.pt_add(pt_dest, (dx, dy))
-        pt_dest = puzzle.pt_add(pt_dest, (-dx, -dy))
+          pt_dest = library.pt_add(pt_dest, (dx, dy))
+        pt_dest = library.pt_add(pt_dest, (-dx, -dy))
         if pt_dest != (x, y):
           G.set(pt_dest, 'O')
           G.set((x, y), '.')
@@ -27,7 +26,7 @@ def shift(dir, G):
 def find_loop(G):
   cache = dict()
   for i in range(10000):
-    if i % 10 == 0: print('.', end='')
+    # if i % 10 == 0: print('.', end='')
     for dir in ['up', 'left', 'down', 'right']:
       shift(dir, G)
     raw = G.__hash__()
@@ -51,12 +50,12 @@ def one(INPUT):
 def two(INPUT):
   G = parse_input(INPUT)
   start, period = find_loop(G)
-  print(start, period)
+  # print(start, period)
   cycles_left = (1000000000-start) % period - 1
   for i in range(cycles_left):
     for dir in ['up', 'left', 'down', 'right']:
       shift(dir, G)
-    print(score(G))
+    # print(score(G))
   return score(G)
 
 if __name__ == '__main__':
