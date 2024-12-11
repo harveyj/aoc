@@ -24,5 +24,5 @@ def two(INPUT):
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2024", "")
-  print(p.run(one, 0))
-  print(p.run(two, 0))
+  print(f'ANSWER: {p.run(one, 0)}')
+  print(f'ANSWER: {p.run(two, 0)}')

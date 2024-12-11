@@ -16,5 +16,5 @@ class Puzzle(object):
       answer = fn(self.inputs[input_id], copy.copy(user_input), **kwarg)
     else: 
       answer = fn(self.inputs[input_id], **kwarg)
-    print("ANSWER", answer)
+    # print("ANSWER", answer)
     return answer
