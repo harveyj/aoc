@@ -28,7 +28,7 @@ def out(msg, f):
   print(msg)
 
 for year in years:
-  lf = open(log_file, "w+")
+  lf = open(log_file, "a")
   out(datetime.now().strftime("%Y-%m-%d %H:%M:%S"), lf)
   out(f'Year {year}', lf)
   answers = list(csv.reader(open(f'{year}/inputs/answers.txt')))
