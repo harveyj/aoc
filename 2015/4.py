@@ -6,7 +6,6 @@ def one(INPUT):
   for i in range(10000000):
     if hashlib.md5((INPUT[0]+str(i)).encode('utf-8')).hexdigest()[:5] == '00000':
       return i
-  return -1
 
 def two(INPUT):
   for i in range(10000000):
