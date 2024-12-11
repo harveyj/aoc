@@ -36,3 +36,6 @@ All puzzles, all years!
 - 2022: 
 - 2023: 
 - 2024: 
+
+## Optimization log
+- 2015-20 - replaced a not-really-code solution that was 16s with an automated solution that was 3s.

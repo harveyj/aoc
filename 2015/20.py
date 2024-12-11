@@ -1,68 +1,44 @@
 #!/usr/bin/env python3
 import puzzle
 import math
+import sympy
 
 def parse(INPUT):
   return int(INPUT[0])
 
-def factorization(n):
-  factors = []
-  for i in range(1, math.ceil(n/2) + 1):
-    if n // i == n / i:
-      factors.append(i)
-  return factors + [n]
+BUFFER = 20000
 
-def bin2num(indices):
-  tot = 0
-  for i in range(len(indices)):
-    tot += indices[i] * 2**i
-  return tot
+def presents_one(n):
+  return sum(sympy.divisors(n))
 
+def presents_two(n):
+  factors = sympy.divisors(n)
+  filtered = [f for f in factors if n / f <= 50]
+  return sum(filtered)
 
-def one(INPUT):
-  max = parse(INPUT) / 10
-  for i in range(100):
-    prev = sum(factorization(2**(i-1)))
-    cur = sum(factorization(2**i))
-    if prev < max < cur:
-      break
-  indices = [0] * 21
-  indices[20] = 1
-  indices[19] = 0
-  indices[18] = 0
-  indices[17] = 0
-  indices[16] = 1
-  indices[15] = 0
-  indices[14] = 0
-  indices[13] = 0
-  indices[12] = 0
-  indices[11] = 0 ##
-  indices[10] = 0
-  indices[9] = 1
-  indices[8] = 0
-
-  for j in range(i):
-    prev = sum(factorization(bin2num(indices)))
-    indices[8] = 1
-    cur = sum(factorization(bin2num(indices)))
-    if prev < max < cur:
-      break
-  for i in range(665280, 600000, -10): # 693000
-    if sum(factorization(i)) > max:
+def one(INPUT, one=True):
+  target = int(INPUT[0]) / (10 if one else 11)
+  base = 0
+  exp = 25
+  prez_fn = presents_one if one else presents_two
+  while exp > 13:
+    low_vals = [prez_fn(base+2**(exp)-BUFFER//2 + j) for j in range(BUFFER)]
+    if max(low_vals) < target:
+      base += 2**(exp)
+    #   print(f'update {base} {exp} {min(low_vals)} vs {target}')
+    # else:
+    #   print(f'miss {base} {exp} {min(low_vals)} vs {target}')
+    exp -= 1
+  # print('here we go ', base, exp )
+  for i in range(base, base+50000):
+    if prez_fn(i) > target:
       return i
 
 def two(INPUT):
-  # i manually range-found for this one
-  for i in range(705000, 705600+1, 1):
-    factors = factorization(i)
-    filtered = [f for f in factors if i / f <= 50]
-    tot = sum([f * 11 for f in filtered])
-    if tot >= 29000000:
-      return i
-  return 0
+  return one(INPUT, one=False)
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2015", "20")
 
-  p.run(one, 0)
-  p.run(two, 0)
+  print(p.run(one, 0))
+  print(p.run(two, 0))
