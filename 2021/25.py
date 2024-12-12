@@ -1,8 +1,5 @@
 import puzzle
 
-# 0 is main
-# 1 is test
-
 def run(INPUT):
   def down_coord(x, y, downs, rights):
     new = (x, (y+1)% len(grid))
@@ -38,5 +35,8 @@ def run(INPUT):
     downs = new_downs
     rights = new_rights
 
-p = puzzle.Puzzle("25")
+def two(INPUT):
+  return 20211225
+
+p = puzzle.Puzzle("2021", "25")
 p.run(run, 0)

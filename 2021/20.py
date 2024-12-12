@@ -4,7 +4,7 @@ def k(x, y):
 	return '%i,%i' %(x, y)
 
 def puzz(INPUT):
-	table_raw, grid_raw = INPUT.split("\n\n")
+	table_raw, grid_raw = '\n'.join(INPUT).split("\n\n")
 	table = list(table_raw)
 	grid = {}
 	grid_lines = grid_raw.split("\n")
@@ -40,6 +40,10 @@ def puzz(INPUT):
 				total += 1
 		print("\n", end='')
 	print("PART TWO ANSWER", total)
+	return total
 
 def one(INPUT):
-	return puzz()
+	return puzz(INPUT)
+
+def two(INPUT):
+	return puzz(INPUT)

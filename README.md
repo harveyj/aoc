@@ -37,5 +37,6 @@ All puzzles, all years!
 - 2023: 17-1 (5s), 18-1 (30s), 23-1 (long), 24-1 (long)
 - 2024: 9-2 (26s)
 
-## Optimization log
+## Optimization/cleanup log
 - 2015-20 - replaced a not-really-code solution that was 16s with an automated solution that was 3s.
+- 2021-21 - rewrote part 1 from scratch, minor cleanup for part 2.

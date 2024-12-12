@@ -161,7 +161,7 @@ Location: CA
 Difficulty: 6/10 
 
 Improvement would be:
-* More prinicpled approach to an infinite board. 
+* More principled approach to an infinite board. 
 
 ## Day 21
 Great example of an AOC puzzle where the solution "feels" right and runs quickly. 
@@ -177,6 +177,8 @@ Location: CA
 
 Improvement would be:
 * Cosmetic fixes - I feel good about this one. 
+
+REWRITE NOTES: Rewrote #1 from scratch, much cleaner now.
 
 Difficulty: 8/10
 

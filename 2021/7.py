@@ -24,10 +24,11 @@ def puzz(INPUT, two=False):
       total += (dist * (dist + 1)) // 2
     totals[mean] = total;
   totalTwo = min(totals.items(), key=lambda a: a[1])
-  return totalTwo if two else totalOne
+  return totalTwo[0] if two else totalOne
 
 def one(INPUT):
   return puzz(INPUT)
+
 def two(INPUT):
   return puzz(INPUT, two=True)
 
