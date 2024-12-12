@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import puzzle, re, library
+import puzzle, library
 from collections import defaultdict, deque
 
 def parse_input(INPUT):
@@ -44,7 +44,6 @@ def one(INPUT):
 def two(INPUT):
   G = parse_input(INPUT)
   G_labeled = library.Grid(x=G.max_x(), y=G.max_y())
-  G_canvas = library.Grid(x=G.max_x(), y=G.max_y())
   seen = set()
   regions = dict() # key = loc, val = set of locs
   edges = defaultdict(list)
@@ -89,8 +88,6 @@ def two(INPUT):
   for r in regions:
     costs.append(((G.get(list(regions[r])[0]), len(regions[r]), sum([len(edges[loc]) for loc in regions[r]]))))
   return sum([a[1] * a[2] for a in costs])
-
-
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2024", "12")
