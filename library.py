@@ -68,6 +68,10 @@ class Grid:
         [self.get((x + DX, y + DY)) for DX, DY in self.NEIGHBORS],
     )
 
+  def neighbors_default(self, pt, default='.'):
+    x, y = pt
+    return [self.get((x + DX, y + DY), default=default) for DX, DY in self.NEIGHBORS]
+
   def neighbors_kv(self, pt):
     x, y = pt
     return filter(

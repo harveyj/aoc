@@ -40,3 +40,4 @@ All puzzles, all years!
 ## Optimization/cleanup log
 - 2015-20 - replaced a not-really-code solution that was 16s with an automated solution that was 3s.
 - 2021-21 - rewrote part 1 from scratch, minor cleanup for part 2.
+- 2021-09 - rewrote to python
