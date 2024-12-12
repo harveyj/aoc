@@ -27,7 +27,6 @@ def one(INPUT):
   seen = set()
   regions = dict() # key = loc, val = set of locs
   borders = defaultdict(int)
-  edges = defaultdict(int)
 
   for x in range(G.max_x()):
     for y in range(G.max_y()):
