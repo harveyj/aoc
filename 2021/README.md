@@ -63,6 +63,12 @@ Improvements could be:
 Difficulty: 5/10
 
 ## Day 9
+BFS-ish
+
+REWRITE 12/11/24
+
+Difficulty (rewrite): 4/10
+
 ## Day 10
 ## Day 11
 ## Day 12

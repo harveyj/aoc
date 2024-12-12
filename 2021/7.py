@@ -1,6 +1,6 @@
 import puzzle
 
-def puzz(INPUT, two=False):
+def one(INPUT, two=False):
   crabs = list(map(int, '\n'.join(INPUT).split(',')))
   crabs.sort()
   median = crabs[len(crabs) // 2];
@@ -24,13 +24,9 @@ def puzz(INPUT, two=False):
       total += (dist * (dist + 1)) // 2
     totals[mean] = total;
   totalTwo = min(totals.items(), key=lambda a: a[1])
-  return totalTwo[0] if two else totalOne
+  return totalTwo[1] if two else totalOne
 
-def one(INPUT):
-  return puzz(INPUT)
-
-def two(INPUT):
-  return puzz(INPUT, two=True)
+two = lambda a: one(a, two=True)
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2021", "7")
