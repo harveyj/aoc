@@ -79,7 +79,7 @@ def one(INPUT):
     t_n = tree(eval(l), None)
     t = add(t, t_n)
     # print(anytree.RenderTree(t))
-  print("PART ONE ANSWER:", mag(t))
+  return mag(t)
 
 def two(INPUT):
   lines = INPUT
@@ -87,7 +87,7 @@ def two(INPUT):
   for l1 in lines:
     for l2 in lines:
       mags.append(mag(add(tree(eval(l1), None), (tree(eval(l2), None)))))
-  print("PART TWO ANSWER:", max(mags))
+  return max(mags)
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2021", "18")

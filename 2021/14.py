@@ -39,7 +39,7 @@ def one(intext):
       max_char = k
     if v < hist[min_char]:
       min_char = k
-  print("PART 1 ANSWER:", hist[max_char] - hist[min_char])
+  return hist[max_char] - hist[min_char]
 
 ### Part 2
 def process_input2(intext):
@@ -84,12 +84,7 @@ def two(intext):
       max_char = k
     if v < char_counts[min_char]:
       min_char = k
-  # print(char_counts)
-  print("PART 2 ANSWER:", char_counts[max_char] - char_counts[min_char])
-
-  # for k, v in bi_counts.items():
-  #   if one_bi_counts[k] != v:
-  #     print("DIFF", k, v)
+  return char_counts[max_char] - char_counts[min_char]
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2021", "14")

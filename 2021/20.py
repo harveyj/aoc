@@ -35,11 +35,10 @@ def puzz(INPUT):
 	total = 0
 	for x in range(min_x - 65, max_x+65):
 		for y in range(min_x-65, max_y+65):
-			print(grid.get(k(x, y), '.'), end='')
+			# print(grid.get(k(x, y), '.'), end='')
 			if grid.get(k(x,y)) == '#':
 				total += 1
-		print("\n", end='')
-	print("PART TWO ANSWER", total)
+		# print("\n", end='')
 	return total
 
 def one(INPUT):

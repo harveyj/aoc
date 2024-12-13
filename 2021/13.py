@@ -31,13 +31,14 @@ def render(dots):
 def one(intext):
   dots, folds = process_input(intext)
   dots = fold(dots, *folds[0])
-  print("PART ONE ANSWER", len(dots))
+  return len(dots)
   
 def two(intext):
   dots, folds = process_input(intext)
   for f in folds:
     dots = fold(dots, *f)
   print("PART TWO ANSWER:\n", render(dots))
+  return 'DUMMY'
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2021", "13")

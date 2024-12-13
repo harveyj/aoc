@@ -17,7 +17,7 @@ def process_input(INPUT):
 
 def one(intext):
   G, max_x, max_y = process_input(intext)
-  print(nx.dijkstra_path_length(G, (0,0), (max_x, max_y)))
+  return nx.dijkstra_path_length(G, (0,0), (max_x, max_y))
 
 ### Part 2
 def process_input2(INPUT):
@@ -53,14 +53,14 @@ def get_grid(INPUT):
 
 def two(intext):
   G, max_x, max_y = process_input2(intext)
-  print(nx.astar_path_length(G, (0,0), (max_x, max_y)))
+  # print(nx.astar_path_length(G, (0,0), (max_x, max_y)))
   p=nx.astar_path(G, (0,0), (max_x, max_y))
   vals = get_grid(intext)
   grid = [[int(vals[(x, y)]) for x in range(max_x+1)] for y in range(max_y+1)]
   tot = 0
   for x, y in p[1:]:
     tot+=grid[y][x]
-  print(tot)
+  return tot
   # for l in grid:
   #   print(''.join(l))
 

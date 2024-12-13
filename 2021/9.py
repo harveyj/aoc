@@ -40,11 +40,11 @@ def two(INPUT):
           DG.add_edge((x, y), neigh)
   basins = [nx.descendants(DG, lp) for lp in low_pts]
   all = list(chain.from_iterable(basins))
-  for x in range(G.max_x()):
-    for y in range(G.max_y()):
-      if (x, y) not in all:
-        print((x,y), G.get((x, y)))
-  print(DG.edges((99,1)))
+  # for x in range(G.max_x()):
+  #   for y in range(G.max_y()):
+  #     if (x, y) not in all:
+  #       print((x,y), G.get((x, y)))
+  # print(DG.edges((99,1)))
   # print((99, 64) in low_pts)
   # +1 is to account for the bottom
   b_sizes = sorted([len(basin) + 1 for basin in basins])
