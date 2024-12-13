@@ -49,3 +49,36 @@ Done on Thomas's first NFL Sunday at home.
 Lesson: Be very careful about floats and equality, and look for areas in libraries where you might have those issues lurking. 
 
 Difficulty: 5.5/10
+
+## Day 9
+
+## Day 10
+
+## Day 11
+Create an arbitrarily long array. Part 1 was a very literal recreate the array. Part 2 insight was that the order does not matter at all, you can just operate over a histogram.
+
+Difficulty: 5/10
+
+## Day 12
+Parse a graph into regions and do things with the regions.
+Part 1: 
+Find all regions and their sizes. Do that with a BFS.
+Find the length of all region borders: you can just iterate over every cell.
+
+Part 2 (spicy): 
+Find the *edges*, not the length.
+Scan l-r and u-d looking for (top, bottom) and (left, right) edges.
+The corner (heh) cases were tricky.
+
+Holiday socks: yellow with Christmas trucks.
+
+Difficulty: 6/10
+
+## Day 13
+Solve a system of linear equations. solver makes this only a few lines.
+
+Done after pediatrician visit.
+
+Holiday socks: Bombas
+
+Difficulty: 3.5/10?
