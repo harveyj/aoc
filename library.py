@@ -103,7 +103,7 @@ class Grid:
           row_out.append(self.overlays[(x, y)])
         else:
           row_out.append(cell)
-      rows.append(''.join(row_out))
+      rows.append(''.join(map(str, row_out)))
     return '\n'.join(rows)
 
   def window(self, min_x, min_y, max_x, max_y):
