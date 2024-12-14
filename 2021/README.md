@@ -85,6 +85,11 @@ REWRITE 12/13/24 with carols, fire, Katie, Thomas
 Difficulty (rewrite) 3.5/10
 
 ## Day 12
+Custom DFS - fun! Nice balance of challenge/algos/thinking.
+
+REWRITE 12/14/24.
+
+Difficulty (rewrite) 5.5/10
 
 ## Day 13
 "Fold stuff" grid puzzle. Surprisingly straightforward for the middle of AOC.
