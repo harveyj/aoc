@@ -70,8 +70,22 @@ REWRITE 12/11/24
 Difficulty (rewrite): 4/10
 
 ## Day 10
+Run a stack over a string. Very straightforward, I just needed to read the darn prompt.
+
+
+REWRITE 12/12/24
+Done waiting for Katie's OB appt.
+Difficulty (rewrite): 3/10
+
 ## Day 11
+Very straightforward game of life-ish.
+
+REWRITE 12/13/24 with carols, fire, Katie, Thomas
+
+Difficulty (rewrite) 3.5/10
+
 ## Day 12
+
 ## Day 13
 "Fold stuff" grid puzzle. Surprisingly straightforward for the middle of AOC.
 
