@@ -18,7 +18,6 @@ def parse_input(INPUT):
 
 def one(INPUT, two=False):
   G, DG = parse_input(INPUT)
-  # print(DG)
   total = 0
   starts = G.detect('0')
   ends = G.detect('9')

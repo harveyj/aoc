@@ -51,8 +51,16 @@ Lesson: Be very careful about floats and equality, and look for areas in librari
 Difficulty: 5.5/10
 
 ## Day 9
+"Defragment" a giant array. Not conceptually hard but tons and tons of off by ones.
+
+Difficulty: 6/10
 
 ## Day 10
+Make a digraph, run simple paths over it.
+
+Done from Thomas's nursery.
+
+Difficulty: 4/10
 
 ## Day 11
 Create an arbitrarily long array. Part 1 was a very literal recreate the array. Part 2 insight was that the order does not matter at all, you can just operate over a histogram.

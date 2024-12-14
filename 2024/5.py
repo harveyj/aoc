@@ -2,19 +2,13 @@
 import puzzle, re
 import networkx as nx
 
-def one(INPUT):
-  raw = '\n'.join(INPUT)
-  rules, packets = raw.split('\n\n')
-  rules = rules.split('\n')
-  packets = packets.split('\n')
-
+def segment_packets(rules, packets):
   good = []
   illegal_packets = []
   for packet in packets:
     vals = packet.split(',')
     forbidden = set()
-    for l in rules:
-      a, b = l.split('|')
+    for a, b in rules:
       if a in vals:
         forbidden.add((b, a))
     illegal_vals = [(v, v2) for v, v2 in zip(vals, vals[1:]) if (v, v2) in forbidden]
@@ -23,22 +17,29 @@ def one(INPUT):
       good.append(int(vals[len(vals)//2]))
     else: 
       illegal_packets.append(packet)
+  return good, illegal_packets
+
+def one(INPUT):
+  raw = '\n'.join(INPUT)
+  rules, packets = raw.split('\n\n')
+  rules = rules.split('\n')
+  rules = [r.split('|') for r in rules]
+  packets = packets.split('\n')
+  good, _ = segment_packets(rules, packets)
   return sum(good)
 
 def two(INPUT):
   raw = '\n'.join(INPUT)
-  rules, _ = raw.split('\n\n')
+  rules, packets = raw.split('\n\n')
   rules = rules.split('\n')
   rules = [r.split('|') for r in rules]
-  _, illegal_packets = one(INPUT)
-  # print(illegal_packets)
+  packets = packets.split('\n')
+  _, illegal_packets = segment_packets(rules, packets)
   out = []
   for packet in illegal_packets:
     vals = packet.split(',')
     G = nx.DiGraph()
-    filtered_rules = [r for r in rules if r[0] in vals and r[1] in vals]
-    # print(filtered_rules)
-    for r in filtered_rules:
+    for r in [r for r in rules if r[0] in vals and r[1] in vals]:
       G.add_edge(*r)
     sorted_packet = list(map(int, nx.topological_sort(G)))
     out.append(int(sorted_packet[len(sorted_packet)//2]))
