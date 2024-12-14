@@ -90,3 +90,12 @@ Done after pediatrician visit.
 Holiday socks: Bombas
 
 Difficulty: 3.5/10?
+
+
+## Day 14
+Simulate particles moving across a grid. Part 1 very straighforward, part 2 was not my cup of tea. 
+
+Ultimate solution (first time): look for periodicity, once you find it, print all the images that have the right period.
+Checked-in solution: Now that I know there is a frame, scan output for '111111"
+
+Difficulty: 5.5/10 (mainly for guess and check on second part. )
