@@ -98,4 +98,12 @@ Simulate particles moving across a grid. Part 1 very straighforward, part 2 was 
 Ultimate solution (first time): look for periodicity, once you find it, print all the images that have the right period.
 Checked-in solution: Now that I know there is a frame, scan output for '111111"
 
-Difficulty: 5.5/10 (mainly for guess and check on second part. )
+Difficulty: 5.5/10 (mainly for guess and check on second part.)
+
+## Day 15
+Simulate a robot pushing blocks across a grid. Fun coding exercise, and the twist in part two was a great addition. This is a canonically-good AOC puzzle.
+
+Done watching football and chilling with Thomas.
+Holiday socks: Running santas.
+
+Difficulty: 7/10
