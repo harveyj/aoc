@@ -17,10 +17,10 @@ All puzzles, all years!
 - 2015: Validated - 21 incorrect
 - 2016: Validated - 23, 24 unknown, 25 incorrect
 - 2017: Validated - 6, 19, 20, 21, 22-25 unknown
-- 2018: 
+- 2018: (incomplete)
 - 2019: 
-- 2020: 
-- 2021: 
+- 2020: (observable notebook)
+- 2021: Validated - 9, 16, 17, 19, 20, 21, 22, 23, 24, 25 incorrect
 - 2022: Validated - 6, 7, 11, 21, 23, 24, 24 incorrect
 - 2023: Validated - 6, 20, 21, 23 incorrect
 - 2024: Validated (through day 11)
