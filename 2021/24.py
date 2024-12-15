@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import puzzle
 
 # FULL ALU IMPLEMENTATION - only used to check things in the end.
@@ -104,27 +105,29 @@ def base_26(val):
 
 # MAIN CODE: Discover and print out the constraints. 
 
-x_s = [0, 12, 11, 13, 11, 14, -10, 11, -9, -3, 13, -5, -10, -4, -5]
-y_s = [0, 4,  11,  5, 11, 14,   7, 11,  4,  6,  5,  9,  12, 14, 14]
-z_s = [0, 1,  1,   1,  1,  1,  26,  1, 26, 26,  1, 26,  26, 26, 26]
+two = lambda a: one(a)
+def one(INPUT):
+  x_s = [0, 12, 11, 13, 11, 14, -10, 11, -9, -3, 13, -5, -10, -4, -5]
+  y_s = [0, 4,  11,  5, 11, 14,   7, 11,  4,  6,  5,  9,  12, 14, 14]
+  z_s = [0, 1,  1,   1,  1,  1,  26,  1, 26, 26,  1, 26,  26, 26, 26]
 
-z_stack = [(0)]
-constraints = []
-for w, x_in, y_in, z_in in zip(range(0, 15), x_s, y_s, z_s):
-  z_prev = z_stack[-1]
-  if x_in > 10:
-    z_stack.append(('w'+str(w), y_in))
-  else:
-    if z_in == 26:
-      z_stack.pop()
-    constraints.append((z_prev, x_in, 'w'+str(w)))
-  # print(w, z_stack)
-for (z_prev, x_in, w_in) in constraints:
-  print (z_prev, "%26", x_in, " = ", w_in)
+  z_stack = [(0)]
+  constraints = []
+  for w, x_in, y_in, z_in in zip(range(0, 15), x_s, y_s, z_s):
+    z_prev = z_stack[-1]
+    if x_in > 10:
+      z_stack.append(('w'+str(w), y_in))
+    else:
+      if z_in == 26:
+        z_stack.pop()
+      constraints.append((z_prev, x_in, 'w'+str(w)))
+    # print(w, z_stack)
+  for (z_prev, x_in, w_in) in constraints:
+    print (z_prev, "%26", x_in, " = ", w_in)
 
-# Check a potential answer's stack at each iteration. 
-# for i in range(1, 15):
-  # print(base_26(python_version([9, 2, 9, 1, 5, 9, 7, 9, 9, 9, 9, 4, 9, 8], slice=i)))
+  # Check a potential answer's stack at each iteration. 
+  # for i in range(1, 15):
+    # print(base_26(python_version([9, 2, 9, 1, 5, 9, 7, 9, 9, 9, 9, 4, 9, 8], slice=i)))
 
 
-#  assert_eq([int(c) for c in list("21611513911181")])
+  #  assert_eq([int(c) for c in list("21611513911181")])
