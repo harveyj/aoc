@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import puzzle
 from collections import defaultdict
 
@@ -89,5 +91,5 @@ def two(intext):
 if __name__ == '__main__':
   p = puzzle.Puzzle("2021", "14")
 
-  p.run(one, 0) 
-  p.run(two, 0) 
+  print(p.run(one, 0))
+  print(p.run(two, 0))
