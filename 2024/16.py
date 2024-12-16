@@ -34,20 +34,15 @@ def one(INPUT, two=False):
       queue.append((loc, new_dir_idx))
     seen.add((loc, dir_idx))
 
-  # dir_chars = '>v<^'
-  # G.overlays = {loc: dir_chars[dir] for loc, dir in nx.dijkstra_path(graph, (S, start_idx), E)}
   paths = nx.all_shortest_paths(graph, source=(S, start_idx), target=E, weight='weight')
   in_shortest = set()
   for p in paths:
     for loc, dir in p:
       in_shortest.add(loc)
-  # G.overlays = {loc: 'O' for loc in in_shortest}
-  # print(G)
-  if two: return len(in_shortest) - 1
+  if two: return len(in_shortest) - 1 # TODO code smell
   return nx.dijkstra_path_length(graph, (S, start_idx), E)
 
-def two(INPUT):
-  return one(INPUT, two=True)
+two = lambda INPUT: one(INPUT, two=True)
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2024", "16")
