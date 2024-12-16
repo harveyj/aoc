@@ -19,3 +19,9 @@ Bumping up a little bit - 10 minutes
 
 Difficulty: 3/10
 
+## Day 7
+Custom topological sort! Now we're getting into it
+
+REWRITE: 12/15/24
+
+Difficulty: 5/10
