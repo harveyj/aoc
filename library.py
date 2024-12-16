@@ -1,6 +1,7 @@
 import re, copy
 
-DIRS_CARDINAL = [(0, 1), (1, 0), (-1, 0), (0, -1)]
+# E, S, W, N
+DIRS_CARDINAL = [(1, 0), (0, 1), (-1, 0), (0, -1)]
 
 def ints(line):
   return list(map(int, re.findall(r"-?\d+", line)))
