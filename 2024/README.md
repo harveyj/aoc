@@ -107,3 +107,14 @@ Done watching football and chilling with Thomas.
 Holiday socks: Running santas.
 
 Difficulty: 7/10
+
+
+## Day 17
+OK NOW HERE WE GO WE'RE IN THIS, BABY
+
+An all-time AOC classic and I am really happy with my solution. It's got decompiling assembly. It's got number theory, it's got bit-flips, it slices, it dices.
+
+Done wearing my AOC tshirt! 
+Holiday socks: Santa t-rex
+
+Difficulty: 9/10
