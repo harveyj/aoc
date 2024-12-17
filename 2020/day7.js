@@ -9,8 +9,8 @@ md`# Advent 2020 Day 7!`
 
 
 
-function _input(inputRaw,selectedInput){return(
-inputRaw[selectedInput].split('\n')
+function _input(INPUT){return(
+INPUT.split('\n')
 )}
 
 function _processedInput(input)

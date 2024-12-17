@@ -4,16 +4,11 @@ function _1(md){return(
 md`# Advent 2020 Day 2!`
 )}
 
-
-
-
-
-
-function _input(inputRaw,selectedInput,parseInstruction){return(
-inputRaw[selectedInput].split('\n').map(parseInstruction)
+function _input(INPUT){return(
+INPUT.split('\n').map(parseInstruction)
 )}
 
-function _parseInstruction(){return(
+function parseInstruction(){return(
 function(val) {
   let [full, min, max, letter, password] = val.match(/(\d+)-(\d+) (\w): (\w+)/);
   return { min, max, letter, password };
@@ -23,6 +18,7 @@ function(val) {
 function _ANSWER_1(input)
 {
   let matches = 0;
+  console.log(input);
   for (let i = 0; i < input.length; i++) {
     let pwObj = input[i];
     let count = (pwObj.password.match(new RegExp(pwObj.letter, 'g')) || [])

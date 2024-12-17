@@ -9,8 +9,8 @@ md`# Advent 2020 Day 11!`
 
 
 
-function _input(inputRaw,selectedInput){return(
-inputRaw[selectedInput].split('\n').map(a => a.split(''))
+function _input(INPUT){return(
+INPUT.split('\n').map(a => a.split(''))
 )}
 
 function _getNextSeating(getNeighbors){return(

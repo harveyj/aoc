@@ -9,8 +9,8 @@ md`# Advent 2020 Day 10!`
 
 
 
-function _input(inputRaw,selectedInput){return(
-inputRaw[selectedInput]
+function _input(INPUT){return(
+INPUT
   .split('\n')
   .map(a => a * 1)
   .sort((a, b) => a - b)

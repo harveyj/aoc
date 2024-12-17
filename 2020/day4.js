@@ -4,13 +4,8 @@ function _1(md){return(
 md`# Advent 2020 Day 4!`
 )}
 
-
-
-
-
-
-function _input(inputRaw,selectedInput){return(
-inputRaw[selectedInput].split('\n\n')
+function _input(INPUT){return(
+INPUT.split('\n\n')
 )}
 
 function _ANSWER_1(input)
@@ -33,23 +28,7 @@ function _ANSWER_1(input)
   return total;
 }
 
-
-function _6(){return(
-`
-byr (Birth Year) - four digits; at least 1920 and at most 2002.
-iyr (Issue Year) - four digits; at least 2010 and at most 2020.
-eyr (Expiration Year) - four digits; at least 2020 and at most 2030.
-hgt (Height) - a number followed by either cm or in:
-If cm, the number must be at least 150 and at most 193.
-If in, the number must be at least 59 and at most 76.
-hcl (Hair Color) - a # followed by exactly six characters 0-9 or a-f.
-ecl (Eye Color) - exactly one of: amb blu brn gry grn hzl oth.
-pid (Passport ID) - a nine-digit number, including leading zeroes.
-cid (Country ID) - ignored, missing or not.
-`
-)}
-
-function _parseLine(){return(
+function parseLine(){return(
 function(line) {
   let ecl = line.match(/ecl:(\w\w\w)/);
   let pid = line.match(/pid:(\d+)/);
@@ -70,25 +49,25 @@ function(line) {
 }
 )}
 
-function _validBirth(){return(
+function validBirth(){return(
 function(match) {
   return match.byr && 1920 <= match.byr * 1 && match.byr * 1 <= 2002;
 }
 )}
 
-function _validIssue(){return(
+function validIssue(){return(
 function(match) {
   return 2010 <= match.iyr * 1 && (match.iyr && match.iyr * 1 <= 2020);
 }
 )}
 
-function _validExpiration(){return(
+function validExpiration(){return(
 function(match) {
   return 2020 <= match.eyr * 1 && (match.eyr && match.eyr * 1 <= 2030);
 }
 )}
 
-function _validHeight(){return(
+function validHeight(){return(
 function(match) {
   if (!match || !match.hgt) {
     return false;
@@ -103,13 +82,13 @@ function(match) {
 }
 )}
 
-function _validHair(){return(
+function validHair(){return(
 function(match) {
   return match.hcl && match.hcl != '';
 }
 )}
 
-function _validEye(){return(
+function validEye(){return(
 function(match) {
   return (
     match.ecl && "amb blu brn gry grn hzl oth".split(' ').includes(match.ecl)
@@ -117,15 +96,14 @@ function(match) {
 }
 )}
 
-function _validPassportId(){return(
+function validPassportId(){return(
 function(match) {
   return match.pid && match.pid != '' && match.pid.length == 9;
 }
 )}
 
-function _ANSWER_2(input,parseLine,validBirth,validIssue,validExpiration,validHeight,validHair,validEye,validPassportId)
+function answer2(input,parseLine,validBirth,validIssue,validExpiration,validHeight,validHair,validEye,validPassportId)
 {
-  // Not 102
   let total = 0;
   let valids = [];
   for (let i = 0; i < input.length; i++) {
@@ -147,8 +125,11 @@ function _ANSWER_2(input,parseLine,validBirth,validIssue,validExpiration,validHe
   return valids;
 }
 
+function _ANSWER_2(input) {
+  return answer2(input,parseLine,validBirth,validIssue,validExpiration,validHeight,validHair,validEye,validPassportId);
+}
 
-function _results(validBirth,parseLine,validHeight,validHair,validEye,validPassportId){return(
+function results(validBirth,parseLine,validHeight,validHair,validEye,validPassportId){return(
 [
   [validBirth(parseLine('byr:2002'))],
   [validBirth(parseLine('byr:2003'))],
