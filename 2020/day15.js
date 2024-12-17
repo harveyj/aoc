@@ -36,6 +36,9 @@ function _ANSWER_1(input)
   return uttered[uttered.length - 1];
 }
 
+// TODO
+function _ANSWER_2(input){}
+
 
 function _setCharAt(){return(
 function setCharAt(str, index, chr) {

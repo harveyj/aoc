@@ -38,10 +38,8 @@ function _ANSWER_1(processedInput)
 }
 
 
-
-
-
-function _SLOW_ANSWER_2(processedInput)
+// called _SLOW_ANSWER_2
+function _ANSWER_2(processedInput)
 {
   function findA(busIndex, bus, a, b) {
     for (let i = a; i < 1000000000000000; i += b) {
@@ -65,12 +63,3 @@ function _SLOW_ANSWER_2(processedInput)
   }
   return { a, b };
 }
-
-
-function _8()
-{
-  let [a, b] = [1, 2];
-  return [a, b];
-}
-
-

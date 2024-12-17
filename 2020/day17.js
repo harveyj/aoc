@@ -122,3 +122,5 @@ function _10(neighbors){return(
 neighbors({ x: 1, y: 1, z: 1 })
 )}
 
+// TODO
+function _ANSWER_2(input){}
