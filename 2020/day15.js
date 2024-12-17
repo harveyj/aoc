@@ -10,16 +10,7 @@ function _input(inputRaw,selectedInput){return(
 inputRaw[selectedInput].split(',').map(a => a * 1)
 )}
 
-function _selectedInput(html,inputRaw)
-{
-  return html`
-    <select>
-      ${Object.keys(inputRaw).map(
-        key => `<option value=${key}>${key}</option>`
-      )}
-    </select>
- `;
-}
+
 
 
 function _ANSWER_1(input)

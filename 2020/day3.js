@@ -6,16 +6,7 @@ md`# Advent 2020 Day 3!`
 
 
 
-function _selectedInput(html,inputRaw)
-{
-  return html`
-    <select>
-      ${Object.keys(inputRaw).map(
-        key => `<option value=${key}>${key}</option>`
-      )}
-    </select>
- `;
-}
+
 
 
 function _input(inputRaw,selectedInput){return(

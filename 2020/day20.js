@@ -189,16 +189,7 @@ class Grid {
 }
 )}
 
-function _selectedInput(html,inputRaw)
-{
-  return html`
-    <select>
-      ${Object.keys(inputRaw).map(
-        key => `<option value=${key}>${key}</option>`
-      )}
-    </select>
- `;
-}
+
 
 
 function _ANSWER_1(connect)
