@@ -406,7 +406,6 @@ function genFinalGrid(input, connections)
 function _ANSWER_2(input) {
   let cm = connectionMatrix(input);
   let connections = connect(cm);
-  console.log(connections.corners)
   let finalGrid = genFinalGrid(input, connections);
   let numHashes = finalGrid.join('').match(/#/g).length;
   return numHashes - 21 * monsterOffsets.length
@@ -415,9 +414,9 @@ function _ANSWER_2(input) {
 function monstersFound(finalGrid)
 {
   let grid = new Grid(finalGrid.map(a => a.split('')));
-  for (let rotation = 0; rotation < 8; rotation++) {
-    console.log({fm: grid.findMonsters(rotation)})
-  }
+  // for (let rotation = 0; rotation < 8; rotation++) {
+  //   console.log({fm: grid.findMonsters(rotation)})
+  // }
   return grid;
 }
 

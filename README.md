@@ -7,7 +7,7 @@ All puzzles, all years!
 - 2017: Complete Python3 implementation, standardized
 - 2018: Completed, but original code was lost to the sands of time. Partial Python3 reimplementation.
 - 2019: Complete Python3 implementation, not standardized
-- 2020: Completed off-repo in Observable notebooks
+- 2020: Completed in Javascript, standardized
 - 2021: Complete Python3 implementation, standardized
 - 2022: Complete Python3 implementation, standardized
 - 2023: Complete Python3 implementation, standardized
@@ -20,7 +20,7 @@ Validation means that the code spits out the correct answer when one(INPUT) and 
 - 2017: Validated - 6, 19, 20, 21, 22-25 unknown
 - 2018: (not fully implemented)
 - 2019: 
-- 2020: (not in the repository)
+- 2020: Validated - 4-1, 8-1, 10-1, 10-2, 16-1, 18-1, 20-1, 19-1, 19-2, 23-2 incorrect
 - 2021: Validated - 9, 16, 17, 19, 20, 21, 22, 23, 24, 25 incorrect
 - 2022: Validated - 6, 7, 11, 21, 23, 24, 24 incorrect
 - 2023: Validated - 6, 20, 21, 23 incorrect
@@ -32,7 +32,7 @@ Validation means that the code spits out the correct answer when one(INPUT) and 
 - 2017: 15-1 (10s),  20-1 (50s), 20-2 (30s), 23-2 (20s) 
 - 2018: (not fully implemented)
 - 2019: 
-- 2020: (not in the repository)
+- 2020: 23
 - 2021: 
 - 2022: 16-1 (12s), 20-2 (20s) 23-2 (5s), 24-1 (20s)
 - 2023: 17-1 (5s), 18-1 (30s), 23-1 (long), 24-1 (long)

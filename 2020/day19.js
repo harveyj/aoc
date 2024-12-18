@@ -17,7 +17,6 @@ function processInput(input) {
     return { op: 'rule', operands: [input * 1] };
   }
   function processClause(clause) {
-    console.log(clause);
     let fields = clause
       .split(' ')
       .filter(a => a.trim())
@@ -137,7 +136,6 @@ function findLengths(rule) {
   } else if (rule.op === 'and') {
     let possibles = [];
     for (let andClause of rule.operands.map(a => input.rules.get(a))) {
-      console.log(andClause);
       possibles = enumerateAll(possibles, findLengths(andClause));
     }
     return possibles;

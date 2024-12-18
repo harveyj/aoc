@@ -94,7 +94,6 @@ function _ANSWER_2(input)
     }
     return expr;
   }
-  console.log(input)
   return input
       .map(process)
       .map(evaluate)
