@@ -4,14 +4,11 @@ function _1(md){return(
 md`# Advent 2020 Day 14!`
 )}
 
+function _input(inputRaw) {
+  return inputRaw.split('\n').map(processInstr)
+}
 
-
-function _input(inputRaw,selectedInput,processInstr){return(
-inputRaw[selectedInput].split('\n').map(processInstr)
-)}
-
-function _processInstr(){return(
-function(instr) {
+function processInstr(instr) {
   let maskRe = /mask = (.*)/;
   let memRe = /mem\[(\d+)\] = (\d+)/;
   let maskMatch = instr.match(maskRe);
@@ -40,9 +37,8 @@ function(instr) {
   }
   return { op: "ERROR" };
 }
-)}
 
-function _ANSWER_1(or,and,input)
+function _ANSWER_1(input)
 {
   let mem = new Map();
   let mask = null;
@@ -71,14 +67,12 @@ function _ANSWER_1(or,and,input)
 }
 
 
-function _setCharAt(){return(
 function setCharAt(str, index, chr) {
   if (index > str.length - 1) return str;
   return str.substring(0, index) + chr + str.substring(index + 1);
 }
-)}
 
-function _ANSWER_2(or,and,setCharAt,input)
+function _ANSWER_2(input)
 {
   function applyMask(mask, val) {
     for (let i = 0; i < 36; i++) {
@@ -133,7 +127,6 @@ function _ANSWER_2(or,and,setCharAt,input)
 
 
 
-function _and(){return(
 function and(v1, v2) {
     var hi = 0x80000000;
     var low = 0x7fffffff;
@@ -145,9 +138,7 @@ function and(v1, v2) {
     var l = low1 & low2;
     return h*hi + l;
 }
-)}
 
-function _or(){return(
 function or(v1, v2) {
   var hi = 0x80000000;
   var low = 0x7fffffff;
@@ -159,5 +150,4 @@ function or(v1, v2) {
   var l = low1 | low2;
   return h * hi + l;
 }
-)}
 

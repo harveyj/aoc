@@ -27,30 +27,25 @@ function toId(input) {
     increment /= 2;
   }
   return row * 8 + col;
+};
+
+
+function _ANSWER_1(input){
+  let ids = input.map(toId);
+  return Math.max(...ids);
 }
-)}
 
-function _ids(input,toId){return(
-input.map(toId)
-)}
-
-function _sortedIds(ids){return(
-ids.sort()
-)}
-
-function _ANSWER_1(ids){return(
-Math.max(...ids)
-)}
-
-function _ANSWER_2(sortedIds)
+function _ANSWER_2(input)
 {
+  let ids = input.map(toId);
+  let sortedIds = ids.sort();
   let answer = [];
   for (let i = 1; i < sortedIds.length - 1; i++) {
     if (sortedIds[i - 1] != sortedIds[i] - 1) {
       answer.push(sortedIds[i - 1] + 1);
     }
   }
-  return answer;
+  return answer[0];
 }
 
 

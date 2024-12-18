@@ -4,28 +4,22 @@ function _1(md){return(
 md`# Advent 2020 Day 12!`
 )}
 
-
-
-
-
-
-function _input(INPUT){return(
-INPUT
+function _input(INPUT){
+return INPUT
   .split('\n')
   .map(a => ({ op: a[0], mag: a.substring(1) * 1 }))
-)}
+}
 
-function _DIRS(){return(
-[{ x: 1, y: 0 }, { x: 0, y: 1 }, { x: -1, y: 0 }, { x: 0, y: -1 }]
-)}
+const DIRS = [{ x: 1, y: 0 }, { x: 0, y: 1 }, { x: -1, y: 0 }, { x: 0, y: -1 }];
 
-function _ANSWER_1(DIRS,input)
+function _ANSWER_1(input)
 {
   let dirIdx = 0;
   let dir = DIRS[dirIdx];
   let x = 0;
   let y = 0;
   let locs = [];
+  // console.log({dir, DIRS})
   for (let inst of input) {
     switch (inst.op) {
       case 'F':
@@ -57,7 +51,7 @@ function _ANSWER_1(DIRS,input)
     }
     locs.push({ x, y });
   }
-  return [Math.abs(x) + Math.abs(y), locs];
+  return Math.abs(x) + Math.abs(y);
 }
 
 
@@ -108,12 +102,5 @@ function _ANSWER_2(input)
     locs.push({ x, y });
     wp.push({ wayX, wayY });
   }
-  return [Math.abs(x) + Math.abs(y), locs, wp];
+  return Math.abs(x) + Math.abs(y);
 }
-
-
-function _TEST_2()
-{
-}
-
-

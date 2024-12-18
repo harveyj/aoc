@@ -4,17 +4,11 @@ function _1(md){return(
 md`# Advent 2020 Day 11!`
 )}
 
-
-
-
-
-
 function _input(INPUT){return(
 INPUT.split('\n').map(a => a.split(''))
 )}
 
-function _getNextSeating(getNeighbors){return(
-function(oldSeating) {
+function getNextSeating(oldSeating) {
   let nextSeating = oldSeating.map(a => a.map(b => '.'));
   for (let y = 0; y < oldSeating.length; y++) {
     for (let x = 0; x < oldSeating[y].length; x++) {
@@ -38,10 +32,8 @@ function(oldSeating) {
   }
   return nextSeating;
 }
-)}
 
-function _getNextSeating_2(getNeighborInView){return(
-function(oldSeating) {
+function getNextSeating_2(oldSeating) {
   let nextSeating = oldSeating.map(a => a.map(b => '.'));
   let grid = nextSeating.map(a => a.map(b => '.'));
 
@@ -68,10 +60,8 @@ function(oldSeating) {
   // console.log(grid);
   return nextSeating;
 }
-)}
 
-function _getNeighbors(){return(
-function([x, y], [maxX, maxY]) {
+function getNeighbors([x, y], [maxX, maxY]) {
   let neighbors = [];
   if (x > 0 && y > 0) {
     neighbors.push({ x: x - 1, y: y - 1 });
@@ -99,10 +89,8 @@ function([x, y], [maxX, maxY]) {
   }
   return neighbors;
 }
-)}
 
-function _getNeighborInView(){return(
-function([startX, startY], [maxX, maxY], grid) {
+function getNeighborInView([startX, startY], [maxX, maxY], grid) {
   let neighbors = 0;
   let DIRS = [
     [-1, 1],
@@ -134,9 +122,8 @@ function([startX, startY], [maxX, maxY], grid) {
   }
   return neighbors;
 }
-)}
 
-function _ANSWER_1(input,getNextSeating)
+function _ANSWER_1(input)
 {
   let oldSeating = input;
   for (let i = 0; i < 10000; i++) {
@@ -153,35 +140,35 @@ function _ANSWER_1(input,getNextSeating)
 }
 
 
-function _TEST_1(input,getNextSeating)
-{
-  let oldSeating = input;
-  let frames = [];
-  for (let i = 0; i < 10000; i++) {
-    let nextSeating = getNextSeating(oldSeating);
-    if (JSON.stringify(nextSeating) == JSON.stringify(oldSeating)) {
-      let rowTotals = nextSeating.map(row =>
-        row.reduce((val, a) => (a == "#" ? val + 1 : val), 0)
-      );
-      let total = rowTotals.reduce((val, a) => val + a);
-      return [i, total, frames];
-    }
-    oldSeating = nextSeating;
-    frames.push(nextSeating);
-  }
-  return frames;
-}
+// function _TEST_1(input,getNextSeating)
+// {
+//   let oldSeating = input;
+//   let frames = [];
+//   for (let i = 0; i < 10000; i++) {
+//     let nextSeating = getNextSeating(oldSeating);
+//     if (JSON.stringify(nextSeating) == JSON.stringify(oldSeating)) {
+//       let rowTotals = nextSeating.map(row =>
+//         row.reduce((val, a) => (a == "#" ? val + 1 : val), 0)
+//       );
+//       let total = rowTotals.reduce((val, a) => val + a);
+//       return [i, total, frames];
+//     }
+//     oldSeating = nextSeating;
+//     frames.push(nextSeating);
+//   }
+//   return frames;
+// }
 
 
-function _TEST(getNeighbors){return(
-[
-  getNeighbors([0, 0], [3, 3]),
-  getNeighbors([1, 1], [3, 3]),
-  getNeighbors([1, 2], [3, 3])
-]
-)}
+// function _TEST(getNeighbors){return(
+// [
+//   getNeighbors([0, 0], [3, 3]),
+//   getNeighbors([1, 1], [3, 3]),
+//   getNeighbors([1, 2], [3, 3])
+// ]
+// )}
 
-function _ANSWER_2(input,getNextSeating_2)
+function _ANSWER_2(input)
 {
   let oldSeating = input;
   for (let i = 0; i < 10000; i++) {
@@ -198,20 +185,20 @@ function _ANSWER_2(input,getNextSeating_2)
 }
 
 
-function _TEST_2(input,getNextSeating_2,getNeighborInView)
-{
-  let grid = input.map(a => a.map(b => '.'));
-  let seating = getNextSeating_2(input);
-  for (let y = 0; y < seating.length; y++) {
-    for (let x = 0; x < seating[y].length; x++) {
-      grid[y][x] = getNeighborInView(
-        [x, y],
-        [seating[y].length, seating.length],
-        seating
-      );
-    }
-  }
-  return grid;
-}
+// function _TEST_2(input,getNextSeating_2,getNeighborInView)
+// {
+//   let grid = input.map(a => a.map(b => '.'));
+//   let seating = getNextSeating_2(input);
+//   for (let y = 0; y < seating.length; y++) {
+//     for (let x = 0; x < seating[y].length; x++) {
+//       grid[y][x] = getNeighborInView(
+//         [x, y],
+//         [seating[y].length, seating.length],
+//         seating
+//       );
+//     }
+//   }
+//   return grid;
+// }
 
 
