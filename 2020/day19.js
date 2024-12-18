@@ -5,14 +5,11 @@ function _1(md){return(
 md`# Advent 2020 Day 19!`
 )}
 
+function _input(input) {
+  return processInput(input);
+}
 
-
-function _input(processInput,inputRaw,selectedInput){return(
-processInput(inputRaw[selectedInput])
-)}
-
-function _processInput(){return(
-function(input) {
+function processInput(input) {
   function processField(input) {
     if (input == "\"a\"" || input == "\"b\"") {
       return { op: eval(input) };
@@ -47,16 +44,12 @@ function(input) {
   messages = messages.split('\n');
   return { rules: new Map(rules), messages };
 }
-)}
 
-
-
-
-function _ANSWER_1(input,applyRule)
+function _ANSWER_1(input)
 {
   let messages = [];
   for (let message of input.messages) {
-    let res = applyRule(input.rules.get(0), message, 0, new Map());
+    let res = applyRule(input, input.rules.get(0), message, 0, new Map());
     if (
       res.ruleApplies &&
       Array.from(res.consumedLengths).indexOf(message.length) != -1
@@ -69,7 +62,6 @@ function _ANSWER_1(input,applyRule)
   return messages.filter(a => a[1]);
 }
 
-
 function _errors(ANSWER_1,CORRECT)
 {
   let wrong = [];
@@ -81,24 +73,7 @@ function _errors(ANSWER_1,CORRECT)
   return wrong;
 }
 
-
-function _CORRECT(){return(
-`bbabbbbaabaabba
-babbbbaabbbbbabbbbbbaabaaabaaa
-aaabbbbbbaaaabaababaabababbabaaabbababababaaa
-bbbbbbbaaaabbbbaaabbabaaa
-bbbababbbbaaaaaaaabbababaaababaabab
-ababaaaaaabaaab
-ababaaaaabbbaba
-baabbaaaabbaaaababbaababb
-abbbbabbbbaaaababbbbbbaaaababb
-aaaaabbaabaaaaababaa
-aaaabbaabbaaaaaaabbbabbbaaabbaabaaa
-aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba`.split('\n')
-)}
-
-function _applyRule(input){return(
-function applyRule(rule, message, consumed) {
+function applyRule(input, rule, message, consumed) {
   if (rule.op == 'a') {
     return message[consumed] == 'a'
       ? { ruleApplies: true, message, consumedLengths: new Set([consumed + 1]) }
@@ -144,11 +119,10 @@ function applyRule(rule, message, consumed) {
     }
     return { ruleApplies, consumedLengths: potentialConsumedLengths };
   }
+  return []
   throw new Error("fell off the end" + rule);
 }
-)}
 
-function _findLengths(input,enumerateAll){return(
 function findLengths(rule) {
   if (rule.op == 'a') {
     return [1];
@@ -168,11 +142,10 @@ function findLengths(rule) {
     }
     return possibles;
   }
-  throw new Error("fell off the end" + rule);
+  // throw new Error("fell off the end" + rule);
+  return []
 }
-)}
 
-function _enumerateAll(){return(
 function enumerateAll(entries) {
   let possibles = new Set([[]]);
   for (let entry of entries) {
@@ -186,11 +159,6 @@ function enumerateAll(entries) {
   }
   return Array.from(possibles);
 }
-)}
-
-function _13(enumerateAll){return(
-enumerateAll([[1, 3], [2, 4]])
-)}
 
 function _ANSWER_2()
 {
