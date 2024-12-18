@@ -6,12 +6,11 @@ md`# Advent 2020 Day 17!`
 
 
 
-function _input(processInput,inputRaw,selectedInput){return(
-processInput(inputRaw[selectedInput])
-)}
+function _input(input){
+  return processInput(input);
+}
 
-function _processInput(idx){return(
-function(input) {
+function processInput(input) {
   let rawCells = input.split('\n').map(a => a.split(''));
   let minX = -1;
   let minY = -1;
@@ -31,18 +30,12 @@ function(input) {
   }
   return { minX, minY, minZ, minW, maxX, maxY, maxZ, maxW, cells };
 }
-)}
 
-function _idx(){return(
-function(x, y, z, w) {
+function idx(x, y, z, w) {
   return `${x},${y},${z},${w}`
 }
-)}
 
-
-
-
-function _ANSWER_1(countNeighbors,idx,input)
+function _ANSWER_2(input)
 {
   function nextGrid(grid) {
     let cells = new Map();
@@ -82,12 +75,16 @@ function _ANSWER_1(countNeighbors,idx,input)
   for (let i = 0; i < 6; i++) {
     grid = nextGrid(grid);
   }
+  let i = 0;
+  for (const [key, value] of grid.cells) {
+    i++;
+  }
+  return i;
   return { grid, input };
 }
 
 
-function _neighbors(){return(
-function(obj) {
+function neighbors(obj) {
   let neighbors = [];
   for (let dx of [-1, 0, 1]) {
     for (let dy of [-1, 0, 1]) {
@@ -108,19 +105,12 @@ function(obj) {
   }
   return neighbors;
 }
-)}
 
-function _countNeighbors(neighbors){return(
-function(obj, pred) {
+function countNeighbors(obj, pred) {
   return neighbors(obj)
     .map(pred)
     .reduce((a, b) => a + b, 0);
 }
-)}
-
-function _10(neighbors){return(
-neighbors({ x: 1, y: 1, z: 1 })
-)}
 
 // TODO
-function _ANSWER_2(input){}
+function _ANSWER_1(input){}
