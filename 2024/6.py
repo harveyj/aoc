@@ -27,7 +27,6 @@ def one(INPUT):
 
 def two(INPUT):
   def find_loop(G, seen, dir_idx, x, y):
-    # print('.', end=''); sys.stdout.flush()
     new_seen = set()
     new_G = library.Grid(grid=G.grid)
     dx, dy = DIRS[dir_idx]; nx, ny = x+dx, y+dy
@@ -57,14 +56,9 @@ def two(INPUT):
   x, y = start
   seen = set()
   obstructions = set()
-  # print(G)
   while 0 <= x < G.max_x() and 0 <= y < G.max_y():
     seen.add(((x, y), DIRS[dir_idx]))
     dx, dy = DIRS[dir_idx]; nx, ny = x+dx, y+dy
-    # print((x, y), (nx, ny), G.get((nx, ny)))
-    # print(G, end='\n\n')
-    # input()
-    # sys.stdout.flush()
     if G.get((nx, ny)) == '#':
       dir_idx = (dir_idx + 1) % 4
       continue
@@ -74,13 +68,10 @@ def two(INPUT):
       obstructions.add(new_block)
       G.overlays = {pt[0]:'L' for pt in loop}
       G.overlays[new_block] = 'O'; G.overlays[start] = '^'
-      # print(G); input()
-      # print(loop)
-      G.overlays = {}
+      # G.overlays = {}
     x, y = nx, ny
   return len(obstructions)
 
-# not 2212, 2038
 if __name__ == '__main__':
   p = puzzle.Puzzle("2024", "6")
 
