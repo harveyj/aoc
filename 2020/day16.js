@@ -4,14 +4,11 @@ function _1(md){return(
 md`# Advent 2020 Day 16!`
 )}
 
+function _input(INPUT){
+  return processInput(INPUT);
+}
 
-
-function _input(processInput,inputRaw,selectedInput){return(
-processInput(inputRaw[selectedInput])
-)}
-
-function _processInput(processNearby,processSpecs){return(
-function(input) {
+function processInput(input) {
   let nearby = input
     .split("nearby tickets:\n")[1]
     .split('\n')
@@ -23,10 +20,8 @@ function(input) {
     .filter(a => a);
   return { nearby, specs };
 }
-)}
 
-function _processSpecs(){return(
-function(item) {
+function processSpecs(item) {
   if (!item) {
     return;
   }
@@ -38,18 +33,12 @@ function(item) {
   });
   return { name, vals };
 }
-)}
 
-function _processNearby(){return(
-function(item) {
+function processNearby(item) {
   return item.split(',').map(a => a * 1);
-}
-)}
+};
 
-
-
-
-function _ANSWER_1(input)
+function _ANSWER_1_INTERNAL(input)
 {
   function valueInvalid(field) {
     for (let spec of input.specs) {
@@ -87,9 +76,13 @@ function _ANSWER_1(input)
   };
 }
 
+function _ANSWER_1(input) {
+  return _ANSWER_1_INTERNAL(input).answer;
+}
 
-function _ANSWER_2(ANSWER_1,input)
+function _ANSWER_2(input)
 {
+  let ANSWER_1 = _ANSWER_1_INTERNAL(input);
   function invalidForValue(spec, value) {
     let found = true;
     for (let i = 0; i < spec.vals.length; i++) {
@@ -117,7 +110,6 @@ function _ANSWER_2(ANSWER_1,input)
     }
   }
   let answers = new Map();
-  let log = [];
   for (let i = 0; i < 1000; i++) {
     for (let spec of input.specs) {
       invalids.forEach((val, key) => {
@@ -128,7 +120,8 @@ function _ANSWER_2(ANSWER_1,input)
       });
     }
   }
-  return { answers, log, invalids };
+  console.log(answers);
+  return answers;
 }
 
 

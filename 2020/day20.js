@@ -4,14 +4,11 @@ function _1(md){return(
 md`# Advent 2020 Day 20!`
 )}
 
+function _input(input) {
+  return processInput(input)
+}
 
-
-function _input(processInput,inputRaw,selectedInput){return(
-processInput(inputRaw[selectedInput])
-)}
-
-function _processInput(Grid){return(
-function(input) {
+function processInput(input) {
   function processGrid(rawGrid) {
     let lines = rawGrid.split('\n');
     let id = lines[0].match(/Tile (\d+)/)[1];
@@ -19,17 +16,13 @@ function(input) {
   }
   return new Map(input.split('\n\n').map(processGrid));
 }
-)}
 
-function _reverseString(){return(
-function(str) {
+function reverseString (str) {
   let arr = Array.from(str);
   arr.reverse();
   return arr.join('');
 }
-)}
 
-function _Grid(reverseString,monsterOffsets){return(
 class Grid {
   constructor(grid, rotation) {
     this.grid = grid;
@@ -187,18 +180,16 @@ class Grid {
     return numFound;
   }
 }
-)}
 
-
-
-
-function _ANSWER_1(connect)
+function _ANSWER_1(input)
 {
-  return Array.from(connect.corners.keys());
+  let cm = connectionMatrix(input);
+  let connections = connect(cm);
+  return Array.from(connections.corners.keys()).reduce((acc, curr) => acc * curr, 1);
 }
 
 
-function _connectionMatrix(input)
+function connectionMatrix(input)
 {
   let ret = new Map();
   for (let [id, grid] of input.entries()) {
@@ -215,7 +206,7 @@ function _connectionMatrix(input)
 }
 
 
-function _connect(connectionMatrix)
+function connect(connectionMatrix)
 {
   let foundTwoConnections = new Map();
   let realConnections = new Map();
@@ -235,8 +226,7 @@ function _connect(connectionMatrix)
 }
 
 
-function _edges(connect)
-{
+function genEdges(connect) {
   let start = connect.corners.keys().next().value;
   let topEdge = findEdge(start, connect.corners.get(start)[0]);
   let leftEdge = findEdge(start, connect.corners.get(start)[1]);
@@ -274,13 +264,11 @@ function _edges(connect)
 }
 
 
-function _intersect(){return(
-function(a, b) {
+function intersect(a, b) {
   return a.filter(item => b.includes(item));
 }
-)}
 
-function _grid(connect,intersect,edges)
+function genGrid(connect, edges)
 {
   function findNextNode(node, lastEdge, i) {
     let candidates1 = connect.realConnections.get(node);
@@ -311,8 +299,7 @@ function _grid(connect,intersect,edges)
 }
 
 
-function _getStartArrangement(){return(
-function(start, right, bottom) {
+function getStartArrangement(start, right, bottom) {
   for (let i = 0; i < 8; i++) {
     let eRotation = start.matchRight(right, i);
     let sRotation = start.matchBottom(bottom, i);
@@ -322,10 +309,8 @@ function(start, right, bottom) {
   }
   return false;
 }
-)}
 
-function _getNextCellRotations(input){return(
-function(id, rotation, rightId, bottomId) {
+function getNextCellRotations(input, id, rotation, rightId, bottomId) {
   let eRotation = input.get(id).matchRight(input.get(rightId), rotation);
   let sRotation = input.get(id).matchBottom(input.get(bottomId), rotation);
   if (eRotation != -1 && sRotation != -1) {
@@ -333,34 +318,19 @@ function(id, rotation, rightId, bottomId) {
   }
   return false;
 }
-)}
 
-function _getSouthCell(input){return(
-function(id, rotation, southId) {
+function getSouthCell(input, id, rotation, southId) {
   let sRotation = input.get(id).matchBottom(input.get(southId), rotation);
   if (sRotation != -1) {
     return { sRotation };
   }
   return false;
 }
-)}
 
-function _gridIt(){return(
-function(elems) {
-  let ret = '';
-  for (let row of elems) {
-    let rowStr = '';
-    for (let cell of row) {
-      rowStr += `<div style="display:inline-block;margin-right:10px"><pre>${cell}</pre></div>`;
-    }
-    ret += `<div>${rowStr}</div>`;
-  }
-  return ret;
-}
-)}
-
-function _finalGrid(getStartArrangement,input,edges,grid,getNextCellRotations,getSouthCell,gridIt,html)
+function genFinalGrid(input, connections)
 {
+  let edges = genEdges(connections);
+  let grid = genGrid(connections, edges);
   let { startRotation, eRotation, sRotation } = getStartArrangement(
     input.get(edges.topEdge[0]),
     input.get(edges.topEdge[1]),
@@ -375,6 +345,7 @@ function _finalGrid(getStartArrangement,input,edges,grid,getNextCellRotations,ge
   for (let x = 0; x < grid.grid.length - 1; x++) {
     for (let y = 0; y < grid.grid.length - 1; y++) {
       let ncr = getNextCellRotations(
+        input,
         grid.grid[y][x],
         rotationGrid.get(key(x, y)),
         grid.grid[y][x + 1],
@@ -387,6 +358,7 @@ function _finalGrid(getStartArrangement,input,edges,grid,getNextCellRotations,ge
   let x = grid.grid.length - 1;
   let y = grid.grid.length - 2;
   let ncr = getSouthCell(
+    input,
     grid.grid[y][x],
     rotationGrid.get(key(x, y)),
     grid.grid[y + 1][x]
@@ -431,15 +403,16 @@ function _finalGrid(getStartArrangement,input,edges,grid,getNextCellRotations,ge
 }
 
 
-function _numHashes(finalGrid){return(
-finalGrid.join('').match(/#/g).length
-)}
+function _ANSWER_2(input) {
+  let cm = connectionMatrix(input);
+  let connections = connect(cm);
+  console.log(connections.corners)
+  let finalGrid = genFinalGrid(input, connections);
+  let numHashes = finalGrid.join('').match(/#/g).length;
+  return numHashes - 21 * monsterOffsets.length
+}
 
-function _ANSWER_2(numHashes,monsterOffsets){return(
-numHashes - 21 * monsterOffsets.length
-)}
-
-function _monstersFound(Grid,finalGrid)
+function monstersFound(finalGrid)
 {
   let grid = new Grid(finalGrid.map(a => a.split('')));
   for (let rotation = 0; rotation < 8; rotation++) {
@@ -449,15 +422,15 @@ function _monstersFound(Grid,finalGrid)
 }
 
 
-function _monsterLiteral(){return(
-`                  # 
+function monsterLiteral(){
+  return`                  # 
 #    ##    ##    ###
- #  #  #  #  #  # `
-)}
+ #  #  #  #  #  # `;
+}
 
-function _monsterOffsets(monsterLiteral)
+function monsterOffsets()
 {
-  let offsetMatrix = monsterLiteral.split('\n').map(line =>
+  let offsetMatrix = monsterLiteral().split('\n').map(line =>
     line
       .split('')
       .map((char, i) => (char == '#' ? i : -1))
