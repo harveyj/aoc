@@ -4,14 +4,11 @@ function _1(md){return(
 md`# Advent 2020 Day 21!`
 )}
 
+function _input(input) {
+  return processInput(input);
+}
 
-
-function _input(processInput,inputRaw,selectedInput){return(
-processInput(inputRaw[selectedInput])
-)}
-
-function _processInput(){return(
-function(input) {
+function processInput(input) {
   function processFood(rawFood) {
     rawFood = rawFood.split(')')[0];
     let allergens = rawFood
@@ -25,14 +22,9 @@ function(input) {
     return { ingredients, allergens };
   }
   return input.split('\n').map(processFood);
-}
-)}
+};
 
-
-
-
-function _allergensToRecipes(input)
-{
+function genAllergensToRecipes(input) {
   let retMap = new Map();
   for (let [recipeIdx, recipe] of input.entries()) {
     for (let allergen of recipe.allergens) {
@@ -45,7 +37,7 @@ function _allergensToRecipes(input)
 }
 
 
-function _ingredientsToRecipes(input)
+function genIngredientsToRecipes(input)
 {
   let retMap = new Map();
   for (let [recipeIdx, recipe] of input.entries()) {
@@ -59,19 +51,15 @@ function _ingredientsToRecipes(input)
 }
 
 
-function _intersect(){return(
-function(a, b) {
+function intersect(a, b) {
   return new Set([...a].filter(x => b.has(x)));
 }
-)}
 
-function _subtract(){return(
-function(a, b) {
+function subtract(a, b) {
   return new Set([...a].filter(x => !b.has(x)));
 }
-)}
 
-function _allAllergens(input)
+function genAllAllergens(input)
 {
   let retSet = new Set();
   for (let [recipeIdx, recipe] of input.entries()) {
@@ -82,8 +70,7 @@ function _allAllergens(input)
   return retSet;
 }
 
-
-function _allIngredients(input)
+function genAllIngredients(input)
 {
   let retSet = new Set();
   for (let [recipeIdx, recipe] of input.entries()) {
@@ -95,37 +82,36 @@ function _allIngredients(input)
 }
 
 
-function _allergenToPossibilities(input,allergensToRecipes,subtract,intersect){return(
-function(allergen, exclusions) {
+function allergenToPossibilities(allergen, exclusions, input) {
+  let allergensToRecipes = genAllergensToRecipes(input);
   let possibleSet = new Set(
     input[allergensToRecipes.get(allergen)[0]].ingredients
   );
   possibleSet = subtract(possibleSet, new Set(exclusions));
-  console.log({ allergen, possibleSet, exclusions });
   for (let recipeIdx of allergensToRecipes.get(allergen)) {
     let recipe = input[recipeIdx];
     possibleSet = intersect(possibleSet, new Set(recipe.ingredients));
   }
   return possibleSet;
 }
-)}
 
-function _ANSWER_1(allAllergens,allergenToPossibilities,allIngredients,ingredientsToRecipes)
-{
+function _GEN_ANSWER_1(input) {
+  let allAllergens = genAllAllergens(input);
   let allergenToPossibleRecipes = new Map();
   let knownAllergens = new Map();
   for (let i = 0; i < 10; i++) {
     for (let allergen of allAllergens) {
       let results = Array.from(
-        allergenToPossibilities(allergen, knownAllergens.keys())
+        allergenToPossibilities(allergen, knownAllergens.keys(), input)
       );
-      console.log(...knownAllergens.keys());
       if (results.length == 1) {
         knownAllergens.set(results[0], allergen);
       }
     }
   }
   let total = 0;
+  let allIngredients = genAllIngredients(input);
+  let ingredientsToRecipes = genIngredientsToRecipes(input);
   for (let ingredient of allIngredients) {
     if (knownAllergens.has(ingredient)) {
       continue;
@@ -135,9 +121,13 @@ function _ANSWER_1(allAllergens,allergenToPossibilities,allIngredients,ingredien
   return { knownAllergens, total };
 }
 
+function _ANSWER_1(input) {
+  return _GEN_ANSWER_1(input).total;
+}
 
-function _ANSWER_2(ANSWER_1)
+function _ANSWER_2(input)
 {
+  let ANSWER_1 = _GEN_ANSWER_1(input);
   let allergenToIngredient = new Map(
     Array.from(ANSWER_1.knownAllergens, a => a.reverse())
   );
@@ -147,5 +137,3 @@ function _ANSWER_2(ANSWER_1)
     .map(a => allergenToIngredient.get(a))
     .join();
 }
-
-
