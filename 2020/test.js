@@ -10,7 +10,7 @@ function check(raw_answers) {
   let answers = raw_answers.split('\n');
   answers = answers.map(row => row.split(' ').map(a=>eval(a)));
   // console.log(answers);
-  for (let i = 13; i < 14; i++) {
+  for (let i = 15; i < 16; i++) {
     const day = require(`./day${i}.js`);
     fs.readFile(`./2020/inputs/${i}.txt`, 'utf8', (err, data) => {
       let [dayId, correct1, correct2] = answers[i-1];

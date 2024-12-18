@@ -72,8 +72,7 @@ function setCharAt(str, index, chr) {
   return str.substring(0, index) + chr + str.substring(index + 1);
 }
 
-function _ANSWER_2(input)
-{
+function _ANSWER_2(input) {
   function applyMask(mask, val) {
     for (let i = 0; i < 36; i++) {
       let bit = 2 ** (35 - i);
@@ -122,10 +121,6 @@ function _ANSWER_2(input)
   }
   return total;
 }
-
-
-
-
 
 function and(v1, v2) {
     var hi = 0x80000000;

@@ -12,11 +12,10 @@ INPUT.split(',').map(a => a * 1)
 
 
 
-
-function _ANSWER_1(input)
+// TODO brute force
+function _ANSWER_2(input)
 {
   let mem = new Map();
-  let nums = [];
   let uttered = [];
   for (let i = 0; i < input.length; i++) {
     mem.set(input[i], i + 1);
@@ -24,7 +23,6 @@ function _ANSWER_1(input)
   }
 
   for (let i = input.length; i < 30000000; i++) {
-    let turn = i + 1;
     let last = uttered[uttered.length - 1];
     if (!mem.has(last)) {
       uttered.push(0);
@@ -36,8 +34,28 @@ function _ANSWER_1(input)
   return uttered[uttered.length - 1];
 }
 
-// TODO
-function _ANSWER_2(input){}
+function _ANSWER_1(input)
+{
+  let mem = new Map();
+  let nums = [];
+  let uttered = [];
+  for (let i = 0; i < input.length; i++) {
+    mem.set(input[i], i + 1);
+    uttered.push(input[i]);
+  }
+
+  for (let i = input.length; uttered.length < 2021; i++) {
+    let turn = i + 1;
+    let last = uttered[uttered.length - 1];
+    if (!mem.has(last)) {
+      uttered.push(0);
+    } else {
+      uttered.push(i - mem.get(last));
+    }
+    mem.set(last, i);
+  }
+  return uttered[2019];
+}
 
 
 function _setCharAt(){return(
