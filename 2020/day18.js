@@ -4,17 +4,13 @@ function _1(md){return(
 md`# Advent 2020 Day 18!`
 )}
 
-
-
-function _input(inputRaw,selectedInput,processInput){return(
-inputRaw[selectedInput]
-  .split('\n')
+function _input(input){
+  return input.split('\n')
   .map(a => a)
   .map(processInput)
-)}
+}
 
-function _processInput(){return(
-function(input) {
+function processInput(input) {
   function processInputHelper(input, start) {
     let out = [];
     let lastNum = null;
@@ -43,9 +39,6 @@ function(input) {
   }
   return processInputHelper(input, 0);
 }
-)}
-
-
 
 
 function _ANSWER_1(input)
@@ -101,13 +94,11 @@ function _ANSWER_2(input)
     }
     return expr;
   }
-  return {
-    pieces: input.map(process),
-    total: input
+  console.log(input)
+  return input
       .map(process)
       .map(evaluate)
-      .reduce((a, b) => a + b, 0)
-  };
+      .reduce((a, b) => a + b, 0);
 }
 
 
