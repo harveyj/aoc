@@ -4,20 +4,13 @@ function _1(md){return(
 md`# Advent 2020 Day 23!`
 )}
 
+function _input(input) {
+  return processInput(input)
+}
 
-
-function _input(processInput,inputRaw,selectedInput){return(
-processInput(inputRaw[selectedInput])
-)}
-
-function _processInput(){return(
-function(input) {
+function processInput(input) {
   return input.split('').map(a => a * 1);
 }
-)}
-
-
-
 
 function _ANSWER_1(input)
 {
@@ -52,9 +45,10 @@ function _ANSWER_1(input)
   return ret.slice(1).join('');
 }
 
-
+// TODO lol crashes the vm
 function _ANSWER_2(input)
 {
+  return 0;
   let MAX = 100;
   let filler = [...Array(MAX - input.length)];
   filler = filler.map((a, idx) => idx + input.length + 1);
@@ -88,7 +82,7 @@ function _ANSWER_2(input)
   }
 
   // return deck[deck.indexOf(1) + 1] * deck[deck.indexOf(1) + 2];
-  return answerMap;
+  // console.log(answerMap)
   return Array.from(answerMap.entries()).filter((a, b) => a[1].length > 1);
 }
 

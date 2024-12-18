@@ -4,27 +4,19 @@ function _1(md){return(
 md`# Advent 2020 Day 24 - Christmas Eve!`
 )}
 
+function _input(input) {
+  return processInput(input);
+}
 
-
-
-
-
-function _input(processInput,inputRaw,selectedInput){return(
-processInput(inputRaw[selectedInput])
-)}
-
-function _processInput(processPath,pathToLoc){return(
-function(input) {
+function processInput(input) {
   let paths = input
     .split('\n')
     .map(processPath)
   let locs = paths.map(pathToLoc);
   return { paths, locs };
 }
-)}
 
-function _processPath(){return(
-function(rawPath) {
+function processPath(rawPath) {
   let items = [];
   for (let i = 0; i < rawPath.length; i) {
     if (rawPath[i] == 'n') {
@@ -53,10 +45,8 @@ function(rawPath) {
   }
   return items;
 }
-)}
 
-function _pathToLoc(){return(
-function(path) {
+function pathToLoc(path) {
   let x = 0;
   let y = 0;
   for (let step of path) {
@@ -82,9 +72,8 @@ function(path) {
   }
   return { x, y };
 }
-)}
 
-function _ANSWER_1(input)
+function GEN_ANSWER_1(input)
 {
   let tiles = new Map();
   for (let loc of input.locs) {
@@ -98,15 +87,16 @@ function _ANSWER_1(input)
   return Array.from(tiles.values()).filter(a => a.black);
 }
 
+function _ANSWER_1(input) {
+  return GEN_ANSWER_1(input).length;
+}
 
-function _k(){return(
-function(loc) {
+
+function k(loc) {
   return loc.x + " " + loc.y
 }
-)}
 
-function _hexNeighbors(){return(
-function(loc) {
+function hexNeighbors(loc) {
   return [
     { x: loc.x - 1, y: loc.y },
     { x: loc.x + 1, y: loc.y },
@@ -116,10 +106,10 @@ function(loc) {
     { x: loc.x + 0.5, y: loc.y - 1 }
   ];
 }
-)}
 
-function _ANSWER_2(ANSWER_1,k,hexNeighbors)
+function _ANSWER_2(input)
 {
+  ANSWER_1 = GEN_ANSWER_1(input)
   let locMap = new Map();
   ANSWER_1.forEach(a => {
     if (a.black) {
@@ -147,7 +137,7 @@ function _ANSWER_2(ANSWER_1,k,hexNeighbors)
         newLocMap.set(k(candidateLoc), { loc: candidateLoc, black: true });
       }
     }
-    console.log("num tiles", day + 1, newLocMap.size);
+    // console.log("num tiles", day + 1, newLocMap.size);
     locMap = newLocMap;
   }
   return newLocMap.size;
