@@ -4,20 +4,19 @@ function _1(md){return(
 md`# Advent 2020 Day 13!`
 )}
 
+function _input(INPUT){
+return INPUT.split('\n');
+}
 
-
-function _input(INPUT){return(
-INPUT.split('\n')
-)}
-
-function _processedInput(input)
+function processInput(input)
 {
   return { start: input[0] * 1, periods: input[1].split(',').map(a => 1 * a) };
 }
 
 
-function _ANSWER_1(processedInput)
+function _ANSWER_1(input)
 {
+  let processedInput = processInput(input);
   let bestBus = null;
   let bestGap = 10000000000000000;
   let gaps = {};
@@ -34,13 +33,31 @@ function _ANSWER_1(processedInput)
     }
     gaps[bus] = gap;
   }
-  return { answer: bestBus * bestGap, gaps };
+  return bestBus * bestGap;
 }
 
 
-// called _SLOW_ANSWER_2
-function _ANSWER_2(processedInput)
+function _ANSWER_2(input)
 {
+  let processedInput = processInput(input);
+  let buses = processedInput.periods;
+  step = 1;
+  val = 0;
+  for (i = 0; i < buses.length; i++) {
+    while (buses[i]) {
+      if ((val + i) % buses[i] == 0) {
+        step *= buses[i];
+        break;
+      }
+      val += step;
+    }
+  }
+  return val;
+}
+
+function _SLOW_ANSWER_2(input)
+{
+  let processedInput = processInput(input);
   function findA(busIndex, bus, a, b) {
     for (let i = a; i < 1000000000000000; i += b) {
       if (i % bus == (bus - busIndex) % bus) {
@@ -49,6 +66,7 @@ function _ANSWER_2(processedInput)
         return [a, b];
       }
     }
+    return [-1, -1] // error condition
   }
   let vals = [];
   let buses = processedInput.periods;

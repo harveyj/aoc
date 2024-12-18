@@ -24,7 +24,7 @@ function check(raw_answers) {
         console.log(`${i} INCORRECT pt1 ${answer1}, ${correct1}`);
       }
       if (answer2 == correct2) {
-        console.log(`${i} CORRECT pt2 ${answer1}`)
+        console.log(`${i} CORRECT pt2 ${answer2}`)
       } else {
         console.log(`${i} INCORRECT pt2 ${answer2}, ${correct2}`);
       }
