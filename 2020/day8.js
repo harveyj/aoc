@@ -7,23 +7,20 @@ md`# Advent 2020 Day 8!`
 
 
 
-
-
-function _input(inputRaw,selectedInput,parseInstruction){return(
-inputRaw[selectedInput].split('\n').map(parseInstruction)
-)}
-
-function _parseInstruction(){return(
-function(inst) {
-  let instRe = /(...) (.\d+)/;
-  let [_, op, val] = inst.match(instRe);
-  val *= 1;
-  return { op, val };
+function parseInstruction(inst){
+    let instRe = /(...) (.\d+)/;
+    let [_, op, val] = inst.match(instRe);
+    val *= 1;
+    return { op, val };
 }
+  
+
+function _input(input){return(
+input.split('\n').map(parseInstruction)
 )}
 
-function _run(){return(
-function(program) {
+
+function run(program) {
   let pc = 0;
   let acc = 0;
   let seenPc = new Set();
@@ -49,15 +46,14 @@ function(program) {
   }
   return acc;
 }
-)}
 
-function _ANSWER_1(run,input)
+function _ANSWER_1(input)
 {
   return run(input);
 }
 
 
-function _ANSWER_2(input,run)
+function _ANSWER_2(input)
 {
   let program = input;
   for (let i = 0; i < program.length; i++) {

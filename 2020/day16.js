@@ -95,7 +95,7 @@ function _ANSWER_2(ANSWER_1,input)
     for (let i = 0; i < spec.vals.length; i++) {
       let val = spec.vals[i];
       if (val.a <= value && val.b >= value) {
-        console.log('found');
+        // console.log('found');
         found = false;
       }
     }
@@ -110,7 +110,7 @@ function _ANSWER_2(ANSWER_1,input)
       let field = tick[i];
       for (let spec of input.specs) {
         if (invalidForValue(spec, field)) {
-          console.log(spec, field, tick, i);
+          // console.log(spec, field, tick, i);
           invalids.get(i).add(spec.name);
         }
       }

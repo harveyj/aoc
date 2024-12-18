@@ -5,16 +5,11 @@ md`# Advent 2020 Day 5!`
 )}
 
 
-
-
-
-
 function _input(INPUT){return(
 INPUT.split('\n')
 )}
 
-function _toId(){return(
-function(input) {
+function toId(input) {
   let row = 0;
   let increment = 64;
   for (let i = 0; i < 7; i++) {

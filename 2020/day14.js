@@ -53,7 +53,7 @@ function _ANSWER_1(or,and,input)
     for (let andVal of mask.ands) {
       val = and(val, andVal);
     }
-    console.log(val);
+    // console.log(val);
     return val;
   }
   for (let inst of input) {

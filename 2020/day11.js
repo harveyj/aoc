@@ -64,8 +64,8 @@ function(oldSeating) {
       }
     }
   }
-  console.log(oldSeating);
-  console.log(grid);
+  // console.log(oldSeating);
+  // console.log(grid);
   return nextSeating;
 }
 )}

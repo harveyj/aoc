@@ -4,16 +4,11 @@ function _1(md){return(
 md`# Advent 2020 Day 7!`
 )}
 
-
-
-
-
-
 function _input(INPUT){return(
 INPUT.split('\n')
 )}
 
-function _processedInput(input)
+function processInput(input)
 {
   let tree = new Map();
   let reverseTree = new Map();
@@ -39,8 +34,7 @@ function _processedInput(input)
 }
 
 
-function _walkTree(processedInput){return(
-function(start) {
+function walkTree(processedInput, start){
   let legals = new Set();
   let queue = [start];
   while (queue.length > 0) {
@@ -54,13 +48,10 @@ function(start) {
   }
   return legals;
 }
-)}
 
-function _containedBags(processedInput){return(
-function(currentBag) {
+function containedBags(processedInput, currentBag) {
   let cbHelper = function(currentBag) {
     let children = processedInput.reverseTree.get(currentBag) || [];
-    console.log(children, processedInput.reverseTree, currentBag);
     let totalContainedBags = 0;
     for (let child of children) {
       totalContainedBags += cbHelper(child.val) * child.num;
@@ -70,30 +61,17 @@ function(currentBag) {
   };
   return cbHelper(currentBag);
 }
-)}
 
-function _ANSWER_1(walkTree)
+function _ANSWER_1(input)
 {
-  return walkTree("shiny gold").size - 1;
+  let processedInput = processInput(input)
+  return walkTree(processedInput, "shiny gold").size - 1;
 }
 
 
-function _ANSWER_2(containedBags)
+function _ANSWER_2(input)
 {
-  return containedBags("shiny gold");
+  let processedInput = processInput(input)
+  return containedBags(processedInput, "shiny gold") - 1;
 }
-
-
-function _results(){return(
-[
-]
-)}
-
-function _a()
-{
-  let z = [5];
-  z.pop();
-  return z;
-}
-
 

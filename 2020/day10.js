@@ -48,7 +48,6 @@ function _ANSWER_2(inputAdjusted)
       if (otherJolt && otherJolt - jolt < 4) {
         paths[i] += paths[j];
         let otherPaths = JSON.parse(JSON.stringify(paths));
-        console.log({ j, i, jolt, otherJolt, otherPaths });
       }
     }
   }

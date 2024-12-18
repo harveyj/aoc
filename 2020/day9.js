@@ -4,11 +4,6 @@ function _1(md){return(
 md`# Advent 2020 Day 9!`
 )}
 
-
-
-
-
-
 function _input(INPUT){return(
 INPUT.split('\n').map(a => a * 1)
 )}
@@ -39,7 +34,7 @@ function _ANSWER_1(input)
 }
 
 
-function _RANGE_2(input)
+function gen_range_2(input)
 {
   let TARGET = 257342611;
   // let TARGET = 127;
@@ -63,8 +58,9 @@ function _RANGE_2(input)
 }
 
 
-function _ANSWER_2(RANGE_2,input)
+function _ANSWER_2(input)
 {
+  let RANGE_2 = gen_range_2(input);
   let max = 0;
   let min = 100000000000000;
   for (let i = RANGE_2[0]; i < RANGE_2[1]; i++) {

@@ -2,19 +2,32 @@
 const fs = require('node:fs');
 
 
-fs.readFile('./inputs/answers.txt', 'utf8', (err, data) => {
+fs.readFile('./2020/inputs/answers.txt', 'utf8', (err, data) => {
   check(data);
 });
 
-function check(answers) {
-  // console.log(answers)
-  for (let i = 1; i < 3; i++) {
+function check(raw_answers) {
+  let answers = raw_answers.split('\n');
+  answers = answers.map(row => row.split(' ').map(a=>eval(a)));
+  // console.log(answers);
+  for (let i = 1; i < 10; i++) {
     const day = require(`./day${i}.js`);
-    fs.readFile(`./inputs/${i}.txt`, 'utf8', (err, data) => {
-      let input = day._input(data);
-      console.log(input);
+    fs.readFile(`./2020/inputs/${i}.txt`, 'utf8', (err, data) => {
+      let [dayId, correct1, correct2] = answers[i-1];
+      // console.log(data);
+      let input = day._input(data.trim());
       let answer1 = day._ANSWER_1(input);
       let answer2 = day._ANSWER_2(input);
+      if (answer1 == correct1) {
+        console.log(`${i} CORRECT 1`)
+      } else {
+        console.log(`${i} INCORRECT 1 ${answer1}, ${correct1}`);
+      }
+      if (answer2 == correct2) {
+        console.log(`${i} CORRECT 2`)
+      } else {
+        console.log(`${i} INCORRECT 2 ${answer2}, ${correct2}`);
+      }
     }); 
   };
 }

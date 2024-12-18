@@ -4,9 +4,9 @@ function _1(md){return(
 md`# Advent 2020 Day 3!`
 )}
 
-function _input(INPUT){return(
-INPUT.split('\n').map(a => a.split(''))
-)}
+function _input(INPUT){
+  return INPUT.split('\n').map(a => a.split(''))
+}
 
 function _ANSWER_1(input)
 {
@@ -21,13 +21,10 @@ function _ANSWER_1(input)
 }
 
 
-function _increments(){return(
-[[1, 1], [3, 1], [5, 1], [7, 1], [1, 2]]
-)}
-
-function _ANSWER_2(increments,INPUT)
+function _ANSWER_2(INPUT)
 {
   let results = [];
+  let increments = [[1, 1], [3, 1], [5, 1], [7, 1], [1, 2]];
   for (let a = 0; a < increments.length; a++) {
     let total = 0;
     let [dx, dy] = increments[a];

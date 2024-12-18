@@ -44,10 +44,7 @@ function _ANSWER_2(input)
       }
     }
     for (let [item, value] of items.entries()) {
-      console.log([value, group.length]);
       if (value === group.length) {
-        console.log('yes');
-
         total += 1;
       }
     }

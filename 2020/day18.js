@@ -90,12 +90,12 @@ function _ANSWER_2(input)
     }
     for (let i = 0; i < expr.length; i++) {
       if (Array.isArray(expr[i])) {
-        console.log(JSON.parse(JSON.stringify(expr[i])));
+        // console.log(JSON.parse(JSON.stringify(expr[i])));
         process(expr[i]);
       }
       if (expr[i] == '+') {
         let lval = process(expr[i + 1]);
-        console.log(lval);
+        // console.log(lval);
         expr.splice(i - 1, 3, [expr[i - 1], '+', lval]);
       }
     }

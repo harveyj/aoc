@@ -72,7 +72,6 @@ function(match) {
   if (!match || !match.hgt) {
     return false;
   }
-  console.log(match);
   if (match.hgt[1] == 'cm') {
     return 150 <= match.hgt[0] * 1 && match.hgt[0] * 1 <= 193;
   } else if (match.hgt[1] == 'in') {
