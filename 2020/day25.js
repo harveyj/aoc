@@ -4,42 +4,30 @@ function _1(md){return(
 md`# Advent 2020 Day 25 - Christmas!`
 )}
 
+function _input(input) {
+  return processInput(input);
+}
 
-
-
-
-
-function _input(processInput,inputRaw,selectedInput){return(
-processInput(inputRaw[selectedInput])
-)}
-
-function _processInput(){return(
-function(input) {
+function processInput(input) {
   let [publicCard, publicDoor] = input.split('\n').map(a => a * 1);
   return { publicCard, publicDoor };
 }
-)}
 
-function _transform(){return(
-function(val, subjectNumber) {
+function transform(val, subjectNumber) {
   val *= subjectNumber;
   val = val % 20201227;
   return val;
 }
-)}
 
-function _transformN(transform){return(
-function(subjectNumber, loopSize) {
+function transformN(subjectNumber, loopSize) {
   let val = 1;
   for (let i = 0; i < loopSize; i++) {
     val = transform(val, subjectNumber);
   }
   return val;
 }
-)}
 
-function _findLoopSize(transform){return(
-function(publicKey, subjectNumber) {
+function findLoopSize(publicKey, subjectNumber) {
   let MAX = 100000000;
   let val = 1;
   for (let i = 0; i < MAX; i++) {
@@ -50,18 +38,17 @@ function(publicKey, subjectNumber) {
   }
   return -1;
 }
-)}
 
-function _ANSWER_1(findLoopSize,input,transformN)
+function _ANSWER_1(input)
 {
   let loopSize = findLoopSize(input.publicDoor, 7);
-  console.log(loopSize);
   return transformN(input.publicCard, loopSize);
 }
 
 
 function _ANSWER_2()
 {
+  return 20201225;
 }
 
 

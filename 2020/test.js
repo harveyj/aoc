@@ -9,7 +9,7 @@ fs.readFile('./2020/inputs/answers.txt', 'utf8', (err, data) => {
 function check(raw_answers) {
   let answers = raw_answers.split('\n');
   answers = answers.map(row => row.split(' ').map(a=>eval(a)));
-  for (let i = 20; i < 21; i++) {
+  for (let i = 1; i < 26; i++) {
     const day = require(`./day${i}.js`);
     fs.readFile(`./2020/inputs/${i}.txt`, 'utf8', (err, data) => {
       let [dayId, correct1, correct2] = answers[i-1];
