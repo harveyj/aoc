@@ -177,7 +177,7 @@ def one(INPUT):
 
   ac=ArcadeCabinet()
   ac.run()
-  print(ac.blocks)
+  # print(ac.blocks)
   return ac.blocks
 
 def two(INPUT):

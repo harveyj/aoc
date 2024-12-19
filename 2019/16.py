@@ -28,7 +28,8 @@ def one(INPUT):
   for i in range(100):
     out = one_round(out)
     # print(list(out)[:8])
-  print(out[:8])
+  # print(out[:8])
+  return out[:8]
 
 def two(INPUT):
   import math

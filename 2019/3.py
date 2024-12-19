@@ -83,8 +83,8 @@ def two(INPUTS):
       if loc not in dist_b: dist_b[loc] = i
 
       if loc[1] in nodes.get(loc[0], []):
-        print('INTERSECT', dist_a[loc] + dist_b[loc])
-        print('INTERSECT', loc)
+        # print('INTERSECT', dist_a[loc] + dist_b[loc])
+        # print('INTERSECT', loc)
         intersects.append(dist_a[loc] + dist_b[loc])
       i += 1
   return min(intersects)

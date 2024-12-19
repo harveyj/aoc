@@ -69,8 +69,8 @@ def two(INPUT):
   g_0 = library.Grid(raw='\n'.join(INPUT))
   grids = [library.Grid(x=5, y=5) for i in range(depth)] + [g_0] + [library.Grid(x=5, y=5) for i in range(depth)]
 
-  print(grids[depth])
-  print('')
+  # print(grids[depth])
+  # print('')
 
   for i in range(200):
     new_grids = [library.Grid(x=5, y=5) for i in range(depth*2+1)]
@@ -101,45 +101,4 @@ def two(INPUT):
   return sum([len(G.detect('#')) for G in grids])
 
 
-def test():
-  grids = [library.Grid(x=5, y=5) for i in range(10)]
-  grids[5] = library.Grid(grid=['ABCDE', 'FGHIJ', 'KLMNO', 'PQRST', 'UVWXY']) 
-  grids[6] = library.Grid(grid=['12345', '67890', [11, 12, 13, 14, 15], [16, 17, 18, 19, 20], [21,22,23,24,25]])
-
-  # print(neighbors(grids, 6, (3,3))) 
-  # print(neighbors(grids, 5, (1,1))) 
-  # print(neighbors(grids, 5, (3,0))) 
-  # print(neighbors(grids, 5, (4,0))) 
-  # print(neighbors(grids, 6, (3,2))) 
-  # print(neighbors(grids, 5, (3,2))) 
-
-
-  print(neighbors(grids, 6, (1,2))) 
-  print(neighbors(grids, 6, (3,2))) 
-  print(neighbors(grids, 6, (2, 3))) 
-  print(neighbors(grids, 6, (2, 1))) 
-
-  print(neighbors(grids, 5, (0,0))) 
-  print(neighbors(grids, 5, (0,1))) 
-  print(neighbors(grids, 5, (0,2))) 
-  print(neighbors(grids, 5, (0,3))) 
-  print(neighbors(grids, 5, (0,4))) 
-  
-  print(neighbors(grids, 5, (1,0))) 
-  print(neighbors(grids, 5, (1,1))) 
-  # print(neighbors(grids, 5, (1,2))) 
-  print(neighbors(grids, 5, (1,3))) 
-  print(neighbors(grids, 5, (1,4))) 
-
-  print(neighbors(grids, 5, (2,0))) 
-  # print(neighbors(grids, 5, (2,1)))
-  # print(neighbors(grids, 5, (2,2))) 
-  # print(neighbors(grids, 5, (2,3))) 
-  print(neighbors(grids, 5, (2,4))) 
-
-
-
 p = puzzle.Puzzle("2019", "24")
-# p.run(one, 0)
-p.run(two, 0)
-# test()

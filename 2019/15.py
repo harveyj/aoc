@@ -261,7 +261,7 @@ def one(INPUT):
       return len(path) + 1 # todo +1
   rr=RepairRobot(INPUT[0].split(','))
   rr.run()
-  rr.pathfind()
+  return rr.pathfind()
 
 def two(INPUT):
   class RepairRobot(object):

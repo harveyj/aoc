@@ -14,11 +14,11 @@ class SpringDroid(object):
     for i in range(10000):
       code, out = self.puter.run()
       if code == intputer.Intputer.OUTPUT:
-        print("OUTPUT", out)
+        # print("OUTPUT", out)
         self.outputs.append(out)
       elif code == intputer.Intputer.INPUT: 
         next_ip = raw_input()
-        print("INPUT", next_ip)
+        # print("INPUT", next_ip)
         break
       else:
         # print("foo")

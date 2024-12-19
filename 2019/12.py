@@ -44,9 +44,9 @@ def one(INPUT):
       moons.append(Moon(x, y, z))
 
   for i in range(1001):
-    print("After %i steps" % i)
-    for m in moons:
-      print(m)
+    # print("After %i steps" % i)
+    # for m in moons:
+    #   print(m)
     nrg = 0
     for m in moons:
       nrg += (abs(m.x) + abs(m.y) + abs(m.z)) * (abs(m.vx) + abs(m.vy) + abs(m.vz))

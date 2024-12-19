@@ -96,7 +96,7 @@ def puzz(INPUT):
   while not needed_too_much(fuel):
     fuel += 1
   fuel -= 1
-  return needed(1), fuel // 1
+  return needed(1) // 1, int(fuel)
 
 def one(INPUT):
   return puzz(INPUT)[0]

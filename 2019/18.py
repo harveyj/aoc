@@ -74,7 +74,8 @@ def one(INPUT):
 
   cache = {}
   # print(bfs(grid, (sx, sy), []))
-  print(distance_to_collect_keys('@', ALL_KEYS, cache))
+  return distance_to_collect_keys('@', ALL_KEYS, cache)
+
 
 def two(INPUT):
   import fileinput, itertools, collections, copy

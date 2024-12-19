@@ -304,7 +304,7 @@ def two(INPUT):
     def __str__(self):
       floor = copy.deepcopy(self.floor)
       if self.overlay_pts:
-        print(self.overlay_pts[0])
+        # print(self.overlay_pts[0])
         floor[self.overlay_pts[0][0][0]][self.overlay_pts[0][0][1]] = self.overlay_pts[0][1]
       rets = []
       for l in floor:
