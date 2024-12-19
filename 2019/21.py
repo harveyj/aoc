@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 
 import intputer
+import puzzle 
 
 class SpringDroid(object):
 
@@ -46,11 +47,14 @@ def one(INPUT):
   sd = SpringDroid(prog, instructions)
 
   out = sd.run2()
-  for c in out:
-    if c > 255:
-      print(c)
-    else: 
-      print(chr(c), end='')
+  # vals = []
+  # for c in out:
+  #   vals.append(c)
+    # if c > 255:
+    #   print(c)
+    # else: 
+    #   print(chr(c), end='')
+  return out[-1]
 
 
 def two(INPUT):
@@ -73,14 +77,15 @@ def two(INPUT):
   sd = SpringDroid(prog, instructions)
 
   out = sd.run2()
-  for c in out:
-    if c > 255:
-      print(c)
-    else: 
-      print(chr(c), end='')
+  return out[-1]
+  # for c in out:
+  #   if c > 255:
+  #     print(c)
+  #   else: 
+  #     print(chr(c), end='')
 
-import puzzle 
 
-p = puzzle.Puzzle("2019", "21")
-p.run(one, 0)
-# p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2019", "21")
+  print(p.run(one, 0))
+  print(p.run(two, 0))
