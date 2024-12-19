@@ -236,6 +236,8 @@ def two(INPUT):
   ac.run()
   return ac.segment
 
-p = puzzle.Puzzle("2019", "13")
-# p.run(one, 0)
-p.run(two, 0)
+if __name__ != '__main':
+
+  p = puzzle.Puzzle("2019", "13")
+  p.run(one, 0)
+  p.run(two, 0)

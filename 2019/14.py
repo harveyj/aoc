@@ -104,6 +104,8 @@ def one(INPUT):
 def two(INPUT):
   return puzz(INPUT)[1]
 
-p = puzzle.Puzzle("2019", "14")
-p.run(one, 0)
-p.run(two, 0)
+if __name__ != '__main':
+
+  p = puzzle.Puzzle("2019", "14")
+  p.run(one, 0)
+  p.run(two, 0)

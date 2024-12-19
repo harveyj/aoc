@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-import puzzle, re
-import fileinput, itertools, collections, copy
-import heapq
+import puzzle
+import collections, copy
 
 class Grid(object):
 
