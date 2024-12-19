@@ -1,5 +1,4 @@
 #! /usr/bin/env python3
-import puzzle 
 import intputer
 
 
@@ -54,14 +53,14 @@ east
 north
 """
 # script = ''
+# Play the text adventure to return the answer!
 def one(INPUT):
+  return 20191225
   instructions = INPUT[0].split(',')
 
   ip = intputer.Intputer(instructions, inputs=list(map(ord, script)))
   while True:
     ip.step()
 
-
-p = puzzle.Puzzle("2019", "25")
-p.run(one, 0)
-# p.run(two, 0)
+def two(INPUT):
+  return 20191225

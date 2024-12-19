@@ -95,14 +95,25 @@ Warmup
 Difficulty: 2/10
 
 ## Day 19
-Warmup
+Find the tractor beam!
 
-Difficulty: 2/10
+Rewritten from scratch - really happy with my solution here, replaced a lot of total hacks and non-functioning code with an elegant solution that works by design.
+
+REMAKE 12/19/24 in between Thomas feedings/screamings. Wearing festive socks and my Tree Rex shirt.
+
+Difficulty: 9/10 (orig), 7/10 (redo)
 
 ## Day 20
-Warmup
+Navigate an infinite-level maze.
 
-Difficulty: 2/10
+Lessons learned:
+- If the code claims it sucks, just go and rewrite it
+- ALWAYS BEWARE SEMANTIC WHITESPACE
+- If you change the base lib and don't think carefully about backwards compat, shame on you.
+
+REMAKE 12/19/24 in between Thomas feedings/screamings. Wearing festive socks and my Tree Rex shirt.
+
+Difficulty: 6/10 (redo)
 
 ## Day 21
 Warmup
