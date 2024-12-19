@@ -4,8 +4,7 @@ class Puzzle(object):
   def __init__(self, year, id):
     self.id = id
     self.inputs = []
-    # This .strip() will bite me eventually...
-    raw_inputs = open(year + '/inputs/' + id + '.txt').read().strip().split('\n\n\n')
+    raw_inputs = open(year + '/inputs/' + id + '.txt').read().split('\n\n\n')
     for inval in raw_inputs:
       self.inputs.append([l for l in inval.split('\n') if not l[:2] == '//'])
 
