@@ -142,6 +142,7 @@ def two(INPUT):
   return cost
   print("END QUEUE")
 
-p = puzzle.Puzzle("2019", "18")
-# p.run(one, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2019", "18")
+  p.run(one, 0)
+  p.run(two, 0)

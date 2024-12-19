@@ -367,8 +367,7 @@ def two(INPUT):
   rr.run()
   return rr.flood()
 
-if __name__ != '__main':
-
+if __name__ == '__main__':
   p = puzzle.Puzzle("2019", "15")
   p.run(one, 0)
   p.run(two, 0)

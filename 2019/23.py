@@ -7,6 +7,7 @@ def onetwo(INPUT, two=False):
   puters = [intputer.Intputer(instructions, inputs=[i], id=i) for i in range(50)]
   nat_x, nat_y = None, None
   all_idle_start = -1
+  values = set()
   for i in range(1000000):
     for p in puters:
       # ensure that the input queue is either [-1] or the output that it should be 
@@ -34,8 +35,12 @@ def onetwo(INPUT, two=False):
         if i - all_idle_start > 100:
           puters[0].inputs = [nat_x, nat_y]
           for p in puters: p.last_read = None
-          print(f'REBOOT: {nat_x, nat_y}')
+          # print(f'REBOOT: {nat_x, nat_y}')
           all_idle_start = -1
+          # print(values)
+          if nat_y in values:
+            return nat_y
+          else: values.add(nat_y)
       else: all_idle_start = -1
 
 def one(INPUT):

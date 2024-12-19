@@ -102,7 +102,7 @@ def two(INPUT):
     if x_period > 0 and y_period > 0 and z_period > 0:
       return math.lcm(x_period, y_period, z_period)
 
-if __name__ != '__main':
+if __name__ == '__main__':
   p = puzzle.Puzzle("2019", "12")
   print(p.run(one, 0))
   print(p.run(two, 0))
