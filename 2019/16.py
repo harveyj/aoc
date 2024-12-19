@@ -56,7 +56,7 @@ def two(INPUT):
   answer.reverse()
   return ''.join(map(str, answer))
 
-if __name__ != '__main':
+if __name__ != '__main__':
 
   p = puzzle.Puzzle("2019", "16")
   p.run(one, 0)
