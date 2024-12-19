@@ -130,7 +130,7 @@ def two(INPUT):
     cost, cpos, keys = heapq.heappop(queue)
     # print(cost, cpos, keys)
     if len(keys) == len(ALL_KEYS):
-      print("TERM END")
+      # print("TERM END")
       return cost
     if (cpos, keys) in seen:
       continue
