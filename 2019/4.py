@@ -29,8 +29,11 @@ def onetwo(INPUT, two=False):
     if is_adjacent and is_inc: num += 1
   return num
 
+def one(INPUT): return onetwo(INPUT, two=False)
+
 def two(INPUT): return onetwo(INPUT, two=True)
 
-p = puzzle.Puzzle("2019", "4")
-p.run(onetwo, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2019", "4")
+  p.run(onetwo, 0)
+  p.run(two, 0)

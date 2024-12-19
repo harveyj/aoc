@@ -73,9 +73,11 @@ class Intputer(object):
     return self.run2()
 
   def run2(self):
-    while not (self.halted or self.terminated):
+    while not self.terminated:
       # print(f'pc: {self.pc}, data:{self.ram[self.pc]}')
-      self.step()
+      code = self.step()
+      if self.halted:
+        return code
 
   def step(self):  
     self.out(f'\n')
@@ -111,6 +113,7 @@ class Intputer(object):
         self.last_read = in_val
         self.pc += self.WIDTHS[opcode]
       elif self.input_mode == 'user':
+        print('?')
         in_val = list(map(ord, input()))
         self.ram[a_addr] = in_val[0]
         # self.last_read = in_val
@@ -119,7 +122,8 @@ class Intputer(object):
       elif self.input_mode == 'halt':
         self.out('HALT')
         self.halted = True
-        return self.INPUT, None
+        self.pc += self.WIDTHS[opcode]
+        return self.INPUT
       self.out("INPUT", in_val, "to", a_addr)
     elif opcode == self.OUTPUT:
       self.out("OUTPUT", modes, a)
@@ -127,6 +131,8 @@ class Intputer(object):
       self.pc += self.WIDTHS[opcode]
       if self.output_mode == 'halt':
         self.halted = True
+        return self.OUTPUT
+
     elif opcode == self.JTR:
       self.out("JTR", modes, a, "to", b)
       self.pc = b if a != 0 else self.pc + self.WIDTHS[opcode]

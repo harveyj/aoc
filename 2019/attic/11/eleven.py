@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import sys
 import copy
 instructions = open(sys.argv[1]).read()
@@ -151,7 +153,7 @@ DIRS = [(0, -1), (1, 0), (0, 1), (-1, 0)]
 
 class Painter(object):
 
-	def __init__(self):
+	def __init__(self, instructions):
 		# 1 in input is for first white panel
 		self.puter = Intputer(instructions, [1], id='a')
 		self.loc = (0,0)
@@ -192,5 +194,10 @@ class Painter(object):
 		# print(outs)
 		print(len(self.panels.keys()))
 
+def one(INPUT):
+	Painter(INPUT[0].split(',')).run()
 
-Painter().run()
+if __name__ == '__main__':
+	p = puzzle.Puzzle("2019", "11")
+	p.run(one, 0)
+	p.run(two, 0)

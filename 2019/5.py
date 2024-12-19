@@ -5,13 +5,13 @@ import puzzle
 WIDTHS = {ADD: 4, MUL: 4, INPUT: 2, OUTPUT: 2, JTR: 3, JFAL: 3, LT: 4, EQ: 4}
 TERM = 99
 
-def run(instring):
+def run(instring, inputs):
   ram = list(map(int, instring))
   ram += [0] * 400
   pc = 0
   outputs = []
   while ram[pc] != TERM:
-    print(pc, ram[pc])
+    # print(pc, ram[pc])
     opcode, modes = process_instruction(ram[pc])
     width = WIDTHS[opcode]
     a = 0
@@ -21,39 +21,40 @@ def run(instring):
       b = ram[pc + 2] if modes[1] else ram[ram[pc + 2]] 
 
     if opcode == ADD:
-      print("ADD", modes, ram[pc+1], ram[pc+2], ram[pc+3])
-      print("ADD a b out", a, b, a+b)
+      # print("ADD", modes, ram[pc+1], ram[pc+2], ram[pc+3])
+      # print("ADD a b out", a, b, a+b)
       ram[ram[pc + 3]] = a + b
     elif opcode == MUL:
-      print("MUL", modes, ram[pc+1], ram[pc+2], ram[pc+3])
-      print("MUL a b out", a, b, a*b)
+      # print("MUL", modes, ram[pc+1], ram[pc+2], ram[pc+3])
+      # print("MUL a b out", a, b, a*b)
       ram[ram[pc + 3]] = a * b
     elif opcode == INPUT:
-      print("INPUT", modes, ram[pc+1])
-      in_val = int(input('input'))
+      # print("INPUT", modes, ram[pc+1])
+      # in_val = int(input('input'))
+      in_val = inputs[0]
       ram[ram[pc + 1]] = in_val
     elif opcode == OUTPUT:
-      print("OUTPUT", modes, ram[pc+1])
-      print("OUTPUT", ram[ram[pc + 1]])
+      # print("OUTPUT", modes, ram[pc+1])
+      # print("OUTPUT", ram[ram[pc + 1]])
       outputs.append(ram[ram[pc + 1]])
     elif opcode == JTR:
-      print("JTR", a)
+      # print("JTR", a)
       if a != 0: 
         pc = b
         continue # needed because else pc gets incremented below
     elif opcode == JFAL:
-      print("JFAL", a)
+      # print("JFAL", a)
       if a == 0:
         pc = b
         continue # needed because else pc gets incremented below
     elif opcode == LT:
-      print("LT", a, b)
+      # print("LT", a, b)
       if a < b: 
         ram[ram[pc+3]] = 1
       else: 
         ram[ram[pc+3]] = 0
     elif opcode == EQ:
-      print("EQ", a, b)
+      # print("EQ", a, b)
       if a == b: 
         ram[ram[pc+3]] = 1
       else:
@@ -76,10 +77,10 @@ def process_instruction(inst):
   return opcode, modes
 
 def one(INPUT):
-  return run(INPUT[0].split(','))[-1]
+  return run(INPUT[0].split(','), [1])[-1]
 
 def two(INPUT):
-  return run(INPUT[0].split(','))[-1]
+  return run(INPUT[0].split(','), [5])[-1]
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2019", "5")

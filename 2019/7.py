@@ -23,7 +23,7 @@ def two(INPUT):
   instructions = list(map(int, INPUT[0].split(',')))
   def looped_amplify(seq, n, a_in):
     puters = []
-    for i in range(n): puters.append(Intputer(instructions, id=i, user_input=False, halt_on_output=True))
+    for i in range(n): puters.append(Intputer(instructions, id=i, input_mode='user', output_mode='halt'))
     for i, puter in enumerate(puters): puter.inputs = [seq[i]]
     outputs = [a_in]
     for i in range(10000):

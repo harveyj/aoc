@@ -6,15 +6,15 @@ def parse_input(INPUT):
   return INPUT
 
 def one(INPUT):
-  invals = parse_input(INPUT)
-  out = 0
-  return out
+  ip = intputer.Intputer(INPUT[0].split(','), inputs=[1])
+  ip.run()
+  return ip.outputs[0]
 
 def two(INPUT):
-  invals = parse_input(INPUT)
-  out = 0
-  return out
+  ip = intputer.Intputer(INPUT[0].split(','), inputs=[2])
+  ip.run()
+  return ip.outputs[0]
 
-p = puzzle.Puzzle("")
+p = puzzle.Puzzle("2019", "9")
 p.run(one, 0)
 p.run(two, 0)

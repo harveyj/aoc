@@ -43,9 +43,13 @@ def puzz(INPUT, two=False):
   else:
     return all_nodes["COM"].total_paths(0)
 
+def one(INPUT):
+  return puzz(INPUT, two=False)
+
 def two(INPUT):
   return puzz(INPUT, two=True)
 
-p = puzzle.Puzzle("2019", "6")
-p.run(puzz, 0)
-p.run(two, 0)
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2019", "6")
+  p.run(puzz, 0)
+  p.run(two, 0)
