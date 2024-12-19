@@ -280,7 +280,7 @@ def two(INPUT):
     def next_input(self):
 
       if self.last_output == 2:
-        print("FOUND IT", self.loc)
+        # print("FOUND IT", self.loc)
         self.final_loc = self.loc
 
       # Process last output
@@ -314,7 +314,7 @@ def two(INPUT):
         if self.floor_get(new_loc) == ".":
           self.attempt = d
           return i + 1
-      print("NO INPUT")
+      # print("NO INPUT")
       for i in range(4):
         d=DIRS[i]
         new_loc = self.loc[0] + d[0], self.loc[1] + d[1]
