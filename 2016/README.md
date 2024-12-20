@@ -115,6 +115,8 @@ Difficulty: 2/10
 ## Day 23
 Super fun register machine problem that modifies its own instructions
 
+REDO 12/19/24 with Thomas, carols, and a fire.
+
 Difficulty: 8/10
 
 
