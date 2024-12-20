@@ -108,7 +108,6 @@ Holiday socks: Running santas.
 
 Difficulty: 7/10
 
-
 ## Day 17
 OK NOW HERE WE GO WE'RE IN THIS, BABY
 
@@ -118,3 +117,28 @@ Done wearing my AOC tshirt!
 Holiday socks: Santa t-rex
 
 Difficulty: 9/10
+
+# Day 18
+Recovery day! One that NX can power through.
+
+Difficulty: 6/10
+
+# Day 19
+"Match the towels" - fun combinatorics problem 
+Awwww yeeeeahhhhh did part 1 in 7 minutes (11 mins e2e) because you can cram the whole thing into a regex. Really happy about that. 
+
+Lessons learned:
+- Need to get better at queue/DFS stuff with corner cases. I am not great at debugging these.
+
+In between Thomas feedings. Tree rex tshirt!
+pt1 8:43 - 8:54
+pt2 9:00ish - 9:29
+
+Difficulty: 7/10
+
+# Day 20
+Find your way through a maze but you can teleport one step (then 20 steps in part 2). Fun!
+
+Done from Thomas's nursery after feeding, early in the morning. Tree rex tshirt!
+
+Difficulty: 7/10

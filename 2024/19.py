@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-import puzzle, re, library
-from collections import defaultdict
+import puzzle, re
 from functools import lru_cache
 
 def parse_input(INPUT):
@@ -13,7 +12,6 @@ def one(INPUT):
   towels, patterns = parse_input(INPUT)
   pat = f"^({'|'.join([f'({t})' for t in towels])})*$"
   return len([p for p in patterns if re.fullmatch(pat, p)])
-
 
 @lru_cache(maxsize=None) 
 def all_matches2(towels, pattern):
@@ -34,8 +32,6 @@ def two(INPUT):
     out += match
   return out
 
-# 8:43 - 8:54
-# 9:00ish - 9:29
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2024", "19")
