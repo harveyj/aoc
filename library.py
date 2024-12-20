@@ -1,4 +1,5 @@
 import re, copy
+import networkx as nx
 
 # E, S, W, N
 DIRS_CARDINAL = [(1, 0), (0, 1), (-1, 0), (0, -1)]
@@ -14,6 +15,10 @@ def pt_add(pt1, pt2):
 
 def mul_vect(vect, mag):
   return [i * mag for i in vect]
+
+def manhattan(a, b):
+  return abs(a[0] - b[0]) + abs(a[1] - b[1])
+
 
 class Grid:
 
@@ -115,3 +120,13 @@ class Grid:
 
     return '\n'.join(
         [''.join(row) for row in grid])
+  
+  def graph(self):
+    G = nx.Graph()
+    for x in range(self.max_x()):
+      for y in range(self.max_y()):
+        c = self.get((x, y))
+        for pt, val in self.neighbors_kv((x, y), default='#'):
+          if c in 'SE.' and val in 'SE.':
+            G.add_edge(pt, (x, y))
+    return G
