@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import puzzle, re, library
+import puzzle, library
 from collections import defaultdict
 import networkx as nx
 
@@ -38,7 +38,7 @@ def two(INPUT):
   for i, node in enumerate(path):
     for j, node2 in enumerate(path[i+skip:]):
       teleport_time = library.manhattan(node, node2)
-      saved = j+skip-library.manhattan(node, node2)
+      saved = j+skip-teleport_time
       if teleport_time <= 20 and saved >= 100:
         cheats.add((node, node2))
         hist[saved] += 1
