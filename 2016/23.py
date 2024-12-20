@@ -3,10 +3,10 @@ import puzzle
 import re
 import networkx as nx
 import collections
-
+import copy, math
 
 def parse(INPUT):
-  pat = re.compile('(\w+) ([-]?\w+) ?([-]?\w+)?')
+  pat = re.compile(r'(\w+) ([-]?\w+) ?([-]?\w+)?')
   for l in INPUT:
     # print(l)
     if not re.match(pat, l):
@@ -19,24 +19,11 @@ def convert(str_val):
   except ValueError:
     return None
 
-
-def one(INPUT, two=True):
-  pc = 0; regs = collections.defaultdict(int)
-  regs['a'] = 7
-  # if two:
-    # regs['a'] = 12
-  instrs = list(parse(INPUT))
-  total = 0
+def run(instrs, regs, watch=[], pc=0):
+  last = copy.copy(regs)
   while pc < len(instrs):
-    total += 1
-    # if total == 100000000:
-      # for r in regs: print(r, regs[r])
-      # for i in instrs: print(i)
-      # break
-    # print(instrs[pc])
     inst = instrs[pc]
     op = inst[0]
-    # print(pc, inst, regs)
     if op == 'cpy':
       if inst[2].isdigit():
         continue
@@ -62,6 +49,7 @@ def one(INPUT, two=True):
       else: pc += 1
     elif op == 'tgl':
       # print('.', pc, inst, regs)
+      print('TOGGLE')
       if inst[1].isdecimal(): # handle literal value
         tgt = pc + eval(inst[1])
       elif regs[inst[1]] != 0:
@@ -81,16 +69,33 @@ def one(INPUT, two=True):
         else:
           tgt_op[0] = 'jnz'
       pc += 1
-  # print(instrs)
+    for reg in watch:
+      if last[reg] != regs[reg]:
+        print(f'{last[reg]}==>{regs[reg]}')
+        last[reg] = regs[reg]
+        return regs, pc, instrs
+  return regs
+
+def one(INPUT):
+  regs = collections.defaultdict(int)
+  regs['a'] = 7
+  instrs = list(parse(INPUT))
+  regs = run(instrs, regs)
   return regs['a']
 
 def two(INPUT):
-  # TODO 
-  # Reverse engineer this one by looking at the register values at various breakpoints.
-  return 0
+  regs = collections.defaultdict(int)
+  regs['a'] = 12
+  instrs = list(parse(INPUT)) 
+  regs, pc, instrs = run(instrs, regs, watch=['b'], pc=0)
+  regs, pc, instrs = run(instrs, regs, watch=['b'], pc=pc)
+  regs, pc, instrs = run(instrs, regs, watch=['b'], pc=pc)
+  print(regs, pc)
+  # mild cheat - extracted from code
+  return regs['a'] * math.factorial(regs['b']) + 95*73
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2016", "23")
-  p.run(one, 0)
-  p.run(two, 0)
+  print(p.run(one, 0))
+  print(p.run(two, 0))
   

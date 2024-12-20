@@ -113,9 +113,9 @@ Warmup
 Difficulty: 2/10
 
 ## Day 23
-Warmup
+Super fun register machine problem that modifies its own instructions
 
-Difficulty: 2/10
+Difficulty: 8/10
 
 
 ## Day 24
