@@ -22,13 +22,13 @@ answer, and I have now forgot. The long-run goal is to go through all the
 unvalidated days and give each an interface that spits out the correct day 1,
 day 2 answer. 
 - 2015: Validated!
-- 2016: Validated - 23, 24 unknown, 25 incorrect
+- 2016: Validated - 24 unknown, 25 incorrect
 - 2017: Validated - 6, 19, 20, 21, 22-25 unknown
 - 2018: (not fully implemented)
-- 2019: Validated - 18  incorrect
+- 2019: Validated - 18 incorrect
 - 2020: Validated - 4-1, 8-1, 10-1, 10-2, 16-1, 18-1, 20-1, 19-1, 19-2, 23-2 incorrect
 - 2021: Validated - 9, 16, 17, 19, 20, 21, 22, 23, 24, 25 incorrect
-- 2022: Validated - 6, 7, 11, 21, 23, 24, 24 incorrect
+- 2022: Validated - 6, 7, 11, 21, 23, 24, 25 incorrect
 - 2023: Validated - 6, 20, 21, 23 incorrect
 - 2024: Validated (through day 11)
 
@@ -50,3 +50,4 @@ day 2 answer.
 - 2021-09 - rewrote to python
 - 2019-19 - full rewrite, really happy, old one was non-functional and i just mashed an answer out of a spreadsheet.
 - 2019-20 - full rewrite bc code was a mess
+- 2016-23 - partial rewrite/re-solve with more automation and an explanation for how to extract from regs
