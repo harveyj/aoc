@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 import puzzle
-import re
-import networkx as nx
 
 WEPS = '''Dagger        8     4       0
 Shortsword   10     5       0
@@ -39,7 +37,7 @@ def one(INPUT):
         for r2, r2stats in ring:
           h_a = wstats[1] + rstats[1] + r2stats[1]
           h_d = astats[2] + rstats[2] + r2stats[2]
-          cost = wstats[0]+astats[0]+rstats[0]+r2stats[0]
+          cost = wstats[0] + astats[0] + rstats[0] + r2stats[0]
           if cost < 91 and sim(h_a, h_d):
             # print(w, a, r, r2, cost, h_a, h_d)
             match_costs.append(cost)
@@ -61,7 +59,7 @@ def two(INPUT):
           if cost > 135 and not sim(h_a, h_d):
             # print(w, a, r, r2, cost, h_a, h_d)
             match_costs.append(cost)
-  return min(match_costs)
+  return max(match_costs)
 
 
 def sim(h_a, h_d):
@@ -80,5 +78,5 @@ def sim(h_a, h_d):
 if __name__ == '__main__':
   p = puzzle.Puzzle("2015", "21")
 
-  p.run(one, 0)
-  p.run(two, 0)
+  print(p.run(one, 0))
+  print(p.run(two, 0))
