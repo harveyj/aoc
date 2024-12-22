@@ -128,7 +128,6 @@ def one(INPUT, depth=2):
               graph.add_edge(state, new_state)
               moves_how[(state, new_state)] = 'A'
         break
-  print(graph)
   scores = []
   start_node = ('A',) * (depth+1)
   for l in INPUT:
