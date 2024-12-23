@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import puzzle, re, library
 from collections import defaultdict
-
+import networkx as nx
 
 def parse_input(INPUT):
   return INPUT
