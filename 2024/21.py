@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import puzzle, re, library, copy
+import puzzle
 from collections import defaultdict
 import networkx as nx
 import itertools
@@ -53,7 +53,6 @@ def transitions_dirkey():
 
 ALL_KEYCODES = '0123456789A'
 ALL_DIRCODES = 'v^><A'
-
 
 def follow(graph, path, depth=2):
   move_map_dirdir = {(dir, fr): to for (fr, to, dir, _) in transitions_dirdir()}
@@ -141,10 +140,6 @@ def shortest_path(graph, moves_how, depth, l):
     path.append(chunk)
   return path
 
-def shortest_path_state(graph, moves_how, depth, start_node, end_node):
-  sp = nx.shortest_path(graph, start_node, end_node)
-  return [moves_how[(n1, n2)] for n1, n2 in zip(sp, sp[1:])]
-
 # TODO arbitrary depths is probably coming... haha nailed it.
 def one(INPUT, depth=2):
   total = 0
@@ -153,27 +148,6 @@ def one(INPUT, depth=2):
     path = shortest_path(graph, moves_how, depth, l)
     total += int(l[:-1]) * len(''.join(path))
   return total
-  
-def two_blah(INPUT):
-  cost_dirdir = {(fr, to): 0 for (fr, to, dir, _) in transitions_dirdir()}
-  cost_dirkey = {(fr, to): 0 for (fr, to, dir, _) in transitions_dirkey()}
-  cost_dirkey = [('5', '4')]
-  start_depth = 2
-  graph_n_1, moves_how_n_1 = gen_move_graph(start_depth-1)
-  for depth in range(start_depth, start_depth+4):
-    print(f'depth {depth}')
-    graph, moves_how = gen_move_graph(depth)
-    for fr, to in cost_dirkey:
-      sp_n_1 = shortest_path(graph_n_1, moves_how_n_1, depth-1, fr+to)[1]
-      sp_n = shortest_path(graph, moves_how, depth, fr+to)[1]
-      print(sp_n.count('A'))
-      print(f'fr {fr}, to {to}, depth{depth-1} {len(sp_n_1)}, depth{depth} {len(sp_n)}')
-    graph_n_1 = graph; moves_how_n_1 = moves_how
-
-@lru_cache(maxsize=None)
-def cost(graph, start, target, max_depth, layers_above):
-  if max_depth == layers_above +1:
-    return nx.shortest_path(start, target)
 
 def gen_dir_move_graph(depth):
   dir_DG = nx.DiGraph()
@@ -212,32 +186,18 @@ def gen_dir_move_graph(depth):
           break
   return graph, moves_how
 
-def shortest_path_dir(graph, moves_how, depth, l):
-  start_node = ('A',) * (depth)
-  path = []
-  for c in l:
-    end_node = ('A',)*(depth-1) + (c,)
-    sp = nx.shortest_path(graph, start_node, c)
-    start_node = end_node
-    chunk = ''.join([moves_how[(n1, n2)] for n1, n2 in zip(sp, sp[1:])])
-    path.append(chunk)
-  return path
-
-
 def get_moves(path, moves_how):
-  return tuple(moves_how[(n1, n2)] for n1, n2 in zip(path, path[1:]))
+  return tuple(moves_how[(n1, n2)] for n1, n2 in zip(path, path[1:])) + ('A',) # TODO hack oh no
 
 @lru_cache(maxsize=None)
 def get_path(graph, start_node, tgt_node):
   return nx.shortest_path(graph, start_node, tgt_node)
 
-## MEMOIZE EVERYTHING WE CAN, hits a wall around n=16
+# Hits a wall around n=16
 def two_memoize(inval):
   depth = 2
-  # seq = list('<A^A>^^AvvvA')
   seq = list(inval)
   graph, moves_how = gen_dir_move_graph(depth)
-  # print(graph.nodes)
   for i in range(1):
     new_seq = []
     prev = 'A'
@@ -247,16 +207,17 @@ def two_memoize(inval):
       new_seq += get_moves(tuple(get_path(graph, start_node, tgt_node)), moves_how)
       prev = cur
     seq = new_seq
-    print(i*2+2, len(seq))
   return ''.join(seq)
 
 def expand_pair_counts(graph, moves_how, a, b):
   start_node = (*('A',), a)
-  tgt_node = ('OUT' + b)
+  tgt_node = ('OUT'+b)
   moves = get_moves(tuple(get_path(graph, start_node, tgt_node)), moves_how)
   new_counts = defaultdict(int)
-  for a, b in zip(moves, moves[1:]):
-    new_counts[(a, b)] += 1
+  prev = 'A'
+  for move in moves:
+    new_counts[(prev, move)] += 1
+    prev = move
   return new_counts
 
 def gen_pair_counts(seq):
@@ -267,33 +228,57 @@ def gen_pair_counts(seq):
     prev = cur
   return pair_counts
 
-def two(INPUT):
-  depth = 2
-  seq = '<A^A>^^AvvvA'
-  seq = '<A'
-  graph, moves_how = gen_dir_move_graph(depth)
-  moves_how = MappingProxyType(moves_how)
+def expand(seq, graph, moves_how, steps):
   pair_counts = gen_pair_counts(seq)
-  print(pair_counts)
-  for d in range(2, 4, 2):
+  for d in range(steps//2):
     new_pair_counts = defaultdict(int)
     for pair, count in pair_counts.items():
       new_counts = expand_pair_counts(graph, moves_how, pair[0], pair[1])
       for new_pair, new_count in new_counts.items():
         new_pair_counts[new_pair] += count * new_count
     pair_counts = new_pair_counts
-  good_pair_counts = gen_pair_counts(two_memoize(seq))
-  for key in gen_pair_counts(two_memoize(seq)):
-    if good_pair_counts[key] != pair_counts[key]:
-      # the two errors are: at the very start, at the gap between the two chars
-      print('ERROR ', key, pair_counts[key], good_pair_counts[key])
-  good_two = two_memoize(seq)
-  print(good_two, gen_pair_counts(good_two))
-  # print(sum(pair_counts.values()))
-  # print(len('v<A<AA>^>AvAA^<A>Av<<A>^>AvA^Av<A^>A<Av<A>^>AAvA^Av<<A>A^>AAAvA<^A>A'))
+  return pair_counts
 
+def check_counts(counts, counts2):
+  for key in counts:
+    if counts[key] != counts2[key]:
+      print('ERROR ', key, counts[key], counts2[key])
+
+def two_counts(INPUT):
+  graph, moves_how = gen_dir_move_graph(2)
+  graph3, moves_how3 = gen_move_graph(3)
+  graph4, moves_how4 = gen_move_graph(4)
+  graph5, moves_how5 = gen_move_graph(5)
+  moves_how = MappingProxyType(moves_how)
+
+  # for seq in INPUT:
+  #   l5_seq = ''.join(shortest_path(graph5, moves_how5, 5, seq))
+  #   l5_counts = gen_pair_counts(l5_seq)
+  #   l3_seq = ''.join(shortest_path(graph3, moves_how3, 3, seq))
+  #   const_pair_counts = expand(l3_seq, graph, moves_how, steps=2)
+  #   check_counts(l5_counts, const_pair_counts)
+
+  for seq in ['<A^A>^^AvvvA']:
+    l3_seq = ''.join(shortest_path(graph3, moves_how3, 3, seq))
+    l3_counts = gen_pair_counts(l3_seq)
+    l4_seq = ''.join(shortest_path(graph4, moves_how4, 4, seq))
+    l4_counts = gen_pair_counts(l4_seq)
+    for key in l3_counts:
+      print(key, l3_counts[key], l4_counts[key])
+
+  return
+  for seq in INPUT:
+    l5_seq = ''.join(shortest_path(graph5, moves_how5, 5, seq))
+    l5_counts = gen_pair_counts(l5_seq)
+    l5_seq = ''.join(shortest_path(graph5, moves_how5, 5, seq))
+    l5_counts = gen_pair_counts(l5_seq)
+
+  for seq in ['<A^A>^^AvvvA']:
+    print(graph.nodes)
+    l2_seq = ''.join(shortest_path(graph, moves_how, 1, seq))
+    print(l2_seq)
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2024", "21")
   # print(f'ANSWER: {p.run(one, 0)}')
-  print(f'ANSWER: {p.run(two, 1)}')
+  print(f'ANSWER: {p.run(two_counts, 0)}')

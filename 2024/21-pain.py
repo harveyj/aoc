@@ -130,6 +130,23 @@ def one(INPUT):
       # optimal way of getting from prev_k to tgt is:
       #  generate all paths of depth d
 
+
+
+def two_blah(INPUT):
+  cost_dirkey = {(fr, to): 0 for (fr, to, dir, _) in transitions_dirkey()}
+  cost_dirkey = [('5', '4')]
+  start_depth = 2
+  graph_n_1, moves_how_n_1 = gen_move_graph(start_depth-1)
+  for depth in range(start_depth, start_depth+4):
+    print(f'depth {depth}')
+    graph, moves_how = gen_move_graph(depth)
+    for fr, to in cost_dirkey:
+      sp_n_1 = shortest_path(graph_n_1, moves_how_n_1, depth-1, fr+to)[1]
+      sp_n = shortest_path(graph, moves_how, depth, fr+to)[1]
+      # print(sp_n.count('A'))
+      print(f'fr {fr}, to {to}, depth{depth-1} {len(sp_n_1)}, depth{depth} {len(sp_n)}')
+    graph_n_1 = graph; moves_how_n_1 = moves_how
+
 def two(INPUT):
   out = 0
   return out
