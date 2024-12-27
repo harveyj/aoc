@@ -107,7 +107,7 @@ def two(INPUT):
     carry = gate_lookup[(carry_and, inputs_and, 'OR')]
     prev_carry = carry
 
-  return ','.join(sorted(gate_swaps.keys()))
+  return '-'.join(sorted(gate_swaps.keys()))
 if __name__ == '__main__':
   p = puzzle.Puzzle("2024", "24")
   print(f'ANSWER: {p.run(one, 0)}')

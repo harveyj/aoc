@@ -54,7 +54,7 @@ def iter(a, b, c, prog):
 def one(INPUT):
   a, b, c, prog = parse_input(INPUT)
   out = iter(a, b, c, prog)
-  return ','.join(map(str, out))
+  return '-'.join(map(str, out))
 
 def program(a):
   return a % 8 ^ 4 ^ (a // 2 ** (a % 8 ^ 1)) % 8

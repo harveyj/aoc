@@ -21,7 +21,7 @@ def two(INPUT):
     G.add_edge(a, b)
   cliques = [(len(clique), clique) for clique in nx.find_cliques(G)]
   max_clique = sorted(cliques)[-1][1]
-  return ','.join(sorted(max_clique))
+  return '-'.join(sorted(max_clique))
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2024", "23")
