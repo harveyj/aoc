@@ -6,8 +6,6 @@ import itertools
 from functools import lru_cache
 from types import MappingProxyType
 
-### LIBRARY - stable functions below
-
 def transitions_dirdir():
   return (('^', 'A', '>', 1),
           ('^', 'v', 'v', 1),
@@ -81,28 +79,6 @@ def follow(graph, path, depth=2):
       print('MISSING EDGE', state_path[-2], state_path[-1])
     else: print(f'to {state}')
 
-def check_counts(counts, counts2):
-  print('CHECKING', len(counts), len(counts2))
-  for key in counts:
-    if counts[key] != counts2[key]:
-      print('ERROR ', key, counts[key], counts2[key])
-
-@lru_cache(maxsize=None)
-def get_path(graph, start_node, tgt_node):
-  return nx.shortest_path(graph, start_node, tgt_node)
-
-# somewhat confusing but level starts at 0, at the keypad
-def get_moves_at_level(graph, path, level):
-  arbitrary_node = path[0]
-  level_bottom = len(arbitrary_node)-level-1
-  moves = [(graph.get_edge_data(n1, n2)['how'], n1, n2) for n1, n2 in zip(path, path[1:])]
-  activations = [move for move in moves if move[0] == 'A']
-  correct_level = [move for move in activations if ''.join(move[1])[:level_bottom-1] == 'A'*(level_bottom-1)]
-  extracted_moves = [move[1][level_bottom-1] for move in correct_level]
-  return extracted_moves
-
-###### END LIBRARY
-
 def gen_move_graph(depth):
   key_DG = nx.DiGraph()
   dir_DG = nx.DiGraph()
@@ -116,6 +92,7 @@ def gen_move_graph(depth):
   graph = nx.DiGraph()
   for kc in ALL_KEYCODES: graph.add_node('OUT' + kc)
   dircodes_product = itertools.product(ALL_DIRCODES, repeat=depth)
+  moves_how = dict()
   for dircodes, keycode in itertools.product(dircodes_product, ALL_KEYCODES):
     state = dircodes + tuple(keycode)
     graph.add_node(state)
@@ -124,12 +101,13 @@ def gen_move_graph(depth):
       if (move, state[0]) in move_map_dirdir:
         new_state = (move_map_dirdir[(move, state[0])],
                        *state[1:]) # any further levels
-        graph.add_edge(state, new_state, how=move)
+        graph.add_edge(state, new_state)
+        moves_how[(state, new_state)] = move
     for i, item in enumerate(state):
       if i == depth:
         new_state = 'OUT' + state[depth]
-        graph.add_edge(state, new_state, how='A')
-        graph.add_edge(new_state, state, how='')
+        graph.add_edge(state, new_state)
+        moves_how[(state, new_state)] = 'A'
       elif item == 'A':
         continue
       else:
@@ -139,28 +117,37 @@ def gen_move_graph(depth):
               new_state = (*state[:i+1], # the as, the first non a
                           move_map_dirkey[(state[i], state[i+1])]
                           )
-              graph.add_edge(state, new_state, how='A')
+              graph.add_edge(state, new_state)
+              moves_how[(state, new_state)] = 'A'
         else:
             if (state[i], state[i+1]) in move_map_dirdir: # safe due to i+1
               new_state = (*state[:i+1], # the as, the first non a
                           move_map_dirdir[(state[i], state[i+1])],
                           *state[i+2:] # any further levels
                           )
-              graph.add_edge(state, new_state, how='A')
+              graph.add_edge(state, new_state)
+              moves_how[(state, new_state)] = 'A'
         break
-  return graph
+  return graph, moves_how
 
-def shortest_path(graph, depth, l):
+def shortest_path(graph, moves_how, depth, l):
   start_node = ('A',) * (depth+1)
-  dir_chunks = []
   path = []
   for c in l:
     sp = nx.shortest_path(graph, start_node, 'OUT'+c)
     start_node = ('A',)*depth + (c,)
-    chunk = ''.join([graph.get_edge_data(n1, n2)['how'] for n1, n2 in zip(sp, sp[1:])])
-    dir_chunks.append(chunk)
-    path += sp
-  return ''.join(dir_chunks), path
+    chunk = ''.join([moves_how[(n1, n2)] for n1, n2 in zip(sp, sp[1:])])
+    path.append(chunk)
+  return path
+
+# TODO arbitrary depths is probably coming... haha nailed it.
+def one(INPUT, depth=2):
+  total = 0
+  graph, moves_how = gen_move_graph(depth)
+  for l in INPUT:
+    path = shortest_path(graph, moves_how, depth, l)
+    total += int(l[:-1]) * len(''.join(path))
+  return total
 
 def gen_dir_move_graph(depth):
   dir_DG = nx.DiGraph()
@@ -170,6 +157,7 @@ def gen_dir_move_graph(depth):
     dir_DG.add_edge(start, end, dir=dir, weight=weight)
   graph = nx.DiGraph()
   dircodes_product = itertools.product(ALL_DIRCODES, repeat=depth)
+  moves_how = dict()
   for state in dircodes_product:
     graph.add_node(state)
     # You can always move the top level
@@ -177,12 +165,13 @@ def gen_dir_move_graph(depth):
       if (move, state[0]) in move_map_dirdir:
         new_state = (move_map_dirdir[(move, state[0])],
                        *state[1:]) # any further levels
-        graph.add_edge(state, new_state, how=move)
+        graph.add_edge(state, new_state)
+        moves_how[(state, new_state)] = move
     for i, item in enumerate(state):
       if i == depth-1:
         new_state = 'OUT' + state[depth-1]
-        graph.add_edge(state, new_state, how='A')
-        graph.add_edge(new_state, state, how='')
+        graph.add_edge(state, new_state)
+        moves_how[(state, new_state)] = 'A'
       elif item == 'A':
         continue
       else:
@@ -192,18 +181,38 @@ def gen_dir_move_graph(depth):
                         move_map_dirdir[(state[i], state[i+1])],
                         *state[i+2:] # any further levels
                         )
-            graph.add_edge(state, new_state, how='A')
+            graph.add_edge(state, new_state)
+            moves_how[(state, new_state)] = 'A'
           break
-  return graph
+  return graph, moves_how
 
-def get_moves(graph, path):
-  return tuple(graph.get_edge_data(n1, n2)['how'] for n1, n2 in zip(path, path[1:])) + ('A',) # TODO hack oh no
+def get_moves(path, moves_how):
+  return tuple(moves_how[(n1, n2)] for n1, n2 in zip(path, path[1:])) + ('A',) # TODO hack oh no
 
+@lru_cache(maxsize=None)
+def get_path(graph, start_node, tgt_node):
+  return nx.shortest_path(graph, start_node, tgt_node)
 
-def expand_counts_ab(graph, a, b):
+# Hits a wall around n=16
+def two_memoize(inval):
+  depth = 2
+  seq = list(inval)
+  graph, moves_how = gen_dir_move_graph(depth)
+  for i in range(1):
+    new_seq = []
+    prev = 'A'
+    for cur in seq:
+      start_node = (*('A',), prev)
+      tgt_node = ('OUT'+cur)
+      new_seq += get_moves(tuple(get_path(graph, start_node, tgt_node)), moves_how)
+      prev = cur
+    seq = new_seq
+  return ''.join(seq)
+
+def expand_pair_counts(graph, moves_how, a, b):
   start_node = (*('A',), a)
   tgt_node = ('OUT'+b)
-  moves = get_moves(graph, tuple(get_path(graph, start_node, tgt_node)))
+  moves = get_moves(tuple(get_path(graph, start_node, tgt_node)), moves_how)
   new_counts = defaultdict(int)
   prev = 'A'
   for move in moves:
@@ -219,118 +228,57 @@ def gen_pair_counts(seq):
     prev = cur
   return pair_counts
 
-# def expand(seq, graph, steps):
-#   pair_counts = gen_pair_counts(seq)
-#   for d in range(steps//2):
-#     new_pair_counts = defaultdict(int)
-#     for pair, count in pair_counts.items():
-#       new_counts = expand_pair_counts(graph, pair[0], pair[1])
-#       for new_pair, new_count in new_counts.items():
-#         new_pair_counts[new_pair] += count * new_count
-#     pair_counts = new_pair_counts
-#   return pair_counts
+def expand(seq, graph, moves_how, steps):
+  pair_counts = gen_pair_counts(seq)
+  for d in range(steps//2):
+    new_pair_counts = defaultdict(int)
+    for pair, count in pair_counts.items():
+      new_counts = expand_pair_counts(graph, moves_how, pair[0], pair[1])
+      for new_pair, new_count in new_counts.items():
+        new_pair_counts[new_pair] += count * new_count
+    pair_counts = new_pair_counts
+  return pair_counts
 
-def expand_counts(dir_graph, pair_counts):
-  new_pair_counts = defaultdict(int)
-  for pair, count in pair_counts.items():
-    new_counts = expand_counts_ab(dir_graph, pair[0], pair[1])
-    for new_pair, new_count in new_counts.items():
-      new_pair_counts[new_pair] += count * new_count
-  return new_pair_counts
+def check_counts(counts, counts2):
+  for key in counts:
+    if counts[key] != counts2[key]:
+      print('ERROR ', key, counts[key], counts2[key])
 
+def two_counts(INPUT):
+  graph, moves_how = gen_dir_move_graph(2)
+  graph3, moves_how3 = gen_move_graph(3)
+  graph4, moves_how4 = gen_move_graph(4)
+  graph5, moves_how5 = gen_move_graph(5)
+  moves_how = MappingProxyType(moves_how)
 
-# TODO arbitrary depths is probably coming... haha nailed it.
-def one(INPUT, depth=2):
-  total = 0
-  graph = gen_move_graph(depth)
-  for l in INPUT:
-    path, _ = shortest_path(graph, depth, l)
-    total += int(l[:-1]) * len(path)
-  return total
+  # for seq in INPUT:
+  #   l5_seq = ''.join(shortest_path(graph5, moves_how5, 5, seq))
+  #   l5_counts = gen_pair_counts(l5_seq)
+  #   l3_seq = ''.join(shortest_path(graph3, moves_how3, 3, seq))
+  #   const_pair_counts = expand(l3_seq, graph, moves_how, steps=2)
+  #   check_counts(l5_counts, const_pair_counts)
 
-def two(INPUT):
-  dir_graph = gen_dir_move_graph(2)
-  level_up = dict()
-  for d1 in ALL_DIRCODES:
-    for d2 in ALL_DIRCODES:
-      start_node = ('A', d1); tgt_node = 'OUT'+d2
-      sp = get_path(dir_graph, start_node, tgt_node)
-      seq = get_moves_at_level(dir_graph, sp, 0)
-      level_up[(d1, d2)] = gen_pair_counts(seq)
-  # TODO need to account for first code - is it always left or down?
+  for seq in ['<A^A>^^AvvvA']:
+    l3_seq = ''.join(shortest_path(graph3, moves_how3, 3, seq))
+    l3_counts = gen_pair_counts(l3_seq)
+    l4_seq = ''.join(shortest_path(graph4, moves_how4, 4, seq))
+    l4_counts = gen_pair_counts(l4_seq)
+    for key in l3_counts:
+      print(key, l3_counts[key], l4_counts[key])
 
-  graph4 = gen_move_graph(4)
-  graph6 = gen_move_graph(6)
-  graph7 = gen_move_graph(7)
+  return
+  for seq in INPUT:
+    l5_seq = ''.join(shortest_path(graph5, moves_how5, 5, seq))
+    l5_counts = gen_pair_counts(l5_seq)
+    l5_seq = ''.join(shortest_path(graph5, moves_how5, 5, seq))
+    l5_counts = gen_pair_counts(l5_seq)
 
-  outs = []
-  for l in INPUT:
-    print('**')
-    sp4raw, sp4 = shortest_path(graph4, 4, l)
-    sp6raw, sp6 = shortest_path(graph6, 6, l)
-    sp7raw, sp7 = shortest_path(graph7, 7, l)
-    base = ''.join(get_moves_at_level(graph4, sp4, 0))
-    pairs_0 = gen_pair_counts(base)
-    pairs = pairs_0
-    iters = 5
-    for i in range(iters):
-      new_pairs = defaultdict(int)
-      for key in pairs:
-        pair, count = key, pairs[key]
-        for sub_pair, sub_pair_count in level_up[pair].items():
-          new_pairs[sub_pair] += count * sub_pair_count
-      pairs = new_pairs
-    correct_moves = ''.join(get_moves_at_level(graph7, sp7, iters))
-    correct_pairs = gen_pair_counts(correct_moves)
-    check_counts(new_pairs, correct_pairs)
-    assert sum(correct_pairs.values()) == sum(pairs.values())
-    outs.append(int(l[:-1]) * sum(pairs.values()))
-    # print()
-  return sum(outs)
+  for seq in ['<A^A>^^AvvvA']:
+    print(graph.nodes)
+    l2_seq = ''.join(shortest_path(graph, moves_how, 1, seq))
+    print(l2_seq)
 
-
-def two_new(INPUT):
-  dir_graph = gen_dir_move_graph(2)
-  level_up = dict()
-  for d1 in ALL_DIRCODES:
-    for d2 in ALL_DIRCODES:
-      start_node = ('A', d1); tgt_node = 'OUT'+d2
-      sp = get_path(dir_graph, start_node, tgt_node)
-      seq = get_moves_at_level(dir_graph, sp, 0)
-      level_up[(d1, d2)] = gen_pair_counts(seq)
-  # TODO need to account for first code - is it always left or down?
-
-  graphs = {i: gen_move_graph(i) for i in range(2, 7)}
- 
-  outs = []
-  INPUT = ['029A']
-  for l in INPUT:
-    print('**')
-    shortest_paths = {i: shortest_path(graphs[i], i, l)[1] for i in graphs}
-    base = ''.join(get_moves_at_level(graphs[4], shortest_paths[4], 2))
-    print(''.join(get_moves_at_level(graphs[3], shortest_paths[3], 2)))
-    pairs_0 = gen_pair_counts(base)
-    pairs = pairs_0
-    print(pairs_0)
-    iters = 4
-    for i in range(iters):
-      new_pairs = defaultdict(int)
-      for key in pairs:
-        pair, count = key, pairs[key]
-        for sub_pair, sub_pair_count in level_up[pair].items():
-          new_pairs[sub_pair] += count * sub_pair_count
-      pairs = new_pairs
-    correct_moves = ''.join(get_moves_at_level(graphs[6], shortest_paths[6], iters))
-    correct_pairs = gen_pair_counts(correct_moves)
-    # check_counts(new_pairs, correct_pairs)
-    # assert sum(correct_pairs.values()) == sum(pairs.values())
-    # outs.append(int(l[:-1]) * sum(pairs.values()))
-    # print()
-  return sum(outs)
-
-
-# 174275498291374 too high
 if __name__ == '__main__':
   p = puzzle.Puzzle("2024", "21")
-  # print(f'ANSWER: {p.run(one, 1)}')
-  print(f'ANSWER: {p.run(two, 0)}')
+  # print(f'ANSWER: {p.run(one, 0)}')
+  print(f'ANSWER: {p.run(two_counts, 0)}')
