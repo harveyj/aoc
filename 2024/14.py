@@ -42,7 +42,7 @@ def two(INPUT):
     iter(robots, MAX_X, MAX_Y)
     G = make_grid(robots, MAX_X, MAX_Y)
     if '111111111111111' in str(G):
-      return i
+      return i - 1 # todo why
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2024", "14")

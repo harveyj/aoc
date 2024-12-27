@@ -29,7 +29,7 @@ def one(INPUT, two=False):
       queue.append((new_loc, dir_idx))
     # can you turn left/right (iow, is left/right then straight legal)
     for new_dir_idx in [(dir_idx + 3) % 4, (dir_idx + 1) % 4]:
-      if loc == S: print('start new dir idx', dir_idx, new_dir_idx)
+      # if loc == S: print('start new dir idx', dir_idx, new_dir_idx)
       graph.add_edge((loc, dir_idx), (loc, new_dir_idx), weight=1000)
       queue.append((loc, new_dir_idx))
     seen.add((loc, dir_idx))

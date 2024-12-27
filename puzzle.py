@@ -16,5 +16,4 @@ class Puzzle(object):
       answer = fn(self.inputs[input_id], **kwarg)
       end_time = time.time()
       if timed: print(f'time: {((end_time-start_time)*1000000//1000)}ms')
-    # print("ANSWER", answer)
     return answer

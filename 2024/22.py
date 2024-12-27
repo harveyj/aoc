@@ -38,7 +38,6 @@ def one(INPUT):
 
 def find(delts, key):
   for i in range(len(delts) - len(key)):
-    print(delts[i:i+len(key)], key)
     if delts[i:i+len(key)] == key:
       return i
   return -1
