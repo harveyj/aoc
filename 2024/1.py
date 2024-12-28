@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import puzzle, re
+import puzzle
 
 def parse_input(INPUT):
   for l in INPUT:

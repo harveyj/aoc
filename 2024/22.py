@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import puzzle, re, library
+import puzzle
 from collections import defaultdict
 import itertools
 
@@ -23,7 +23,6 @@ def secret(num, iters):
     b = new_num * 2048
     # Then, mix this result into the secret number. Finally, prune the secret number.
     new_num = prune(mix(b, new_num))
-    # print(i, new_num)
     deltas.append(new_num % 10 - num % 10)
     nums.append(num)
     num = new_num

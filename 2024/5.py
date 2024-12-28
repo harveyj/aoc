@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import puzzle, re
+import puzzle
 import networkx as nx
 
 def segment_packets(rules, packets):

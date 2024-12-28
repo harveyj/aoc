@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import puzzle, re, library
+import puzzle, library
 from collections import defaultdict
 
 def parse_input(INPUT):
