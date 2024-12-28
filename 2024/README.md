@@ -91,7 +91,6 @@ Holiday socks: Bombas
 
 Difficulty: 3.5/10?
 
-
 ## Day 14
 Simulate particles moving across a grid. Part 1 very straighforward, part 2 was not my cup of tea. 
 

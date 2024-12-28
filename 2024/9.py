@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
-import puzzle, re, library, copy
-from collections import defaultdict
-from itertools import chain
+import puzzle, copy
+from itertools import accumulate
+import bisect
+from collections import deque
+from sortedcontainers import SortedList
 
 def parse_input(INPUT):
   return list(map(int, INPUT))
@@ -82,6 +84,88 @@ def two(INPUT):
     id -= 1
   return checksum2(array)
 
-p = puzzle.Puzzle("2024", "9")
-p.run(one, 0)
-p.run(two, 0)
+def render(blocks, gaps):
+  gaps = [(gap_idx, '.', gap_span) for gap_idx, gap_span in gaps]
+  combined = sorted(blocks + gaps, key=lambda a: a[0])
+  return ''.join([str(id)*span for _, id, span in combined])
+
+def checksum3(blocks):
+  ret = 0
+  for start_idx, id, span in blocks:
+    for i in range(span):
+      ret += (start_idx + i) * id
+  return ret
+
+
+def one_fast(INPUT):
+  items = parse_input(INPUT[0])
+  # start_idx, span
+  indices = list(zip([0]+list(accumulate(items)), items))
+  blocks = SortedList([(start_idx, id, span) for (id, (start_idx, span)) in enumerate(indices[0::2])])
+  gaps = deque([(start_idx, span) for (_, (start_idx, span)) in enumerate(indices[1::2])])
+  for block_idx, block_id, block_span in blocks[::-1]:
+    if not gaps or gaps[0][0] > block_idx:
+      break
+    while block_span > 0:
+      gap_idx, gap_span = gaps.popleft()
+      if gap_idx > block_idx:
+        blocks[-1] = (block_idx, block_id, block_span)
+        break
+      # up to block span or gap span
+      consumed = min(block_span, gap_span)
+      if consumed == block_span: blocks.pop()
+      block_span = block_span - consumed
+      bisect.insort(blocks, (gap_idx, block_id, consumed))
+      if gap_span > consumed:
+        gaps.appendleft((gap_idx + consumed, gap_span - consumed))
+
+  return checksum3(blocks)
+
+def two_fast(INPUT):
+  items = parse_input(INPUT[0])
+  # start_idx, span
+  indices = list(zip([0]+list(accumulate(items)), items))
+  blocks = [(start_idx, id, span) for (id, (start_idx, span)) in enumerate(indices[0::2])]
+  gaps = deque([(start_idx, span) for (_, (start_idx, span)) in enumerate(indices[1::2])])
+  i = len(blocks) - 1
+  while i > 0:
+    block_idx, block_id, block_span = blocks[i]
+    j = 0
+    while j < len(gaps) and gaps[j][0] < block_idx:
+      gap_idx, gap_span = gaps[j]
+      # print(f'considering {block_idx} {block_id}, {block_span} {gap_idx} {gap_span}')
+      if block_span <= gap_span:
+        del gaps[j]
+        del blocks[i]
+        i += 1
+        bisect.insort(blocks, (gap_idx, block_id, block_span))
+        bisect.insort(gaps, (gap_idx+block_span, gap_span - block_span))
+        idx = bisect.bisect_left(gaps, (block_idx, block_span))
+        new_idx = block_idx; new_span = block_span
+        gap_left = gaps[idx-1]
+        gap_right = gaps[idx] if idx < len(gaps) else None
+        # if previous gap abuts new gap
+        if gap_left[0] + gap_left[1] == block_idx:
+          # print('expanding left')
+          new_idx = gap_left[0]
+          new_span += gap_left[1]
+          gaps.remove(gap_left)
+        # if following gap abuts new gap
+        if gap_right and block_idx + block_span == gap_right[0]:
+          # print('expanding rt')
+          new_span += gap_right[1]
+          gaps.remove(gap_right)
+        bisect.insort(gaps, (new_idx, new_span))
+        break
+      j += 1
+    # print('after', i, render(blocks, gaps))
+    i -= 1
+
+  return checksum3(blocks)
+
+
+if __name__ == '__main__':
+  p = puzzle.Puzzle("2024", "9")
+  # print(p.run(one_fast, 0))
+  print(p.run(two_fast, 0))
+  # print(p.run(two, 0))
