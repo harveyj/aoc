@@ -108,6 +108,11 @@ Holiday socks: Running santas.
 
 Difficulty: 7/10
 
+## Day 16
+Standard-issue grid navigation problem.
+
+Difficulty: 5/10
+
 ## Day 17
 OK NOW HERE WE GO WE'RE IN THIS, BABY
 
@@ -142,3 +147,42 @@ Find your way through a maze but you can teleport one step (then 20 steps in par
 Done from Thomas's nursery after feeding, early in the morning. Tree rex tshirt!
 
 Difficulty: 7/10
+
+# Day 21
+OH SHIT HERE WE GO - hardest day of the year. The "control the controller" recursive problem. Complex graph traversal program for part 1 is doable, and then, of course, so much depth that a graph is infeasible for part 2.
+
+Part 1 12/21, but it was a battle. 
+Part 2 12/22-12/23, then Christmas break. Finished on 12/27
+
+Solution history:
+- Did a "build up the solution" impl which in retrospect was very very close, but didn't have the correct paths for a few of the transitions. Considered hand-coding this (would have worked in retrospect) but ultimately opted for the more robust graph nav approach
+- Graph navigation approach - good enough for part 1 and helped with part two. Ultimately very overwrought but them's the breaks. 
+- Graph navigation approach with some of the navigation memoized - this got up to depth 16!
+- Expand based on the counts of pairs, as each pair expands to the same thing n=2 levels up. THIS SHOULD HAVE WORKED and did in fact work for all known inputs EXCEPT the real input for part 2 :sob:. 
+- Rip out graph navigation for keypad nav and do a memoized cost approach, somewhat ripped from reddit. 
+
+Difficulty: 10/10
+
+# Day 22
+Make your own crypto algo and then noodle around with it. A blessed reprieve from day 21 (which is fair, but a huge lift).
+
+Done 12/22
+
+Difficulty: 6/10.
+
+# Day 23
+Detect cliques in graphs. I banged this out in a half hour. If I knew what various NX calls did it would have been about 10 minutes.
+
+Difficulty: 4/10
+
+# Day 24
+Build your own gate sim (part 1) debug a binary adder (part 2). Super fun puzzle. 
+
+My solution is 80% automated. I scan through the adder looking for the correct gates. If there is no gate that meets all the criteria, it barfs. It was easy to ctrl-f to see what the correct gate should have been.
+
+TODO fully automate.
+
+Done 12/26 (part 1) 12/27 (part 2)
+Difficulty: 8/10
+# Day 25
+Done 12/27
