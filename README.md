@@ -7,11 +7,11 @@ All puzzles, all years!
 - 2017: Complete Python3 implementation, standardized
 - 2018: Completed, but original code was lost to the sands of time. Partial Python3 reimplementation.
 - 2019: Complete Python3 implementation, standardized
-- 2020: Completed in Javascript, standardized
+- 2020: Complete Javascript implementation, standardized
 - 2021: Complete Python3 implementation, standardized
 - 2022: Complete Python3 implementation, standardized
 - 2023: Complete Python3 implementation, standardized
-- 2024: Current Python3 implementation, standardized
+- 2024: Complete Python3 implementation, standardized
 
 ## Validation
 Validation means that the code spits out the correct answer when one(INPUT) and
@@ -30,7 +30,7 @@ day 2 answer.
 - 2021: Validated - 9, 16, 17, 19, 20, 21, 22, 23, 24, 25 incorrect
 - 2022: Validated - 6, 7, 11, 21, 23, 24, 25 incorrect
 - 2023: Validated - 6, 20, 21, 23 incorrect
-- 2024: Validated (through day 11)
+- 2024: Validated
 
 ## Performance hotspots
 - 2015: 6-1 (2s), 6-2 (4s), 22-1&2 (3s)
@@ -42,7 +42,7 @@ day 2 answer.
 - 2021: 17, 20
 - 2022: 16-1 (12s), 20-2 (20s) 23-2 (5s), 24-1 (20s)
 - 2023: 17-1 (5s), 18-1 (30s), 23-1 (long), 24-1 (long)
-- 2024: 9-2 (26s)
+- 2024: 6-2 (13s), 7-2 (8s), 9-2 (26s), 14-2 (6s), 15-2 (13s), 20-1+2 (5s), 22-2 (19s)
 
 ## Optimization/cleanup log
 - 2015-20 - replaced a not-really-code solution that was 16s with an automated solution that was 3s.
