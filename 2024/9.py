@@ -2,8 +2,9 @@
 import puzzle, copy
 from itertools import accumulate
 import bisect
-from collections import deque
+from collections import deque, defaultdict
 from sortedcontainers import SortedList
+import itertools
 
 def parse_input(INPUT):
   return list(map(int, INPUT))
@@ -53,7 +54,7 @@ def checksum2(out):
       idx += 1
   return ret
 
-def two(INPUT):
+def two_slow(INPUT):
   items = parse_input(INPUT[0])
   array = [[i//2 if i % 2 == 0 else '.', size] for i, size in enumerate(items)]
   id = len(items)//2
@@ -163,9 +164,64 @@ def two_fast(INPUT):
 
   return checksum3(blocks)
 
+def find_left(gaps_dict, block_idx):
+  indexes = {i: gaps_dict[i].bisect_left((block_idx, -1)) for i in range(1, 500)}
+  entries = [gaps_dict[i][indexes[i]] for i in range(1, 500) if indexes[i] < len(gaps_dict[i])]
+  entries = sorted(entries)
+  return entries[-1] if entries else None
+
+def find_right(gaps_dict, block_idx):
+  indexes = {i: gaps_dict[i].bisect_right((block_idx, -1)) for i in range(1, 500)}
+  entries = [gaps_dict[i][indexes[i]] for i in range(1, 500) if indexes[i] < len(gaps_dict[i])]
+  entries = sorted(entries)
+  return entries[0] if entries else None
+
+def two_faster(INPUT):
+  items = parse_input(INPUT[0])
+  # start_idx, span
+  indices = list(zip([0]+list(accumulate(items)), items))
+  blocks = [(start_idx, id, span) for (id, (start_idx, span)) in enumerate(indices[0::2])]
+  gaps_in = deque([(start_idx, span) for (_, (start_idx, span)) in enumerate(indices[1::2])])
+  gaps_dict = {i:SortedList([g for g in gaps_in if g[1] == i]) for i in range(1, 500)}
+  i = len(blocks) - 1
+  seen = set()
+  while i > 0:
+    block_idx, block_id, block_span = blocks[i]
+    # take all first entries of gaps_dict where block_span <= i, sort by location, first location is winner
+    all_feasible_gaps = sorted([gaps_list[0] for (gap_size, gaps_list) in gaps_dict.items() if gap_size >= block_span and gaps_list and gaps_list[0][0] < block_idx])
+    if not all_feasible_gaps or block_id in seen: 
+      i -= 1
+      continue
+    seen.add(block_id)
+    gap_idx, gap_span = all_feasible_gaps[0]
+    gaps_dict[gap_span].remove((gap_idx, gap_span))
+    del blocks[i]
+    bisect.insort(blocks, (gap_idx, block_id, block_span))
+    remaining = gap_span - block_span
+    if remaining != 0: 
+      gaps_dict[remaining].add((gap_idx+block_span, remaining))
+
+    new_idx = block_idx; new_span = block_span
+    gap_left = find_left(gaps_dict, block_idx)
+    gap_right = find_right(gaps_dict, block_idx)
+    # if previous gap abuts new gap
+    if gap_left and (gap_left[0] + gap_left[1] == block_idx):
+      new_idx = gap_left[0]
+      new_span += gap_left[1]
+      gaps_dict[gap_left[1]].remove(gap_left)
+    # if following gap abuts new gap
+    if gap_right and block_idx + block_span == gap_right[0]:
+      new_span += gap_right[1]
+      gaps_dict[gap_right[1]].remove(gap_right)
+    gaps_dict[new_span].add((new_idx, new_span))
+  return checksum3(blocks)
+
+def two(INPUT):
+  return two_slow(INPUT)
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2024", "9")
-  # print(p.run(one_fast, 0))
+  print(p.run(one_fast, 0))
   print(p.run(two_fast, 0))
-  # print(p.run(two, 0))
+  print(p.run(two_faster, 0))
+  print(p.run(two, 0))
