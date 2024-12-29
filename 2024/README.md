@@ -53,6 +53,11 @@ Difficulty: 5.5/10
 ## Day 9
 "Defragment" a giant array. Not conceptually hard but tons and tons of off by ones.
 
+REWRITE 12/28 OK this was super fun. 
+- The first draft literally constructed the array. This took 20s.
+- Rewrite this to deal with spans as ints, not as the literal array. This took 4s
+- Realize that you can just keep track of the first gap of size n. This gets you down to 1s.
+
 Difficulty: 6/10
 
 ## Day 10
