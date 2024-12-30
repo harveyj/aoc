@@ -42,7 +42,7 @@ day 2 answer.
 - 2021: 17, 20
 - 2022: 16-1 (12s), 20-2 (20s) 23-2 (5s), 24-1 (20s)
 - 2023: 17-1 (5s), 18-1 (30s), 23-1 (long), 24-1 (long)
-- 2024: 6-2 (13s), 7-2 (8s), 9-2 (26s), 14-2 (6s), 15-2 (13s), 20-1+2 (5s), 22-2 (19s)
+- 2024: 6-2 (13s), 7-2 (8s), 14-2 (6s), 15-2 (13s), 20-1+2 (5s), 22-2 (19s)
 
 ## Optimization/cleanup log
 - 2015-20 - replaced a not-really-code solution that was 16s with an automated solution that was 3s.
@@ -51,3 +51,4 @@ day 2 answer.
 - 2019-19 - full rewrite, really happy, old one was non-functional and i just mashed an answer out of a spreadsheet.
 - 2019-20 - full rewrite bc code was a mess
 - 2016-23 - partial rewrite/re-solve with more automation and an explanation for how to extract from regs
+- 2024-09 - two full rewrites 20s->4s, 4s->1s
