@@ -58,4 +58,9 @@ Detect the period. Added a detect_steady_state function to the library to do thi
 
 Difficulty: 4.5/10
 
+## Day 13
+Simulate mine carts! Fun but READ THE PROBLEM, HARVEY
 
+Rewrite 12/31/2024
+
+Difficulty: 5/10
