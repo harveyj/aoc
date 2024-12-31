@@ -130,3 +130,18 @@ class Grid:
           if c in 'SE.' and val in 'SE.':
             G.add_edge(pt, (x, y))
     return G
+
+
+# input: a continuation / iter that yields (i, state)
+# input: a function that takes state, outputs score
+# output: the offset at which the periodicity begins, the value at that point, the delta per iteration
+def detect_steady_state(fn, score):
+  prev_delt = -100000
+  last = 0
+  for (i, state) in fn:
+    new = score(state)
+    delt = new - last
+    if delt == prev_delt:
+      return i, new, delt
+    last = new
+    prev_delt = delt

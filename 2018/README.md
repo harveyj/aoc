@@ -52,3 +52,10 @@ Part 1: Straightforward impl of puzzle as described.
 Part 2: Realize that calculation can be done in O(1) time with an O(N^2) precomputation step. Initial impl was O(N^4)+.
 
 Lesson learned: DEBUG USING SIMPLE EXAMPLES, build up from base components that are trusted!
+
+## Day 12
+Detect the period. Added a detect_steady_state function to the library to do this in an automated fashion in the future.
+
+Difficulty: 4.5/10
+
+
