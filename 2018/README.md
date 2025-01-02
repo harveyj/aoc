@@ -64,3 +64,14 @@ Simulate mine carts! Fun but READ THE PROBLEM, HARVEY
 Rewrite 12/31/2024
 
 Difficulty: 5/10
+
+## Day 14
+Generate a large list of numbers. Feel like I lost the plot on this one and accidentally brute forced it.
+
+Rewrite 12/31/2024
+
+Difficulty: 5/10
+
+## Day 15
+Oh man, I remember this one...
+

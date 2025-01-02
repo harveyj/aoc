@@ -121,13 +121,13 @@ class Grid:
     return '\n'.join(
         [''.join(row) for row in grid])
   
-  def graph(self):
+  def graph(self, permissible='SE.'):
     G = nx.Graph()
     for x in range(self.max_x()):
       for y in range(self.max_y()):
         c = self.get((x, y))
         for pt, val in self.neighbors_kv((x, y), default='#'):
-          if c in 'SE.' and val in 'SE.':
+          if c in permissible and val in permissible:
             G.add_edge(pt, (x, y))
     return G
 
