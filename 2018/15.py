@@ -12,71 +12,62 @@ START_HP, START_ATTACK = 200, 3
 def book_sort(locs):
   return sorted(locs, key= lambda a: (a[1], a[0]))
 
-def bfs(G, loc, tgt):
+def bfs2(G, start_loc, tgt):
   def nxt(G, loc):
-    return [(loc, neigh_loc) for (neigh_loc, neigh_val) in G.neighbors_kv(loc) if neigh_val == '.']
+    return [neigh_loc for (neigh_loc, neigh_val) in G.neighbors_kv(loc) if neigh_val == '.']
   seen = set()
-  queue = deque(nxt(loc))
-  min_len = -1
+  queue = deque([(a,) for a in nxt(G, start_loc)])
+  min_len = 10000000
   candidates = []
+  # print(f'startqueue {queue}')
   while queue:
-    path = queue.popleft()
-    if path in seen: continue
+    path = queue.popleft(); loc = path[-1]
+    # print(path)
+    seen.add(loc)
     if candidates and len(path) > min_len: break
     if tgt in G.neighbors(loc):
       candidates.append(path)
       min_len = len(path)
-    for n in nxt(G, loc): queue.append((path) + (n,))
+      if start_loc == (7, 4):
+        print(f'PATH {path}')
+        print(f'queue {queue}')
+    for n in nxt(G, loc): 
+      if n not in seen: queue.append((path) + (n,))
+    # print(queue)
   return candidates
 
-def move2(G, loc, enemy_type):
-  candidates = bfs(G, loc, enemy_type)
-  if not candidates: return None
-  first_steps = [path[1] for path in candidates]
-  return book_sort(first_steps)[0] if first_steps else None
+def bfs(G, start_loc, tgt):
+  # ensure neighbors are traversed in book order. cool if it works...
+  G.NEIGHBORS = [(0, -1), (-1, 0), (1, 0), (0, 1)]
+  def nxt(G, loc):
+    return [neigh_loc for (neigh_loc, neigh_val) in G.neighbors_kv(loc) if neigh_val == '.']
+  seen = set()
+  queue = deque([(a,) for a in nxt(G, start_loc)])
+  while queue:
+    path = queue.popleft(); loc = path[-1]
+    if loc in seen: continue
+    seen.add(loc)
+    if tgt in G.neighbors(loc):
+      return path
+    for n in nxt(G, loc): 
+      if n not in seen: queue.append((path) + (n,))
 
 
-def move(G, graph, loc, entities, enemy_type):
-  if loc not in graph: return None
-  enemies = [loc for loc in entities if entities[loc][0] == enemy_type]
-  candidates = []
-  for e in enemies:
-    for e_neigh_loc, e_neigh_val in G.neighbors_kv(e):
-      if e_neigh_val == '.' and e_neigh_loc in graph and nx.has_path(graph, loc, e_neigh_loc):
-        candidates.extend(nx.all_shortest_paths(graph, loc, e_neigh_loc))
-  if not candidates: return None
-  min_len = min([len(c) for c in candidates])
-  candidates = [c for c in candidates if len(c) == min_len]
-  # print('sorted')
-  # for c in candidates:
-  #   print(len(c), c)
-  # print(loc)
-  first_steps = [path[1] for path in candidates]
-  # print(first_steps)
-  return book_sort(first_steps)[0] if first_steps else None
+def move(G, loc, enemy_type):
+  path = bfs(G, loc, enemy_type)
+  return path[0] if path else None
 
 def dump(G, entities):
   print(G)
   for loc in list(book_sort(entities.keys())):
     print(loc, entities[loc])
 
-  def graph(self):
-    DG = nx.DiGraph()
-    for x in range(self.max_x()):
-      for y in range(self.max_y()):
-        c = self.get((x, y))
-        for pt, val in self.neighbors_kv((x, y), default='#'):
-          if c == '.' and val in '.GE':
-            DG.add_edge(pt, (x, y))
-    return DG
-
-
-def one(INPUT):
+def one(INPUT, two=False, ATTACK_ELF=3):
   G = parse_input(INPUT)
   elves = G.detect('E')
   goblins = G.detect('G')
-  entities = {loc: ('E',START_HP, START_ATTACK, loc) for loc in elves}
-  entities.update({loc: ('G', START_HP, START_ATTACK, loc) for loc in goblins})
+  entities = {loc: ('E',START_HP, ATTACK_ELF, loc) for loc in elves}
+  entities.update({loc: ('G', START_HP, 3, loc) for loc in goblins})
   print(f"INITIALLY")
 
   print(G)
@@ -89,10 +80,8 @@ def one(INPUT):
       # print(neighbor_enemies, list(G.neighbors_kv(loc)))
       if not neighbor_enemies:
         ## Move
-        G.set(loc, 'S')
-        connect = G.graph()
         G.set(loc, '.')
-        next_loc = move(G, connect, loc, entities, enemy)
+        next_loc = move(G, loc, enemy)
         if next_loc:
           del entities[loc]
           entities[next_loc] = (type, hp, attack, next_loc)
@@ -110,31 +99,17 @@ def one(INPUT):
         if neigh_hp > 0:
           entities[neigh_loc] = (enemy, neigh_hp, neigh_attack, neigh_loc)
         else: 
+          if two and enemy == 'E': return -1
           del entities[neigh_loc]
           G.set(neigh_loc, '.')
           if enemy not in [e[0] for e in entities.values()]:
-            dump(G, entities)
-            return i+1, sum([e[1] for e in entities.values()])
-      else:
-        print(f'no enemies {loc, type}')
-
-    print(f'ROUND {i+1}')
-    dump(G, entities)
-    print()
-    # input()
-
-  return 0
+            rem_hp = sum([e[1] for e in entities.values()])
+            return i*rem_hp
 
 def two(INPUT):
-  invals = parse_input(INPUT)
-  out = 0
-  return out
-
-
-  # G = library.Grid(raw='\n'.join(INPUT))
-  # for x in range(G.max_x()):
-  #   for y in range(G.max_y()):
-  #     c = G.get((x, y))
+  for i in range(3, 20):
+    res = one(INPUT, two=True, ATTACK_ELF=i)
+    if res != -1: return res
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2018", "15")
