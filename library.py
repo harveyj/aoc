@@ -1,5 +1,6 @@
 import re, copy
 import networkx as nx
+from collections import defaultdict
 
 # E, S, W, N
 DIRS_CARDINAL = [(1, 0), (0, 1), (-1, 0), (0, -1)]
@@ -30,6 +31,8 @@ class Grid:
     else:
       self.grid = [["." for i in range(x)] for j in range(y)]
     self.overlays = {}
+    self.counts = defaultdict(int)
+    self.counts['.'] = x * y
 
   NEIGHBORS = [(-1, 0), (1, 0), (0, -1), (0, 1)]
   NEIGHBORS_DIAG = NEIGHBORS + [(-1, -1), (1, -1), (1, 1), (-1, 1)]
@@ -48,6 +51,8 @@ class Grid:
 
   def set(self, pt, val):
     x, y = pt
+    self.counts[self.get(pt)] -= 1
+    self.counts[val] += 1
     self.grid[y][x] = val
 
   def get(self, pt, default=None):
@@ -61,6 +66,9 @@ class Grid:
 
   def legal(self, pt):
     return 0 <= pt[0] < self.max_x() and 0 <= pt[1] < self.max_y()
+
+  def detect_fast(self, val):
+    return self.counts[val]
 
   def detect(self, val):
     return [(x, y) 
@@ -134,7 +142,7 @@ class Grid:
 
 # input: a continuation / iter that yields (i, state)
 # input: a function that takes state, outputs score
-# output: the offset at which the periodicity begins, the value at that point, the delta per iteration
+# output: the offset at which the periodicity begins, the delta per iteration
 def detect_steady_state(fn, score):
   prev_delt = -100000
   last = 0
@@ -145,3 +153,20 @@ def detect_steady_state(fn, score):
       return i, new, delt
     last = new
     prev_delt = delt
+
+# input: a continuation / iter that yields (i, state)
+# output: the offset at which the periodicity begins, the value at that point, the delta per iteration
+def find_period(fn):
+  cache = dict()
+  for (i, state) in fn:
+    state = str(state)
+    if state in cache:
+      period = i - cache[state]
+      break
+    cache[state] = i
+  return i, period
+
+def find_periodic_state_at(fn, minimum, period, tgt):
+  for (i, state) in fn:
+    if i > minimum and (tgt-i) % period == 0:
+      return state
