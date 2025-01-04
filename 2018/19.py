@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
-import puzzle, re, library
+import puzzle, library
 from collections import defaultdict
-import networkx as nx
-import itertools, copy
-import sympy
+import copy
 
-def parse_input(INPUT):
-  return INPUT
 
 def exec(op, a, b, c, regs):
   new_regs = copy.copy(regs)
@@ -38,7 +34,6 @@ def one(INPUT):
     if pc >= len(instrs): break
     op, a, b, c = instrs[pc]
     op = op.upper()
-    old_regs = regs
     regs = exec(op, a, b, c, regs)
     pc = regs[pc_addr]
     pc += 1
@@ -68,7 +63,6 @@ def two(INPUT):
   num = regs[3]
   # Compute the sum of all factors
   return sum([i for i in range(1,num+1) if num / i == num // i])
-
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2018", "19")
