@@ -2,16 +2,16 @@
 All puzzles, all years!
 
 ## Implementation
-- 2015: Complete Python3 implementation, standardized
-- 2016: Complete Python3 implementation, standardized
-- 2017: Complete Python3 implementation, standardized
-- 2018: Completed, but original code was lost to the sands of time. Partial Python3 reimplementation.
-- 2019: Complete Python3 implementation, standardized
-- 2020: Complete Javascript implementation, standardized
-- 2021: Complete Python3 implementation, standardized
-- 2022: Complete Python3 implementation, standardized
-- 2023: Complete Python3 implementation, standardized
-- 2024: Complete Python3 implementation, standardized
+- 2015: Complete Python3 implementation.
+- 2016: Complete Python3 implementation.
+- 2017: Complete Python3 implementation.
+- 2018: Completed, but original code was lost to the sands of time. Python3 reimplementation.
+- 2019: Complete Python3 implementation.
+- 2020: Complete Javascript implementation.
+- 2021: Complete Python3 implementation.
+- 2022: Complete Python3 implementation.
+- 2023: Complete Python3 implementation.
+- 2024: Complete Python3 implementation.
 
 ## Validation
 Validation means that the code spits out the correct answer when one(INPUT) and
