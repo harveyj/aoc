@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import puzzle, re, library
-from collections import defaultdict, namedtuple
+from collections import namedtuple
 
 Unit = namedtuple('Unit', ['id', 'n', 'team', 'hp', 'attack', "attacktype", 'initiative', 'weaknesses', 'immunities'])
 

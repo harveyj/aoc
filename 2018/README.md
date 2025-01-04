@@ -73,5 +73,78 @@ Rewrite 12/31/2024
 Difficulty: 5/10
 
 ## Day 15
-Oh man, I remember this one...
+Oh man, I remember this one... Simulate a dungeon with dozens of characters pathfinding, lots of fiddly little bits. 
+
+Rewrite ~1/1/2024
+
+Difficulty: 9/10
+
+## Day 16
+Cumsums - standard interview-ish problem. Fiddly to get the indices right, fun and fair.
+
+Rewrite ~1/1/2024
+
+Difficulty: 7/10
+
+## Day 17
+Fill the pools! Super fun!
+
+Rewrite 1/2/24
+
+Difficulty: 7/10
+
+## Day 18
+Find the period
+
+Rewrite 1/2/24
+
+Difficulty: 7/10
+
+## Day 19
+Figure out which ops were which! Super fun. 
+
+Rewrite 1/3/24
+
+Difficulty: 8/10
+
+## Day 20
+oooh, spicy. The "you can take these paths" to generate the maze problem.
+
+Rewrite 1/3/24.
+
+Difficulty: 9/10
+
+## Day 21
+Yessss a badass dissasembly problem. A war to figure out what the program is doing especially because of the whole "ip bound to register" thing obfuscating code.
+
+Rewrite 1/3/2024
+
+Difficulty: 9/10
+
+## Day 22
+Standard "navigate a grid" problem.
+
+Rewrite 1/3/2024
+
+Difficulty: 6/10
+
+## Day 23
+The octree problem! Segment a 3d space. 
+
+Rewrite 1/4/2024
+
+Difficulty: 9/10
+
+## Day 24
+OK some annoying parsing but other than that a straightforward sim. 
+
+Rewrite 1/4/2024
+
+Difficulty: 6/10
+
+## Day 25
+Powered through it in 5 minutes with NX. 
+
+Rewrite 1/4/2024
+Difficulty: 3/10
 

@@ -3,7 +3,6 @@ import puzzle, library
 from collections import defaultdict
 import copy
 
-
 def exec(op, a, b, c, regs):
   new_regs = copy.copy(regs)
   a = a if op in ['GTIR', 'SETI', 'EQIR'] else regs[a]
