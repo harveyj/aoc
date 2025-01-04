@@ -24,19 +24,19 @@ day 2 answer.
 - 2015: Validated!
 - 2016: Validated - 24 unknown, 25 incorrect
 - 2017: Validated - 6, 19, 20, 21, 22-25 unknown
-- 2018: (not fully implemented)
+- 2018: Validated - 13 incorrect
 - 2019: Validated - 18 incorrect
 - 2020: Validated - 4-1, 8-1, 10-1, 10-2, 16-1, 18-1, 20-1, 19-1, 19-2, 23-2 incorrect
 - 2021: Validated - 9, 16, 17, 19, 20, 21, 22, 23, 24, 25 incorrect
 - 2022: Validated - 6, 7, 11, 21, 23, 24, 25 incorrect
 - 2023: Validated - 6, 20, 21, 23 incorrect
-- 2024: Validated
+- 2024: Validated!
 
 ## Performance hotspots
 - 2015: 6-1 (2s), 6-2 (4s), 22-1&2 (3s)
 - 2016: 5-1 (5s), 5-2 (14s), 9 (42s), 11 (very long), 12-2 (30s) 14-2 (30s), 18-2 (40s), 19-2 (690s), 24 (at least 5m)
 - 2017: 15-1 (10s),  20-1 (50s), 20-2 (30s), 23-2 (20s) 
-- 2018: (not fully implemented)
+- 2018: 5-2 (30s) 14-2 (10s)
 - 2019: 18
 - 2020: 23
 - 2021: 17, 20
@@ -52,3 +52,4 @@ day 2 answer.
 - 2019-20 - full rewrite bc code was a mess
 - 2016-23 - partial rewrite/re-solve with more automation and an explanation for how to extract from regs
 - 2024-09 - two full rewrites 20s->4s, 4s->1s
+- 2018 - complete python reimplementation

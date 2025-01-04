@@ -84,7 +84,6 @@ def two(INPUT):
     op_num, a, b, c = instr
     op = op_lookup[op_num]
     regs = exec(op, a, b, c, regs)
-    print(regs)
   return regs[0]
 
 if __name__ == '__main__':

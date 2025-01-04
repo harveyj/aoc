@@ -37,7 +37,7 @@ def onetwo_fast(INPUT, two=False):
         if pow_grid2(sumgrid, x, y, width=i) > max_pow:
           max_pow = pow_grid2(sumgrid, x, y, width=i) 
           loc = (x, y, i)
-  return loc
+  return loc[0] - loc[1]
 
 one = lambda INPUT: onetwo_fast(INPUT)
 two = lambda INPUT: onetwo_fast(INPUT, two=True)
@@ -56,7 +56,7 @@ def pow_grid(x, y, sn, width=3):
       tot += power(x+dx, y+dy, sn)
   return tot
 
-def one(INPUT):
+def one_old(INPUT):
   sn = int(INPUT[0])
   max_pow = 0
   loc = None

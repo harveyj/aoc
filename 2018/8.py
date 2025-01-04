@@ -37,7 +37,6 @@ def two(INPUT):
     else:
       total = sum(DG.nodes[n]['metadata'])
       vals[n] = total # if 'metadata' in DG.nodes[n] else [0]])
-  print(vals)
   return vals[0]
 
 if __name__ == '__main__':

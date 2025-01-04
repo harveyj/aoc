@@ -86,7 +86,6 @@ def two(INPUT):
   units = parse_input(INPUT)
   # just start entering vals by hand. below 59 infinite loops, i presume bc of a stalemate.
   for i in range(59, 10000):
-    print(i)
     units = parse_input(INPUT)
     units = [boost(u, 'immune', i) for u in units]
     result = sim(units)

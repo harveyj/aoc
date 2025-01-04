@@ -23,14 +23,13 @@ def one(INPUT, two=False):
     # This works if you start it at zero but this saves time.
     if i > 10700 and stddev < min_std_dev:
       min_x = max(cells[0][0] - 50, 0); min_y = max(cells[0][1] - 50, 0)
-      print(G.window(min_x, min_y, min_x + 100, min_y + 100))
       min_std_dev = stddev
       min_i_val = i
   # Read the letters off of the grid
-  return min_i_val if two else 'DUMMY'
+  return min_i_val + 1 if two else 'DUMMY' # TODO why +1
 
 def two(INPUT):
-  return one(two=True)
+  return one(INPUT, two=True)
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2018", "10")

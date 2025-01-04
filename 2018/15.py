@@ -19,18 +19,13 @@ def bfs2(G, start_loc, tgt):
   queue = deque([(a,) for a in nxt(G, start_loc)])
   min_len = 10000000
   candidates = []
-  # print(f'startqueue {queue}')
   while queue:
     path = queue.popleft(); loc = path[-1]
-    # print(path)
     seen.add(loc)
     if candidates and len(path) > min_len: break
     if tgt in G.neighbors(loc):
       candidates.append(path)
       min_len = len(path)
-      if start_loc == (7, 4):
-        print(f'PATH {path}')
-        print(f'queue {queue}')
     for n in nxt(G, loc): 
       if n not in seen: queue.append((path) + (n,))
     # print(queue)
@@ -68,9 +63,8 @@ def one(INPUT, two=False, ATTACK_ELF=3):
   goblins = G.detect('G')
   entities = {loc: ('E',START_HP, ATTACK_ELF, loc) for loc in elves}
   entities.update({loc: ('G', START_HP, 3, loc) for loc in goblins})
-  print(f"INITIALLY")
-
-  print(G)
+  # print(f"INITIALLY")
+  # print(G)
   for i in range(100):
     for loc in list(book_sort(entities.keys())):
       if loc not in entities: continue # we got killed earlier in the turn

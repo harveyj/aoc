@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
-import puzzle, re, library
+import puzzle, library
 from collections import defaultdict
-import networkx as nx
-import itertools
 import copy
 
 def exec(op, a, b, c, regs):
@@ -49,7 +47,7 @@ def one(INPUT):
     pc += 1
   return regs[5]
 
-def two_fast(INPUT):
+def two(INPUT):
   # Translate the core of the assembler to python, loop through it really fast. 
   def nxt(prev):
     regs = [0,0,0,0,0,0]
@@ -75,5 +73,5 @@ def two_fast(INPUT):
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2018", "21")
-  # print(p.run(one, 0))
-  print(p.run(two_fast, 0))
+  print(p.run(one, 0))
+  print(p.run(two, 0))

@@ -11,8 +11,6 @@ def one_slow(INPUT, two=False):
   marbles = [0,2,1,3] # skip first few steps
   scores = defaultdict(int)
   while marble_id < end_marble+1:
-    if marble_id % 1000 == 0:
-      print(marble_id)
     if marble_id % 23 == 0:
       seven_back_idx = (current_idx + len(marbles) - 7 ) % len(marbles)
       scores[marble_id % players] += marble_id + marbles[seven_back_idx]
