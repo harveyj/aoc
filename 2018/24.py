@@ -12,7 +12,6 @@ def extract_unit(raw_unit, team, i):
   immunities = tuple()
   immune_match = re.search(r'immune to ([\w ,]+)', raw_unit)
   if immune_match:
-    print(immune_match.groups())
     immunities = tuple(immune_match.groups()[0].split(', '))
   weaknesses = tuple()
   weak_match = re.search(r'weak to ([\w ,]+)', raw_unit)
@@ -40,13 +39,11 @@ def dmg(a, b):
   if a.attacktype in b.weaknesses: return base * 2
   return base
 
-def one(INPUT):
-  units = parse_input(INPUT)
+def sim(units):
   all_units = {u.id:u for u in units}
-  for u in all_units.values(): print(u)
   while True:
     if len(set([u.team for u in all_units.values()])) == 1:
-      return sum([u.n for u in all_units.values()])
+      return sum([u.n for u in all_units.values()]), list(all_units.values())[0].team
     # Targeting phase
     tgts = dict()
     unit_order = sorted(all_units.values(), key=lambda a: (-ep(a), -a.initiative))
@@ -74,16 +71,30 @@ def one(INPUT):
                             initiative=tgt.initiative, weaknesses=tgt.weaknesses, immunities=tgt.immunities)
         all_units[tgt.id] = post_attack
       # print(f'{attacker.id} attacks defending group {tgt.id} killing {killed}')
-    for key in all_units:
-      print(all_units[key])
+
+def one(INPUT):
+  units = parse_input(INPUT)
+  return sim(units)[0]
+
+def boost(unit, team, num):
+  unit_vals = list(unit)
+  if unit_vals[2] == team:
+    unit_vals[4] += num
+  return Unit(*unit_vals)
 
 def two(INPUT):
-  invals = parse_input(INPUT)
-  out = 0
-  return out
+  units = parse_input(INPUT)
+  # just start entering vals by hand. below 59 infinite loops, i presume bc of a stalemate.
+  for i in range(59, 10000):
+    print(i)
+    units = parse_input(INPUT)
+    units = [boost(u, 'immune', i) for u in units]
+    result = sim(units)
+    if result[1] == 'immune':
+      return result[0]
 
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2018", "24")
   print(p.run(one, 0))
-  # print(p.run(two, 0))
+  print(p.run(two, 0))
