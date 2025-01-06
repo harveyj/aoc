@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-import puzzle, re, numpy
+import puzzle
 
 def one(INPUT):
-
   def one_round(in_str):
     digits = list(map(int, list(in_str)))
     new_digits = []
@@ -27,8 +26,6 @@ def one(INPUT):
   out = INPUT[0]
   for i in range(100):
     out = one_round(out)
-    # print(list(out)[:8])
-  # print(out[:8])
   return out[:8]
 
 def two(INPUT):
