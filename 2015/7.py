@@ -10,7 +10,6 @@ def parse(INPUT):
     match = re.search('(\w+) (.*) (\w+)', lval)
     if match:
       oper1, op, oper2 = match.group(1, 2, 3)
-      # print([oper1, op, oper2, dest])
       if oper2.isdigit():
         oper2 = int(oper2)
       if oper1.isdigit():
@@ -20,7 +19,6 @@ def parse(INPUT):
       match = re.search('(.*) (\w+)', lval)
       if match:
         op, oper2 = match.group(1, 2)
-        # print(['NULL', op, oper2, dest])
         instrs.append(['NULL', op, oper2, dest])
       else: 
         match = re.search('(\d+)', lval)

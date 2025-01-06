@@ -2,7 +2,6 @@
 import puzzle
 import json
 
-
 def onetwo(INPUT, two=False):
   def sum_num(inval):
     val = 0
@@ -18,11 +17,8 @@ def onetwo(INPUT, two=False):
 
   return sum_num(json.loads(INPUT[0]))
 
-def one(INPUT):
-  return onetwo(INPUT, two=False)
-
-def two(INPUT):
-  return onetwo(INPUT, two=True)
+def one(INPUT): return onetwo(INPUT, two=False)
+def two(INPUT): return onetwo(INPUT, two=True)
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2015", "12")

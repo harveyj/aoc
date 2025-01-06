@@ -188,5 +188,6 @@ TODO fully automate.
 
 Done 12/26 (part 1) 12/27 (part 2)
 Difficulty: 8/10
+
 # Day 25
 Done 12/27

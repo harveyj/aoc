@@ -20,7 +20,6 @@ def two(INPUT):
     l = l.strip()
     slash = l.count('\\')
     quote = l.count('"')
-    slash_quote = l.count('\\"')
     total += slash + quote + 2
   return total
 

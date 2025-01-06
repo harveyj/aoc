@@ -5,7 +5,6 @@ import itertools
 def parse(INPUT):
   return map(int, INPUT)
 
-
 def onetwo(INPUT, two=False):
   buckets = list(parse(INPUT))
   combos = 0

@@ -41,11 +41,8 @@ def onetwo(INPUT, two=False):
       return i+1
   return 0
 
-def one(INPUT):
-  return onetwo(INPUT, two=False)
-
-def two(INPUT):
-  return onetwo(INPUT, two=True)
+def one(INPUT): return onetwo(INPUT, two=False)
+def two(INPUT): return onetwo(INPUT, two=True)
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2015", "16")

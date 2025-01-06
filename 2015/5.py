@@ -13,28 +13,15 @@ def is_nice(inval):
   return sum(val_counts) >= 3 and sum(double_counts) > 0
 
 def one(INPUT):
-  total = 0
-  for l in INPUT:
-    if is_nice(l):
-      # print('nice', l)
-      total += 1
-    # else: print('no', l)
-  return total
+  return len([l for l in INPUT if is_nice(l)])
 
 def is_nice2(inval):
   repeat = re.search(r'(..).*\1', inval)
   sandwich = re.search(r'(.).\1', inval)
-  # print(repeat, sandwich, inval)
   return repeat != None and sandwich != None
 
 def two(INPUT):
-  total = 0
-  for l in INPUT:
-    if is_nice2(l):
-      # print('nice', l)
-      total += 1
-    # else: print('no', l)
-  return total
+  return len([l for l in INPUT if is_nice2(l)])
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2015", "5")

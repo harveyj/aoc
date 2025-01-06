@@ -13,17 +13,13 @@ def iter(INPUT):
     i = j
   return ''.join([str(a) + b for a, b in out])
 
-def one(INPUT):
+def one(INPUT, two = False):
   val = INPUT[0]
-  for i in range(40):
+  for i in range(50 if two else 40):
     val = iter(val)
   return len(val)
 
-def two(INPUT):
-  val = INPUT[0]
-  for i in range(50):
-    val = iter(val)
-  return len(val)
+def two(INPUT): return one(INPUT, two=True)
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2015", "10")

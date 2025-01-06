@@ -7,7 +7,6 @@ def parse(INPUT):
   for l in INPUT:
     yield re.match(pat, l).groups()
 
-
 def one(INPUT):
   ingredients = list(parse(INPUT))
   ing_map = dict()

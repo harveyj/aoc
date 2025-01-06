@@ -8,7 +8,6 @@ def parse(INPUT):
   for l in INPUT:
     yield re.match(pat, l).groups()
 
-
 def one(INPUT):
   total_t = 2503
   reindeer = parse(INPUT)
