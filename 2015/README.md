@@ -35,7 +35,9 @@ First checkin cuts it to 2s.
 Tried with intervals naively and it is a living hell of if statements
 Did some research, now trying rtree
 
-Difficulty: 2/10, 4/10 optimized to 2s
+OK rtree is super cool but then it ran in 40 seconds fml
+
+Difficulty: 2/10, 4/10 optimized to 2s, 3/10 optimized to 50ms
 
 ## Day 7
 Warmup
