@@ -31,9 +31,11 @@ Difficulty: 2/10
 Toggle Christmas lights. 
 Doing it with a million-cell grid not that bad but takes ~6s.
 
-First checkin cuts it to 2s
+First checkin cuts it to 2s.
+Tried with intervals naively and it is a living hell of if statements
+Did some research, now trying rtree
 
-Difficulty: 2/10, 5/10 optimized
+Difficulty: 2/10, 4/10 optimized to 2s
 
 ## Day 7
 Warmup
