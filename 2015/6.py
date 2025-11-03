@@ -2,6 +2,7 @@
 import puzzle
 import re
 from library import Grid
+from collections import defaultdict
 
 def parse(INPUT):
   instrs = []
@@ -12,43 +13,65 @@ def parse(INPUT):
       instr = ['turn on']
     else:
       instr = ['turn off']
-    match = re.findall('(\d+)', l)
+    match = re.findall(r'(\d+)', l)
 
     for m in match:
       instr.append(int(m))
     instrs.append(instr)
   return instrs
 
+# spatial index of instructions, scan l-r 
 def one(INPUT):
-  G = Grid(1000, 1000)
+  rows = defaultdict(list)
   instrs = parse(INPUT)
-  for (op, x1, y1, x2, y2) in instrs:
-    for x in range(x1, x2 + 1):
-      for y in range(y1, y2 + 1):
-        if op == 'toggle': 
-          tgt = '#' if (G.get((x, y)).strip() == '.') else '.'
-          G.set((x, y), tgt)
-        elif op == 'turn on': G.set((x, y), '#')
-        elif op == 'turn off': G.set((x, y), '.')
-  return len(G.detect('#'))
+  for inst in instrs:
+    (op, x1, y1, x2, y2) = inst
+    for y in range(y1, y2+1):
+      row_ops = rows[y]
+      row_ops.append((op, x1, x2))
+  on_lights = 0
+  for y in range(1000):
+    ops = rows[y]
+    for x in range(1000):
+      on = 0
+      for op in ops:
+        oper, x1, x2 = op
+        if x1 <= x <= x2:
+          if oper == "turn on":
+            on = 1
+          if oper == "turn off":
+            on = 0
+          if oper == "toggle":
+            on = 0 if on == 1 else 1
+      on_lights += on
+  print(on_lights)
+  return on_lights
 
 def two(INPUT):
+  rows = defaultdict(list)
   instrs = parse(INPUT)
-  G = Grid(1000, 1000)
-  for x in range(0, 1000):
-    for y in range(0, 1000):
-      G.set((x, y), 0)
-  for (op, x1, y1, x2, y2) in instrs:
-    for x in range(x1, x2+1):
-      for y in range(y1, y2+1):
-        if op == 'toggle': G.set((x, y), G.get((x, y), 0) + 2)
-        elif op == 'turn on': G.set((x, y), G.get((x, y), 0) + 1)
-        elif op == 'turn off': G.set((x, y), max(0, G.get((x, y), 0) - 1))
-  tot = 0
-  for x in range(0, 1000):
-    for y in range(0, 1000):
-      tot += G.get((x, y))
-  return tot
+  for inst in instrs:
+    (op, x1, y1, x2, y2) = inst
+    for y in range(y1, y2+1):
+      row_ops = rows[y]
+      row_ops.append((op, x1, x2))
+  on_lights = 0
+  for y in range(1000):
+    ops = rows[y]
+    for x in range(1000):
+      on = 0
+      for op in ops:
+        oper, x1, x2 = op
+        if x1 <= x <= x2:
+          if oper == "turn on":
+            on += 1
+          if oper == "turn off":
+            on = max(on - 1, 0)
+          if oper == "toggle":
+            on += 2
+      on_lights += on
+  print(on_lights)
+  return on_lights
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2015", "6")

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.13
+#!/usr/bin/env python3.12
 
 import importlib.util
 import argparse
@@ -15,7 +15,7 @@ parser.add_argument('-e', '--exclude_days', type=str, help="Year", default=[])
 # parser.add_argument('-l', '--log_file', type=str, help="Log File", default=[])
 args = parser.parse_args()
 
-years = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
+years = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
 days = range(1, 26)
 exclude_days = []
 log_file = f'logs/main.txt'

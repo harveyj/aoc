@@ -28,9 +28,12 @@ Warmup
 Difficulty: 2/10
 
 ## Day 6
-Warmup
+Toggle Christmas lights. 
+Doing it with a million-cell grid not that bad but takes ~6s.
 
-Difficulty: 2/10
+First checkin cuts it to 2s
+
+Difficulty: 2/10, 5/10 optimized
 
 ## Day 7
 Warmup
