@@ -33,7 +33,7 @@ day 2 answer.
 - 2024: Validated!
 
 ## Performance hotspots
-- 2015: 6-1 (2s), 6-2 (4s), 22-1&2 (3s)
+- 2015: 22-1&2 (3s)
 - 2016: 5-1 (5s), 5-2 (14s), 9 (42s), 11 (very long), 12-2 (30s) 14-2 (30s), 18-2 (40s), 19-2 (690s), 24 (at least 5m)
 - 2017: 15-1 (10s),  20-1 (50s), 20-2 (30s), 23-2 (20s) 
 - 2018: 5-2 (30s) 14-2 (10s)
@@ -53,3 +53,5 @@ day 2 answer.
 - 2016-23 - partial rewrite/re-solve with more automation and an explanation for how to extract from regs
 - 2024-09 - two full rewrites 20s->4s, 4s->1s
 - 2018 - complete python reimplementation
+- 2015-06 - rewrite to get to 50ms with numpy
+- 2016-11 - rewrite with A* to get from "very long" to 10s (pt 1)

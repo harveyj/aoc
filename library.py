@@ -1,6 +1,7 @@
 import re, copy
 import networkx as nx
 from collections import defaultdict
+import heapq
 
 # E, S, W, N
 DIRS_CARDINAL = [(1, 0), (0, 1), (-1, 0), (0, -1)]
@@ -170,3 +171,43 @@ def find_periodic_state_at(fn, minimum, period, tgt):
   for (i, state) in fn:
     if i > minimum and (tgt-i) % period == 0:
       return state
+
+def a_star_lazy(start, goal, h, neighbors):
+  def reconstruct_path(came_from, current):
+    total_path = [current]
+    while current in came_from.keys():
+      current = came_from[current]
+      total_path.insert(0, current)
+    return total_path
+  open_set = [(h(start), start)]
+  came_from = dict()
+  g_score = defaultdict(lambda: 1000000000)
+  g_score[start] = 0
+  f_score = {start:h(start)}
+  while open_set:
+    current = heapq.heappop(open_set)[1]
+    if current == goal:
+      return reconstruct_path(came_from, current)
+    for n in neighbors(current):
+      tentative_gScore = g_score[current] + 1
+      if tentative_gScore < g_score[n]:
+        came_from[n] = current
+        g_score[n] = tentative_gScore
+        f_score[n] = tentative_gScore + h(n)
+        if n not in open_set:
+          heapq.heappush(open_set, ((f_score[n], n)))
+  return None
+
+def test_a_star():
+  def simple_neighbors(n):
+    for i in range(len(n)):
+      if n[i] > 5: continue
+      yield n[:i] + (n[i]+1,) + n[i+1:]
+
+  def h(state):
+    return 3 * len(state) - sum(state)
+
+  path = a_star_lazy((0,0,0), (3, 2, 1), h, simple_neighbors)
+  for p in path:
+    print(p)
+

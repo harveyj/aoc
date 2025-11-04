@@ -53,9 +53,11 @@ Warmup
 Difficulty: 2/10
 
 ## Day 11
-Warmup
+Towers of hanoi adjacent. A*!!
 
-Difficulty: 2/10
+Take 2: Wrote the A* library. Accurate but way way too slow.
+
+Difficulty: 7/10 (fast)
 
 ## Day 12
 Warmup

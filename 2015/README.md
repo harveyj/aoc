@@ -37,6 +37,8 @@ Did some research, now trying rtree
 
 OK rtree is super cool but then it ran in 40 seconds fml
 
+just use numpy - thanks this guy: https://www.reddit.com/r/adventofcode/comments/3vmltn/day_6_solutions/
+
 Difficulty: 2/10, 4/10 optimized to 2s, 3/10 optimized to 50ms
 
 ## Day 7
