@@ -125,9 +125,11 @@ Difficulty: 8/10
 
 
 ## Day 24
-Warmup
+Graph search. First version SUPER inefficient, crushed the second version with A* precomputation. OMG lazy A* where have you been all my life. 
 
-Difficulty: 2/10
+REDO 11/4/25
+
+Difficulty: 5/10
 
 
 ## Day 25

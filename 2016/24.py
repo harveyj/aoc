@@ -1,48 +1,35 @@
 #!/usr/bin/env python3
 import puzzle, library
 import networkx as nx
+import library
+from functools import partial
 import itertools
-
 
 def one(INPUT, two=False):
   G = library.Grid(raw='\n'.join(INPUT))
+  def neighbors(G, pt):
+    return [loc for loc, val in G.neighbors_kv(pt, default='#') if val == '.']
   nodes = dict()
   for x in range(G.max_x()):
     for y in range(G.max_y()):
       if G.get((x, y)).isdigit():
-        nodes[(x, y)] = G.get((x, y))
-  graph = nx.Graph()
-  for x in range(G.max_x()):
-    for y in range(G.max_y()):
-      if G.get((x, y)) != '#':
-        graph.add_node((x, y))
-        for loc, val in G.neighbors_kv((x, y)):
-          if val != '#':
-            graph.add_edge((loc), (x, y))
-  weights = dict(nx.all_pairs_shortest_path(graph))
-  graph2 = nx.Graph()
-  for n0 in nodes:
-    graph2.add_node(n0)
-    for n1 in nodes:
-      # fencepost accounts for the -1
-      graph2.add_edge(n0, n1, weight=len(weights[n0][n1])-1)
-  weights = dict(nx.all_pairs_dijkstra_path_length(graph2, weight='weight'))
-
-  next_nodes = {loc:nodes[loc] for loc in nodes if nodes[loc] != '0'}
-  start_node = [loc for loc in nodes if nodes[loc] == '0'][0]
+        nodes[int(G.get((x, y)))] = (x, y)
+        G.set((x, y),  '.')
   
-  min_total=100000000
-  min_path = []
-  for path in itertools.permutations(next_nodes):
-    total = weights[start_node][path[0]]
-    for n0, n1 in zip(path, path[1:]):
-      total += weights[n0][n1]
-    if two:
-      total += weights[n1][start_node]
-    if total < min_total:
-      min_total = total
-      min_path = [start_node] + list(path)
-  return min_total, min_path
+  weights = {}
+  for n1 in nodes.keys():
+    for n2 in nodes.keys():
+      if n1 == n2: continue
+      loc1 = nodes[n1]; loc2 = nodes[n2]
+      weights[(n1, n2)] = len(library.a_star_lazy(loc1, loc2, partial(library.manhattan, loc2), partial(neighbors, G))) - 1
+  min_path = None; min_cost = 1000000000
+  for path in itertools.permutations(range(1, 8)):
+    path = [0] + list(path)
+    path_cost = sum([weights[(n1, n2)] for n1, n2 in zip(path, path[1:])])
+    if two: path_cost = path_cost + weights[(path[-1], 0)]
+    if path_cost < min_cost:
+      min_cost = path_cost
+  return min_cost
 
 def two(INPUT):
   return one(INPUT, two=True)
