@@ -175,27 +175,27 @@ def find_periodic_state_at(fn, minimum, period, tgt):
 def a_star_lazy(start, goal, h, neighbors):
   def reconstruct_path(came_from, current):
     total_path = [current]
-    while current in came_from.keys():
-      current = came_from[current]
+    while str(current) in came_from.keys():
+      current = came_from[str(current)]
       total_path.insert(0, current)
     return total_path
   open_set = [(h(start), start)]
   came_from = dict()
   g_score = defaultdict(lambda: 1000000000)
-  g_score[start] = 0
-  f_score = {start:h(start)}
+  g_score[str(start)] = 0
+  f_score = {str(start):h(start)}
   while open_set:
     current = heapq.heappop(open_set)[1]
     if current == goal:
       return reconstruct_path(came_from, current)
     for n in neighbors(current):
-      tentative_gScore = g_score[current] + 1
-      if tentative_gScore < g_score[n]:
-        came_from[n] = current
-        g_score[n] = tentative_gScore
-        f_score[n] = tentative_gScore + h(n)
+      tentative_gScore = g_score[str(current)] + 1
+      if tentative_gScore < g_score[str(n)]:
+        came_from[str(n)] = current
+        g_score[str(n)] = tentative_gScore
+        f_score[str(n)] = tentative_gScore + h(n)
         if n not in open_set:
-          heapq.heappush(open_set, ((f_score[n], n)))
+          heapq.heappush(open_set, ((f_score[str(n)], n)))
   return None
 
 def test_a_star():

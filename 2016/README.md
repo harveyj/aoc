@@ -57,6 +57,8 @@ Towers of hanoi adjacent. A*!!
 
 Take 2: Wrote the A* library. Accurate but way way too slow.
 
+Take 3: Rewritten completely because the names of the elements doesn't matter, all elements interchangeable (thanks reddit!)
+
 Difficulty: 7/10 (fast)
 
 ## Day 12

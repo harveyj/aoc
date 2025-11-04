@@ -1,79 +1,71 @@
 #!/usr/bin/env python3
 import puzzle
-from typing import Any, Tuple
 import library
-from functools import lru_cache
+from dataclasses import dataclass
+import re
+import copy
 
-ELEMENTS = {'promethium':'Pr',
-            'cobalt':'Co',
-            'ruthenium':'Ru',
-            'curium':'Cu',
-            'plutonium':'Pu',
-            'lithium': 'Li',
-            'hydrogen': 'Hg',
-            'dilithium': 'Di',
-            'elerium': 'El'
-            }
+@dataclass(order=True)
+class Element:
+  g: int
+  m: int
 
 def parse(INPUT):
-  items = []
+  items = {}
   for i, l in enumerate(INPUT):
-    for k in ELEMENTS.keys():
-      if k+' ' in l: items.append((i, ELEMENTS[k] + '-G'))
-      if k+'-' in l: items.append((i, ELEMENTS[k] + '-M'))
-  return frozenset(items)
+    gens = re.findall(r'(\w+) generator', l)
+    for k in gens:
+      if k in items: items[k].g = i
+      else: items[k] = Element(g=i, m=-1)
+    micros = re.findall(r'(\w+)-', l)
+    for k in micros:
+      if k in items: items[k].m = i
+      else: items[k] = Element(m=i, g=-1)
+  return sorted(items.values())
 
-def legal(items):
-  oob = [it for it in items if it[0] < 0 or it[0] > 3]
-  if oob: return False
-  for fl_idx in range(4):
-    f = [it[1] for it in items if it[0] == fl_idx]
-    unpaired = False; generator = False
-    for item in f:
-      name = item.split('-')[0]
-      unpaired |= name+'-M' in f and not name+'-G' in f
-      generator |= name+'-G' in f
-    if unpaired and generator:
-      return False
-  return True
+def legal(fl_idx, items):
+  unpaired_m = {e.m for e in items if e.g != e.m}
+  g = {e.g for e in items}
+  return 0 <= fl_idx < 4 and not unpaired_m.intersection(g)
 
-def print_state(state):
-  levels = {v:k for k, v in state[1]}
-  for k in sorted(levels.keys()): print(k, levels[k], end=' ')
-  print('')
 
 def one(INPUT):
-  # need a better function
   def h(state):
     fl_idx, items = state
-    need_move = {it for it in items if it[0] != 3}
-    return max(0, sum([3-c[0] * 2 for c in need_move]) - 3)
+    m_height = [it.m for it in items if it.m != 3]
+    g_height = [it.g for it in items if it.g != 3]
+    return max(0, 3 * 2 * len(items) - sum(m_height) - sum(g_height) - 2)
+  
+  def move_indices(fl_idx, items):
+    for delta in [-1, 1]:
+      for i in range(len(items) * 2):
+        if (i % 2 == 0 and items[i//2].g == fl_idx or
+            i % 2 == 1 and items[i//2].m == fl_idx):
+          yield (delta, (i,))
+      for i in range(len(items) * 2):
+        if (i % 2 == 0 and items[i//2].g == fl_idx or
+            i % 2 == 1 and items[i//2].m == fl_idx):
+          for j in range(i+1, len(items) * 2):
+            if (j % 2 == 0 and items[j//2].g == fl_idx or
+                j % 2 == 1 and items[j//2].m == fl_idx):
+              yield (delta, (i, j))
+
   def neighbors(state):
     fl_idx, items = state
-    fl_items = {it for it in items if it[0] == fl_idx}
-    other_items = {it for it in items if it[0] != fl_idx}
-    checked = set()
-    for it_a in fl_items:
-      ret = {it for it in fl_items if it != it_a }| set([(it_a[0] - 1, it_a[1])]) | other_items
-      if legal(ret): yield (fl_idx-1, frozenset(ret))
-      ret = {it for it in fl_items if it != it_a }| set([(it_a[0] + 1, it_a[1])]) | other_items
-      if legal(ret): yield (fl_idx+1, frozenset(ret))
-      checked.add(it_a)
-      for it_b in fl_items:
-        if it_b in checked: continue
-        ret = {it for it in fl_items if it not in [it_a, it_b]} | set([(it_a[0] - 1, it_a[1]), (it_b[0] - 1, it_b[1])]) | other_items
-        if legal(ret): yield (fl_idx - 1, frozenset(ret))
-        ret = {it for it in fl_items if it not in [it_a, it_b]} | set([(it_a[0] + 1, it_a[1]), (it_b[0] + 1, it_b[1])]) | other_items
-        if legal(ret): yield (fl_idx + 1, frozenset(ret))
+    for (delta, moves) in move_indices(fl_idx, items):
+      new_items = copy.deepcopy(items)
+      for m in moves:
+        move_g = m % 2 == 0
+        if move_g: new_items[m//2].g += delta
+        else: new_items[m//2].m += delta
+      new_state = (fl_idx + delta), sorted(new_items)
+      if legal(*new_state): yield new_state
     return []
 
-  state = (0, parse(INPUT))
-  goal = (3, frozenset((3, item[1]) for item in state[1]))
-  path = library.a_star_lazy(goal, state, h, neighbors)
-  for p in path:
-    print(p)
-    print_state(p)
-  print(len(path) - 1)
+  start = parse(INPUT)
+  state = (0, start)
+  goal = (3, [Element(3, 3) for _ in range(len(start))])
+  path = library.a_star_lazy(state, goal, h, neighbors)
   return len(path) - 1
 
 def two(INPUT):
