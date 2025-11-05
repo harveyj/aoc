@@ -52,11 +52,11 @@ for year in years:
     end_time = time.time()
     timings[f'{year}-{i}-2'] = round((end_time - start_time)*1000000)/1000
     if answers[str(i)][0] != str(one):
-      out(f'INCORRECT: output - {one} vs correct - {answers[str(i)][0]}', lf)
+      out(f'INCORRECT pt1: output - {one} vs correct - {answers[str(i)][0]}', lf)
       continue
     else: out('CORRECT pt 1', lf)
     if answers[str(i)][1] != str(two):
-      out(f'INCORRECT: output - {two} vs correct - {answers[str(i)][1]}', lf)
+      out(f'INCORRECT pt 2: output - {two} vs correct - {answers[str(i)][1]}', lf)
       continue
     else: out('CORRECT pt 2', lf)
     out(f'pt 1: {timings[f'{year}-{i}-1']} ms', lf)

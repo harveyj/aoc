@@ -19,6 +19,14 @@ Bumping up a little bit - 10 minutes
 
 Difficulty: 3/10
 
+## Day 5
+Doing this one with lists is super slow. Doing it with deque crushes it
+
+REWRITE 11/5/2025
+
+Difficulty: 3/10
+
+
 ## Day 7
 Custom topological sort! Now we're getting into it. 
 

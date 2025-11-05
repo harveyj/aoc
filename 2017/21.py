@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
 import puzzle, library
-import re
-# import networkx as nx
-# import hashlib
-# from collections import defaultdict
 
 def all(pat):
   outs = []
@@ -56,20 +52,20 @@ def iter(stride, patterns, G):
           new_G.set((sx+dx, sy+dy), out[dy][dx])
   return new_G
 
-def one(INPUT):
+def onetwo(INPUT, steps):
   patterns = parse(INPUT)
   G = library.Grid(raw=START_PAT)
   
-  steps = 18
-  for i in range(steps):
+  for _ in range(steps):
     stride = 2 if G.max_x() % 2 == 0 else 3
     G = iter(stride, patterns, G)
-    # print(len(G.detect('#')))
-  return 0
+  return len(G.detect('#'))
 
-# TODO borked
+def one(INPUT):
+  return onetwo(INPUT, steps=5)
+
 def two(INPUT):
-  return 0
+  return onetwo(INPUT, steps=18)
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2017", "21")

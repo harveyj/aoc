@@ -1,16 +1,12 @@
 #!/usr/bin/env python3
-import puzzle, library
-import re
-import networkx as nx
-import hashlib
-
+import puzzle
 
 def parse(INPUT):
   for l in INPUT:
     yield list(map(int, l.split()))
 
 
-def one(INPUT):
+def puzz(INPUT):
   blocks = list(parse(INPUT))[0]
   seen = set()
   steps = 0
@@ -26,11 +22,13 @@ def one(INPUT):
       idx = (max_idx + 1 + i) % len(blocks)
       blocks[idx] += 1
 
+def one(INPUT):
+  return puzz(INPUT)[0]
 
 def two(INPUT):
-  _, blocks = one(INPUT)
+  _, blocks = puzz(INPUT)
   blocks = [str(b) for b in blocks]
-  steps2, _ = one([' '.join(blocks)])
+  steps2, _ = puzz([' '.join(blocks)])
   return steps2
 
 if __name__ == '__main__':

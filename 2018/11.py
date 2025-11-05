@@ -37,7 +37,8 @@ def onetwo_fast(INPUT, two=False):
         if pow_grid2(sumgrid, x, y, width=i) > max_pow:
           max_pow = pow_grid2(sumgrid, x, y, width=i) 
           loc = (x, y, i)
-  return loc[0] - loc[1]
+
+  return '.'.join(map(str, loc)) if two else '.'.join((map(str, loc[:2])))
 
 one = lambda INPUT: onetwo_fast(INPUT)
 two = lambda INPUT: onetwo_fast(INPUT, two=True)
@@ -46,23 +47,3 @@ if __name__ == '__main__':
   p = puzzle.Puzzle("2018", "11")
   print(p.run(one, 0))
   print(p.run(two, 0))
-
-
-## OLD
-def pow_grid(x, y, sn, width=3):
-  tot = 0
-  for dx in range(min(width, 300-width)):
-    for dy in range(min(width, 300-width)):
-      tot += power(x+dx, y+dy, sn)
-  return tot
-
-def one_old(INPUT):
-  sn = int(INPUT[0])
-  max_pow = 0
-  loc = None
-  for x in range(1, 297):
-    for y in range(1, 297):
-      if pow_grid(x, y, sn) > max_pow:
-        max_pow =  pow_grid(x, y, sn) 
-        loc = (x, y)
-  return loc

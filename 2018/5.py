@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
-import puzzle
+import puzzle, collections
 
 def one(INPUT):
-  polymer = list(INPUT[0])
-  dirty = True
-  while dirty:
-    dirty = False
-    i = 0
-    while i < len(polymer) - 1:
-      if ((polymer[i].upper() == polymer[i+1]) or (polymer[i].lower() == polymer[i+1])) and (polymer[i] != polymer[i+1]):
-        del polymer[i:i+2]
-        dirty = True
-      i += 1
-  return len(polymer)
+  # prevent bug where string wraps around because - never exists in input
+  polymer = collections.deque(list(INPUT[0]+'-'))
+  clean = 0
+  while True:
+    if polymer[0].upper() == polymer[1].upper() and polymer[0] != polymer[1]:
+      clean = 0
+      polymer.popleft(); polymer.popleft()
+    else:
+      clean += 1
+      polymer.rotate(1)
+    if clean == len(polymer): break
+  return len(polymer) - 1
 
 def two(INPUT):
   polymer = list(INPUT[0])

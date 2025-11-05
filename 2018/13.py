@@ -41,7 +41,7 @@ def one(INPUT, two=False):
       if loc in new_locs or loc in old_locs:
         if two:
           remove_locs.add(loc)
-        else: return loc
+        else: return '.'.join(map(str, loc))
       new_locs.add(loc)
       if (G.get(loc), dir) in TURNS:
         dir = TURNS[G.get(loc), dir]
@@ -54,7 +54,8 @@ def one(INPUT, two=False):
     carts = [c for c in carts if c[2] not in remove_locs]
     G.overlays = {loc: dir for (dir, next_turn, loc) in carts}
     if len(carts) == 1:
-      return carts[0][2]
+      return '.'.join(map(str, carts[0][2]))
+
     # Fun to watch it step!
     # print('')
     # print(G)
