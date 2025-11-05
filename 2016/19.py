@@ -17,7 +17,22 @@ def one(INPUT):
 
   return first_one + 1 # one-based system
 
+## Derp only works for even
 def two(INPUT):
+  dels = set()
+  max_val = int(INPUT[0])
+  cur = max_val // 2
+  while True:
+    dels.add(cur + 1)
+    if len(dels) == max_val: return cur+1
+    while cur + 1 in dels: cur = (cur + 1) % max_val
+    dels.add(cur + 1)
+    if len(dels) == max_val: return cur+1
+    while cur + 1 in dels: cur = (cur + 1) % max_val
+    cur = (cur + 1) % max_val
+    while cur + 1 in dels: cur = (cur + 1) % max_val
+
+def twoa(INPUT):
   items = list(range(1, int(INPUT[0])+1))
   idx = 0
   while len(items) > 1:
@@ -25,8 +40,9 @@ def two(INPUT):
     tgt %= len(items)
     if items[tgt] > items[idx]:
       idx += 1
+    print(items)
     del items[tgt]
-    idx %= len (items)
+    idx %= len(items)
   return items[0]
 
 if __name__ == '__main__':

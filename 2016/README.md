@@ -97,9 +97,10 @@ Warmup
 Difficulty: 2/10
 
 ## Day 19
-Warmup
+Crazy-ass modular arithmetic. 
+Do it the expensive way, print out the steps, find a cheaper way
 
-Difficulty: 2/10
+Difficulty: 8/10 (fast)
 
 ## Day 20
 Warmup
@@ -133,6 +134,8 @@ Difficulty: 5/10
 
 
 ## Day 25
-Warmup
+Merry Christmas!
+Last Assembunny. Stupid forgetting to increment the PC set me back two hours... other than that straightforward
+REDO 11/4/25
 
-Difficulty: 2/10
+Difficulty: 5/10
