@@ -1,12 +1,5 @@
 module.exports = { _input, _ANSWER_1, _ANSWER_2};
 
-function _1(md){return(
-md`# Advent 2020 Day 8!`
-)}
-
-
-
-
 function parseInstruction(inst){
     let instRe = /(...) (.\d+)/;
     let [_, op, val] = inst.match(instRe);
@@ -27,7 +20,7 @@ function run(program) {
   while (pc < program.length) {
     let inst = program[pc];
     if (seenPc.has(pc)) {
-      return null;
+      return -1 * acc;
     } else {
       seenPc.add(pc);
     }
@@ -49,7 +42,7 @@ function run(program) {
 
 function _ANSWER_1(input)
 {
-  return run(input);
+  return run(input)*-1;
 }
 
 
@@ -64,7 +57,7 @@ function _ANSWER_2(input)
     }
 
     let val = run(program);
-    if (val !== null) {
+    if (val > 0) {
       return val;
     }
 

@@ -1,8 +1,5 @@
+#!/usr/local/bin/node
 module.exports = { _input, _ANSWER_1, _ANSWER_2};
-
-function _1(md){return(
-md`# Advent 2020 Day 4!`
-)}
 
 function _input(INPUT){return(
 INPUT.split('\n\n')
@@ -28,8 +25,7 @@ function _ANSWER_1(input)
   return total;
 }
 
-function parseLine(){return(
-function(line) {
+function parseLine(line) {
   let ecl = line.match(/ecl:(\w\w\w)/);
   let pid = line.match(/pid:(\d+)/);
   let eyr = line.match(/eyr:(\d\d\d\d)/);
@@ -47,28 +43,20 @@ function(line) {
     hgt: hgt && [hgt[1], hgt[2]]
   };
 }
-)}
 
-function validBirth(){return(
-function(match) {
+function validBirth(match) {
   return match.byr && 1920 <= match.byr * 1 && match.byr * 1 <= 2002;
 }
-)}
 
-function validIssue(){return(
-function(match) {
+function validIssue(match) {
   return 2010 <= match.iyr * 1 && (match.iyr && match.iyr * 1 <= 2020);
 }
-)}
 
-function validExpiration(){return(
-function(match) {
+function validExpiration(match) {
   return 2020 <= match.eyr * 1 && (match.eyr && match.eyr * 1 <= 2030);
 }
-)}
 
-function validHeight(){return(
-function(match) {
+function validHeight(match) {
   if (!match || !match.hgt) {
     return false;
   }
@@ -79,27 +67,20 @@ function(match) {
   }
   return false;
 }
-)}
 
-function validHair(){return(
-function(match) {
+function validHair(match) {
   return match.hcl && match.hcl != '';
 }
-)}
 
-function validEye(){return(
-function(match) {
+function validEye(match) {
   return (
     match.ecl && "amb blu brn gry grn hzl oth".split(' ').includes(match.ecl)
   );
 }
-)}
 
-function validPassportId(){return(
-function(match) {
+function validPassportId(match) {
   return match.pid && match.pid != '' && match.pid.length == 9;
 }
-)}
 
 function answer2(input,parseLine,validBirth,validIssue,validExpiration,validHeight,validHair,validEye,validPassportId)
 {
@@ -121,25 +102,10 @@ function answer2(input,parseLine,validBirth,validIssue,validExpiration,validHeig
       valids.push(row);
     }
   }
-  return valids;
+  console.log('ANSWER 2: ', valids.length)
+  return valids.length;
 }
 
 function _ANSWER_2(input) {
   return answer2(input,parseLine,validBirth,validIssue,validExpiration,validHeight,validHair,validEye,validPassportId);
 }
-
-function results(validBirth,parseLine,validHeight,validHair,validEye,validPassportId){return(
-[
-  [validBirth(parseLine('byr:2002'))],
-  [validBirth(parseLine('byr:2003'))],
-  [validHeight(parseLine('hgt:60in')), validHeight(parseLine('hgt:190cm'))],
-  [validHeight(parseLine('hgt:190in')), validHeight(parseLine('hgt:190'))],
-  [validHair(parseLine('hcl:#123abc'))],
-  [validHair(parseLine('hcl:123abc')), validHair(parseLine('hcl:#123abz'))],
-  [validEye(parseLine('ecl:brn'))],
-  [validEye(parseLine('ecl:wat'))],
-  [validPassportId(parseLine('pid:000000001'))],
-  [validPassportId(parseLine('pid:0123456789'))]
-]
-)}
-
