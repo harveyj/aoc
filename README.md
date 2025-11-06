@@ -26,7 +26,7 @@ day 2 answer.
 - 2017: Validated!
 - 2018: Validated!
 - 2019: Validated!
-- 2020: Validated - 16-1, 18-1, 20-1, 19-1, 19-2, 23-2 incorrect
+- 2020: Validated - 20-1, 19-1, 19-2, 23-2 incorrect
 - 2021: Validated - 9, 16, 17, 19, 20, 21, 22, 23, 24, 25 incorrect
 - 2022: Validated - 6, 7, 11, 21, 23, 24, 25 incorrect
 - 2023: Validated - 6, 20, 21, 23 incorrect

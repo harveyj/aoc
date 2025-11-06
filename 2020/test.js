@@ -30,6 +30,7 @@ function check(raw_answers) {
   for (const day_id of days) {
     const day = await import(`./day${day_id}.js`);
     fs.readFile(`./2020/inputs/${day_id}.txt`, 'utf8', (err, data) => {
+      data=data.split('\n\n\n')[0];
       let [dayId, correct1, correct2] = answers[1*day_id-1];
       let input = day._input(data.trim());
       let answer1 = day._ANSWER_1(input);
