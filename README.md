@@ -25,7 +25,7 @@ day 2 answer.
 - 2016: Validated!
 - 2017: Validated!
 - 2018: Validated!
-- 2019: Validated - 18 incorrect
+- 2019: Validated!
 - 2020: Validated - 4-1, 8-1, 10-1, 10-2, 16-1, 18-1, 20-1, 19-1, 19-2, 23-2 incorrect
 - 2021: Validated - 9, 16, 17, 19, 20, 21, 22, 23, 24, 25 incorrect
 - 2022: Validated - 6, 7, 11, 21, 23, 24, 25 incorrect
@@ -35,9 +35,9 @@ day 2 answer.
 ## Performance hotspots
 - 2015: 22-1&2 (3s)
 - 2016: 5-1 (5s), 5-2 (14s), 9 (42s), 11-2 (7), 12-2 (30s) 14-2 (30s), 18-2 (40s),
-- 2017: 15-1 (10s), 22-2 (10s), 23-2 (20s) 
+- 2017: 13 (6s), 15-1 (10s), 22-2 (10s), 23-2 (20s), 24 (6s)
 - 2018: 14-2 (10s)
-- 2019: 18
+- 2019: 23-2 (10s) 24-2 (6s)
 - 2020: 23
 - 2021: 17, 20
 - 2022: 16-1 (12s), 20-2 (20s) 23-2 (5s), 24-1 (20s)
@@ -60,3 +60,4 @@ day 2 answer.
 - 2016-19 - fun rewrite!
 - 2017-20 - optimize, validate
 - 2018-05 - optimize
+- 2019-18 - full rewrite - twice.

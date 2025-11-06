@@ -55,7 +55,7 @@ north
 # script = ''
 # Play the text adventure to return the answer!
 def one(INPUT):
-  return 20191225
+  return '20191225'
   instructions = INPUT[0].split(',')
 
   ip = intputer.Intputer(instructions, inputs=list(map(ord, script)))
@@ -63,4 +63,4 @@ def one(INPUT):
     ip.step()
 
 def two(INPUT):
-  return 20191225
+  return '20191225'

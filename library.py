@@ -1,6 +1,6 @@
 import re, copy
 import networkx as nx
-from collections import defaultdict
+from collections import defaultdict, deque
 import heapq
 
 # E, S, W, N
@@ -172,7 +172,7 @@ def find_periodic_state_at(fn, minimum, period, tgt):
     if i > minimum and (tgt-i) % period == 0:
       return state
 
-def a_star_lazy(start, goal, h, neighbors):
+def a_star_lazy(start, goal, h, neighbors, cost_fn=None, goal_fn=None, debug=False):
   def reconstruct_path(came_from, current):
     total_path = [current]
     while str(current) in came_from.keys():
@@ -186,10 +186,12 @@ def a_star_lazy(start, goal, h, neighbors):
   f_score = {str(start):h(start)}
   while open_set:
     current = heapq.heappop(open_set)[1]
-    if current == goal:
+    if debug: print(current)
+    if goal_fn and goal_fn(current) or current == goal:
       return reconstruct_path(came_from, current)
     for n in neighbors(current):
-      tentative_gScore = g_score[str(current)] + 1
+      cost = cost_fn(current, n) if cost_fn else 1
+      tentative_gScore = g_score[str(current)] + cost
       if tentative_gScore < g_score[str(n)]:
         came_from[str(n)] = current
         g_score[str(n)] = tentative_gScore
@@ -197,6 +199,26 @@ def a_star_lazy(start, goal, h, neighbors):
         if n not in open_set:
           heapq.heappush(open_set, ((f_score[str(n)], n)))
   return None
+
+# input: start state, neigbhors (state -> (cost, state) iterator)
+# return: {node: cost}, {node: prev}, [goals]
+def dijkstra_lazy(start, neighbors, goal_fn=None):
+  q = [(0, start)]
+  dist = defaultdict(lambda: float('inf'))
+  dist[start] = 0
+  prev = {start: []}
+  goals = set()
+
+  while q:
+    cost, node = heapq.heappop(q)
+    for n_cost, n in neighbors(node):
+      new_cost = cost + n_cost
+      if new_cost < dist[n]: 
+        prev[n] = node
+        dist[n] = new_cost
+        if goal_fn and goal_fn(n): goals.add(n)
+        else: heapq.heappush(q, ((new_cost, n)))
+  return dist, prev, goals
 
 def test_a_star():
   def simple_neighbors(n):

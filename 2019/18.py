@@ -1,147 +1,135 @@
 #!/usr/bin/env python3
-import puzzle, re
+import puzzle, library
+from collections import defaultdict
+from functools import lru_cache, partial
 
-def parse_input(INPUT):
-  return INPUT
+def neighbors_ptpt(G, goal, loc):
+  for new_loc, val in G.neighbors_kv(loc, default='#'):
+    if val in [goal, '.']:
+      yield new_loc
+
+def neighbors_ptpt_allkeys(adjacencies, loc):
+  for new_loc in adjacencies[loc].keys():
+    yield new_loc
+
+def neighbors(adjacencies, KEYS, DOORS, state):
+  node, found_keys = state
+  candidates = adjacencies[node]
+  for c in candidates:
+    if c in KEYS: 
+      new_found_keys = found_keys | {c}
+      yield (c, new_found_keys)
+    elif c in DOORS and c.lower() in found_keys or c == '@': 
+      yield (c, found_keys)
+
+def cost_fn(adjacencies, a, b):
+  a_loc = a[0]; b_loc = b[0]
+  return adjacencies[a_loc][b_loc]
 
 def one(INPUT):
-  import itertools, collections
-  grid = [list(line.strip()) for line in INPUT]
-  lingrid = list(itertools.chain.from_iterable(grid))
-  ALL_KEYS = set([c for c in lingrid if c.islower()])
-  linstart = lingrid.index('@')
-  w, h = len(grid[0]), len(grid)
+  G = library.Grid(grid=[list(l) for l in INPUT])
+  KEYS = {c: G.detect(c)[0] for c in 'abcdefghijklmnopqrstuvwxyz' if G.detect(c)}
+  DOORS = {c.upper(): G.detect(c.upper())[0] for c in 'abcdefghijklmnopqrstuvwxyz' if G.detect(c.upper())}
+  start_loc = G.detect('@')[0]
+  G.set(start_loc, '1')
+  POIS = DOORS | KEYS | {'1': start_loc}
 
-  sx, sy = linstart % w, linstart // w
-  grid[sy][sx] = '.'
-  keylocs = {'@': (sx, sy)}
-  for c in ALL_KEYS:
-    start = lingrid.index(c)
-    keylocs[c] = start % w, start // w
+  ## Step 1: Collapse the maze into a graph.
+  adjacencies = defaultdict(dict)
+  def neighbor_cost(G, loc):
+    for new_loc, val in G.neighbors_kv(loc, default='#'):
+      if val != '#':
+        yield 1, new_loc
+  for poi1 in POIS.keys():
+    dist, prev, goals = library.dijkstra_lazy(POIS[poi1], partial(neighbor_cost, G), lambda a: G.get(a) in POIS)
+    adjacencies[poi1] = {G.get(loc): dist[loc] for loc in goals}
 
+  best_case_adjacencies = defaultdict(dict)
 
-  def bfs(grid, start_loc, accessed_keys):
-    def north(loc): return loc[0], loc[1] - 1
-    def south(loc): return loc[0], loc[1] + 1
-    def east(loc): return loc[0]+1, loc[1]
-    def west(loc): return loc[0]-1, loc[1]
+  # Step 2: compute best cases
+  for poi1 in POIS.keys():
+    for poi2 in POIS.keys():
+      path = library.a_star_lazy(poi1, poi2,
+                                 lambda x: 0,
+                                 partial(neighbors_ptpt_allkeys, adjacencies))
+      if poi1 != poi2 and path: 
+        best_case_adjacencies[poi1][poi2] = sum([adjacencies[p1[0]][p2[0]] for p1, p2 in zip(path, path[1:])])
 
-    queue = collections.deque()
-    queue.append(start_loc)
-    seen = set()
-    parents = {start_loc: None}
-    seen_keys = {}
-    while queue:
-      loc = queue.popleft()
-      if loc in seen:
-        continue
-      seen.add(loc)
-      for nx, ny in [north(loc), south(loc), east(loc), west(loc)]:
-        c = grid[ny][nx]
-        if (c == '.'  or c.lower() in accessed_keys or c.islower()) and not (nx, ny) in seen:
-          parents[(nx, ny)] = loc
-          if c.islower() and not c in accessed_keys:
-            yield parents, c, loc
-          queue.append((nx, ny))
+  min_steps = {k:min(v.values()) for k, v in best_case_adjacencies.items()}
+  def h(min_steps, state):
+    ms = [min_steps[k] for k in KEYS.keys() if k not in state[1]]
+    return sum(ms) 
 
-  def distance(target, parents):
-    length = 0
-    while target in parents:
-      target = parents[target]
-      length += 1
-    return length
-
-  def distance_to_collect_keys(current_key, keys, cache):
-    unfound_keys = set(ALL_KEYS)
-    unfound_keys.difference_update(keys)
-    if not keys: return 0
-    cache_key = (current_key, frozenset(keys))
-    if cache_key in cache:
-      # print('returning ', cache_key)
-      # print '.',
-      return cache[cache_key]
-
-    min_cost = 100000000000000
-    for parents, seen_key_val, seen_key_loc in bfs(grid, keylocs[current_key], unfound_keys):
-      remaining_keys = set(keys)
-      remaining_keys.remove(seen_key_val)
-      next_cost = (distance(seen_key_loc, parents) +
-                  distance_to_collect_keys(seen_key_val, remaining_keys, cache))
-      # print(current_key, seen_key_val, distance(seen_key_loc, parents))
-      min_cost = min(min_cost, next_cost)
-    cache[cache_key] = min_cost
-    return min_cost
-
-  cache = {}
-  # print(bfs(grid, (sx, sy), []))
-  return distance_to_collect_keys('@', ALL_KEYS, cache)
-
+  # Step 3: Traverse
+  start = ('1', set())
+  goal_fn = lambda state: len(state[1]) == len(KEYS)
+  path = library.a_star_lazy(start, None, 
+                             partial(h, min_steps), 
+                             partial(neighbors, adjacencies, KEYS, DOORS), 
+                             partial(cost_fn, adjacencies), goal_fn, debug=False)
+  cost = sum([adjacencies[p1[0]][p2[0]] for p1, p2 in zip(path, path[1:])])
+  return cost
 
 def two(INPUT):
-  import fileinput, itertools, collections, copy
-  import heapq
+  G = library.Grid(grid=[list(l) for l in INPUT])
+  KEYS = {c: G.detect(c)[0] for c in 'abcdefghijklmnopqrstuvwxyz' if G.detect(c)}
+  DOORS = {c.upper(): G.detect(c.upper())[0] for c in 'abcdefghijklmnopqrstuvwxyz' if G.detect(c.upper())}
+  start_x, start_y = G.detect('@')[0]
+  G.set((start_x - 1, start_y - 1), '1')
+  G.set((start_x, start_y - 1), '#')
+  G.set((start_x + 1, start_y - 1), '2')
 
-  grid = [list(line.strip()) for line in INPUT]
-  lingrid = list(itertools.chain.from_iterable(grid))
-  ALL_KEYS = set([c for c in lingrid if c.islower()])
-  linstart = lingrid.index('@')
-  w, h = len(grid[0]), len(grid)
-  sx, sy = linstart % w, linstart // w
+  G.set((start_x - 1, start_y), '#')
+  G.set((start_x, start_y), '#')
+  G.set((start_x + 1, start_y), '#')
+  
+  G.set((start_x - 1, start_y + 1), '3')
+  G.set((start_x, start_y + 1), '#')
+  G.set((start_x + 1, start_y + 1), '4')
 
-  # Transform for part 2
-  grid[sy-1][sx] = '#'
-  grid[sy+1][sx] = '#'
-  grid[sy][sx-1] = '#'
-  grid[sy][sx]   = '#'
-  grid[sy][sx+1] = '#'
+  adjacencies = defaultdict(dict)
+  POIS = DOORS | KEYS | {'1': (start_x - 1, start_y - 1), '2': (start_x + 1, start_y - 1), '3': (start_x - 1, start_y + 1), '4': (start_x + 1, start_y + 1)}
 
-  pos = (((sx-1), (sy-1)), ((sx+1), (sy-1)), ((sx-1), (sy+1)), ((sx+1), (sy+1)))
+  ## Step 1: Collapse the maze into a graph.
+  adjacencies = defaultdict(dict)
+  def neighbor_cost_g(G, loc):
+    for new_loc, val in G.neighbors_kv(loc, default='#'):
+      if val != '#':
+        yield 1, new_loc
+  for poi1 in POIS.keys():
+    dist, prev, goals = library.dijkstra_lazy(POIS[poi1], partial(neighbor_cost_g, G), lambda a: G.get(a) in POIS)
+    adjacencies[poi1] = {G.get(loc): dist[loc] for loc in goals}
 
-  render_grid = copy.copy(grid)
-  for loc in pos:
-    # print(loc)
-    px, py = loc
-    render_grid[py][px] = '@'
-  # for l in render_grid:
-  #   print(''.join(l))
+  quadrants = dict()
+  QUAD_KEYS = ['1', '2', '3', '4']
+  neighbor_cost = lambda node: [(cost, n) for (n, cost) in adjacencies[node].items()]
+  for poi in QUAD_KEYS:
+    dist, prev, goals = library.dijkstra_lazy(poi, neighbor_cost)
+    quadrants[poi] = dist
 
-  def reachable_keys(grid, x, y, accessed_keys):
-    queue = collections.deque()
-    queue.append((x, y, 0))
-    seen = set()
-    # parents = {(x, y): None}
-    while queue:
-      x, y, cost = queue.popleft()
-      if grid[y][x].islower() and grid[y][x] not in keys:
-        yield cost, x, y, grid[y][x]
-      for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
-        nx, ny = x + dx, y + dy
-        if ((nx, ny)) in seen:
-          continue
-        seen.add((nx, ny))
-        c = grid[ny][nx]
+  @lru_cache(maxsize=None)
+  def reachable_keys(start, havekeys):
+    def neigh_keys(adjacencies, havekeys, node):
+      return [(adjacencies[node][k], k) for k in adjacencies[node].keys() if k in k in list(KEYS.keys()) + QUAD_KEYS or k.lower() in havekeys]
 
-        if c != '#' and (not c.isupper() or c.lower() in keys):
-          # parents[(nx, ny)] = (x, y)
-          queue.append((nx, ny, cost + 1))
+    dist, prev, goals = library.dijkstra_lazy(start, partial(neigh_keys, adjacencies, havekeys))
+    return {k for k in dist.keys() - start if k in list(KEYS.keys()) + QUAD_KEYS and k not in havekeys}, dist
 
-  queue = [(0, pos, frozenset())]
-  seen = set()
-  while queue:
-    cost, cpos, keys = heapq.heappop(queue)
-    # print(cost, cpos, keys)
-    if len(keys) == len(ALL_KEYS):
-      # print("TERM END")
-      return cost
-    if (cpos, keys) in seen:
-      continue
-    seen.add((cpos, keys))
-    for i, (cx, cy) in enumerate(cpos):
-      for sub_cost, nx, ny, key in reachable_keys(grid, cx, cy, keys):
-        npos = cpos[0:i] + ((nx, ny),) + cpos[i+1:]
-        heapq.heappush(queue, (cost + sub_cost, npos, keys | frozenset([key])))
-  return cost
-  print("END QUEUE")
+  @lru_cache(maxsize=None)
+  def min_cost(state, havekeys):
+    # optimal is min(cost(k, keys+k) for k in keys)
+    costs = []
+    if len(havekeys) == len(KEYS): return (0, [])
+    for i, qk in enumerate(QUAD_KEYS):
+      reachable, dist = reachable_keys(state[i], havekeys)
+      for k in (KEYS.keys() - havekeys) & reachable:
+        new_state = state[:i] + (k,) + state[i+1:]
+        marginal_cost = dist[k]
+        best_cost, best_path = min_cost(new_state, havekeys | {k})
+        costs.append((best_cost+marginal_cost, [k]+best_path))
+    return min(costs) if costs else (float('inf'), [])
+  out = min_cost(('1', '2', '3', '4'), frozenset())
+  return out[0]
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2019", "18")

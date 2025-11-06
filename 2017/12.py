@@ -4,7 +4,7 @@ import re
 import networkx as nx
 
 def parse(INPUT):
-  pat = re.compile('(\d+) <-> (.*)')
+  pat = re.compile(r'(\d+) <-> (.*)')
   for l in INPUT:
     gr = re.match(pat, l)
     yield int(gr[1]), list(map(int, gr[2].split(',')))

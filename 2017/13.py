@@ -3,7 +3,7 @@ import puzzle, library
 import re
 
 def parse(INPUT):
-  pat = re.compile('(\d+): (\d+)')
+  pat = re.compile(r'(\d+): (\d+)')
   for l in INPUT:
     yield list(map(int, re.match(pat, l).groups()))
 
