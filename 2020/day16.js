@@ -1,9 +1,5 @@
 module.exports = { _input, _ANSWER_1, _ANSWER_2};
 
-function _1(md){return(
-md`# Advent 2020 Day 16!`
-)}
-
 function _input(INPUT){
   return processInput(INPUT);
 }
@@ -18,7 +14,10 @@ function processInput(input) {
     .split('\n')
     .map(processSpecs)
     .filter(a => a);
-  return { nearby, specs };
+  let mine = processNearby(input
+    .split("your ticket:")[1]
+    .split("nearby tickets:")[0]);
+  return { nearby, specs, mine };
 }
 
 function processSpecs(item) {
@@ -109,55 +108,26 @@ function _ANSWER_2(input)
       }
     }
   }
+  console.log(input);
   let answers = new Map();
   for (let i = 0; i < 1000; i++) {
     for (let spec of input.specs) {
       invalids.forEach((val, key) => {
         if (val.size == input.specs.length - 1 && !val.has(spec.name)) {
-          answers[spec.name] = key;
+          console.log(spec.name, key)
+          answers[spec.name] = input.mine[key];
           invalids.forEach((val, key) => val.add(spec.name));
         }
       });
     }
   }
-  console.log(answers);
-  return answers;
+
+  let tot = 1;
+  for (let k in answers) {
+    if (k.includes('departure')) {
+      // console.log(k, answers);
+      tot *= answers[k];
+    }
+  }
+  return tot;
 }
-
-
-function _tick(){return(
-[
-  73,
-  59,
-  83,
-  127,
-  137,
-  151,
-  71,
-  139,
-  67,
-  53,
-  89,
-  79,
-  61,
-  109,
-  131,
-  103,
-  149,
-  97,
-  107,
-  101
-]
-)}
-
-function _11(tick){return(
-tick[11] * tick[4] * tick[5] * tick[0] * tick[18] * tick[8]
-)}
-
-function _setCharAt(){return(
-function setCharAt(str, index, chr) {
-  if (index > str.length - 1) return str;
-  return str.substring(0, index) + chr + str.substring(index + 1);
-}
-)}
-
