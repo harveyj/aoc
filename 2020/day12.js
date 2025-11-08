@@ -102,5 +102,5 @@ function _ANSWER_2(input)
     locs.push({ x, y });
     wp.push({ wayX, wayY });
   }
-  return Math.abs(x) + Math.abs(y);
+  return Math.round(Math.abs(x) + Math.abs(y));
 }

@@ -108,13 +108,11 @@ function _ANSWER_2(input)
       }
     }
   }
-  console.log(input);
   let answers = new Map();
   for (let i = 0; i < 1000; i++) {
     for (let spec of input.specs) {
       invalids.forEach((val, key) => {
         if (val.size == input.specs.length - 1 && !val.has(spec.name)) {
-          console.log(spec.name, key)
           answers[spec.name] = input.mine[key];
           invalids.forEach((val, key) => val.add(spec.name));
         }

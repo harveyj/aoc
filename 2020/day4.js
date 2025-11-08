@@ -102,7 +102,6 @@ function answer2(input,parseLine,validBirth,validIssue,validExpiration,validHeig
       valids.push(row);
     }
   }
-  console.log('ANSWER 2: ', valids.length)
   return valids.length;
 }
 

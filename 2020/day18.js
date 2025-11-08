@@ -75,9 +75,6 @@ function _ANSWER_2(input)
     }
     return expr;
   }
-  // console.log(input[0])
-  // input = input.slice(0, 1)
-  // console.dir(process(input[0]), { depth: 8 });
   return input
       .map(process)
       .map(evaluate)

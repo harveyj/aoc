@@ -1,20 +1,18 @@
+// https://observablehq.com/@harveyj/advent-2020-day-19@2046
 module.exports = { _input, _ANSWER_1, _ANSWER_2};
 
 function _1(md){return(
-md`# Advent 2020 Day 19 take 2!`
+md`# Advent 2020 Day 19!`
 )}
 
+function _input(input) {
+  return processInput(input);
+}
 
-
-function _input(processInput,inputRaw,selectedInput){return(
-processInput(inputRaw[selectedInput])
-)}
-
-function _processInput(){return(
-function(input) {
+function processInput(input) {
   function processField(input) {
     if (input == "\"a\"" || input == "\"b\"") {
-      return { op: 'literal', operands: [eval(input)] };
+      return { op: eval(input) };
     }
     return { op: 'rule', operands: [input * 1] };
   }
@@ -45,16 +43,12 @@ function(input) {
   messages = messages.split('\n');
   return { rules: new Map(rules), messages };
 }
-)}
 
-
-
-
-function _ANSWER_1(input,applyRule)
+function _ANSWER_1(input)
 {
   let messages = [];
   for (let message of input.messages) {
-    let res = applyRule(input.rules.get(0), message, 0, new Map());
+    let res = applyRule(input, input.rules.get(0), message, 0, new Map());
     if (
       res.ruleApplies &&
       Array.from(res.consumedLengths).indexOf(message.length) != -1
@@ -64,26 +58,9 @@ function _ANSWER_1(input,applyRule)
       messages.push([message, false, res]);
     }
   }
+  console.log(messages)
   return messages.filter(a => a[1]);
 }
-
-
-function _ANSWER_2(input,applyRule)
-{
-  let messages = [];
-  for (let message of input.messages) {
-    let rule42Results = [];
-    for (let i = 0; i < 5; i++) {
-      let res = applyRule(input.rules.get(42), message, 0);
-      return res;
-      if (res.ruleApplies) {
-        res.consumed;
-      }
-    }
-  }
-  return messages;
-}
-
 
 function _errors(ANSWER_1,CORRECT)
 {
@@ -96,38 +73,15 @@ function _errors(ANSWER_1,CORRECT)
   return wrong;
 }
 
-
-function _CORRECT(){return(
-`bbabbbbaabaabba
-babbbbaabbbbbabbbbbbaabaaabaaa
-aaabbbbbbaaaabaababaabababbabaaabbababababaaa
-bbbbbbbaaaabbbbaaabbabaaa
-bbbababbbbaaaaaaaabbababaaababaabab
-ababaaaaaabaaab
-ababaaaaabbbaba
-baabbaaaabbaaaababbaababb
-abbbbabbbbaaaababbbbbbaaaababb
-aaaaabbaabaaaaababaa
-aaaabbaabbaaaaaaabbbabbbaaabbaabaaa
-aabbbbbaabbbaaaaaabbbbbababaaaaabbaaabba`.split('\n')
-)}
-
-function _applyRule(input){return(
-function applyRule(rule, message, consumed) {
-  if (rule.op == 'literal') {
-    let compareString = message.substring(
-      consumed,
-      consumed + rule.operands[0].length
-    );
-    if (compareString === rule.operands[0]) {
-      return {
-        ruleApplies: true,
-        message,
-        consumedLengths: new Set([consumed + 1])
-      };
-    } else {
-      return { ruleApplies: false, message };
-    }
+function applyRule(input, rule, message, consumed) {
+  if (rule.op == 'a') {
+    return message[consumed] == 'a'
+      ? { ruleApplies: true, message, consumedLengths: new Set([consumed + 1]) }
+      : { ruleApplies: false, message };
+  } else if (rule.op == 'b') {
+    return message[consumed] == 'b'
+      ? { ruleApplies: true, consumedLengths: new Set([consumed + 1]) }
+      : { ruleApplies: false };
   } else if (rule.op == 'rule') {
     return applyRule(input.rules.get(rule.operands[0]), message, consumed);
   } else if (rule.op === 'or') {
@@ -144,8 +98,8 @@ function applyRule(rule, message, consumed) {
   } else if (rule.op === 'and') {
     let ruleApplies = true;
     let potentialConsumedLengths = new Set([consumed]);
-    let newPotentialConsumedLengths = new Set();
     for (let andClause of rule.operands) {
+      let newPotentialConsumedLengths = new Set();
       let someStringWorks = false;
       for (let consumedLength of potentialConsumedLengths) {
         let res = applyRule(andClause, message, consumedLength);
@@ -165,11 +119,10 @@ function applyRule(rule, message, consumed) {
     }
     return { ruleApplies, consumedLengths: potentialConsumedLengths };
   }
+  return []
   throw new Error("fell off the end" + rule);
 }
-)}
 
-function _findLengths(input,enumerateAll){return(
 function findLengths(rule) {
   if (rule.op == 'a') {
     return [1];
@@ -184,16 +137,14 @@ function findLengths(rule) {
   } else if (rule.op === 'and') {
     let possibles = [];
     for (let andClause of rule.operands.map(a => input.rules.get(a))) {
-      console.log(andClause);
       possibles = enumerateAll(possibles, findLengths(andClause));
     }
     return possibles;
   }
-  throw new Error("fell off the end" + rule);
+  // throw new Error("fell off the end" + rule);
+  return []
 }
-)}
 
-function _enumerateAll(){return(
 function enumerateAll(entries) {
   let possibles = new Set([[]]);
   for (let entry of entries) {
@@ -207,9 +158,9 @@ function enumerateAll(entries) {
   }
   return Array.from(possibles);
 }
-)}
 
-function _14(enumerateAll){return(
-enumerateAll([[1, 3], [2, 4]])
-)}
+function _ANSWER_2()
+{
+}
+
 

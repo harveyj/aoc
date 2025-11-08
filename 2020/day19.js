@@ -1,18 +1,17 @@
-// https://observablehq.com/@harveyj/advent-2020-day-19@2046
-module.exports = { _input, _ANSWER_1, _ANSWER_2};
+import assert from 'assert';   // ES modules
 
 function _1(md){return(
-md`# Advent 2020 Day 19!`
+md`# Advent 2020 Day 19 take 2!`
 )}
 
-function _input(input) {
-  return processInput(input);
+export function _input(input){
+  return processInput(input)
 }
 
 function processInput(input) {
   function processField(input) {
     if (input == "\"a\"" || input == "\"b\"") {
-      return { op: eval(input) };
+      return { op: 'literal', operands: [eval(input)] };
     }
     return { op: 'rule', operands: [input * 1] };
   }
@@ -44,7 +43,9 @@ function processInput(input) {
   return { rules: new Map(rules), messages };
 }
 
-function _ANSWER_1(input)
+
+
+export function _ANSWER_1(input)
 {
   let messages = [];
   for (let message of input.messages) {
@@ -58,8 +59,47 @@ function _ANSWER_1(input)
       messages.push([message, false, res]);
     }
   }
-  return messages.filter(a => a[1]);
+  return messages.filter(a => a[1]).length;
 }
+
+
+export function _ANSWER_2(input) {
+  let messages = new Set();
+  // 8 is magic # from inspection
+  let MAGIC = 8
+  for (let a = 0; a < input.messages.length; a++) {
+    let message = input.messages[a];
+    message.trim()
+    let validPrefix = true;
+    let applications = 0;
+    while (validPrefix && applications * MAGIC < message.length) {
+      let res = applyRule(input, input.rules.get(42), message, applications * MAGIC);
+      if (res.ruleApplies) {
+        applications++;
+      } else {
+        validPrefix = false;
+      }
+    }
+    if (applications < 2) {
+      continue;
+    }
+    for (let j = 0; j < applications - 1; j++) {
+      let res2 = applyRule(input, input.rules.get(31), message, (applications + j) * MAGIC);
+      if (res2.ruleApplies) {
+        assert(res2.consumedLengths.size == 1);
+        if (res2.consumedLengths.has(message.length)){
+          messages.add(message) 
+          break;
+        }
+      } else {
+        break
+      }
+    }
+  }
+  return Array.from(messages).length;
+}
+
+
 
 function _errors(ANSWER_1,CORRECT)
 {
@@ -73,21 +113,27 @@ function _errors(ANSWER_1,CORRECT)
 }
 
 function applyRule(input, rule, message, consumed) {
-  if (rule.op == 'a') {
-    return message[consumed] == 'a'
-      ? { ruleApplies: true, message, consumedLengths: new Set([consumed + 1]) }
-      : { ruleApplies: false, message };
-  } else if (rule.op == 'b') {
-    return message[consumed] == 'b'
-      ? { ruleApplies: true, consumedLengths: new Set([consumed + 1]) }
-      : { ruleApplies: false };
+  if (rule.op == 'literal') {
+    let compareString = message.substring(
+      consumed,
+      consumed + rule.operands[0].length
+    );
+    if (compareString === rule.operands[0]) {
+      return {
+        ruleApplies: true,
+        message,
+        consumedLengths: new Set([consumed + 1])
+      };
+    } else {
+      return { ruleApplies: false, message };
+    }
   } else if (rule.op == 'rule') {
-    return applyRule(input.rules.get(rule.operands[0]), message, consumed);
+    return applyRule(input, input.rules.get(rule.operands[0]), message, consumed);
   } else if (rule.op === 'or') {
     let ruleApplies = false;
     let consumedLengths = new Set();
     for (let orBlock of rule.operands) {
-      let res = applyRule(orBlock, message, consumed);
+      let res = applyRule(input, orBlock, message, consumed);
       if (res.ruleApplies) {
         consumedLengths = new Set([...consumedLengths, ...res.consumedLengths]);
         ruleApplies = true;
@@ -101,11 +147,11 @@ function applyRule(input, rule, message, consumed) {
       let newPotentialConsumedLengths = new Set();
       let someStringWorks = false;
       for (let consumedLength of potentialConsumedLengths) {
-        let res = applyRule(andClause, message, consumedLength);
+        let res = applyRule(input, andClause, message, consumedLength);
         if (res.ruleApplies) {
           newPotentialConsumedLengths = new Set([
             ...newPotentialConsumedLengths,
-            ...res.consumedLengths
+            ...res.consumedLengths,
           ]);
           someStringWorks = true;
         }
@@ -118,48 +164,5 @@ function applyRule(input, rule, message, consumed) {
     }
     return { ruleApplies, consumedLengths: potentialConsumedLengths };
   }
-  return []
   throw new Error("fell off the end" + rule);
 }
-
-function findLengths(rule) {
-  if (rule.op == 'a') {
-    return [1];
-  } else if (rule.op == 'b') {
-    return [1];
-  } else if (rule.op === 'or') {
-    let possibles = [];
-    for (let orBlock of rule.operands) {
-      possibles = possibles.concat(findLengths(orBlock));
-    }
-    return possibles;
-  } else if (rule.op === 'and') {
-    let possibles = [];
-    for (let andClause of rule.operands.map(a => input.rules.get(a))) {
-      possibles = enumerateAll(possibles, findLengths(andClause));
-    }
-    return possibles;
-  }
-  // throw new Error("fell off the end" + rule);
-  return []
-}
-
-function enumerateAll(entries) {
-  let possibles = new Set([[]]);
-  for (let entry of entries) {
-    let newPossibles = new Set();
-    for (let possible of possibles) {
-      for (let subEntry of entry) {
-        newPossibles.add(possible.concat(subEntry));
-      }
-    }
-    possibles = new Set(newPossibles);
-  }
-  return Array.from(possibles);
-}
-
-function _ANSWER_2()
-{
-}
-
-

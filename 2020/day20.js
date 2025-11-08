@@ -1,9 +1,5 @@
 module.exports = { _input, _ANSWER_1, _ANSWER_2};
 
-function _1(md){return(
-md`# Advent 2020 Day 20!`
-)}
-
 function _input(input) {
   return processInput(input)
 }
@@ -397,9 +393,6 @@ function genFinalGrid(input, connections)
     }
   }
   return allFinalStrings;
-
-  let gridHtml = gridIt(allStrings);
-  return html`${gridHtml}`;
 }
 
 
@@ -408,16 +401,7 @@ function _ANSWER_2(input) {
   let connections = connect(cm);
   let finalGrid = genFinalGrid(input, connections);
   let numHashes = finalGrid.join('').match(/#/g).length;
-  return numHashes - 21 * monsterOffsets.length
-}
-
-function monstersFound(finalGrid)
-{
-  let grid = new Grid(finalGrid.map(a => a.split('')));
-  // for (let rotation = 0; rotation < 8; rotation++) {
-  //   console.log({fm: grid.findMonsters(rotation)})
-  // }
-  return grid;
+  return numHashes - 21 * monsterOffsets().length
 }
 
 

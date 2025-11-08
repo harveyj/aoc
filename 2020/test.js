@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+import Deque from '@blakeembrey/deque';
+
 import fs from 'fs';
 import { Command } from 'commander';
 const program = new Command();
