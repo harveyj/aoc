@@ -72,11 +72,9 @@ def apply(tree):
 
 def one(INPUT):
   p, bits = decode_packet(hextobin(INPUT[0]))
-  # p=(6, 6, [(5, 'LITERAL', 15), (2, 'LITERAL', 15)])
-  tot = apply(p)
-  # print(p)
-  # print(tot)
-  return tot
+  return sum_ids(p)
 
 def two(INPUT):
-  return one(INPUT)
+  p, bits = decode_packet(hextobin(INPUT[0]))
+  tot = apply(p)
+  return tot
