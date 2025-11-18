@@ -107,5 +107,5 @@ def two(INPUT):
 if __name__ == '__main__':
   p = puzzle.Puzzle("2021", "19")
 
-  # print(p.run(one, 0))
-  print(p.run(two, 0))
+  p.run(one, 0)
+  p.run(two, 0)
