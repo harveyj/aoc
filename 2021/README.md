@@ -333,6 +333,9 @@ Improvement would be:
 * Doing it e2e in code
 * Doing it for generic values of the constants / defensively coding it
 
+REDO 11/18/25 on pat leave: made a big mess and then realized i left myself AWESOME notes. Go me!
+Once I had the notes, the code became clear, i did it e2e in code! I rewrote the parser to depend on the input! I think this ~= perfect. arbitrary disassembly is not the puzzle - this will work for all inputs which are this shape of puzzle.
+
 Difficulty: 8.5/10
 
 ## Day 25

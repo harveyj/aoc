@@ -1,5 +1,46 @@
 #!/usr/bin/env python3
-import puzzle
+import puzzle, library
+
+# MAIN CODE: Discover and print out the constraints. 
+# CHECK THE WRITEUP IT IS GREAT
+two = lambda a: one(a, two=True)
+def one(INPUT, two=False):
+  STRIDE = 18
+  x_s = [0] + [library.ints(l)[0] for l in INPUT[5::STRIDE]]
+  y_s = [0] + [library.ints(l)[0] for l in INPUT[15::STRIDE]]
+  z_s = [0] + [library.ints(l)[0] for l in INPUT[4::STRIDE]]
+
+  print(y_s)
+  z_stack = [(0)]
+  constraints = []
+  for w, x_in, y_in, z_in in zip(range(0, 15), x_s, y_s, z_s):
+    z_prev = z_stack[-1]
+    if x_in > 10:
+      z_stack.append(('in_'+str(w), y_in))
+    else:
+      if z_in == 26:
+        z_stack.pop()
+      constraints.append((z_prev, x_in, 'in_'+str(w)))
+
+  if two:
+    values = {}
+    for (z_prev, x_in, w_in) in constraints[1:]:
+      values[z_prev[0]] = max(1, 1-(z_prev[1]+x_in))
+      values[w_in] = values[z_prev[0]] - -1*(z_prev[1]+x_in)
+    return ''.join([str(values[f'in_{idx}']) for idx in range(1, 15)])
+  else:
+    values = {}
+    for (z_prev, x_in, w_in) in constraints[1:]:
+      values[z_prev[0]] = min(9, 9 + -1*(z_prev[1]+x_in))
+      values[w_in] = values[z_prev[0]] - -1*(z_prev[1]+x_in)
+    return ''.join([str(values[f'in_{idx}']) for idx in range(1, 15)])
+
+
+#### EXTRAS
+
+def base_26(val):
+  return [val // (26 ** n) % 26 for n in range(7, -1, -1)]
+
 
 # FULL ALU IMPLEMENTATION - only used to check things in the end.
 # https://appdividend.com/2021/03/23/how-to-check-if-string-is-integer-in-python/
@@ -99,35 +140,3 @@ def assert_eq(user_input):
     print("FAIL", alu.regs["z"],python_version(user_input))
   if alu.regs["z"] == 0:
     print("ZERO", user_input)
-
-def base_26(val):
-  return [val // (26 ** n) % 26 for n in range(7, -1, -1)]
-
-# MAIN CODE: Discover and print out the constraints. 
-
-two = lambda a: one(a)
-def one(INPUT):
-  x_s = [0, 12, 11, 13, 11, 14, -10, 11, -9, -3, 13, -5, -10, -4, -5]
-  y_s = [0, 4,  11,  5, 11, 14,   7, 11,  4,  6,  5,  9,  12, 14, 14]
-  z_s = [0, 1,  1,   1,  1,  1,  26,  1, 26, 26,  1, 26,  26, 26, 26]
-
-  z_stack = [(0)]
-  constraints = []
-  for w, x_in, y_in, z_in in zip(range(0, 15), x_s, y_s, z_s):
-    z_prev = z_stack[-1]
-    if x_in > 10:
-      z_stack.append(('w'+str(w), y_in))
-    else:
-      if z_in == 26:
-        z_stack.pop()
-      constraints.append((z_prev, x_in, 'w'+str(w)))
-    # print(w, z_stack)
-  for (z_prev, x_in, w_in) in constraints:
-    print (z_prev, "%26", x_in, " = ", w_in)
-
-  # Check a potential answer's stack at each iteration. 
-  # for i in range(1, 15):
-    # print(base_26(python_version([9, 2, 9, 1, 5, 9, 7, 9, 9, 9, 9, 4, 9, 8], slice=i)))
-
-
-  #  assert_eq([int(c) for c in list("21611513911181")])
