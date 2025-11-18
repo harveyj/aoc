@@ -205,6 +205,10 @@ Difficulty: 9/10
 Improvements would be:
 * I feel pretty happy about the code. 
 
+11/xx/25 
+- oh wow, revisitng, and COMPLETE rewrite. the code was a mess! What was four years ago harvey on about?
+- the new code finds the adjacent points by intersecting all the vectors over every rotation
+
 ## Day 20
 I coded the first part quickly and then realized the a-ha and kludged it a *little* bit for part 2. 
 
