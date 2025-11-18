@@ -208,6 +208,8 @@ Improvements would be:
 11/xx/25 
 - oh wow, revisitng, and COMPLETE rewrite. the code was a mess! What was four years ago harvey on about?
 - the new code finds the adjacent points by intersecting all the vectors over every rotation
+- i could probably cache the rotation matrices in the first part and save a factor of 24 on the second loop
+- matching the beacons is still the sticking point
 
 ## Day 20
 I coded the first part quickly and then realized the a-ha and kludged it a *little* bit for part 2. 

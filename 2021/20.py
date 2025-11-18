@@ -3,7 +3,7 @@ from collections import *
 def k(x, y):
 	return '%i,%i' %(x, y)
 
-def puzz(INPUT):
+def puzz(INPUT, n=2):
 	table_raw, grid_raw = '\n'.join(INPUT).split("\n\n")
 	table = list(table_raw)
 	grid = {}
@@ -20,7 +20,7 @@ def puzz(INPUT):
 			for dy in [-1, 0, 1]:
 				yield k(x+dx, y+dy)
 
-	for i in range(50):
+	for i in range(n):
 		new_grid = {}
 		for x in range(min_x - 130, max_x+130):
 			for y in range(min_y - 130, max_y+130):
@@ -45,4 +45,4 @@ def one(INPUT):
 	return puzz(INPUT)
 
 def two(INPUT):
-	return puzz(INPUT)
+	return puzz(INPUT, n=50)
