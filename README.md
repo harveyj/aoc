@@ -28,7 +28,7 @@ day 2 answer.
 - 2019: Validated!
 - 2020: Validated!
 - 2021: Validated - 17, 22, 23 incorrect
-- 2022: Validated - 6, 7, 11, 21, 23 incorrect
+- 2022: Validated - 7, 11, 21, 23 incorrect
 - 2023: Validated - 6, 20, 21, 23 incorrect
 - 2024: Validated!
 
