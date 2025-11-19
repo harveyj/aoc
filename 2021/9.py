@@ -17,7 +17,7 @@ def detect_low(G):
   for x in range(G.max_x()):
     for y in range(G.max_y()):
       neigh = list(G.neighbors((x, y)))
-      if len([n for n in neigh if n > G.get((x,y))]) == len(neigh):
+      if len([n for n in neigh if n > G.get((x,y), default=9)]) == len(neigh):
         low_vals.append(1+G.get((x, y)))
         low_pts.add((x, y))
   return low_vals, low_pts
@@ -34,21 +34,15 @@ def two(INPUT):
   for x in range(G.max_x()):
     for y in range(G.max_y()):
       DG.add_node((x, y))
-      for neigh, val in G.neighbors_kv((x, y)):
-        if val in [None, 9]: continue
-        if val - 1 == G.get((x, y)):
-          DG.add_edge((x, y), neigh)
-  basins = [nx.descendants(DG, lp) for lp in low_pts]
+      val = G.get((x, y))
+      if val == 9: continue
+      for neigh, neigh_val in G.neighbors_kv((x, y)):
+        if neigh_val in [None, 9]: continue
+        if val > neigh_val:
+          DG.add_edge(neigh, (x, y))
+  basins = [nx.descendants(DG, lp) | {lp} for lp in low_pts] 
   all = list(chain.from_iterable(basins))
-  # for x in range(G.max_x()):
-  #   for y in range(G.max_y()):
-  #     if (x, y) not in all:
-  #       print((x,y), G.get((x, y)))
-  # print(DG.edges((99,1)))
-  # print((99, 64) in low_pts)
-  # +1 is to account for the bottom
-  b_sizes = sorted([len(basin) + 1 for basin in basins])
-  # oh no test works real vals don't
+  b_sizes = sorted([len(basin) for basin in basins])
   return b_sizes[-3] * b_sizes[-2] * b_sizes[-1]
 
 if __name__ == '__main__':

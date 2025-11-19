@@ -27,8 +27,8 @@ day 2 answer.
 - 2018: Validated!
 - 2019: Validated!
 - 2020: Validated!
-- 2021: Validated - 9, 17, 22, 23, 25 incorrect
-- 2022: Validated - 6, 7, 11, 21, 23, 24, 25 incorrect
+- 2021: Validated - 17, 22, 23 incorrect
+- 2022: Validated - 6, 7, 11, 21, 23 incorrect
 - 2023: Validated - 6, 20, 21, 23 incorrect
 - 2024: Validated!
 
@@ -63,3 +63,5 @@ day 2 answer.
 - 2019-18 - full rewrite - twice.
 - 2019-19 - extensive redo and debug
 - 2021-19 - boomshakalaka. one of the hardest AOCs and i got it. 
+- 2021-24 - a super fun romp and my notes were great! good job me! 
+- 2021-09 - quick rewrite as original had major bug (??)
