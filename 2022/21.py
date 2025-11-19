@@ -76,7 +76,7 @@ def two(INPUT):
   r = G.nodes["root"].get('r', None)
   a, b = postorder2(G, l)
   c, d = postorder2(G, r)
-  return (d-b) / a
+  return int((d-b) // a)
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2022", "21")
