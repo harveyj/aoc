@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import puzzle
-import re
 
 def parse(INPUT):
   commands = [(command_chunk.split('\n')[0], command_chunk.strip().split('\n')[1:]) for command_chunk in '\n'.join(INPUT).split("$ ")][1:]
@@ -78,7 +77,7 @@ def two(INPUT):
       # print('replacing', smallest_path, path)
       smallest_path = path
       smallest_total = val
-  return smallest_path
+  return smallest_total
 
 
 if __name__ == '__main__':

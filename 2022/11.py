@@ -3,7 +3,7 @@ import puzzle
 import re
 
 class Monkey:
-  PAT = """Monkey (\d+):
+  PAT = r"""Monkey (\d+):
   Starting items: (.*)
   Operation: (.*)
   Test: divisible by (\d+)
