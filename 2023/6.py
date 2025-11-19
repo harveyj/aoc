@@ -7,7 +7,7 @@ def parse_input(INPUT):
   distances = list(map(int, INPUT[1].split()[1:]))
   return times, distances
 
-def one(INPUT, two=True):
+def one(INPUT, two=False):
   times, distances = parse_input(INPUT)
   if two:
     times = [int(''.join(map(str, times)))]
