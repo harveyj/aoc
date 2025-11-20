@@ -43,7 +43,7 @@ def parse(INPUT):
     else:
       return int(instr)
   raw_grid, raw_instrs = INPUT.split('\n\n')
-  instrs = [parse_instr(instr) for instr in re.split('(\d+)', raw_instrs) if instr]
+  instrs = [parse_instr(instr) for instr in re.split(r"(\d+)", raw_instrs) if instr]
   raw_grid = raw_grid.split('\n')
   max_len = max([len(row) for row in raw_grid])
   raw_grid = [[row[x] if x < len(row) else ' ' for x in range(max_len)] for row in raw_grid]

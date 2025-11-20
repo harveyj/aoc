@@ -1,11 +1,6 @@
 #!/usr/bin/env python3
 import puzzle
-import re
-import networkx as nx
 import math
-
-def parse(INPUT):
-  return INPUT
 
 def translate(c):
   if c == '=': return -2
@@ -26,32 +21,25 @@ def snafu(num):
       contrib = val * (5 ** pow)
       # 2*25 + 2*5 + 2*1
       bound = sum([2 * 5**p_1 for p_1 in range(pow)])
-      # print(contrib, tgt-contrib, bound, -bound <= tgt - contrib <= bound, val, pow)
       if -bound <= tgt - contrib <= bound:
         vals.append(val)
         tgt -= val * 5 ** pow
         break
   ret = []
-  # print(vals)
   for val in vals:
     ret.append(rev(val))
   return ''.join(ret)
 
 def one(INPUT):
   sum = 0
-  for l in parse(INPUT):
+  for l in INPUT:
     num = 0
     pow = 1
     for c in l[::-1]:
       num += translate(c)*pow
       pow *= 5
-    # print(num)
     sum += num
-  # print(sum)
-  # print(snafu(sum))
-  # 625 -250 -25 + 5 - 2
-  print(snafu(353))
-  return 0
+  return snafu(sum)
 
 def two(INPUT):
   print("Merry Christmas!")

@@ -13,7 +13,7 @@ def parse(INPUT, bottom=False):
   pts = []
   for l in INPUT:
     sx, sy = None, None
-    for pt in re.finditer("(\d+),(\d+)", l):
+    for pt in re.finditer(r"(\d+),(\d+)", l):
       x, y = map(int, pt.groups(1))
       max_x = max(max_x, x)
       max_y = max(max_y, y)

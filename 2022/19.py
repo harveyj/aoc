@@ -7,7 +7,7 @@ def parse(INPUT):
   ret = []
   for l in INPUT:
     # print(l)
-    mat = re.match('Blueprint (\d+): Each ore robot costs (\d+) ore. Each clay robot costs (\d+) ore. Each obsidian robot costs (\d+) ore and (\d+) clay. Each geode robot costs (\d+) ore and (\d+) obsidian.', l)
+    mat = re.match(r'Blueprint (\d+): Each ore robot costs (\d+) ore. Each clay robot costs (\d+) ore. Each obsidian robot costs (\d+) ore and (\d+) clay. Each geode robot costs (\d+) ore and (\d+) obsidian.', l)
     ret.append(Spec(*map(int, mat.group(1, 2, 3, 4, 5, 6, 7))))
   return ret
 

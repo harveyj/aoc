@@ -13,7 +13,7 @@ def parse(INPUT):
     match = re.match(r"Valve (\w+) has flow rate=(\d+); tunnels? leads? to valves? ((\w+,? ?)+)", l)
     name = match.group(1)
     rate = int(match.group(2))
-    outs = list(re.findall('\w+', match.group(3)))
+    outs = list(re.findall(r'\w+', match.group(3)))
     ret.append([name, rate, outs])
   return ret
 

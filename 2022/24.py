@@ -60,7 +60,7 @@ def advance(grid, blizzards):
       new_blizzards[new_pos].append(dir)
   return new_blizzards
 
-def one(INPUT):
+def one(INPUT, two=False):
   grid, blizzards = parse(INPUT)
 
   graph = nx.DiGraph()
@@ -97,16 +97,17 @@ def one(INPUT):
   leg_2 = nx.astar_path_length(graph, (END, leg_1), (START, 'sink'), heuristic=dist)
   leg_3 = nx.astar_path_length(graph, (START, leg_1+leg_2), (END, 'sink'), heuristic=dist)
 
-  # print(leg_1, leg_2, leg_3)
-  
-  return leg_1+leg_2+leg_3
+  if two:
+    return leg_1+leg_2+leg_3
+  else:
+    return leg_1
 
 def dist(a, b):
   a = a[0]; b = b[0]
   return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
 def two(INPUT):
-  return 0
+  return one(INPUT, two=True)
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2022", "24")

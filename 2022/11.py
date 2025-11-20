@@ -24,11 +24,13 @@ class Monkey:
     # print(self.id, self.items, self.operation, self.cond, self.true_monkey, self.false_monkey)
     self.inspect = 0
 
-  
+  def __str__(self):
+    return f"{self.id, self.items, self.inspect}"
+
   def receive(self, val):
     self.items.append(val)
 
-def round(monkeys, divide=3, modulo = 1):
+def round(monkeys, divide=3, modulo=-1):
   for i in range(len(monkeys)):
     m = monkeys[i]
     while m.items:
@@ -40,7 +42,8 @@ def round(monkeys, divide=3, modulo = 1):
       new = int(eval(m.operation))
       # print("worry level is ", m.operation, "to", new)
       new = new // divide
-      new = new % modulo
+      if modulo != -1:
+        new = new % modulo
       # print("Monkey gets bored with item. Worry level is divided by 3 to", new)
       if new % m.cond == 0:
         # print("Current worry level is divisible by", m.cond)
@@ -93,5 +96,5 @@ def two(INPUT):
 if __name__ == '__main__':
   p = puzzle.Puzzle("2022", "11")
 
-  p.run(one, 0) 
-  p.run(two, 0) 
+  print(p.run(one, 0))
+  print(p.run(two, 0))
