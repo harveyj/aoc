@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-import puzzle, re, collections, functools
+import puzzle, re, collections, functools, library
 
 def parse_input(INPUT):
-  return library.Grid(raw=INPUT)
+  return library.Grid(raw=''.join(INPUT))
 
 def all_reachable(G, n, S):
   queue = collections.deque([S])
@@ -10,7 +10,7 @@ def all_reachable(G, n, S):
     new_pts = set()
     while queue:
       pt = queue.pop()
-      for new_pt in puzzle.neighbors(pt):
+      for new_pt in G.neighbors_locs(pt):
         if G.get_repeating(new_pt) == '.' and new_pt not in new_pts:
           new_pts.add(new_pt)
     queue = collections.deque(new_pts)
@@ -34,5 +34,5 @@ def two(INPUT):
 if __name__ == '__main__':
   p = puzzle.Puzzle("2023", "21")
 
-  p.run(one, 0) 
-  p.run(two, 0) 
+  print(p.run(one, 0)) 
+  print(p.run(two, 0))

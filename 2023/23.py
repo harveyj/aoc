@@ -37,7 +37,7 @@ def parse_input(INPUT):
 
 def parse_input_2(INPUT):
   G = networkx.Graph()
-  grid = library.Grid(raw=INPUT)
+  grid = library.Grid(raw='\n'.join(INPUT))
   for x in range(grid.max_x()):
    for y in range(grid.max_y()):
       pt = (x,y)
@@ -47,7 +47,7 @@ def parse_input_2(INPUT):
         for neighbor in grid.neighbors_locs(pt):
           if grid.get(neighbor, default='#') in '.><v^':
             G.add_edge(pt, neighbor)
-      S = 1, 0
+  S = 1, 0
   E = grid.max_x() - 2, grid.max_y()-1
   grid.overlays[S] = 'S'
   grid.overlays[E] = 'E'
@@ -55,17 +55,51 @@ def parse_input_2(INPUT):
 
 def one(INPUT):
   S, E, G, grid = parse_input(INPUT)
-  all_paths = list(networkx.all_simple_paths(G, S, E))
-  out_path = max(all_paths, key=lambda x: len(x))
-  # print(len(all_paths))
-  for path in all_paths:
-    # print(path)
-    for pt in path:
-      # print(pt)
-      if grid.get(pt) == '.': 
-        grid.overlays[pt] = 'O'
-  # print(grid)
-  return len(out_path) - 1
+
+  G2 = networkx.DiGraph()
+  corners = set([S, E])
+  for x in range(grid.max_x()):
+    for y in range(grid.max_y()):
+      pt = x, y
+      if grid.get(pt) == '.':
+        if list(grid.neighbors(pt)).count('.') > 2:
+          corners.add(pt)
+        if set('>^v>') & set(grid.neighbors(pt)):
+          corners.add(pt)
+      elif grid.get(pt) in '><^v':
+        corners.add(pt)
+  for c in corners:
+    G2.add_node(c)
+    # print(c, bfs_corners(grid, G, c, corners))
+    if grid.get(c) == ">":
+      n1, n2 = (c[0]-1, c[1]), c
+      G2.add_edge(n1, n2, weight=1)
+      n1, n2 = c, (c[0]+1, c[1])
+      G2.add_edge(n1, n2, weight=1)
+    elif grid.get(c) == "<":
+      n1, n2 = (c[0]+1, c[1]), c
+      G2.add_edge(n1, n2, weight=1)
+      n1, n2 = c, (c[0]-1, c[1])
+      G2.add_edge(n1, n2, weight=1)
+    elif grid.get(c) == "v":
+      n1, n2 = (c[0], c[1]-1), c
+      G2.add_edge(n1, n2, weight=1)
+      n1, n2 = c, (c[0], c[1]+1)
+      G2.add_edge(n1, n2, weight=1)
+    elif grid.get(c) == "^":
+      n1, n2 = (c[0], c[1]+1), c
+      G2.add_edge(n1, n2, weight=1)
+      n1, n2 = c, (c[0], c[1]-1)
+      G2.add_edge(n1, n2, weight=1)
+    else:
+      for c2, length in bfs_corners(grid, G, c, corners):
+        if grid.get(c) == "." and grid.get(c2) == ".":
+          G2.add_edge(c, c2, weight=length)
+          G2.add_edge(c2, c, weight=length)
+  all_paths = [(path, networkx.path_weight(G2, path, weight='weight'))
+               for path in networkx.all_simple_paths(G2, S, E)]
+  out_path = max(all_paths, key=lambda x: x[1])
+  return out_path[1]
 
 def bfs_corners(grid, G, S, corners):
   accessible_corners = []
@@ -88,10 +122,7 @@ def bfs_corners(grid, G, S, corners):
 
 def two(INPUT):
   S, E, G, grid = parse_input_2(INPUT)
-  # all_paths = networkx.all_simple_paths(G, S, E)
-  # out_path = max(all_paths, key=lambda x: len(x))
   G2 = networkx.Graph()
-  # print(G.nodes)
   corners = set([S, E])
   for x in range(grid.max_x()):
     for y in range(grid.max_y()):
@@ -102,16 +133,14 @@ def two(INPUT):
   for c in corners:
     G2.add_node(c)
     for c2, length in bfs_corners(grid, G, c, corners):
-      print(c, c2, length)
       G2.add_edge(c, c2, weight=length)
   all_paths = [(path, networkx.path_weight(G2, path, weight='weight'))
                for path in networkx.all_simple_paths(G2, S, E)]
   out_path = max(all_paths, key=lambda x: x[1])
-  print(out_path)
-  return 0
+  return out_path[1]
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2023", "23")
 
-  p.run(one, 0) 
-  p.run(two, 0) 
+  print(p.run(one, 0))
+  print(p.run(two, 0))

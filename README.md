@@ -29,7 +29,7 @@ day 2 answer.
 - 2020: Validated!
 - 2021: Validated - 17, 22, 23 incorrect
 - 2022: Validated!
-- 2023: Validated - 20-2, 21, 23 incorrect
+- 2023: Validated - 20-2 incorrect
 - 2024: Validated!
 
 ## Performance hotspots
@@ -40,9 +40,9 @@ day 2 answer.
 - 2019: 23-2 (10s) 24-2 (6s)
 - 2020: none (bless you js!)
 - 2021: 17, 18-2 (7s), 19 1-2 (17s), 20 (13s), 22 (forever)
-- 2022: 16-1 (12s), 20-2 (20s) 23-2 (5s), 24-1 (20s)
-- 2023: 17-1 (5s), 18-1 (30s), 23-1 (long), 24-1 (long)
-- 2024: 6-2 (13s), 7-2 (8s), 14-2 (6s), 15-2 (13s), 20-1+2 (5s), 22-2 (19s)
+- 2022: 16-1 (12s), 20-2 (20s) 23-2 (5s), 24-1,2 (20s)
+- 2023: 17-1 (5s), 18-1 (30s), 23-2 (74s), 24-1 (long)
+- 2024: 6-2 (13s), 7-2 (8s), 9 (23s), 14-2 (6s), 15-2 (13s), 20-1+2 (5s), 22-2 (19s)
 
 ## Optimization/cleanup log
 - 2015-20 - replaced a not-really-code solution that was 16s with an automated solution that was 3s.
@@ -65,3 +65,4 @@ day 2 answer.
 - 2021-19 - boomshakalaka. one of the hardest AOCs and i got it. 
 - 2021-24 - a super fun romp and my notes were great! good job me! 
 - 2021-09 - quick rewrite as original had major bug (??)
+- 2023-23 - port faster version of pt 2 for pt 1

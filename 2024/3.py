@@ -3,7 +3,7 @@ import puzzle, re, library, itertools
 
 def parse_input(INPUT):
   for l in INPUT:
-    yield re.findall('mul\(\d+,\d+\)', l)
+    yield re.findall(r'mul\(\d+,\d+\)', l)
 
 def one(INPUT):
   total = 0
@@ -14,15 +14,15 @@ def one(INPUT):
   return total
 
 def find_mul(INPUT):
-  for match in re.finditer('mul\((\d+),(\d+)\)', INPUT):
+  for match in re.finditer(r'mul\((\d+),(\d+)\)', INPUT):
     yield (match.start(), 'mul', match.groups())
 
 def find_do(INPUT):
-  for match in re.finditer('do\(\)', INPUT):
+  for match in re.finditer(r'do\(\)', INPUT):
     yield (match.start(), 'do', match.groups())
 
 def find_dont(INPUT):
-  for match in re.finditer('don\'t\(\)', INPUT):
+  for match in re.finditer(r'don\'t\(\)', INPUT):
     yield (match.start(), 'dont', match.groups())
 
 def two(INPUT):
