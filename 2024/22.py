@@ -8,7 +8,7 @@ def secret(num, iters):
   prune = lambda a: a % 16777216
   deltas = []
   nums = []
-  for i in range(iters):
+  for _ in range(iters):
     # Calculate the result of multiplying the secret number by 64. 
     # Then, mix this result into the secret number. Finally, prune the secret number. 
     new_num = prune(mix(num, num * 64))
@@ -31,7 +31,7 @@ def secret(num, iters):
 def one(INPUT):
   out = []
   for l in INPUT:
-    nums, _ = secret(int(l), 2000)
+    nums, _ = secret(int(l), 2001)
     out.append(nums[-1])
   return sum(out)
 

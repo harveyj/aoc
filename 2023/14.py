@@ -21,7 +21,7 @@ def shift(dir, G):
         if pt_dest != (x, y):
           G.set(pt_dest, 'O')
           G.set((x, y), '.')
-  return None
+  return G
 
 def find_loop(G):
   cache = dict()
