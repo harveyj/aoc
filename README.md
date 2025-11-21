@@ -27,7 +27,7 @@ day 2 answer.
 - 2018: Validated!
 - 2019: Validated!
 - 2020: Validated!
-- 2021: Validated - 17, 22, 23 incorrect
+- 2021: Validated - 22, 23 incorrect
 - 2022: Validated!
 - 2023: Validated - 20-2 incorrect
 - 2024: Validated!
@@ -39,7 +39,7 @@ day 2 answer.
 - 2018: 14-2 (10s)
 - 2019: 23-2 (10s) 24-2 (6s)
 - 2020: none (bless you js!)
-- 2021: 17, 18-2 (7s), 19 1-2 (17s), 20 (13s), 22 (forever)
+- 2021: 17 (this is gross, high priority to redo), 18-2 (7s), 19 1-2 (17s), 20 (13s), 22 (forever)
 - 2022: 16-1 (12s), 20-2 (20s) 23-2 (5s), 24-1,2 (20s)
 - 2023: 17-1 (5s), 18-1 (30s), 23-2 (74s)
 - 2024: 6-2 (13s), 7-2 (8s), 9 (23s), 14-2 (6s), 15-2 (13s), 20-1+2 (5s), 22-2 (19s)
