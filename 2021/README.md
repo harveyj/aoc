@@ -273,6 +273,8 @@ Location: CA, CA->CT transit.
 
 Difficulty: 9.5/10
 
+REWRITE 11/22/25 yep fixing up the cube intersection was the right way to go. SUPER helpful reddit comment "if the box intersects, split the box along an axis and check both boxes" and from there the rest was history. Happy that I got the iterate over the cubes backwards a-ha.
+
 ## Day 23
 The puzzle-craft in this year's AOC really shone through. This was a great medium-level coding
 challenge, with enough corner cases to make things interesting but not a giant slog. 
