@@ -144,6 +144,8 @@ Difficulty: 9.5/10
 
 Location: CT
 
+Part 2 redo 11/22/25 - cleaned up the thing I did via inspection and it worked!
+
 ## Day 21
 Traverse the infinite maze. The peak of this year's AOC.
 Part 1 is a nice warmup and I reimplemented it time after time to try to nail down part 2. 

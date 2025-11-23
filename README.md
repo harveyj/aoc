@@ -21,15 +21,17 @@ was a mess, spewed out 25 numbers, and I knew at the time which number was the
 answer, and I have now forgot. The long-run goal is to go through all the
 unvalidated days and give each an interface that spits out the correct day 1,
 day 2 answer. 
+
+UPDATE 11/22/25 holy shit I did it. Every day (I think) has a ~reasonable code solution that runs in less than 90 seconds and is validated.
 - 2015: Validated!
 - 2016: Validated!
 - 2017: Validated!
 - 2018: Validated!
 - 2019: Validated!
 - 2020: Validated!
-- 2021: Validated - 23 incorrect
+- 2021: Validated!
 - 2022: Validated!
-- 2023: Validated - 20-2 incorrect
+- 2023: Validated!
 - 2024: Validated!
 
 ## Performance hotspots
@@ -39,7 +41,7 @@ day 2 answer.
 - 2018: 14-2 (10s)
 - 2019: 23-2 (10s) 24-2 (6s)
 - 2020: none (bless you js!)
-- 2021: 17 (this is gross, high priority to redo), 18-2 (7s), 19 1-2 (17s), 20 (13s)
+- 2021: 17 (this is gross, high priority to redo), 18-2 (7s), 19 1-2 (17s), 20 (13s), 23 (7s)
 - 2022: 16-1 (12s), 20-2 (20s) 23-2 (5s), 24-1,2 (20s)
 - 2023: 17-1 (5s), 18-1 (30s), 23-2 (74s)
 - 2024: 6-2 (13s), 7-2 (8s), 9 (23s), 14-2 (6s), 15-2 (13s), 20-1+2 (5s), 22-2 (19s)
@@ -66,4 +68,4 @@ day 2 answer.
 - 2021-24 - a super fun romp and my notes were great! good job me! 
 - 2021-09 - quick rewrite as original had major bug (??)
 - 2023-23 - port faster version of pt 2 for pt 1
-- 2021-22 - 
+- 2021-22 - see notes! wow that one was a beast.

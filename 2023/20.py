@@ -63,61 +63,35 @@ def simulate(G, state, n):
   all_pulses = defaultdict(list)
   for i in range(n):
     out_l += 1 # account for initial 'button'
-    # highs = [key for key in state['mr'] if state['mr'][key] == 'high']
-    # if len(highs) > 6:
-      # print(i, highs)
     q = deque(handle(G, state, 'low', 'broadcaster'))
     while q:
       pulse, tgt = q.popleft()
-      # if tgt in ['jt', 'sx', 'kb', 'ks'] and pulse == 'low':
-      #   print(tgt, i)
-      # all_pulses[(tgt, pulse)].append(i)
+      all_pulses[(tgt, pulse)].append(i)
       q.extend(handle(G, state, pulse, tgt))
       if pulse == 'high': out_h += 1
       if pulse == 'low': out_l += 1
-      # print(i, state['jt'])
-  return out_h, out_l, all_pulses
+  return out_h, out_l, all_pulses, state
 
 def one(INPUT):
   instrs = parse_input(INPUT)
   G, state = create_network(instrs)
-  out_h, out_l, all_pulses = simulate(G, state, 1000)
+  out_h, out_l, _, _ = simulate(G, state, 1000)
   return (out_h * out_l) 
 
-def tiers(G, H, root, n):
-  tiers = []
-  queue = deque([root])
-  for i in range(n):
-    new_queue = deque()
-    tier = []
-    while queue:
-      node = queue.pop()
-      new_queue.extend(H.neighbors(node))
-      tier.append((node, G.nodes[node]['code']))
-    tiers.append(tier)
-    queue = new_queue
-  return tiers
-
+# A teeny bit by inspection but I think this is pretty cool. 
 def two(INPUT):
   instrs = parse_input(INPUT)
   G, state = create_network(instrs)
   H = G.reverse()
+  second_tier = []
+  for n in list(H.neighbors('rx')):
+    second_tier = list(H.neighbors(n))
+  out_h, out_l, all_pulses, state = simulate(G, state, 10000)
+  ans = 1
+  for key in second_tier:
+    ans *= all_pulses[(key, 'low')][0] + 1
+  return ans
 
-  time_series = defaultdict(list)
-  # print(tiers(G, H, 'zh', 3)[2])
-  # return
-  # pv, vv, bl, mr
-  # next_tier = tiers(G, H, 'vv', 2)[1]
-  TRIALS = 100000
-  _, _, all_pulses = simulate(G, state, TRIALS)
-  # print(state['zh'])
-  #   for node, code in next_tier:
-  #     time_series[node].append((i, state[node]))
-
-  
-  return 0
-
-# all of its inputs need to be high
 if __name__ == '__main__':
   p = puzzle.Puzzle("2023", "20")
 
