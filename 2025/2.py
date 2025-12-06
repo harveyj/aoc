@@ -6,7 +6,6 @@ def parse_input(INPUT):
 
 def one(INPUT):
   invals = parse_input(INPUT)
-  print(invals)
   out = 0
   for i in range(len(invals) // 2):
     a = invals[i*2]; b = invals[i*2+1]

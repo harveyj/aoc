@@ -10,20 +10,17 @@ def parse_input(INPUT):
 
 def one(INPUT):
   db, vals = parse_input("\n".join(INPUT))
-  print(db, vals)
   out = 0
   for v in vals:
     for a, b in db:
       if a <= v < b: 
         out += 1
-        print(v)
         break
   return out
 
 def two(INPUT):
   db, _ = parse_input("\n".join(INPUT))
   events = sorted([(a[0], 's') for a in db] + [(a[1], 'e') for a in db])
-  print(events)
   stack = []
   range_start = -1
   out = 0 
