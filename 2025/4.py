@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import puzzle, re, library
+import puzzle, library
 
 def one(INPUT, two=False):
   G = library.Grid(raw='\n'.join(INPUT))
@@ -10,7 +10,6 @@ def one(INPUT, two=False):
     for x in range(G.max_x()):
       for y in range(G.max_y()):
         if G.get((x, y)) == "@" and list(G.neighbors_diag((x, y))).count('@') < 4:
-          # G.set((x, y), 'x')
           locs.add((x, y))
           removed += 1
     iters -= 1
@@ -20,8 +19,6 @@ def one(INPUT, two=False):
 
 def two(INPUT):
   return one(INPUT, two=True)
-
-
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2025", "4")
