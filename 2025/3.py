@@ -10,7 +10,6 @@ def one(INPUT):
     max_idx = vals.index(max_val)
     del vals[:max_idx+1]
     max_val_2 = max(vals)
-    print(max_val * 10 + max_val_2)
     out += max_val * 10 + max_val_2
   return out
 
@@ -27,7 +26,6 @@ def two(INPUT):
   out = 0
   for l in INPUT:
     vals = tuple(map(int, list(l)))
-    print(max_joltage(vals, 12))
     out += max_joltage(vals, 12)
   return out
 
