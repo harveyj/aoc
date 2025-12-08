@@ -39,3 +39,10 @@ https://leetcode.com/problems/the-skyline-problem/description/
 Done 12/5/25 in front of our 9-foot tree!
 
 Difficulty: 3/10 (would be 5/10 if I didn't know this problem from interview prep)
+
+## Day 6
+Straightforward parser problem. 
+
+Difficulty: 3/10
+
+Done 12/6/25 in front of our 9-foot tree after the eggnog competition!
