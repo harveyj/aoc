@@ -46,3 +46,10 @@ Straightforward parser problem.
 Difficulty: 3/10
 
 Done 12/6/25 in front of our 9-foot tree after the eggnog competition!
+
+## Day 7
+Straightforward recursion lru cache problem
+
+Difficulty: 2/10
+
+Done 12/7/25 in front of our giant tree.

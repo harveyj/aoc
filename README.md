@@ -33,6 +33,7 @@ UPDATE 11/22/25 holy shit I did it. Every day (I think) has a ~reasonable code s
 - 2022: Validated!
 - 2023: Validated!
 - 2024: Validated!
+- 2025: Validated!
 
 ## Performance hotspots
 - 2015: 22-1&2 (3s)
@@ -45,7 +46,7 @@ UPDATE 11/22/25 holy shit I did it. Every day (I think) has a ~reasonable code s
 - 2022: 16-1 (12s), 20-2 (20s) 23-2 (5s), 24-1,2 (20s)
 - 2023: 17-1 (5s), 18-1 (30s), 23-2 (74s)
 - 2024: 6-2 (13s), 7-2 (8s), 9 (23s), 14-2 (6s), 15-2 (13s), 20-1+2 (5s), 22-2 (19s)
-
+- 2025: none (so far)
 ## Optimization/cleanup log
 - 2015-20 - replaced a not-really-code solution that was 16s with an automated solution that was 3s.
 - 2021-21 - rewrote part 1 from scratch, minor cleanup for part 2.
