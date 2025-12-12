@@ -53,3 +53,10 @@ Straightforward recursion lru cache problem
 Difficulty: 2/10
 
 Done 12/7/25 in front of our giant tree.
+
+## Day 8
+Straightforward graph component problem
+
+Difficulty: 2/10
+
+Done 12/11/25 with xmas socks while katie watched thomas and played CoC.
