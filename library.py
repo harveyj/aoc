@@ -186,7 +186,7 @@ def a_star_lazy(start, goal, h, neighbors, cost_fn=None, goal_fn=None, debug=Fal
   f_score = {str(start):h(start)}
   while open_set:
     current = heapq.heappop(open_set)[1]
-    if debug: print(current)
+    if debug: print('current goal', current, goal)
     if goal_fn and goal_fn(current) or current == goal:
       return reconstruct_path(came_from, current)
     for n in neighbors(current):
