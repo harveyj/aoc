@@ -30,5 +30,5 @@ def two(INPUT):
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2025", "11")
-  # print(f'ANSWER: {p.run(one, 0)}')
+  print(f'ANSWER: {p.run(one, 0)}')
   print(f'ANSWER: {p.run(two, 0)}')

@@ -60,3 +60,33 @@ Straightforward graph component problem
 Difficulty: 2/10
 
 Done 12/11/25 with xmas socks while katie watched thomas and played CoC.
+
+## Day 9
+OK here we go. Part 1 was quick and then part 2 was brutal.
+
+Find the biggest rect that is within a giant sprawling polygon, where two corners are each points of the polygon.
+
+Ultimately I abused a geometry library to get it. I was happy with my hack to deal with the off-by-one errors that the discrete width-of-1 boundary created. 
+
+TODO: Try the approach of checking each path segment against each rect.
+
+Difficulty: 8.5/10
+
+## Day 10
+Minimal number of button presses to generate joltage. 
+
+In other words, a giant pile of linear algebra!
+
+I warred with this one for a good 8 hours, built a solution that worked but was far too slow. Then I offloaded it to a constraint satisfier which crushed it.
+
+Difficulty: 9/10 (doing by hand) 4/10 (with library)
+
+## Day 11
+"count all the paths" memoization problem.
+
+Difficulty: 6/10
+
+## Day 12
+Done with Capen! Uhhhhh, you can do the problem while ignoring ~all the properties of the input. I had it staring at me and then Capen thought to actually try the answer.
+
+Difficulty: 9/10 (general case) 3/10 (particular input)

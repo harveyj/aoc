@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-import puzzle, library
+import puzzle, re, library
 import networkx as nx
 import itertools
-from z3 import *
+from functools import partial
 
 def parse_input(INPUT):
   for l in INPUT:
@@ -16,7 +16,7 @@ def flip(c):
 
 def one(INPUT):
   ans = 0
-  for tgt_lights, buttons, _ in list(parse_input(INPUT)):
+  for tgt_lights, buttons, joltage in list(parse_input(INPUT)):
     G = nx.DiGraph()
     S = tuple('.'*len(tgt_lights))
     E = tuple(tgt_lights)
@@ -27,28 +27,30 @@ def one(INPUT):
     ans += (nx.shortest_path_length(G, S, E))
   return ans
 
+def h(max_per_press, tgt, state):
+  return sum([a-b for a, b in zip(tgt, state)]) // max_per_press
+
+def neighbors(tgt, buttons, current):
+  for b in buttons:
+    out = tuple(c + (1 if i in b else 0) for i, c in enumerate(current))
+    over = [o for o, t in zip(out, tgt) if o > t]
+    if len(over) == 0: 
+      yield out
+
 def two(INPUT):
   total = 0
-
   for _, buttons, joltage in list(parse_input(INPUT)):
-    opt = Optimize()
-    button_presses = IntVector('b', len(buttons))
-    opt.add(*[bp >= 0 for bp in button_presses])
-
-    all_eqs = []
-    for i in range(len(joltage)):
-      all_eqs.append([button_presses[j] for j, button in enumerate(buttons) if i in button])
-    for eq, jolt in list(zip(all_eqs, joltage)): 
-      opt.add(Sum(*eq) == jolt)
-    all_presses = Sum(button_presses)
-    opt.minimize(all_presses)
-    res = opt.check()
-    assert res == sat
-    m = opt.model()
-    total += m.eval(all_presses, model_completion=True).as_long()
+    print('.')
+    start = tuple([0]*len(joltage))
+    goal = tuple(joltage)
+    max_per_press = max([len(b) for b in buttons])
+    path = library.a_star_lazy(start, goal, 
+                        partial(h, max_per_press, joltage), 
+                        partial(neighbors, joltage, buttons))
+    total += len(path[1:])  # it's button presses, so first one doesn't count 
   return total
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2025", "10")
-  print(f'ANSWER: {p.run(one, 0)}')
+  # print(f'ANSWER: {p.run(one, 0)}')
   print(f'ANSWER: {p.run(two, 0)}')

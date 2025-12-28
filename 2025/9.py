@@ -7,7 +7,6 @@ def parse_input(INPUT):
 
 def one(INPUT):
   invals = parse_input(INPUT)
-  print(invals)
   vals = []
   for i, a in enumerate(invals):
     for j, b in enumerate(invals[i+1:]):
@@ -41,7 +40,7 @@ def two(INPUT):
     min_x, min_y, max_x, max_y = maxes(a, b)
     rect = shapely.Polygon([(min_x, min_y), (max_x, min_y), (max_x, max_y), (min_x, max_y)])
     if path.covers(rect):
-      return size(a, b), a, b
+      return size(a, b)
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2025", "9")

@@ -15,8 +15,9 @@ parser.add_argument('-e', '--exclude_days', type=str, help="Year", default=[])
 # parser.add_argument('-l', '--log_file', type=str, help="Log File", default=[])
 args = parser.parse_args()
 
-years = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025']
-days = range(1, 26)
+years_25 = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
+years_12 = ['2025']
+years = years_25 + years_12
 exclude_days = []
 log_file = f'logs/main.txt'
 if args.year: years = [args.year]
@@ -28,6 +29,7 @@ def out(msg, f):
   print(msg)
 
 for year in years:
+  days = range(1, 26) if year in years_25 else range(1, 13)
   lf = open(log_file, "a")
   out(datetime.now().strftime("%Y-%m-%d %H:%M:%S"), lf)
   out(f'Year {year}', lf)
