@@ -68,7 +68,7 @@ Find the biggest rect that is within a giant sprawling polygon, where two corner
 
 Ultimately I abused a geometry library to get it. I was happy with my hack to deal with the off-by-one errors that the discrete width-of-1 boundary created. 
 
-TODO: Try the approach of checking each path segment against each rect.
+UPDATE 12/31/25 Rewrote the geometry portion myself!
 
 Difficulty: 8.5/10
 
@@ -78,6 +78,8 @@ Minimal number of button presses to generate joltage.
 In other words, a giant pile of linear algebra!
 
 I warred with this one for a good 8 hours, built a solution that worked but was far too slow. Then I offloaded it to a constraint satisfier which crushed it.
+
+TODO: Code the constraint satisfier myself
 
 Difficulty: 9/10 (doing by hand) 4/10 (with library)
 
