@@ -59,24 +59,8 @@ def intersect(a, b, c, d):
 
 X, Y = 0, 1
 
-# TODO unit tests for within
-def within(pt, vectors):
-  # from 0, pt_y to pt
-  vectors = sorted(vectors, key=lambda a: a[0][0])
-  lines = [vect for vect in vectors if intersect((0, pt[1]), pt, vect[0], vect[1])]
-  active = False; last_active = -1
-  for l in lines:
-    if l[0][1] < l[1][1]:
-      active = True
-    else:
-      last_active = l[0][0]
-      active = False
-  return active or pt[0] == last_active
-
 def covers(rect, poly_path):
   min_x, min_y, max_x, max_y = maxes(*rect)
-  # corners = within((min_x, min_y), poly_path) and within((min_x, max_y), poly_path) and within((max_x, max_y), poly_path) and within((max_x, max_y), poly_path)
-  # if not corners: return False
 
   # sides such that within the rect is to the right
   sides = [((min_x, min_y), (max_x, min_y)),  # top
@@ -98,16 +82,6 @@ def covers(rect, poly_path):
           # print(f"orient({a}, {b}, {c}) {orient(a, b, c)}")
           # print(f"orient({a}, {b}, {d}) {orient(a, b, d)}")
           return False
-  # for p1, p2 in poly_path:
-  #   if p1[Y] <= min_y < p2[Y] and min_x < p1[X] < max_x: # top
-  #     return False
-  #   if p2[Y] < max_y <= p1[Y] and min_x < p1[X] < max_x: # bottom
-  #     return False
-  #   if p1[X] <= min_x < p2[X] and min_y < p1[Y] < max_y: # left
-  #     return False
-  #   if p2[X] < min_x <= p1[X] and min_y < p1[Y] < max_y: # right
-  #     return False
-    
   return True
 
 def two(INPUT):
@@ -117,23 +91,16 @@ def two(INPUT):
   poly_path = list(zip(buffered, buffered[1:] + [buffered[0]]))
 
   candidates = []
-  # print(poly_path)
-  # G = library.Grid(20, 20)
-  # for a, b in poly_path:
-  #   G.overlays[a] = 'X'
-  # print(G)
   for i, a in enumerate(invals):
     for j, b in enumerate(invals[i+1:]):
      candidates.append((size(a, b), a, b))
   candidates = sorted(candidates, reverse=True)
 
-  # candidates = [(0, (2, 3), (10,6))]
   for _, a, b in candidates:
     if covers((a, b), poly_path):
-      print(a, b)
       return size(a, b)
 
 if __name__ == '__main__':
   p = puzzle.Puzzle("2025", "9")
-  # print(f'ANSWER: {p.run(one, 0)}')
+  print(f'ANSWER: {p.run(one, 0)}')
   print(f'ANSWER: {p.run(two, 0)}')
