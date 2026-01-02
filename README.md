@@ -70,3 +70,4 @@ UPDATE 11/22/25 holy shit I did it. Every day (I think) has a ~reasonable code s
 - 2021-09 - quick rewrite as original had major bug (??)
 - 2023-23 - port faster version of pt 2 for pt 1
 - 2021-22 - see notes! wow that one was a beast.
+- 2025-09 - rewrite to do the hard part myself, break dependency on geometry library

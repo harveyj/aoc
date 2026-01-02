@@ -70,6 +70,12 @@ Ultimately I abused a geometry library to get it. I was happy with my hack to de
 
 UPDATE 12/31/25 Rewrote the geometry portion myself!
 
+- transform the polygon so it is actually the polygon with the boundary, not the off by one junk
+- then check each possible rect against the polygon
+- if any line segment of the polygon intrudes within the rect, it's invalid.
+- "intrude" means having one point on the left-hand or on the line, and the other point on the right hand side
+
+
 Difficulty: 8.5/10
 
 ## Day 10
